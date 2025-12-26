@@ -4,7 +4,6 @@ const Banner = () => {
     return (
         <div>
             it is banner
-        
         </div>
     );
 };
