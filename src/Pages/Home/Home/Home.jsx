@@ -5,7 +5,7 @@ import AboutSection from '../../../components/sections/AboutSection'
 import GoalsSection from '../../../components/sections/GoalsSection'
 import GallerySection from '../../../components/sections/GallerySection'
 import TeamSection from '../../../components/sections/TeamSection'
-import Footer from '../../../components/sheard/Footer'
+
 
 const Home = ({ setActiveView }) => {
   return (
@@ -31,7 +31,7 @@ const Home = ({ setActiveView }) => {
       {/* Project Employee Section (4 employees with More option) */}
       <TeamSection />
       
-      <Footer />
+
     </div>
   )
 }
