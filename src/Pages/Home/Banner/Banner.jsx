@@ -1,18 +1,12 @@
-import { MapPin } from 'lucide-react'
-import { useState, useEffect } from 'react'
-import { useLanguage } from '../sheard/contexts/LanguageContext'
+
+import { useState } from 'react'
+ 
 
 const Banner = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const { t } = useLanguage()
+              
 
-  // Auto-slide effect
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % t('heroSlides').length)
-    }, 4000)
-    return () => clearInterval(timer)
-  }, [t])
+
 
   return (
     <div className="relative bg-gradient-to-br from-green-500 to-green-600 text-white py-32 overflow-hidden">
@@ -26,27 +20,18 @@ const Banner = () => {
       </div>
       
       {/* Location Pins */}
-      <div className="absolute inset-0">
-        <MapPin className="absolute top-20 left-1/4 h-8 w-8 text-white opacity-60 animate-pulse" />
-        <MapPin className="absolute top-32 right-1/3 h-6 w-6 text-white opacity-50 animate-pulse" style={{animationDelay: '0.5s'}} />
-        <MapPin className="absolute top-40 left-1/2 h-7 w-7 text-white opacity-70 animate-pulse" style={{animationDelay: '1s'}} />
-        <MapPin className="absolute bottom-32 left-1/3 h-6 w-6 text-white opacity-60 animate-pulse" style={{animationDelay: '1.5s'}} />
-        <MapPin className="absolute bottom-40 right-1/4 h-8 w-8 text-white opacity-50 animate-pulse" style={{animationDelay: '2s'}} />
-        <MapPin className="absolute top-28 left-2/3 h-5 w-5 text-white opacity-40 animate-pulse" style={{animationDelay: '2.5s'}} />
-      </div>
+     
 
       <div className="relative container mx-auto px-6 text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-          <span className="block transition-all duration-1000 ease-in-out">
-            {t('heroSlides')[currentSlide]}
-          </span>
+          Empowering Communities with <span className="underline decoration-white/50">GIS Solutions</span>
         </h1>
         
         {/* Slide indicators */}
         <div className="flex justify-center space-x-2 mt-8">
-          {t('heroSlides').map((_, index) => (
+          {[0, 1, 2].map((index) => (
             <button
-              key={index}
+              key={index} 
               onClick={() => setCurrentSlide(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
                 index === currentSlide ? 'bg-white' : 'bg-white/50'
