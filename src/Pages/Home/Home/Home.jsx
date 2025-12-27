@@ -16,6 +16,7 @@ const Home = () => {
             <section>
                 <Contact/>
             </section>
+           
         </div>
     );
 };

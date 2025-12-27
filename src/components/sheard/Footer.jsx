@@ -10,7 +10,7 @@ const Footer = () => {
           <img
             src="/ictd-footer.png"
             alt="Digital Bangladesh | ICT Division | DoICT"
-            className="max-h-40 w-full object-contain"
+            className="max-h-35 w-full object-contain"
           />
         </div>
 
