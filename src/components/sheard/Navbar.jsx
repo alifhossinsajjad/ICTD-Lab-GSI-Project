@@ -1,11 +1,27 @@
 import React from 'react';
 
 const Navbar = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <div>
+      <ul>
+        <li>alif mia</li>
+        <li>alif mia</li>
+        <li>alif mia</li>
+        <li>alif mia</li>
+        <li>alif mia</li>
+        <li>alif mia</li>
+        <li>alif mia</li>
+      </ul>
+    </div>
+  );
 };
 
-export default Navbar;
+export default Navbar;<ul>
+  <li>alif mia</li>
+  <li>alif mia</li>
+  <li>alif mia</li>
+  <li>alif mia</li>
+  <li>alif mia</li>
+  <li>alif mia</li>
+  <li>alif mia</li>
+</ul>

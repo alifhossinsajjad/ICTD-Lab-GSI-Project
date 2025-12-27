@@ -46,10 +46,10 @@ const Vendor = () => {
 
         {/* Header */}
         <div className="mb-14 text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-green-700 uppercase">
+          <h2 className="text-2xl md:text-5xl font-semibold text-green-700 uppercase">
             Contact With Vendor
           </h2>
-          <p className="text-sm text-gray-500 mt-2">
+          <p className="text-lg text-gray-500 mt-2">
             Approved vendors for ICTD Lab GIS Mapping System
           </p>
         </div>
