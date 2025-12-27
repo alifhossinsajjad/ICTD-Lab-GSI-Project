@@ -3,6 +3,7 @@ import RootLayout from "../layout/RootLayout";
 
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home"
+import AllNotice from "../components/AllNotice/AllNotice";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
         index: true,
         Component: Home,
       },
+      {
+        path: "all-notice",
+        Component: AllNotice,
+      }
     ],
   },
 ]);
