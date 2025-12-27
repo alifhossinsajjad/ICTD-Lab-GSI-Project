@@ -1,17 +1,17 @@
 import React from 'react';
 import Banner from '../Banner/Banner';
 import Contact from '../../Contact/Contact';
-import Vendor from '../../Vendor/Vendor';
+import Vendor from '../Vendor/Vendor';
+
 
 const Home = () => {
     return (
         <div>
             <section>
-                <Banner/>
-
+          <Banner/>
             </section>
             <section>
-                <Vendor></Vendor>
+               <Vendor/>
             </section>
             <section>
                 <Contact/>
@@ -21,4 +21,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home
