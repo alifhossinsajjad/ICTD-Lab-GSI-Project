@@ -4,6 +4,7 @@ import RootLayout from "../layout/RootLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home"
 import AllNotice from "../Pages/AllNotice/AllNotice";
+import Notice from "../Pages/AllNotice/Notice";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "all-notice",
         Component: AllNotice,
+      },
+      {
+        path: "notice",
+        Component: Notice,
       }
     ],
   },
