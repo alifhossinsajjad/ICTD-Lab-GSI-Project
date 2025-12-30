@@ -1,0 +1,407 @@
+[{
+    "id": 1,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুষ্টিয়া সদর",
+    "institute": "দৌলতপুর মাধ্যমিক বিদ্যালয়-৪২১৬ (SOF & SRDL)",
+    "labCode": "4216",
+    "email": "asad2bhjun1980@gmail.com"
+  },
+  {
+    "id": 2,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুষ্টিয়া সদর",
+    "institute": "আব্দুল জব্বার মাধ্যমিক বিদ্যালয়-৪২০৬",
+    "labCode": "4206",
+    "email": "s117525ahs@gmail.com"
+  },
+  {
+    "id": 3,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুষ্টিয়া সদর",
+    "institute": "আব্দুল মান্নান মাধ্যমিক বিদ্যালয়-৪২০৭",
+    "labCode": "4207",
+    "email": "khalilurrahman88@gmail.com"
+  },
+  {
+    "id": 4,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুষ্টিয়া সদর",
+    "institute": "কল্যাণপুর মাধ্যমিক বিদ্যালয়-৪২০৮",
+    "labCode": "4208",
+    "email": "kallyanpur17538@gmail.com"
+  },
+  {
+    "id": 5,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুষ্টিয়া সদর",
+    "institute": "খাজানগর মাধ্যমিক বিদ্যালয়-৪২০৯",
+    "labCode": "4209",
+    "email": "ks117515@gmail.com"
+  },
+
+  {
+    "id": 6,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "ভেড়ামারা",
+    "institute": "ভেড়ামারা পাইলট মাধ্যমিক বিদ্যালয়-৪২২৭",
+    "labCode": "4227",
+    "email": "s117489@gmail.com"
+  },
+  {
+    "id": 7,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "ভেড়ামারা",
+    "institute": "ভেড়ামারা মাধ্যমিক বিদ্যালয়-৪২২১",
+    "labCode": "4221",
+    "email": "s117485@hotmail.com"
+  },
+  {
+    "id": 8,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "মিরপুর",
+    "institute": "আটিয়া মাধ্যমিক বিদ্যালয়-৪২২৮",
+    "labCode": "4228",
+    "email": "atigramsecondaryschool@gmail.com"
+  },
+  {
+    "id": 9,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "মিরপুর",
+    "institute": "আমলা মাধ্যমিক বিদ্যালয়-৪২২৯",
+    "labCode": "4229",
+    "email": "amlasadarphs@gmail.com"
+  },
+  {
+    "id": 10,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "মিরপুর",
+    "institute": "কুরিপাইয়া মাধ্যমিক বিদ্যালয়-৪২৩০",
+    "labCode": "4230",
+    "email": "kuripaihighschool@gmail.com"
+  },
+  {
+    "id": 11,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুমারখালী",
+    "institute": "কুমারখালী উচ্চ বিদ্যালয়-৪২৩১",
+    "labCode": "4231",
+    "email": "kumarkhali.hs4231@gmail.com"
+  },
+  {
+    "id": 12,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "কুমারখালী",
+    "institute": "চরসাদীপুর মাধ্যমিক বিদ্যালয়-৪২৩২",
+    "labCode": "4232",
+    "email": "charsadipur4232@gmail.com"
+  },
+  {
+    "id": 13,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "দৌলতপুর",
+    "institute": "ফিলিপনগর উচ্চ বিদ্যালয়-৪২৩৩",
+    "labCode": "4233",
+    "email": "philipnagar4233@gmail.com"
+  },
+  {
+    "id": 14,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "দৌলতপুর",
+    "institute": "রামকৃষ্ণপুর মাধ্যমিক বিদ্যালয়-৪২৩৪",
+    "labCode": "4234",
+    "email": "ramkrishnapur4234@gmail.com"
+  },
+  {
+    "id": 15,
+    "phase": "২য়",
+    "division": "খুলনা",
+    "district": "কুষ্টিয়া",
+    "upazila": "খোকসা",
+    "institute": "খোকসা জানিপুর মাধ্যমিক বিদ্যালয়-৪২৩৫",
+    "labCode": "4235",
+    "email": "khoksa4235@gmail.com"
+  },
+
+  {
+    "id": 16,
+    "phase": "২য়",
+    "division": "রাজশাহী",
+    "district": "নাটোর",
+    "upazila": "সিংড়া",
+    "institute": "সিংড়া দমদমা উচ্চ বিদ্যালয়-৪২৩৬",
+    "labCode": "4236",
+    "email": "singra4236@gmail.com"
+  },
+  {
+    "id": 17,
+    "phase": "২য়",
+    "division": "রাজশাহী",
+    "district": "নাটোর",
+    "upazila": "বাগাতিপাড়া",
+    "institute": "বাগাতিপাড়া পাইলট উচ্চ বিদ্যালয়-৪২৩৭",
+    "labCode": "4237",
+    "email": "bagatipara4237@gmail.com"
+  },
+  {
+    "id": 18,
+    "phase": "২য়",
+    "division": "রাজশাহী",
+    "district": "নাটোর",
+    "upazila": "নাটোর সদর",
+    "institute": "নাটোর সরকারি বালক উচ্চ বিদ্যালয়-৪২৩৮",
+    "labCode": "4238",
+    "email": "natoreboys4238@gmail.com"
+  },
+  {
+    "id": 19,
+    "phase": "২য়",
+    "division": "রাজশাহী",
+    "district": "নাটোর",
+    "upazila": "লালপুর",
+    "institute": "লালপুর উচ্চ বিদ্যালয়-৪২৩৯",
+    "labCode": "4239",
+    "email": "lalpur4239@gmail.com"
+  },
+  {
+    "id": 20,
+    "phase": "২য়",
+    "division": "রাজশাহী",
+    "district": "নাটোর",
+    "upazila": "গুরুদাসপুর",
+    "institute": "গুরুদাসপুর মাধ্যমিক বিদ্যালয়-৪২৪০",
+    "labCode": "4240",
+    "email": "gurudaspur4240@gmail.com"
+  },
+
+  {
+    "id": 21,
+    "phase": "২য়",
+    "division": "ঢাকা",
+    "district": "গাজীপুর",
+    "upazila": "কালিয়াকৈর",
+    "institute": "কালিয়াকৈর উচ্চ বিদ্যালয়-৪২৪১",
+    "labCode": "4241",
+    "email": "kaliakoir4241@gmail.com"
+  },
+  {
+    "id": 22,
+    "phase": "২য়",
+    "division": "ঢাকা",
+    "district": "গাজীপুর",
+    "upazila": "শ্রীপুর",
+    "institute": "শ্রীপুর পাইলট উচ্চ বিদ্যালয়-৪২৪২",
+    "labCode": "4242",
+    "email": "sreepur4242@gmail.com"
+  },
+  {
+    "id": 23,
+    "phase": "২য়",
+    "division": "ঢাকা",
+    "district": "গাজীপুর",
+    "upazila": "গাজীপুর সদর",
+    "institute": "ভাওয়াল বদরে আলম কলেজিয়েট স্কুল-৪২৪৩",
+    "labCode": "4243",
+    "email": "bhawal4243@gmail.com"
+  },
+  {
+    "id": 24,
+    "phase": "২য়",
+    "division": "ঢাকা",
+    "district": "গাজীপুর",
+    "upazila": "কালীগঞ্জ",
+    "institute": "কালীগঞ্জ আর আর এন পাইলট উচ্চ বিদ্যালয়-৪২৪৪",
+    "labCode": "4244",
+    "email": "kaliganj4244@gmail.com"
+  },
+  {
+    "id": 25,
+    "phase": "২য়",
+    "division": "ঢাকা",
+    "district": "গাজীপুর",
+    "upazila": "কাপাসিয়া",
+    "institute": "কাপাসিয়া উচ্চ বিদ্যালয়-৪২৪৫",
+    "labCode": "4245",
+    "email": "kapasia4245@gmail.com"
+  },
+
+  {
+    "id": 26,
+    "phase": "২য়",
+    "division": "চট্টগ্রাম",
+    "district": "কুমিল্লা",
+    "upazila": "চান্দিনা",
+    "institute": "চান্দিনা পাইলট বালক উচ্চ বিদ্যালয়-৪২৪৬",
+    "labCode": "4246",
+    "email": "chandina4246@gmail.com"
+  },
+  {
+    "id": 27,
+    "phase": "২য়",
+    "division": "চট্টগ্রাম",
+    "district": "কুমিল্লা",
+    "upazila": "দাউদকান্দি",
+    "institute": "দাউদকান্দি আদর্শ উচ্চ বিদ্যালয়-৪২৪৭",
+    "labCode": "4247",
+    "email": "daudkandi4247@gmail.com"
+  },
+  {
+    "id": 28,
+    "phase": "২য়",
+    "division": "চট্টগ্রাম",
+    "district": "কুমিল্লা",
+    "upazila": "বরুড়া",
+    "institute": "বরুড়া মডেল উচ্চ বিদ্যালয়-৪২৪৮",
+    "labCode": "4248",
+    "email": "barura4248@gmail.com"
+  },
+  {
+    "id": 29,
+    "phase": "২য়",
+    "division": "চট্টগ্রাম",
+    "district": "কুমিল্লা",
+    "upazila": "লাকসাম",
+    "institute": "লাকসাম সরকারি পাইলট উচ্চ বিদ্যালয়-৪২৪৯",
+    "labCode": "4249",
+    "email": "laksam4249@gmail.com"
+  },
+  {
+    "id": 30,
+    "phase": "২য়",
+    "division": "চট্টগ্রাম",
+    "district": "কুমিল্লা",
+    "upazila": "মনোহরগঞ্জ",
+    "institute": "মনোহরগঞ্জ উচ্চ বিদ্যালয়-৪২৫০",
+    "labCode": "4250",
+    "email": "monoharganj4250@gmail.com"
+  },
+
+  {
+    "id": 31,
+    "phase": "২য়",
+    "division": "বরিশাল",
+    "district": "বরিশাল",
+    "upazila": "বরিশাল সদর",
+    "institute": "বরিশাল জিলা স্কুল-৪২৫১",
+    "labCode": "4251",
+    "email": "barisalzs4251@gmail.com"
+  },
+  {
+    "id": 32,
+    "phase": "২য়",
+    "division": "বরিশাল",
+    "district": "বরিশাল",
+    "upazila": "বাকেরগঞ্জ",
+    "institute": "বাকেরগঞ্জ পাইলট উচ্চ বিদ্যালয়-৪২৫২",
+    "labCode": "4252",
+    "email": "bakerganj4252@gmail.com"
+  },
+  {
+    "id": 33,
+    "phase": "২য়",
+    "division": "বরিশাল",
+    "district": "বরিশাল",
+    "upazila": "মেহেন্দিগঞ্জ",
+    "institute": "মেহেন্দিগঞ্জ মাধ্যমিক বিদ্যালয়-৪২৫৩",
+    "labCode": "4253",
+    "email": "mehendigang4253@gmail.com"
+  },
+  {
+    "id": 34,
+    "phase": "২য়",
+    "division": "বরিশাল",
+    "district": "বরিশাল",
+    "upazila": "গৌরনদী",
+    "institute": "গৌরনদী পাইলট উচ্চ বিদ্যালয়-৪২৫৪",
+    "labCode": "4254",
+    "email": "gaurnadi4254@gmail.com"
+  },
+  {
+    "id": 35,
+    "phase": "২য়",
+    "division": "বরিশাল",
+    "district": "বরিশাল",
+    "upazila": "উজিরপুর",
+    "institute": "উজিরপুর মাধ্যমিক বিদ্যালয়-৪২৫৫",
+    "labCode": "4255",
+    "email": "uzirpur4255@gmail.com"
+  },
+
+  {
+    "id": 36,
+    "phase": "২য়",
+    "division": "সিলেট",
+    "district": "সিলেট",
+    "upazila": "সিলেট সদর",
+    "institute": "সিলেট সরকারি পাইলট উচ্চ বিদ্যালয়-৪২৫৬",
+    "labCode": "4256",
+    "email": "sylhetpilot4256@gmail.com"
+  },
+  {
+    "id": 37,
+    "phase": "২য়",
+    "division": "সিলেট",
+    "district": "সিলেট",
+    "upazila": "বিয়ানীবাজার",
+    "institute": "বিয়ানীবাজার সরকারি উচ্চ বিদ্যালয়-৪২৫৭",
+    "labCode": "4257",
+    "email": "beanibazar4257@gmail.com"
+  },
+  {
+    "id": 38,
+    "phase": "২য়",
+    "division": "সিলেট",
+    "district": "সিলেট",
+    "upazila": "জকিগঞ্জ",
+    "institute": "জকিগঞ্জ উচ্চ বিদ্যালয়-৪২৫৮",
+    "labCode": "4258",
+    "email": "jakiganj4258@gmail.com"
+  },
+  {
+    "id": 39,
+    "phase": "২য়",
+    "division": "সিলেট",
+    "district": "সিলেট",
+    "upazila": "কানাইঘাট",
+    "institute": "কানাইঘাট সরকারি উচ্চ বিদ্যালয়-৪২৫৯",
+    "labCode": "4259",
+    "email": "kanaighat4259@gmail.com"
+  },
+  {
+    "id": 40,
+    "phase": "২য়",
+    "division": "সিলেট",
+    "district": "সিলেট",
+    "upazila": "গোলাপগঞ্জ",
+    "institute": "গোলাপগঞ্জ উচ্চ বিদ্যালয়-৪২৬০",
+    "labCode": "4260",
+    "email": "golapganj4260@gmail.com"
+  }
+]

@@ -3,9 +3,7 @@ import React from 'react';
 import Banner from '../Banner/Banner';
 import Contact from '../../Contact/Contact';
 import Vendor from '../Vendor/Vendor';
-import AllNotice from '../../AllNotice/AllNotice';
-import Notice from '../../AllNotice/Notice';
-import About from '../../About/About';
+
 
 
 const Home = () => {
@@ -24,6 +22,9 @@ const Home = () => {
 
      <section>
                 <AllNotice/>
+            </section>
+            <section>
+                <Goals/>
             </section>
             <section>
                <Vendor/>

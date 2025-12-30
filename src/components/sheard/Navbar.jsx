@@ -57,6 +57,7 @@ const Navbar = ({ setActiveView }) => {
   ];
 
   return (
+
     <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
       {/* Top Bar */}
       <div className="bg-green-700 text-white py-2">
