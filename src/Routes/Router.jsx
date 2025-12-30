@@ -5,6 +5,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home"
 import AllNotice from "../Pages/AllNotice/AllNotice";
 import Lab from "../Pages/lab/Lab";
+import Login from "../Pages/login/Login";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,6 +26,11 @@ const router = createBrowserRouter([
       }
     ],
   },
+   {
+    path: "/login",
+    Component: Login,
+  },
+  
 ]);
 
 export default router;
