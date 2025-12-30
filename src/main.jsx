@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { RouterProvider } from "react-router";
 import router from "./Routes/Router.jsx";
 import "./components/languages/language/i18n.js";
-// TanStack Query
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 //  Create client

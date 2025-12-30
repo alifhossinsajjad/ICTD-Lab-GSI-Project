@@ -10,6 +10,9 @@ import {
   FiMenu,
   FiX,
 } from "react-icons/fi";
+import logo from "../../assets/govt.png";
+
+
 
 const Navbar = ({ setActiveView }) => {
   const { t, i18n } = useTranslation();
@@ -54,6 +57,7 @@ const Navbar = ({ setActiveView }) => {
   ];
 
   return (
+
     <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
       {/* Top Bar */}
       <div className="bg-green-700 text-white py-2">
@@ -71,10 +75,10 @@ const Navbar = ({ setActiveView }) => {
         {/* Logo */}
         <div
           onClick={() => handleNavigation("home")}
-          className="cursor-pointer flex items-center space-x-3"
+          className="cursor-pointer flex items-center space-x-2"
         >
-          <div className="bg-blue-700 p-2 rounded-lg text-white font-bold text-xl">
-            ICTD
+          <div className="">
+            <img src={logo} alt="" className="w-14"/>
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-800">ICTD Lab</h1>
