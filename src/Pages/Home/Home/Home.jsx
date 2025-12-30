@@ -1,8 +1,9 @@
+
 import React from 'react';
 import Banner from '../Banner/Banner';
 import Contact from '../../Contact/Contact';
 import Vendor from '../Vendor/Vendor';
-import Goals from '../Goals/Goals';
+
 
 
 const Home = () => {
@@ -10,6 +11,17 @@ const Home = () => {
         <div>
             <section>
           <Banner/>
+            </section>
+
+            <section>
+                <Notice/>
+            </section>
+            <section>
+                <About/>
+            </section>
+
+     <section>
+                <AllNotice/>
             </section>
             <section>
                 <Goals/>
@@ -20,6 +32,7 @@ const Home = () => {
             <section>
                 <Contact/>
             </section>
+       
            
         </div>
     );
