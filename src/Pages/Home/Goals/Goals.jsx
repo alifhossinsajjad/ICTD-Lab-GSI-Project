@@ -95,9 +95,7 @@ const Goals = () => {
                   />
                 </div>
        
-                <div className="absolute -top-2 -right-2 w-8 h-8 flex items-center justify-center rounded-full bg-gradient-to-br from-green-500 to-emerald-600 text-white text-sm font-bold shadow-md">
-                  {index + 1}
-                </div>
+                
               </div>
 
               {/* Title */}
