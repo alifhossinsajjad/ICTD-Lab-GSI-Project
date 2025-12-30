@@ -1,26 +1,48 @@
-@import "tailwindcss";
 @plugin "daisyui";
+@import "tailwindcss";
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Custom styles for GIS Platform */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
 }
 
-.animate-fade-in {
-  animation: fade-in 0.3s ease-out;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-section {
-  scroll-margin-top: 120px;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
-.navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.9); /* Example: semi-transparent white */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example: subtle shadow */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Smooth transitions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Map controls styling */
+.leaflet-control-container .leaflet-top.leaflet-right {
+  top: 80px;
+  right: 20px;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-40%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
 }
