@@ -19,6 +19,10 @@ const router = createBrowserRouter([
         path: "all-notice",
         Component: AllNotice,
       },
+      {
+        path : "lab",
+        Component : Lab,
+      }
      
     ],
   },

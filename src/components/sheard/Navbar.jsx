@@ -1,38 +1,36 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FiX } from "react-icons/fi";
 
 import logo from "../../assets/govt.png";
-import { FiBell, FiHome, FiInfo, FiMenu, FiTarget, FiUsers } from "react-icons/fi";
-
-
+import {
+  FiBell,
+  FiHome,
+  FiInfo,
+  FiMenu,
+  FiTarget,
+  FiUsers,
+} from "react-icons/fi";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
-
-
 
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === "en" ? "bn" : "en");
   };
 
   // Scroll to section using refs
-  
 
-
-
-const navItems = [
-  { icon: <FiHome />, label: t("home"), href: "#home" },
-  { icon: <FiBell />, label: t("notice"), href: "#notice" },
-  { icon: <FiTarget />, label: t("goals"), href: "#goals" },
-  { icon: <FiUsers />, label: t("team"), href: "#vendor" },
-  { icon: <FiInfo/>, label: t("contact"), href: "#contact" },
-];
-
+  const navItems = [
+    { icon: <FiHome />, label: t("home"), href: "#home" },
+    { icon: <FiBell />, label: t("notice"), href: "#notice" },
+    { icon: <FiTarget />, label: t("goals"), href: "#goals" },
+    { icon: <FiUsers />, label: t("team"), href: "#vendor" },
+    { icon: <FiInfo />, label: t("contact"), href: "#contact" },
+  ];
 
   return (
-
     <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
       {/* Top Bar */}
       <div className="bg-green-700 text-white py-2">
@@ -48,12 +46,9 @@ const navItems = [
       {/* Main Nav */}
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div
-          
-          className="cursor-pointer flex items-center space-x-2"
-        >
+        <div className="cursor-pointer flex items-center space-x-2">
           <div className="">
-            <img src={logo} alt="" className="w-14"/>
+            <img src={logo} alt="" className="w-14" />
           </div>
           <div>
             <h1 className="text-xl font-bold text-gray-800">ICTD Lab</h1>
@@ -63,16 +58,14 @@ const navItems = [
 
         {/* Desktop Menu */}
         <nav className="hidden lg:flex items-center space-x-2">
-         {navItems.map((item) => (
-  <NavItem
-    key={item.href}
-    icon={item.icon}
-    label={item.label}
-    href={item.href}
-  />
-))}
-
-
+          {navItems.map((item) => (
+            <NavItem
+              key={item.href}
+              icon={item.icon}
+              label={item.label}
+              href={item.href}
+            />
+          ))}
           {/* Language */}
           <button
             onClick={toggleLanguage}
@@ -80,7 +73,6 @@ const navItems = [
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
           </button>
-
           <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2">
             {t("login")}
           </button>
@@ -99,16 +91,15 @@ const navItems = [
       {menuOpen && (
         <div className="lg:hidden bg-white shadow-md border-t border-gray-200">
           <nav className="flex flex-col space-y-1 p-4">
-           {navItems.map((item) => (
-  <NavItem
-    key={item.href}
-    icon={item.icon}
-    label={item.label}
-    href={item.href}
-    onClick={() => setMenuOpen(false)}
-  />
-))}
-
+            {navItems.map((item) => (
+              <NavItem
+                key={item.href}
+                icon={item.icon}
+                label={item.label}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+              />
+            ))}
 
             <button
               onClick={toggleLanguage}
@@ -138,6 +129,5 @@ const NavItem = ({ icon, label, href, onClick }) => (
     <span>{label}</span>
   </a>
 );
-
 
 export default Navbar;
