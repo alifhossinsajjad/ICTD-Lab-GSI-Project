@@ -1,27 +1,31 @@
 import React from "react";
-import Banner from "../Banner/Banner";
-import Contact from "../../Contact/Contact";
-import Vendor from "../Vendor/Vendor";
-import AllNotice from "../../AllNotice/AllNotice";
+import Banner from '../Banner/Banner';
+import AllNotice from "../../../Pages/AllNotice/AllNotice";
 import Goals from "../Goals/Goals";
+import Vendor from "../Vendor/Vendor";
+import Contact from "../../Contact/Contact";
+
 
 const Home = () => {
   return (
     <div>
-      <section>
-        <Banner />
+      <section id="home">
+        <Banner/>
       </section>
 
-      <section>
+      <section id="notice">
         <AllNotice/>
       </section>
-      <section>
-        <Goals/>
+
+      <section id="goals">
+        <Goals />
       </section>
-      <section>
+
+      <section id="vendor">
         <Vendor />
       </section>
-      <section>
+
+      <section id="contact">
         <Contact />
       </section>
     </div>

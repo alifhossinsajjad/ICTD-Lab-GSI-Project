@@ -1,60 +1,35 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 import { useTranslation } from "react-i18next";
-import {
-  FiHome,
-  FiBell,
-  FiInfo,
-  FiTarget,
-  FiCamera,
-  FiUsers,
-  FiMenu,
-  FiX,
-} from "react-icons/fi";
+import { FiX } from "react-icons/fi";
+
 import logo from "../../assets/govt.png";
+import { FiBell, FiHome, FiInfo, FiMenu, FiTarget, FiUsers } from "react-icons/fi";
 
 
 
-const Navbar = ({ setActiveView }) => {
+const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Refs for scroll sections
-  const noticeRef = useRef(null);
-  const aboutRef = useRef(null);
-  const goalsRef = useRef(null);
-  const galleryRef = useRef(null);
-  const teamRef = useRef(null);
+
 
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === "en" ? "bn" : "en");
   };
 
   // Scroll to section using refs
-  const scrollTo = (ref) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false); // close mobile menu
-  };
+  
 
-  const handleNavigation = (view) => {
-    if (view === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setMenuOpen(false);
-    } else if (view === "notice") scrollTo(noticeRef);
-    else if (view === "about") scrollTo(aboutRef);
-    else if (view === "goals") scrollTo(goalsRef);
-    else if (view === "gallery") scrollTo(galleryRef);
-    else if (view === "team") scrollTo(teamRef);
-    else if (view === "all-notices" && setActiveView) setActiveView("all-notices");
-  };
 
-  const navItems = [
-    { icon: <FiHome />, label: t("home"), view: "home" },
-    { icon: <FiBell />, label: t("notice"), view: "notice" },
-    { icon: <FiInfo />, label: t("about"), view: "about" },
-    { icon: <FiTarget />, label: t("goals"), view: "goals" },
-    { icon: <FiCamera />, label: t("gallery"), view: "gallery" },
-    { icon: <FiUsers />, label: t("team"), view: "team" },
-  ];
+
+const navItems = [
+  { icon: <FiHome />, label: t("home"), href: "#home" },
+  { icon: <FiBell />, label: t("notice"), href: "#notice" },
+  { icon: <FiTarget />, label: t("goals"), href: "#goals" },
+  { icon: <FiUsers />, label: t("team"), href: "#vendor" },
+  { icon: <FiInfo/>, label: t("contact"), href: "#contact" },
+];
+
 
   return (
 
@@ -74,7 +49,7 @@ const Navbar = ({ setActiveView }) => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div
-          onClick={() => handleNavigation("home")}
+          
           className="cursor-pointer flex items-center space-x-2"
         >
           <div className="">
@@ -88,14 +63,15 @@ const Navbar = ({ setActiveView }) => {
 
         {/* Desktop Menu */}
         <nav className="hidden lg:flex items-center space-x-2">
-          {navItems.map((item) => (
-            <NavItem
-              key={item.view}
-              icon={item.icon}
-              label={item.label}
-              onClick={() => handleNavigation(item.view)}
-            />
-          ))}
+         {navItems.map((item) => (
+  <NavItem
+    key={item.href}
+    icon={item.icon}
+    label={item.label}
+    href={item.href}
+  />
+))}
+
 
           {/* Language */}
           <button
@@ -115,7 +91,7 @@ const Navbar = ({ setActiveView }) => {
           className="lg:hidden text-gray-800 text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <FiX /> : <FiMenu />}
+          {menuOpen ? <Fix /> : <FiMenu />}
         </button>
       </div>
 
@@ -123,14 +99,16 @@ const Navbar = ({ setActiveView }) => {
       {menuOpen && (
         <div className="lg:hidden bg-white shadow-md border-t border-gray-200">
           <nav className="flex flex-col space-y-1 p-4">
-            {navItems.map((item) => (
-              <NavItem
-                key={item.view}
-                icon={item.icon}
-                label={item.label}
-                onClick={() => handleNavigation(item.view)}
-              />
-            ))}
+           {navItems.map((item) => (
+  <NavItem
+    key={item.href}
+    icon={item.icon}
+    label={item.label}
+    href={item.href}
+    onClick={() => setMenuOpen(false)}
+  />
+))}
+
 
             <button
               onClick={toggleLanguage}
@@ -150,14 +128,16 @@ const Navbar = ({ setActiveView }) => {
 };
 
 // Nav Item Component
-const NavItem = ({ icon, label, onClick }) => (
-  <button
+const NavItem = ({ icon, label, href, onClick }) => (
+  <a
+    href={href}
     onClick={onClick}
     className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700"
   >
     {icon}
     <span>{label}</span>
-  </button>
+  </a>
 );
+
 
 export default Navbar;
