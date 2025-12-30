@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @plugin "daisyui";
 @import "tailwindcss";
 
@@ -46,3 +47,5 @@
   display: inline-block;
   animation: marquee 25s linear infinite;
 }
+=======
+>>>>>>> main

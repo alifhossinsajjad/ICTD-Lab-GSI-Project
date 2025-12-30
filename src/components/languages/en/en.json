@@ -1,10 +1,6 @@
 {
   "home": "Home",
-  "notice": "Notice",
   "about": "About",
-  "goals": "Goals",
-  "gallery": "Gallery",
-  "team": "Team",
-  "login": "Login",
-  "government": "Government of Bangladesh"
+  "contact": "Contact",
+  "language": "Language"
 }

@@ -21,7 +21,6 @@ const Navbar = () => {
   
 
 
-
 const navItems = [
   { icon: <FiHome />, label: t("home"), href: "#home" },
   { icon: <FiBell />, label: t("notice"), href: "#notice" },
@@ -80,7 +79,6 @@ const navItems = [
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
           </button>
-
           <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2">
             {t("login")}
           </button>
