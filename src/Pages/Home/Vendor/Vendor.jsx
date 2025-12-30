@@ -41,14 +41,18 @@ const vendors = [
 
 const Vendor = () => {
   return (
-    <section className="py-20 bg-white" id="vendor">
+    <section className="py-20 bg-emerald-50" id="vendor">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* Header */}
         <div className="mb-14 text-center">
-          <h2 className="text-2xl md:text-5xl font-semibold text-green-700 uppercase">
+          <div className="inline-block mb-4 ">
+              <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+              <h1 className="text-3xl md:text-4xl p-2 lg:text-5xl font-bold text-gray-800 mb-4">
             Contact With Vendor
-          </h2>
+            </h1>
+             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+           </div>
           <p className="text-lg text-gray-500 mt-2">
             Approved vendors for ICTD Lab GIS Mapping System
           </p>

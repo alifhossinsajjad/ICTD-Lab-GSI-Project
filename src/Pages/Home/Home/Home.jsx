@@ -3,26 +3,32 @@ import Banner from '../Banner/Banner';
 import Contact from '../../Contact/Contact';
 import Vendor from '../Vendor/Vendor';
 import Goals from '../Goals/Goals';
-
+import About from '../About/About';
+import AllNotice from '../../AllNotice/AllNotice';
 
 const Home = () => {
     return (
-        <div>
+        <div className="bg-white">
             <section>
-          <Banner/>
+                <Banner />
             </section>
             <section>
-                <Goals/>
+                <AllNotice />
             </section>
             <section>
-               <Vendor/>
+                <About />
+            </section>
+            <section className="bg-gray-50">
+                <Goals />
             </section>
             <section>
-                <Contact/>
+                <Vendor />
             </section>
-           
+            <section>
+                <Contact />
+            </section>
         </div>
     );
 };
 
-export default Home
+export default Home;

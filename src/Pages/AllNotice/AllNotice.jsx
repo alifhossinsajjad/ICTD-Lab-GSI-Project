@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaSearch, FaSyncAlt, FaFilePdf, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const fetchNotices = async () => {
   const res = await fetch("/notices.json");
@@ -41,176 +41,241 @@ const AllNotice = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50 relative">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-20 bg-gray-50 min-h-screen font-sans">
 
-        {/* Toast */}
+      <div className="overflow-hidden bg-white py-10 border-b border-gray-100">
+        <style>{`
+          @keyframes marquees {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquees {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+          }
+          .animate-marquees:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+        <div className="animate-marquees">
+          {/* Render 4 sets of images to ensure seamless looping even on wide screens */}
+          {[
+            "/Screenshot_36.jpg",
+            "/Screenshot_37.jpg",
+            "/Screenshot_38.jpg",
+            "/Screenshot_36.jpg",
+            "/Screenshot_37.jpg",
+            "/Screenshot_38.jpg",
+            "/Screenshot_36.jpg",
+            "/Screenshot_37.jpg",
+            "/Screenshot_38.jpg",
+            "/Screenshot_36.jpg",
+            "/Screenshot_37.jpg",
+            "/Screenshot_38.jpg"
+          ].map((src, index) => (
+            <div key={index} className="mx-8 flex items-center justify-center">
+              <img
+                src={src}
+                alt="Partner Logo"
+                className="h-16 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6">
+
+        {/* Toast Notification */}
         {showToast && (
-          <div className="fixed top-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow-lg text-sm z-50 animate-fade-in">
+          <div className="fixed top-24 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl text-sm font-medium z-50 animate-fade-in flex items-center gap-2">
+            <FaSyncAlt className="animate-spin" />
             Notices refreshed successfully
           </div>
         )}
 
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h2 className="text-lg font-semibold uppercase tracking-widest text-gray-800">
-            NOTICE
-          </h2>
-          <div className="w-20 h-[2px] bg-green-600 mx-auto mt-2"></div>
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          
+           <div className="inline-block mb-4 ">
+             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+             <h1 className="text-3xl md:text-4xl p-2 lg:text-5xl font-bold text-gray-800 mb-4">
+              All Notices
+            </h1>
+             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+           </div>
+            
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            Stay updated with the latest announcements, circulars, and project updates from the ICTD Digital Lab.
+          </p>
         </div>
 
-        <h3 className="text-lg mb-4 font-medium text-gray-800">
-          নোটিস বোর্ড
-        </h3>
+        {/* Main Card */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
 
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-3 text-sm bg-white p-3 border rounded">
-          <div className="flex items-center gap-2">
-            <span className="text-gray-600">Show</span>
-            <select
-              value={entries}
-              onChange={(e) => {
-                setEntries(Number(e.target.value));
-                setPage(1);
-              }}
-              className="border px-2 py-1 rounded text-sm"
-            >
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-            </select>
-            <span className="text-gray-600">entries</span>
+          {/* Toolbar */}
+          <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex flex-col md:flex-row justify-between items-center gap-4">
 
-            <button
-              onClick={handleReload}
-              className="ml-2 border px-3 py-1 rounded hover:bg-gray-100"
-            >
-              Reload
-            </button>
+            {/* Left: Entries & Reload */}
+            <div className="flex items-center gap-4 w-full md:w-auto">
+              <div className="flex items-center gap-2 text-sm text-gray-600 bg-white px-3 py-2 rounded-lg border border-gray-200 shadow-sm">
+                <span>Show</span>
+                <select
+                  value={entries}
+                  onChange={(e) => {
+                    setEntries(Number(e.target.value));
+                    setPage(1);
+                  }}
+                  className="bg-transparent font-semibold text-gray-800 focus:outline-none cursor-pointer"
+                >
+                  <option value={10}>10</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                </select>
+                <span>entries</span>
+              </div>
+
+              <button
+                onClick={handleReload}
+                className="p-2.5 text-gray-500 hover:text-green-600 bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow transition-all active:scale-95"
+                title="Reload Data"
+              >
+                <FaSyncAlt className={isFetching ? "animate-spin" : ""} />
+              </button>
+            </div>
+
+            {/* Right: Search */}
+            <div className="relative w-full md:w-72">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <FaSearch className="text-gray-400 text-sm" />
+              </div>
+              <input
+                type="text"
+                className="block w-full pl-10 pr-4 py-2.5 text-sm text-gray-900 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500/20 focus:border-green-500 transition-all shadow-sm"
+                placeholder="Search notices..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 mt-2 md:mt-0">
-            <span className="text-gray-600">Search:</span>
-            <input
-              className="border px-2 py-1 rounded text-sm"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-        </div>
-
-        {/* Table */}
-        <div className="bg-white border rounded shadow-sm overflow-x-auto relative">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-gray-100 text-gray-700">
-                <th className="border px-3 py-2 w-12 text-center">SL</th>
-                <th className="border px-3 py-2 text-left">Title</th>
-                <th className="border px-3 py-2 w-48 text-left">
-                  Publish Date
-                </th>
-                <th className="border px-3 py-2 w-24 text-center">
-                  Download
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {(isLoading || isFetching) ? (
-                <tr>
-                  <td colSpan="4" className="py-10 text-center">
-                    {/* Spinner */}
-                    <div className="flex justify-center">
-                      <div className="h-8 w-8 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
-                    </div>
-                  </td>
+          {/* Table Container */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-center w-20">SL</th>
+                  <th className="px-6 py-4">Title</th>
+                  <th className="px-6 py-4 w-48">Published Date</th>
+                  <th className="px-6 py-4 w-32 text-center">Action</th>
                 </tr>
-              ) : paginated.length === 0 ? (
-                <tr>
-                  <td colSpan="4" className="text-center py-6">
-                    No data found
-                  </td>
-                </tr>
-              ) : (
-                paginated.map((notice, index) => (
-                  <tr
-                    key={notice.id}
-                    className="group transition hover:bg-green-50 hover:border-l-4 hover:border-green-600"
-                  >
-                    <td className="border px-3 py-2 text-center group-hover:text-green-800">
-                      {start + index + 1}
-                    </td>
-
-                    <td className="border px-3 py-2 group-hover:text-green-800">
-                      {notice.title}
-                    </td>
-
-                    <td className="border px-3 py-2 group-hover:text-green-800">
-                      {notice.date}
-                      <br />
-                      <span className="text-xs text-gray-500">
-                        {notice.time}
-                      </span>
-                    </td>
-
-                    <td className="border px-3 py-2 text-center">
-                      <a
-                        href={notice.file}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-green-700 transition"
-                      >
-                        <FaDownload />
-                      </a>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {(isLoading || isFetching) ? (
+                  <tr>
+                    <td colSpan="4" className="py-12 text-center">
+                      <div className="flex flex-col items-center justify-center gap-3">
+                        <div className="h-8 w-8 border-4 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+                        <span className="text-sm text-gray-500 font-medium">Loading notices...</span>
+                      </div>
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : paginated.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="py-12 text-center text-gray-500">
+                      No notices found matching your search.
+                    </td>
+                  </tr>
+                ) : (
+                  paginated.map((notice, index) => (
+                    <tr
+                      key={notice.id}
+                      className="group hover:bg-green-50/30 transition-colors duration-200"
+                    >
+                      <td className="px-6 py-4 text-center">
+                        <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-600 text-xs font-bold group-hover:bg-green-100 group-hover:text-green-700 transition-colors">
+                          {start + index + 1}
+                        </span>
+                      </td>
 
-        {/* Footer */}
-        <div className="flex flex-col md:flex-row justify-between items-center mt-4 text-sm text-gray-600">
-          <span>
-            Showing {start + 1} to{" "}
-            {Math.min(start + entries, filtered.length)} of{" "}
-            {filtered.length} entries
-          </span>
+                      <td className="px-6 py-4">
+                        <div className="flex items-start gap-3">
+                          <FaFilePdf className="text-red-500 mt-0.5 text-lg flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity" />
+                          <span className="text-gray-700 font-medium group-hover:text-green-700 transition-colors leading-relaxed">
+                            {notice.title}
+                          </span>
+                        </div>
+                      </td>
 
-          <div className="flex gap-1 mt-2 md:mt-0">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage(page - 1)}
-              className="border px-3 py-1 rounded disabled:opacity-40 hover:bg-gray-100"
-            >
-              Previous
-            </button>
+                      <td className="px-6 py-4 text-sm text-gray-500">
+                        <div className="flex flex-col">
+                          <span className="font-medium text-gray-700">{notice.date}</span>
+                          <span className="text-xs text-gray-400">{notice.time}</span>
+                        </div>
+                      </td>
 
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i}
-                onClick={() => setPage(i + 1)}
-                className={`border px-3 py-1 rounded ${
-                  page === i + 1
-                    ? "bg-green-600 text-white"
-                    : "hover:bg-gray-100"
-                }`}
-              >
-                {i + 1}
-              </button>
-            ))}
-
-            <button
-              disabled={page === totalPages}
-              onClick={() => setPage(page + 1)}
-              className="border px-3 py-1 rounded disabled:opacity-40 hover:bg-gray-100"
-            >
-              Next
-            </button>
+                      <td className="px-6 py-4 text-center">
+                        <a
+                          href={notice.file}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-green-600 hover:text-white hover:border-green-600 shadow-sm hover:shadow-md transition-all duration-200"
+                          title="Download PDF"
+                        >
+                          <FaDownload className="text-sm" />
+                        </a>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
           </div>
-        </div>
 
+          {/* Pagination Footer */}
+          <div className="p-6 border-t border-gray-200 bg-gray-50/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+            <span className="text-gray-500 font-medium">
+              Showing <span className="text-gray-900">{filtered.length > 0 ? start + 1 : 0}</span> to{" "}
+              <span className="text-gray-900">{Math.min(start + entries, filtered.length)}</span> of{" "}
+              <span className="text-gray-900">{filtered.length}</span> entries
+            </span>
+
+            <div className="flex items-center gap-2">
+              <button
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+                className="px-4 py-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 font-medium"
+              >
+                <FaChevronLeft className="text-xs" /> Previous
+              </button>
+
+              <div className="hidden md:flex gap-1">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setPage(i + 1)}
+                    className={`w-9 h-9 rounded-lg flex items-center justify-center font-medium transition-all ${page === i + 1
+                        ? "bg-green-600 text-white shadow-md shadow-green-200"
+                        : "bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 hover:text-green-700"
+                      }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                disabled={page === totalPages || totalPages === 0}
+                onClick={() => setPage(page + 1)}
+                className="px-4 py-2 rounded-lg border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 font-medium"
+              >
+                Next <FaChevronRight className="text-xs" />
+              </button>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );
