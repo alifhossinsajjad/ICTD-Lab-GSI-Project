@@ -1,111 +1,102 @@
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
 
 const Contact = () => {
   return (
-    <section  id="contact-section"
-      className="pt-24 pb-20 bg-cover bg-center relative"
+    <section
+      id="contact-section"
+      className="relative pt-24 pb-20 bg-cover bg-center"
       style={{ backgroundImage: "url('/cnts-bg.png')" }}
     >
-      {/* Gradient Overlay */}
+      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 via-green-800/70 to-green-700/60"></div>
 
-      {/* Content */}
-      <div className="relative">
-        <div className="container mx-auto px-6">
+      <div className="relative z-10">
+        <div className="max-w-7xl mx-auto px-6">
 
-          {/* Header */}
+          {/* Section Title */}
           <div className="text-center mb-14">
-            <h2 className="text-3xl font-semibold text-white">
-              Get in Touch
+            <h2 className="text-4xl font-bold text-white tracking-wide">
+              CONTACT US
             </h2>
-            <p className="text-sm text-gray-200 mt-2">
-              Have questions or need information? Contact us anytime.
+            <p className="text-sm text-gray-300 mt-3">
+              Official Communication & Location Information
             </p>
           </div>
 
-          {/* GRID (Desktop width controlled) */}
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.6fr] gap-10 justify-center">
+          {/* Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
 
-            {/* LEFT: Contact Info */}
-            <div className="bg-white/90 backdrop-blur rounded-2xl shadow-lg p-8 space-y-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">
-                Contact Information
+            {/* LEFT INFO CARD */}
+            <div className="lg:col-span-1 bg-white rounded-xl shadow-xl p-8">
+              <h3 className="text-lg font-semibold text-gray-800 mb-6 border-b pb-3">
+                Office Information
               </h3>
 
-              <div className="flex items-start gap-4 text-sm text-gray-700">
-                <FaPhoneAlt className="text-green-600 mt-1" />
-                <span>+880xxxxxxxx</span>
-              </div>
+              <ul className="space-y-5 text-sm text-gray-700">
+                <li className="flex gap-4">
+                  <FaMapMarkerAlt className="text-green-400 mt-1" />
+                  <span>
+                    Plot # E-14/X, ICT Tower (5th Floor) <br />
+                    Agargaon, Dhaka-1207
+                  </span>
+                </li>
 
-              <div className="flex items-start gap-4 text-sm text-gray-700">
-                <FaEnvelope className="text-green-600 mt-1" />
-                <span>xxxxxx@gmail.com</span>
-              </div>
+                <li className="flex gap-4">
+                  <FaEnvelope className="text-green-400 mt-1" />
+                  <span>pdsrdl@doict.gov.bd</span>
+                </li>
 
-              <div className="flex items-start gap-4 text-sm text-gray-700">
-                <FaMapMarkerAlt className="text-green-600 mt-1" />
-                <span>
-                  xxxxzxxx <br />
-                  Dhaka-1207, Bangladesh
-                </span>
+                <li className="flex gap-4">
+                  <FaPhoneAlt className="text-green-400 mt-1" />
+                  <span>+88-02-41024073</span>
+                </li>
+              </ul>
+
+              <p className="text-xs text-gray-500 mt-6 leading-relaxed">
+                Establishment of ICTD Digital Lab Project (Phase II)
+              </p>
+
+              {/* SOCIAL */}
+              <div className="flex gap-3 mt-6">
+                {[
+                  { icon: <FaFacebookF />, link: "#" },
+                  { icon: <FaInstagram />, link: "#" },
+                  { icon: <FaYoutube />, link: "#" },
+                ].map((item, i) => (
+                  <a
+                    key={i}
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="
+                     w-10 h-10 rounded-full
+  flex items-center justify-center
+  bg-green-50 text-green-600
+  hover:bg-green-600 hover:text-white
+  transition
+                    "
+                  >
+                    {item.icon}
+                  </a>
+                ))}
               </div>
             </div>
 
-            {/* RIGHT: Contact Form (X-axis reduced) */}
-            <div className="bg-white/90 backdrop-blur rounded-2xl shadow-lg p-10 max-w-3xl w-full">
-              <h3 className="text-lg font-semibold text-gray-800 mb-6">
-                Send a Message
-              </h3>
-
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-                <div>
-                  <label className="text-sm text-gray-600">Name</label>
-                  <input
-                    type="text"
-                    className="w-full mt-1 px-4 py-2 border rounded-full
-                               focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-sm text-gray-600">Email</label>
-                  <input
-                    type="email"
-                    className="w-full mt-1 px-4 py-2 border rounded-full
-                               focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="text-sm text-gray-600">Subject</label>
-                  <input
-                    type="text"
-                    className="w-full mt-1 px-4 py-2 border rounded-full
-                               focus:outline-none focus:ring-2 focus:ring-green-500"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="text-sm text-gray-600">Message</label>
-                  <textarea
-                    rows="5"
-                    className="w-full mt-1 px-4 py-3 border rounded-xl
-                               focus:outline-none focus:ring-2 focus:ring-green-500"
-                  ></textarea>
-                </div>
-
-                <div className="md:col-span-2">
-                  <button
-                    type="submit"
-                    className="w-full bg-green-600 text-white py-3 rounded-full
-                               font-semibold hover:bg-green-700 transition"
-                  >
-                    Send Message
-                  </button>
-                </div>
-
-              </form>
+            {/* RIGHT MAP */}
+            <div className="lg:col-span-2 bg-white rounded-xl shadow-xl overflow-hidden">
+              <iframe
+                title="ICT Tower Location"
+                src="https://www.google.com/maps?q=ICT%20Tower%20Agargaon%20Dhaka&output=embed"
+                className="w-full h-[420px] border-0"
+                loading="lazy"
+              ></iframe>
             </div>
 
           </div>
