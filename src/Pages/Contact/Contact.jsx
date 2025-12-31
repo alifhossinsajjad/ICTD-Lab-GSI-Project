@@ -1,7 +1,10 @@
 import React from 'react';
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="contact-section" className="py-20 bg-emerald-50 font-sans relative overflow-hidden">
       {/* Decorative Elements */}
@@ -15,12 +18,12 @@ const Contact = () => {
           <div className="inline-block mb-4">
             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
             <h2 className="text-3xl md:text-4xl p-2 lg:text-5xl font-bold text-gray-800 mb-2">
-              Get in Touch
+              {t("contact_title")}
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
           </div>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Have questions or need information? We're here to help. Reach out to us anytime.
+            {t("contact_subtitle")}
           </p>
         </div>
 
@@ -33,9 +36,9 @@ const Contact = () => {
             <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
 
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-6">{t("contact_info_title")}</h3>
               <p className="text-green-100 mb-10 leading-relaxed">
-                Fill up the form and our team will get back to you within 24 hours.
+                {t("contact_info_desc")}
               </p>
 
               <div className="space-y-8">
@@ -44,7 +47,7 @@ const Contact = () => {
                     <FaPhoneAlt className="text-green-300" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg">Phone</h4>
+                    <h4 className="font-semibold text-lg">{t("contact_phone")}</h4>
                     <p className="text-green-100 text-sm mt-1">+880 1234 567 890</p>
                   </div>
                 </div>
@@ -54,7 +57,7 @@ const Contact = () => {
                     <FaEnvelope className="text-green-300" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg">Email</h4>
+                    <h4 className="font-semibold text-lg">{t("contact_email")}</h4>
                     <p className="text-green-100 text-sm mt-1">info@ictd-lab.gov.bd</p>
                   </div>
                 </div>
@@ -64,7 +67,7 @@ const Contact = () => {
                     <FaMapMarkerAlt className="text-green-300" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-lg">Address</h4>
+                    <h4 className="font-semibold text-lg">{t("contact_address")}</h4>
                     <p className="text-green-100 text-sm mt-1 leading-relaxed">
                       ICT Tower, Agargaon,<br />
                       Dhaka-1207, Bangladesh
@@ -82,12 +85,12 @@ const Contact = () => {
 
           {/* RIGHT: Contact Form */}
           <div className="lg:col-span-2 p-10 md:p-14 bg-white">
-            <h3 className="text-2xl font-bold text-gray-800 mb-8">Send us a Message</h3>
+            <h3 className="text-2xl font-bold text-gray-800 mb-8">{t("contact_form_title")}</h3>
 
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">First Name</label>
+                  <label className="text-sm font-medium text-gray-700">{t("contact_label_fname")}</label>
                   <input
                     type="text"
                     placeholder="John"
@@ -95,7 +98,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Last Name</label>
+                  <label className="text-sm font-medium text-gray-700">{t("contact_label_lname")}</label>
                   <input
                     type="text"
                     placeholder="Doe"
@@ -106,7 +109,7 @@ const Contact = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Email Address</label>
+                  <label className="text-sm font-medium text-gray-700">{t("contact_label_email")}</label>
                   <input
                     type="email"
                     placeholder="john@example.com"
@@ -114,7 +117,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700">Phone Number</label>
+                  <label className="text-sm font-medium text-gray-700">{t("contact_label_phone")}</label>
                   <input
                     type="tel"
                     placeholder="+880..."
@@ -124,7 +127,7 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Subject</label>
+                <label className="text-sm font-medium text-gray-700">{t("contact_label_subject")}</label>
                 <input
                   type="text"
                   placeholder="How can we help?"
@@ -133,7 +136,7 @@ const Contact = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-700">Message</label>
+                <label className="text-sm font-medium text-gray-700">{t("contact_label_message")}</label>
                 <textarea
                   rows="4"
                   placeholder="Write your message here..."
@@ -147,7 +150,7 @@ const Contact = () => {
                   className="w-full md:w-auto px-8 py-3 bg-[#006A4E] hover:bg-[#00563f] text-white font-semibold rounded-lg shadow-lg shadow-green-900/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <FaPaperPlane className="text-sm" />
-                  Send Message
+                  {t("contact_btn_send")}
                 </button>
               </div>
             </form>

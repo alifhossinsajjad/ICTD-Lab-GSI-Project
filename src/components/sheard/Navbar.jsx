@@ -35,7 +35,7 @@ const Navbar = () => {
       {/* Top Bar */}
       <div className="bg-green-700 text-white py-2">
         <div className="container mx-auto px-6 flex justify-between text-sm">
-          <div className="flex gap-8 overflow-hidden whitespace-nowrap animate-marquee">
+          <div className="flex gap-8 overflow-hidden whitespace-nowrap">
             <span>📞 +880-2-9898989</span>
             <span>✉️ info@ictdlab.gov.bd</span>
           </div>

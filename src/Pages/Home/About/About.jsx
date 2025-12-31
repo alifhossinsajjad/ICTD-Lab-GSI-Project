@@ -1,47 +1,101 @@
 import React from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaLaptopCode, FaUsers } from 'react-icons/fa';
+import { useTranslation } from "react-i18next";
 
 const About = () => {
+    const { t } = useTranslation();
     return (
-        <section className="py-20 bg-emerald-50 font-sans overflow-hidden">
-            <div className="container mx-auto px-6 max-w-6xl">
+        <section className="py-12 bg-emerald-50 overflow-hidden">
+            <div className="container mx-auto px-6 max-w-7xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-                {/* Header */}
-                <div className="text-center mb-16">
-                     <div className="inline-block mb-4 ">
-             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
-             <h1 className="text-3xl md:text-4xl p-2 lg:text-5xl font-bold text-gray-800 mb-4">
-            About Us
-            </h1>
-             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
-           </div>
-                </div>
+                    {/* Left Side - Image Composition */}
+                    <div className="relative">
+                        {/* Main Image */}
+                        <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+                            <img
+                                src="/Screenshot_39.png"
+                                alt="ICT Lab Students"
+                                className="w-full h-[500px] object-contain"
+                            />
+                            {/* Overlay Gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </div>
 
-                {/* Content Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 text-gray-600 leading-relaxed text-justify">
 
-                    {/* Left Column */}
-                    <div className="space-y-6">
-                        <p>
-                            The Department of Information and Communication Technology has devoted special attention to the Information Technology sector in extending ICT education across the country. To ensure the use and application of ICT and to develop skilled manpower, ICTD Digital Labs are being established in various educational institutions under the direction of the Honourable Prime Minister on the initiative of the Information and Communication Technology Division and under the supervision of the Department of Information and Communication Technology (DoICT).
-                        </p>
-                        <p>
-                            The goals of establishing those labs are generating a conducive environment of ICT education for primary, secondary, and higher secondary students and providing informational IT training to interested youth with the prospects to acquire profitable employment opportunities at home and abroad.
-                        </p>
+
+
+                        <div className="absolute bottom-40  -left-12 z-30 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 animate-bounce-slow hidden md:block">
+                            <div className="flex items-center gap-4">
+                                <div className="bg-green-100 p-3 rounded-full text-green-600">
+                                    <FaUsers size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-gray-800">30,000+</h3>
+                                    <p className="text-sm text-gray-500 font-medium">{t("about_stats_students")}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Stats Card - Floating */}
+                        <div className="absolute top-10 -right-8 z-30 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 animate-bounce-slow hidden md:block">
+                            <div className="flex items-center gap-4">
+                                <div className="bg-green-100 p-3 rounded-full text-green-600">
+                                    <FaLaptopCode size={24} />
+                                </div>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-gray-800">9,001+</h3>
+                                    <p className="text-sm text-gray-500 font-medium">{t("about_stats_labs")}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Decorative Elements */}
+                        <div className="absolute -top-10 -left-10 w-40 h-40 bg-green-50 rounded-full blur-3xl -z-10"></div>
+                        <div className="absolute bottom-10 right-10 w-40 h-40 bg-orange-50 rounded-full blur-3xl -z-10"></div>
                     </div>
 
-                    {/* Right Column */}
-                    <div className="space-y-8">
-                        <p>
-                            The establishment of ICTD Digital Lab (SRDL) is being constructed under the leadership of the honourable State Minister of ICT Division, Mr. Junaid Ahmed Palak MP, and with the support of the honourable Adviser, Mr. Sajib Wazed. ICTD Digital Lab has been set up in 9001 educational institutions across the country under the overall management of the Senior Secretary of the ICT Department in collaboration with the Director-General and Project Director of the ICT Department, all Deputy Commissioners and Upazila Nirbahi Officers, District Education Officers, District- Upazila ICT Officers, Upazila Secondary Education Officers and all concerned personnel.
-                        </p>
+                    {/* Right Side - Content */}
+                    <div className="space-y-8 relative">
+                        <div>
+                            <span className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-2 block">
+                                {t("about_tag")}
+                            </span>
+                            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                                {t("about_title")}
+                            </h2>
 
-                        <button className="bg-[#006A4E] hover:bg-[#00563f] text-white px-8 py-3 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-green-900/20">
-                            Learn More
-                            <FaArrowRight className="text-sm" />
+                        </div>
+
+                        <div className="text-gray-600 text-lg leading-relaxed space-y-6 text-justify">
+                            <p>
+                                {t("about_p1")}
+                            </p>
+                            <p>
+                                {t("about_p2")}
+                            </p>
+                        </div>
+
+                        {/* Feature List */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {[
+                                t("about_feature_1"),
+                                t("about_feature_2"),
+                                t("about_feature_3"),
+                                t("about_feature_4")
+                            ].map((item, index) => (
+                                <div key={index} className="flex items-center gap-3 text-gray-700 font-medium">
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                    {item}
+                                </div>
+                            ))}
+                        </div>
+
+                        <button className="group bg-[#006A4E] text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-green-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3">
+                            {t("about_btn_explore")}
+                            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                         </button>
                     </div>
-
                 </div>
             </div>
         </section>

@@ -1,12 +1,14 @@
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
 
       {/* Government Logos */}
       {/* Partner Marquee */}
-      
+
 
       {/* Main Content with Background */}
       <div
@@ -22,44 +24,43 @@ const Footer = () => {
             {/* About */}
             <div>
               <h3 className="text-white text-lg font-bold mb-6 border-b border-green-500 inline-block pb-1">
-                ICTD Lab GIS
+                {t("footer_about_title")}
               </h3>
               <p className="text-sm leading-relaxed text-gray-300">
-                A government GIS mapping and analytics platform supporting
-                spatial data visualization, monitoring, and decision-making for a smarter Bangladesh.
+                {t("footer_about_desc")}
               </p>
             </div>
 
             {/* Quick Links */}
             <div>
               <h3 className="text-white text-lg font-bold mb-6 border-b border-green-500 inline-block pb-1">
-                Quick Links
+                {t("footer_quick_links")}
               </h3>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Home</a></li>
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Map Dashboard</a></li>
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Vendor List</a></li>
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Contact Us</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_link_home")}</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_link_map")}</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_link_vendor")}</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_link_contact")}</a></li>
               </ul>
             </div>
 
             {/* Services */}
             <div>
               <h3 className="text-white text-lg font-bold mb-6 border-b border-green-500 inline-block pb-1">
-                Services
+                {t("footer_services")}
               </h3>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">GIS Mapping</a></li>
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Spatial Analysis</a></li>
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Data Visualization</a></li>
-                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">Project Reports</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_service_gis")}</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_service_spatial")}</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_service_viz")}</a></li>
+                <li><a href="#" className="hover:text-white hover:translate-x-1 transition-all inline-block">{t("footer_service_reports")}</a></li>
               </ul>
             </div>
 
             {/* Social */}
             <div>
               <h3 className="text-white text-lg font-bold mb-6 border-b border-green-500 inline-block pb-1">
-                Follow Us
+                {t("footer_follow")}
               </h3>
               <div className="flex gap-4">
                 <a className="p-3 rounded-full bg-white/10 hover:bg-green-600 text-white transition-all shadow-lg backdrop-blur-sm cursor-pointer">
@@ -81,8 +82,8 @@ const Footer = () => {
 
           {/* Bottom Bar */}
           <div className="border-t border-white/10 mt-12 pt-8 text-center text-sm text-gray-400">
-            <p>© {new Date().getFullYear()} ICTD Lab GIS Mapping System. All rights reserved.</p>
-            <p className="mt-2 text-xs text-gray-500">Government of the People's Republic of Bangladesh</p>
+            <p>© {new Date().getFullYear()} {t("footer_copyright")}</p>
+            <p className="mt-2 text-xs text-gray-400">{t("footer_govt")}</p>
           </div>
         </div>
       </div>
