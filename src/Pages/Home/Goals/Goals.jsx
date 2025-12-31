@@ -74,7 +74,7 @@ const Goals = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:lg:grid-cols-4 gap-6 lg:gap-8">
         {goalsData.map((goal, index) => (
           <div 
             key={index}
