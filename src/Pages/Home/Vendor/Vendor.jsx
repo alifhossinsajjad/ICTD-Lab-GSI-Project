@@ -1,45 +1,36 @@
 import { FaPhoneAlt, FaMapMarkerAlt, FaBuilding } from "react-icons/fa";
-
-const vendors = [
-  {
-    id: 1,
-    name: "JV of Optimal IT Ltd; Savvy Techmart Ltd and LAL Sobuz Technology",
-    address: "4/16 Humayun Road (3rd Floor), Mohammadpur, Dhaka-1207",
-    phone: "01711-588054",
-  },
-  {
-    id: 2,
-    name: "JV of IBCS-Primax Software (Bangladesh) Ltd, Leads Training & Consulting Ltd and Virtual Market Solution Ltd",
-    address: "House- 6/2 (Level 4 & 6), Kazi Nazrul Islam Road, Block-F, Dhaka-1207",
-    phone: "01713-397560",
-  },
-  {
-    id: 3,
-    name: "DataSoft Systems Bangladesh Ltd",
-    address: "House-11, Road-113/A, Gulshan-2, Dhaka-1212",
-    phone: "01712-445566",
-  },
-  {
-    id: 4,
-    name: "Southtech Limited",
-    address: "Rangs Pearl Tower, Mohakhali, Dhaka-1212",
-    phone: "01715-998877",
-  },
-  {
-    id: 5,
-    name: "Tiger IT Bangladesh Ltd",
-    address: "Rangs Bhaban, Gulshan-1, Dhaka-1212",
-    phone: "01718-223344",
-  },
-  {
-    id: 6,
-    name: "Dream71 Bangladesh Ltd",
-    address: "Banani DOHS, Dhaka-1206",
-    phone: "01719-667788",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Vendor = () => {
+  const { t } = useTranslation();
+
+  const vendors = [
+    {
+      id: 1,
+      phone: "01711-588054",
+    },
+    {
+      id: 2,
+      phone: "01713-397560",
+    },
+    {
+      id: 3,
+      phone: "01712-445566",
+    },
+    {
+      id: 4,
+      phone: "01715-998877",
+    },
+    {
+      id: 5,
+      phone: "01718-223344",
+    },
+    {
+      id: 6,
+      phone: "01719-667788",
+    },
+  ];
+
   return (
     <section className="py-20 bg-emerald-50" id="vendor">
       <div className="max-w-7xl mx-auto px-6">
@@ -47,14 +38,14 @@ const Vendor = () => {
         {/* Header */}
         <div className="mb-14 text-center">
           <div className="inline-block mb-4 ">
-              <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
-              <h1 className="text-3xl md:text-4xl p-2 lg:text-5xl font-bold text-gray-800 mb-4">
-            Contact With Vendor
+            <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+            <h1 className="text-3xl md:text-4xl p-2 lg:text-5xl font-bold text-gray-800 mb-4">
+              {t("vendor_title")}
             </h1>
-             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
-           </div>
+            <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+          </div>
           <p className="text-lg text-gray-500 mt-2">
-            Approved vendors for ICTD Lab GIS Mapping System
+            {t("vendor_subtitle")}
           </p>
         </div>
 
@@ -74,7 +65,7 @@ const Vendor = () => {
               <div className="flex items-start gap-3 mb-4">
                 <FaBuilding className="text-green-600 mt-1 transition-colors duration-300 group-hover:text-red-600" />
                 <h3 className="text-sm font-semibold text-gray-800 leading-relaxed">
-                  {vendor.name}
+                  {t(`vendor_${vendor.id}_name`)}
                 </h3>
               </div>
 
@@ -82,7 +73,7 @@ const Vendor = () => {
               <div className="flex items-start gap-3 mb-3">
                 <FaMapMarkerAlt className="text-green-500 mt-1" />
                 <p className="text-sm text-gray-700">
-                  {vendor.address}
+                  {t(`vendor_${vendor.id}_address`)}
                 </p>
               </div>
 
