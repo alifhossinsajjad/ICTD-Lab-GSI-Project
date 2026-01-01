@@ -44,9 +44,9 @@ const AllNotice = () => {
   };
 
   return (
-    <section className="py-20 bg-gray-50 min-h-screen font-sans">
+    <section className="py-20 bg-emerald-50  min-h-screen font-sans">
 
-      <div className="overflow-hidden bg-white py-10 border-b border-gray-100">
+      <div className="overflow-hidden bg-emerald-50  py-10 border-b border-gray-100">
         <Marquee pauseOnHover={true} speed={50} gradient={true} gradientColor="255, 255, 255">
           {/* Render images */}
           {[
@@ -67,7 +67,7 @@ const AllNotice = () => {
               <img
                 src={src}
                 alt="Partner Logo"
-                className="h-16 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className="h-16 rounded-full p-2 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
               />
             </div>
           ))}
@@ -101,7 +101,7 @@ const AllNotice = () => {
         </div>
 
         {/* Main Card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white  border-6 border-gray-200 shadow-xl rounded-2xl shadow-sm border border-gray-200 overflow-hidden">
 
           {/* Toolbar */}
           <div className="p-6 border-b border-gray-100 bg-gray-50/50 flex flex-col md:flex-row justify-between items-center gap-4">

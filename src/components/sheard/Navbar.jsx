@@ -69,11 +69,11 @@ const Navbar = () => {
           {/* Language */}
           <button
             onClick={toggleLanguage}
-            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium text-sm ml-4"
+            className="px-4 py-2 bg-gray-100 hover:bg-red-600 font-bold text-black hover:text-white rounded-lg font-medium text-sm ml-4 cursor-pointer hover:scale-105"
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
           </button>
-          <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2">
+          <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2 cursor-pointer hover:scale-105">
             {t("login")}
           </button>
         </nav>
