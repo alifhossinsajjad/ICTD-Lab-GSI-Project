@@ -61,7 +61,7 @@ const Goals = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 ">
 
       <div className="text-center mb-16">
         <div className="inline-block mb-4">
@@ -83,7 +83,17 @@ const Goals = () => {
             className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100"
           >
 
-            <div className={`absolute inset-0 bg-gradient-to-br ${goal.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+            <div
+  className={`
+    absolute inset-0
+    bg-gradient-to-br ${goal.color}
+    transform scale-0
+    origin-top-left
+   transition-transform duration-2000 ease-out
+    group-hover:scale-100
+  `}
+></div>
+
 
 
             <div className="relative p-6 md:p-8 space-y-6 z-10">
