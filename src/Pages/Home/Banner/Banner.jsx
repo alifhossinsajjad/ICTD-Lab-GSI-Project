@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
-import { HiOutlineOfficeBuilding, HiOutlineUsers, HiOutlineLocationMarker } from "react-icons/hi";
+import React, { useState } from "react";
+import {
+  HiOutlineOfficeBuilding,
+  HiOutlineUsers,
+  HiOutlineLocationMarker,
+} from "react-icons/hi";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -59,7 +63,7 @@ const Banner = () => {
       x: 0,
       transition: {
         duration: 0.5,
-        ease: "easeOut"
+        ease: "easeOut",
       },
     },
   };
@@ -67,13 +71,16 @@ const Banner = () => {
   return (
     <div className="relative bg-emerald-50 pt-32 px-12 pb-20 overflow-hidden font-sans">
       {/* Background Pattern (Subtle dots or grid) */}
-      <div className="absolute inset-0 opacity-[0.03]"
-        style={{ backgroundImage: 'radial-gradient(#059669 1px, transparent 1px)', backgroundSize: '24px 24px' }}>
-      </div>
+      <div
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: "radial-gradient(#059669 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+        }}
+      ></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
           {/* Left Content */}
           <motion.div
             className="text-left space-y-6"
@@ -82,7 +89,10 @@ const Banner = () => {
             animate="visible"
           >
             {/* Tag */}
-            <motion.div variants={itemVariants} className="flex items-center gap-2">
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center gap-2"
+            >
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
               <span className="text-green-700 font-medium text-sm tracking-wide">
                 {t("banner_tag")}
@@ -97,12 +107,18 @@ const Banner = () => {
             </motion.div>
 
             {/* Description */}
-            <motion.p variants={itemVariants} className="text-gray-600 text-lg max-w-xl leading-relaxed">
+            <motion.p
+              variants={itemVariants}
+              className="text-gray-600 text-lg max-w-xl leading-relaxed"
+            >
               {t("banner_desc")}
             </motion.p>
 
             {/* Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-4">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap gap-4 pt-4"
+            >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -126,8 +142,11 @@ const Banner = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${index === currentSlide ? 'w-8 bg-[#006A4E]' : 'w-2 bg-gray-300'
-                    }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide
+                      ? "w-8 bg-[#006A4E]"
+                      : "w-2 bg-gray-300"
+                  }`}
                 />
               ))}
             </motion.div>
@@ -143,15 +162,14 @@ const Banner = () => {
                 transition: {
                   staggerChildren: 0.3,
                   delayChildren: 0.2,
-                }
-              }
+                },
+              },
             }}
           >
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.id}
                 variants={cardVariants}
-
                 className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-md transition-shadow duration-300 max-w-md ml-auto w-full cursor-pointer"
               >
                 <div className="w-16 h-16 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
@@ -161,14 +179,11 @@ const Banner = () => {
                   <h3 className="text-3xl font-bold text-[#006A4E]">
                     {stat.count}
                   </h3>
-                  <p className="text-gray-500 font-medium">
-                    {stat.label}
-                  </p>
+                  <p className="text-gray-500 font-medium">{stat.label}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
-
         </div>
       </div>
     </div>
