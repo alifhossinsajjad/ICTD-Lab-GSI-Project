@@ -12,14 +12,14 @@ const About = () => {
                     {/* Left Side - Image Composition */}
                     <div className="relative">
                         {/* Main Image */}
-                        <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+                        <div className="relative z-10  h-[600px] rounded-3xl overflow-hidden  transform hover:scale-[1.02] transition-transform duration-500">
                             <img
-                                src="/Screenshot_39.png"
+                                src="https://i.ibb.co/Zpk688v6/rel.webp"
                                 alt="ICT Lab Students"
-                                className="w-full h-[500px] object-contain"
+                                className="w-full h-full object-cover rounded-2xl overflow-hidden shadow-lg  "
                             />
                             {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                            
                         </div>
 
 

@@ -63,11 +63,11 @@ const AllNotice = () => {
             "/Screenshot_37.jpg",
             "/Screenshot_38.jpg"
           ].map((src, index) => (
-            <div key={index} className="mx-8 flex items-center justify-center">
+            <div key={index} className="mx-8 flex bg-white rounded-2xl  w-[10rem] px-4 py-1 mb-1 items-center justify-center shadow">
               <img
                 src={src}
                 alt="Partner Logo"
-                className="h-16 rounded-full p-2 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className="h-[5rem] rounded-full p-2 md:h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
               />
             </div>
           ))}

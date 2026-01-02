@@ -160,7 +160,7 @@ const Lab = () => {
       variants={containerVariants}
       className="min-h-screen bg-emerald-50 py-8 px-4 md:px-8"
     >
-      <div className="max-w-7xl mx-auto mt-10">
+      <div className="max-w-7xl mx-auto mt-16">
         {/* HEADER SECTION */}
         <div  className="text-center mb-10">
          
@@ -301,28 +301,28 @@ const Lab = () => {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={exportExcel}
-                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+                className="cursor-pointer flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all"
               >
                 <FaFileExcel />
                 Excel
               </button>
               <button
                 onClick={exportCSV}
-                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+                className="cursor-pointer flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all"
               >
                 <FaFileCsv />
                 CSV
               </button>
               <button
                 onClick={fetchLabs}
-                className="flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+                className="cursor-pointer flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all"
               >
                 <FaSyncAlt />
                 Reload
               </button>
               <button
                 onClick={() => window.print()}
-                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+                className="cursor-pointer flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-sm transition-all"
               >
                 <FaPrint />
                 Print
@@ -380,7 +380,7 @@ const Lab = () => {
                         exit={{ opacity: 0 }}
                         className="hover:bg-green-50/30 transition-colors group"
                       >
-                        <td className="px-6 py-4 font-medium text-gray-500">
+                        <td className={`px-6 font-medium text-gray-500 ${start + i + 1===1?'py-5':'py-4'}`}>
                           {start + i + 1}
                         </td>
                         <td className="px-6 py-4">
