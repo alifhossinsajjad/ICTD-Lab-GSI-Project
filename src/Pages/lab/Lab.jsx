@@ -1,12 +1,29 @@
-import { useEffect, useState } from "react";
-import { FaDownload, FaPrint, FaFileExcel,FaFileCsv,FaSyncAlt,FaUndo} from "react-icons/fa";
+import { useEffect, useState, useMemo } from "react";
+import {
+  FaDownload,
+  FaPrint,
+  FaFileExcel,
+  FaFileCsv,
+  FaSyncAlt,
+  FaUndo,
+  FaSearch,
+  FaFilter,
+  FaChevronDown,
+  FaChevronUp,
+  FaFlask,
+  FaMapMarkerAlt,
+  FaBuilding,
+  FaEnvelope
+} from "react-icons/fa";
 import * as XLSX from "xlsx";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Lab = () => {
   const [labs, setLabs] = useState([]);
   const [search, setSearch] = useState("");
   const [entries, setEntries] = useState(25);
   const [page, setPage] = useState(1);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const [phase, setPhase] = useState("");
   const [division, setDivision] = useState("");
@@ -27,18 +44,18 @@ const Lab = () => {
     fetchLabs();
   }, []);
 
-  const phases = [...new Set(labs.map((l) => l.phase))];
-  const divisions = [...new Set(labs.map((l) => l.division))];
+  const phases = useMemo(() => [...new Set(labs.map((l) => l.phase))], [labs]);
+  const divisions = useMemo(() => [...new Set(labs.map((l) => l.division))], [labs]);
 
-  const districts = [
+  const districts = useMemo(() => [
     ...new Set(
       labs
         .filter((l) => !division || l.division === division)
         .map((l) => l.district)
     ),
-  ];
+  ], [labs, division]);
 
-  const upazilas = [
+  const upazilas = useMemo(() => [
     ...new Set(
       labs
         .filter(
@@ -48,11 +65,11 @@ const Lab = () => {
         )
         .map((l) => l.upazila)
     ),
-  ];
+  ], [labs, division, district]);
 
   const labTypes = ["SOF", "SRDL", "SOF & SRDL"];
 
-  const filtered = labs.filter((lab) => {
+  const filtered = useMemo(() => labs.filter((lab) => {
     const matchesText = Object.values(lab)
       .join(" ")
       .toLowerCase()
@@ -66,7 +83,7 @@ const Lab = () => {
       (!labType || lab.institute.includes(labType)) &&
       matchesText
     );
-  });
+  }), [labs, phase, division, district, upazila, labType, search]);
 
   const start = (page - 1) * entries;
   const paginated = filtered.slice(start, start + entries);
@@ -122,166 +139,202 @@ const Lab = () => {
     XLSX.writeFile(workbook, "ictd-lab-list.xlsx");
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, staggerChildren: 0.1 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <section className="py-4 bg-white">
-      <div className="max-w-full px-2 mx-auto">
-        <h2 className="text-center font-semibold mb-2 text-sm md:text-base">
-          সকল আইসিটি ডিজিটাল ল্যাবের তালিকা (১ম ও ২য় ধাপ)
-        </h2>
-
-        {/* FILTER BAR */}
-       <details className="bg-white border border-gray-400 rounded-md mb-3">
- <summary className="cursor-pointer select-none px-4 py-3
-  flex items-center justify-between
-  text-sm font-medium
-  bg-gray-50 rounded-lg
-  relative">
-
-  <span>ফিল্টার অপশন</span>
-
-  <span className="absolute right-3 top-1/2 -translate-y-1/2
-    text-xs font-semibold text-white
-    bg-green-600 px-3 py-1.5 rounded-full shadow">
-    খুলুন / বন্ধ করুন
-  </span>
-</summary>
+    <motion.section
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen bg-emerald-50 py-8 px-4 md:px-8"
+    >
+      <div className="max-w-7xl mx-auto mt-10">
+        {/* HEADER SECTION */}
+        <div  className="text-center mb-10">
+         
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+            আইসিটি ডিজিটাল ল্যাব তালিকা
+          </h1>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            ১ম ও ২য় পর্যায়ের সকল আইসিটি ডিজিটাল ল্যাবের বিস্তারিত তথ্য এবং অবস্থান অনুসন্ধান করুন।
+          </p>
+        </div>
 
 
-  <div className="px-3 py-3 border-t border-gray-300">
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2">
-      <select
-        value={phase}
-        onChange={(e) => setPhase(e.target.value)}
-        className="border border-gray-400 px-2 py-1 rounded text-sm"
-      >
-        <option value="">পর্যায়</option>
-        {phases.map((p) => (
-          <option key={p}>{p}</option>
-        ))}
-      </select>
-
-      <select
-        value={division}
-        onChange={(e) => {
-          setDivision(e.target.value);
-          setDistrict("");
-          setUpazila("");
-        }}
-        className="border border-gray-400 px-2 py-1 rounded text-sm"
-      >
-        <option value="">বিভাগ</option>
-        {divisions.map((d) => (
-          <option key={d}>{d}</option>
-        ))}
-      </select>
-
-      <select
-        value={district}
-        onChange={(e) => {
-          setDistrict(e.target.value);
-          setUpazila("");
-        }}
-        className="border border-gray-400 px-2 py-1 rounded text-sm"
-      >
-        <option value="">জেলা</option>
-        {districts.map((d) => (
-          <option key={d}>{d}</option>
-        ))}
-      </select>
-
-      <select
-        value={upazila}
-        onChange={(e) => setUpazila(e.target.value)}
-        className="border border-gray-400 px-2 py-1 rounded text-sm"
-      >
-        <option value="">নির্বাচিত এলাকা</option>
-        {upazilas.map((u) => (
-          <option key={u}>{u}</option>
-        ))}
-      </select>
-
-      <select
-        value={labType}
-        onChange={(e) => setLabType(e.target.value)}
-        className="border border-gray-400 px-2 py-1 rounded text-sm"
-      >
-        <option value="">ল্যাবের ধরন</option>
-        {labTypes.map((t) => (
-          <option key={t}>{t}</option>
-        ))}
-      </select>
-
-      <button
-        onClick={resetFilters}
-        className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700"
-      >
-        অনুসন্ধান
-      </button>
-    </div>
-  </div>
-</details>
-
-        {/* CONTROLS */}
-        <div className="flex flex-col lg:flex-row justify-between gap-2 mb-2 text-sm">
-          <div className="flex flex-wrap items-center gap-1">
-            <span>Show</span>
-            <select
-              value={entries}
-              onChange={(e) => {
-                setEntries(+e.target.value);
-                setPage(1);
-              }}
-              className="border px-1 py-1 rounded"
-            >
-              <option value={25}>25</option>
-              <option value={50}>50</option>
-              <option value={100}>100</option>
-            </select>
-            <span>entries</span>
-
-            <button
-  onClick={exportExcel}
-  className="border border-green-600 bg-green-600 font-bold text-white hover:bg-green-500 hover:text-black px-2 py-1 rounded cursor-pointer flex items-center gap-1"
-> 
-  <FaFileExcel/>
-  Excel
-</button>
-
-<button
-  onClick={exportCSV}
-className="border border-green-600 bg-green-600 font-bold text-white hover:bg-green-500 hover:text-black px-2 py-1 rounded cursor-pointer flex items-center gap-1">
-  <FaFileCsv/>
-  CSV
-</button>
-
-<button
-  onClick={fetchLabs}
-className="border border-green-600 bg-green-600 font-bold text-white hover:bg-green-500 hover:text-black px-2 py-1 rounded cursor-pointer flex items-center gap-1">
- <FaSyncAlt/>
-  Reload
-</button>
-
-<button
-  onClick={resetFilters}
-className="border border-green-600 bg-green-600 font-bold text-white hover:bg-green-500 hover:text-black px-2 py-1 rounded cursor-pointer flex items-center gap-1">
-  <FaUndo/>
-  Reset
-</button>
-
-<button
-  onClick={() => window.print()}
-    className="border border-red-600 bg-red-600 rounded text-white hover:text-black font-bold px-2 py-1 flex items-center gap-1 hover:bg-red-400 cursor-pointer"
->
-  <FaPrint />
-  Print
-</button>
-
+        {/* FILTER & SEARCH BAR */}
+        <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+          <div
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+            className="px-6 py-4 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition-colors"
+          >
+            <div className="flex items-center gap-2 font-semibold text-gray-700">
+              <FaFilter className="text-green-600" />
+              <span>ফিল্টার অপশন</span>
+            </div>
+            {isFilterOpen ? <FaChevronUp className="text-black" /> : <FaChevronDown className="text-black" />}
           </div>
 
-          <div className="flex items-center gap-1">
-            <span>Search:</span>
+          <AnimatePresence>
+            {isFilterOpen && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="border-t border-gray-100"
+              >
+                <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">পর্যায়</label>
+                    <select
+                      value={phase}
+                      onChange={(e) => setPhase(e.target.value)}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none transition-all"
+                    >
+                      <option value="">সকল পর্যায়</option>
+                      {phases.map((p) => <option key={p} value={p}>{p}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">বিভাগ</label>
+                    <select
+                      value={division}
+                      onChange={(e) => {
+                        setDivision(e.target.value);
+                        setDistrict("");
+                        setUpazila("");
+                      }}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none transition-all"
+                    >
+                      <option value="">সকল বিভাগ</option>
+                      {divisions.map((d) => <option key={d} value={d}>{d}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">জেলা</label>
+                    <select
+                      value={district}
+                      onChange={(e) => {
+                        setDistrict(e.target.value);
+                        setUpazila("");
+                      }}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none transition-all"
+                    >
+                      <option value="">সকল জেলা</option>
+                      {districts.map((d) => <option key={d} value={d}>{d}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">উপজেলা</label>
+                    <select
+                      value={upazila}
+                      onChange={(e) => setUpazila(e.target.value)}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none transition-all"
+                    >
+                      <option value="">সকল উপজেলা</option>
+                      {upazilas.map((u) => <option key={u} value={u}>{u}</option>)}
+                    </select>
+                  </div>
+
+                  <div className="space-y-1">
+                    <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">ল্যাবের ধরন</label>
+                    <select
+                      value={labType}
+                      onChange={(e) => setLabType(e.target.value)}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none transition-all"
+                    >
+                      <option value="">সকল ধরন</option>
+                      {labTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+                    </select>
+                  </div>
+                </div>
+                <div className="px-6 pb-6 flex justify-end">
+                  <button
+                    onClick={resetFilters}
+                    className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all"
+                  >
+                    <FaUndo className="text-xs" />
+                    রিসেট ফিল্টার
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* CONTROLS & SEARCH */}
+        <motion.div variants={itemVariants} className="flex flex-col lg:flex-row justify-between items-center gap-4 mb-6">
+          <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+            <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-sm">
+              <span className="text-sm text-gray-500">Show</span>
+              <select
+                value={entries}
+                onChange={(e) => {
+                  setEntries(+e.target.value);
+                  setPage(1);
+                }}
+                className="bg-transparent font-semibold text-gray-700 outline-none cursor-pointer"
+              >
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+                <option value={100}>100</option>
+              </select>
+            </div>
+
+            <div className="h-8 w-[1px] bg-gray-200 mx-1 hidden sm:block"></div>
+
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={exportExcel}
+                className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+              >
+                <FaFileExcel />
+                Excel
+              </button>
+              <button
+                onClick={exportCSV}
+                className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+              >
+                <FaFileCsv />
+                CSV
+              </button>
+              <button
+                onClick={fetchLabs}
+                className="flex items-center gap-2 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+              >
+                <FaSyncAlt />
+                Reload
+              </button>
+              <button
+                onClick={() => window.print()}
+                className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow-sm transition-all"
+              >
+                <FaPrint />
+                Print
+              </button>
+            </div>
+          </div>
+
+          <div className="relative w-full lg:w-72">
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
-              className="border px-2 py-1 rounded"
+              className="w-full bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-2.5 text-sm shadow-sm focus:ring-2 focus:ring-green-500/20 focus:border-green-500 outline-none transition-all"
+              placeholder="Search labs..."
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -289,106 +342,138 @@ className="border border-green-600 bg-green-600 font-bold text-white hover:bg-gr
               }}
             />
           </div>
-        </div>
+        </motion.div>
 
-      {/* TABLE */}
-<div className="bg-white border border-gray-300 rounded overflow-x-auto">
-  <table className="w-full text-xs border-collapse">
-    <thead className="sticky top-0 z-10 bg-green-50">
-      <tr>
-        {[
-          "ক্রম",
-          "পর্যায়",
-          "বিভাগ",
-          "জেলা",
-          "উপজেলা",
-          "প্রতিষ্ঠান",
-          "Lab Code",
-          "ইমেইল",
-        ].map((h, idx) => (
-          <th
-            key={h}
-            className={`
-              px-2 py-2 text-left font-semibold text-gray-800
-              border border-gray-300
-              ${idx === 0 ? "bg-green-100" : ""}
-              whitespace-nowrap
-            `}
-          >
-            {h}
-          </th>
-        ))}
-      </tr>
-    </thead>
-
-    <tbody>
-      {paginated.map((l, i) => (
-        <tr
-          key={l.id}
-          className="
-            hover:bg-green-100/80
-            transition-colors
-          "
+        {/* TABLE SECTION */}
+        <motion.div
+          variants={itemVariants}
+          className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
         >
-          <td className="px-2 py-2 border border-gray-300 bg-green-50 font-medium">
-            {start + i + 1}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.phase}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.division}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.district}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.upazila}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.institute}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.labCode}
-          </td>
-          <td className="px-2 py-2 border border-gray-300">
-            {l.email}
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-</div>
-
-
-        {/* PAGINATION */}
-        <div className="flex justify-between items-center mt-2 text-sm">
-          <span>
-            Showing {start + 1} to{" "}
-            {Math.min(start + entries, filtered.length)} of{" "}
-            {filtered.length} entries
-          </span>
-
-          <div className="flex gap-1">
-            <button
-              disabled={page === 1}
-              onClick={() => setPage(page - 1)}
-              className="border px-2 py-1 disabled:opacity-40"
-            >
-              Previous
-            </button>
-            <button
-              disabled={page === totalPages}
-              onClick={() => setPage(page + 1)}
-              className="border px-2 py-1 disabled:opacity-40"
-            >
-              Next
-            </button>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm text-left">
+              <thead>
+                <tr className="bg-gray-50/50 border-b border-gray-100">
+                  {[
+                    "ক্রম",
+                    "পর্যায়",
+                    "বিভাগ",
+                    "জেলা",
+                    "উপজেলা",
+                    "প্রতিষ্ঠান",
+                    "Lab Code",
+                    "ইমেইল",
+                  ].map((h) => (
+                    <th key={h} className="px-6 py-4 font-semibold text-gray-700 whitespace-nowrap">
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-50">
+                <AnimatePresence mode="wait">
+                  {paginated.length > 0 ? (
+                    paginated.map((l, i) => (
+                      <motion.tr
+                        key={l.id || `${l.labCode}-${i}`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="hover:bg-green-50/30 transition-colors group"
+                      >
+                        <td className="px-6 py-4 font-medium text-gray-500">
+                          {start + i + 1}
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className="px-2.5 py-1 bg-blue-50 text-blue-600 rounded-lg text-xs font-bold">
+                            {l.phase}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 text-gray-600">{l.division}</td>
+                        <td className="px-6 py-4 text-gray-600">{l.district}</td>
+                        <td className="px-6 py-4 text-gray-600">{l.upazila}</td>
+                        <td className="px-6 py-4">
+                          <div className="font-semibold text-gray-900">{l.institute}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <code className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-mono">
+                            {l.labCode}
+                          </code>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex items-center gap-2 text-gray-500 hover:text-green-600 transition-colors cursor-pointer">
+                            <FaEnvelope className="text-xs" />
+                            <span className="text-xs">{l.email}</span>
+                          </div>
+                        </td>
+                      </motion.tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8" className="px-6 py-12 text-center">
+                        <div className="flex flex-col items-center gap-2 text-gray-400">
+                          <FaSearch className="text-4xl opacity-20" />
+                          <p>কোন তথ্য পাওয়া যায়নি</p>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </AnimatePresence>
+              </tbody>
+            </table>
           </div>
-        </div>
+
+          {/* PAGINATION */}
+          <div className="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-gray-500">
+              Showing <span className="font-semibold text-gray-900">{start + 1}</span> to{" "}
+              <span className="font-semibold text-gray-900">{Math.min(start + entries, filtered.length)}</span> of{" "}
+              <span className="font-semibold text-gray-900">{filtered.length}</span> entries
+            </p>
+
+            <div className="flex items-center gap-2">
+              <button
+                disabled={page === 1}
+                onClick={() => setPage(page - 1)}
+                className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+              >
+                Previous
+              </button>
+              <div className="flex items-center gap-1">
+                {[...Array(Math.min(5, totalPages))].map((_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) pageNum = i + 1;
+                  else if (page <= 3) pageNum = i + 1;
+                  else if (page >= totalPages - 2) pageNum = totalPages - 4 + i;
+                  else pageNum = page - 2 + i;
+
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => setPage(pageNum)}
+                      className={`w-10 h-10 rounded-xl text-sm font-semibold transition-all ${page === pageNum
+                          ? "bg-green-600 text-white shadow-md shadow-green-200"
+                          : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
+                        }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+              <button
+                disabled={page === totalPages}
+                onClick={() => setPage(page + 1)}
+                className="px-4 py-2 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
 export default Lab;
+
