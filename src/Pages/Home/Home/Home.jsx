@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Banner from '../Banner/Banner';
+import Banner from "../Banner/Banner";
 import AllNotice from "../../../Pages/AllNotice/AllNotice";
 import Goals from "../Goals/Goals";
 import Vendor from "../Vendor/Vendor";
@@ -7,7 +7,6 @@ import Contact from "../../Contact/Contact";
 import About from "../About/About";
 import { BangladeshMap } from "../../../components/BangladeshMap/Mainfile";
 import { StatsChart } from "../../../components/BangladeshMap/StatsChart";
-
 
 const Home = () => {
   const [hoveredDivision, setHoveredDivision] = useState(null);
@@ -17,14 +16,15 @@ const Home = () => {
       <section id="home">
         <Banner />
       </section>
- 
+
       <section id="notice">
         <AllNotice />
       </section>
-  <section id="about">
-        <About />
-      </section>
-      <section id="map-stats" className="py-20 bg-emerald-50 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+
+      <section
+        id="map-stats"
+        className="py-20 bg-emerald-50 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      >
         {/* Decorative background elements */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
         <div className="absolute bottom-0 right-0 w-64 h-64 bg-emerald-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
@@ -35,8 +35,9 @@ const Home = () => {
               Interactive Division Statistics
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore educational infrastructure and SRDL lab distribution across Bangladesh.
-              Hover over the map to see detailed statistics for each division.
+              Explore educational infrastructure and SRDL lab distribution
+              across Bangladesh. Hover over the map to see detailed statistics
+              for each division.
             </p>
           </div>
 
@@ -68,8 +69,9 @@ const Home = () => {
         <Goals />
       </section>
 
-
-   
+      <section id="about">
+        <About />
+      </section>
 
       <section id="vendor">
         <Vendor />
@@ -83,4 +85,3 @@ const Home = () => {
 };
 
 export default Home;
-

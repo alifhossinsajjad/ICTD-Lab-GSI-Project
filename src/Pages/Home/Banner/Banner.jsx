@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   HiOutlineOfficeBuilding,
   HiOutlineUsers,
@@ -10,7 +10,6 @@ import { motion } from "framer-motion";
 import heroBg1 from "../../../../public/heroBg1.jpg";
 import heroBg2 from "../../../../public/heroBg2.jpg";
 import heroBg3 from "../../../../public/heroBg3.jpg";
-import { t } from "i18next";
 
 const slides = [
   {
@@ -101,7 +100,6 @@ const slides = [
 
 const Banner = () => {
   const [current, setCurrent] = useState(0);
-  const slide = slides[current];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -110,188 +108,79 @@ const Banner = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, x: 100 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
+  const slide = slides[current];
 
   return (
-    <div className="relative bg-emerald-50 pt-32 px-12 pb-20 overflow-hidden font-sans">
-      {/* Background Pattern (Subtle dots or grid) */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: "radial-gradient(#059669 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      ></div>
+    <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden">
+      {/* BACKGROUND SLIDER */}
+      <div className="absolute inset-0 -z-10">
+        {slides.map((s, i) => (
+          <div
+            key={i}
+            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000
+              ${
+                i === current ? "opacity-100 scale-105" : "opacity-0 scale-100"
+              }`}
+            style={{ backgroundImage: `url(${s.bg})` }}
+          />
+        ))}
+        <div className="absolute inset-0 bg-white/70" />
+      </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
+      {/* CONTENT */}
+      <div className="container mx-auto z-10">
+        <div className="max-w-xl sm:max-w-2xl text-center sm:text-left space-y-5">
           <motion.div
             key={current}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            {/* Tag */}
-            <motion.div
-              variants={itemVariants}
-              className="flex items-center gap-2"
-            >
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-              <span className="text-green-700 font-medium text-sm tracking-wide">
-                {t("banner_tag")}
-              </span>
-            </motion.div>
+            <span className="inline-flex items-center justify-center sm:justify-start gap-2 text-green-700 text-sm font-medium">
+              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+              {slide.tag}
+            </span>
 
             <h1 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#064E3B] leading-tight">
               {slide.title}
             </h1>
 
-            {/* Description */}
-            <motion.p
-              variants={itemVariants}
-              className="text-gray-600 text-lg max-w-xl leading-relaxed"
-            >
-              {t("banner_desc")}
-            </motion.p>
+            <p className="mt-3 text-sm sm:text-base md:text-lg text-gray-700">
+              {slide.desc}
+            </p>
 
-            {/* Buttons */}
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-wrap gap-4 pt-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#006A4E] hover:bg-[#00563f] text-white px-8 py-3 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-green-900/20"
-              >
-                {t("banner_btn_lab_list")}
-                <FaArrowRight className="text-sm" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-[#006A4E] hover:bg-[#00563f] text-white px-8 py-3 rounded-lg font-medium transition-all shadow-lg shadow-green-900/20"
-              >
-                {t("banner_btn_learn_more")}
-              </motion.button>
-            </motion.div>
-
-            {/* Slide Indicators */}
-            <motion.div variants={itemVariants} className="flex gap-2 pt-8">
-              {[0, 1, 2].map((index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrent(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === current ? "w-8 bg-[#006A4E]" : "w-2 bg-gray-300"
-                  }`}
-                />
-              ))}
-            </motion.div>
+            <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+              <button className="bg-[#006A4E] hover:bg-[#00563f] text-white px-6 py-3 rounded-full font-medium flex items-center justify-center gap-2 shadow">
+                {slide.btn1}
+                <FaArrowRight />
+              </button>
+              <button className="border border-[#006A4E] text-[#006A4E] px-6 py-3 rounded-full font-medium hover:bg-green-50">
+                {slide.btn2}
+              </button>
+            </div>
           </motion.div>
 
-          {/* Right Content - Stats Cards */}
-          <motion.div
-            className="flex flex-col gap-6 lg:pl-12"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.3,
-                  delayChildren: 0.2,
-                },
-              },
-            }}
-          >
-            {slide.stats.map((stat, index) => (
-              <motion.div
-                key={stat.id}
-                variants={cardVariants}
-                className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-md transition-shadow duration-300 max-w-md ml-auto w-full cursor-pointer"
-              >
-                <div className="w-16 h-16 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
-                  {stat.icon}
-                </div>
-                <div>
-                  <h3 className="text-3xl font-bold text-[#006A4E]">
-                    {stat.count}
-                  </h3>
-                  <p className="text-gray-500 font-medium">{stat.label}</p>
-                </div>
-              </motion.div>
+          {/* DOTS */}
+          <div className="flex gap-2 pt-6 justify-center sm:justify-start">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrent(i)}
+                className={`h-2 rounded-full transition-all
+                  ${i === current ? "w-8 bg-[#006A4E]" : "w-2 bg-gray-300"}`}
+              />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* STATS CARDS (ONLY LARGE SCREEN) */}
-      {/* <div className="hidden lg:block absolute -bottom-7 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl py-7 p-3">
-        <div className="bg-white/95 backdrop-blur rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] px-8 py-6 grid grid-cols-3 gap-6">
-          {slide.stats.map((stat) => (
-            <div
-              key={stat.id}
-              className="group flex items-center gap-4 p-4 rounded-2xl hover:bg-green-50 transition-all"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-green-100 flex items-center justify-center group-hover:bg-[#006A4E] transition">
-                <div className="text-green-700 group-hover:text-white transition">
-                  {stat.icon}
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold text-[#064E3B]">
-                  {stat.count}
-                </h3>
-                <p className="text-sm text-gray-600">
-                  {stat.label}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div> */}
       {/* STATS CARDS (MD & LG ONLY) */}
       <div
         className="
   hidden 
   md:block 
   absolute 
-  -bottom-6 
+  bottom-1 
   left-1/2 
   -translate-x-1/2 
   w-[94%] 
@@ -352,7 +241,7 @@ const Banner = () => {
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
