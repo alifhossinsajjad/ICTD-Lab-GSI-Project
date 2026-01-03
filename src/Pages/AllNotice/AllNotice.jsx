@@ -155,7 +155,7 @@ const AllNotice = () => {
           </span>
 
           <div className="flex items-center gap-2">
-            <button disabled={page===1} onClick={()=>setPage(page-1)} className="px-3 py-1 border rounded hover:bg-gray-50 disabled:opacity-50">
+            <button disabled={page===1} onClick={()=>setPage(page-1)} className="px-3 py-1 flex items-center border rounded hover:bg-gray-50 disabled:opacity-50">
               <FaChevronLeft className="text-xs"/> {t("notice_prev")}
             </button>
 
@@ -165,7 +165,7 @@ const AllNotice = () => {
               </button>
             ))}
 
-            <button disabled={page===totalPages} onClick={()=>setPage(page+1)} className="px-3 py-1 border rounded hover:bg-gray-50 disabled:opacity-50">
+            <button disabled={page===totalPages} onClick={()=>setPage(page+1)} className="px-3 py-1 flex items-center border rounded hover:bg-gray-50 disabled:opacity-50">
               {t("notice_next")} <FaChevronRight className="text-xs"/>
             </button>
           </div>

@@ -61,7 +61,7 @@ const About = () => {
                             <span className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-2 block">
                                 {t("about_tag")}
                             </span>
-                            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                            <h2 className="text-4xl lg:text-4xl font-bold text-gray-900 leading-tight mb-6">
                                 {t("about_title")}
                             </h2>
 
@@ -91,10 +91,14 @@ const About = () => {
                             ))}
                         </div>
 
-                        <button className="group bg-[#006A4E] text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-green-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3">
-                            {t("about_btn_explore")}
-                            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                        </button>
+                  
+
+
+                        <button className="group bg-gradient-to-r from-green-600 to-green-400 text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-green-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3">
+  {t("about_btn_explore")}
+  <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+</button>
+
                     </div>
                 </div>
             </div>
