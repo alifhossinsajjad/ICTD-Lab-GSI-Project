@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
       {/* Top Bar */}
-      <div className="bg-green-700 text-white py-2">
+      {/* <div className="bg-green-700 text-white py-2">
         <div className="container mx-auto px-6 flex justify-between text-sm">
           <div className="flex gap-8 overflow-hidden whitespace-nowrap">
             <span>📞 +880-2-9898989</span>
@@ -40,7 +40,7 @@ const Navbar = () => {
           </div>
           <div className="text-xs font-medium">{t("government")}</div>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Nav */}
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -99,14 +99,18 @@ const Navbar = () => {
                 <span>{item.label}</span>
               </button>
             ))}
-            <button
+        
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2 hover:scale-105 transition-transform duration-300">
+              {t("login")}
+            </button>
+
+
+
+                <button
               onClick={toggleLanguage}
               className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium text-sm mt-2"
             >
               {i18n.language === "en" ? "বাংলা" : "English"}
-            </button>
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2 hover:scale-105 transition-transform duration-300">
-              {t("login")}
             </button>
           </nav>
         </div>
