@@ -12,14 +12,14 @@ const About = () => {
                     {/* Left Side - Image Composition */}
                     <div className="relative">
                         {/* Main Image */}
-                        <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
+                        <div className="relative z-10  h-[600px] rounded-3xl overflow-hidden  transform hover:scale-[1.02] transition-transform duration-500">
                             <img
-                                src="/Screenshot_39.png"
+                                src="https://i.ibb.co/Zpk688v6/rel.webp"
                                 alt="ICT Lab Students"
-                                className="w-full h-[500px] object-contain"
+                                className="w-full h-full object-cover rounded-2xl overflow-hidden shadow-lg  "
                             />
                             {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                            
                         </div>
 
 
@@ -61,7 +61,7 @@ const About = () => {
                             <span className="text-orange-500 font-bold tracking-widest text-sm uppercase mb-2 block">
                                 {t("about_tag")}
                             </span>
-                            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
+                            <h2 className="text-4xl lg:text-4xl font-bold text-gray-900 leading-tight mb-6">
                                 {t("about_title")}
                             </h2>
 
@@ -91,10 +91,14 @@ const About = () => {
                             ))}
                         </div>
 
-                        <button className="group bg-[#006A4E] text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-green-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3">
-                            {t("about_btn_explore")}
-                            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                        </button>
+                  
+
+
+                        <button className="group bg-gradient-to-r from-green-600 to-green-400 text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-green-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3">
+  {t("about_btn_explore")}
+  <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+</button>
+
                     </div>
                 </div>
             </div>

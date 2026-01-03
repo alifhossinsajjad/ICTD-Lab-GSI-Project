@@ -53,38 +53,54 @@ const Vendor = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {vendors.map((vendor) => (
             <div
-              key={vendor.id}
-              className="
-                relative bg-gray-50 rounded-xl p-6 shadow-sm
-                border-l-4 border-green-600
-                transition-all duration-300
-                hover:border-red-600 hover:bg-red-50 hover:shadow-lg
-              "
-            >
-              {/* Vendor Name */}
-              <div className="flex items-start gap-3 mb-4">
-                <FaBuilding className="text-green-600 mt-1 transition-colors duration-300 group-hover:text-red-600" />
-                <h3 className="text-sm font-semibold text-gray-800 leading-relaxed">
-                  {t(`vendor_${vendor.id}_name`)}
-                </h3>
-              </div>
+  key={vendor.id}
+  className="
+    relative overflow-hidden
+    bg-gray-50 rounded-xl p-6 shadow-sm
+    border-l-4 border-green-600
+    transition-all duration-300
+    hover:bg-red-50 hover:shadow-lg
+    group
+  "
+>
+  {/* Vendor Name */}
+  <div className="flex items-start gap-3 mb-4">
+    <FaBuilding className="text-green-600 mt-1  transition-colors" />
+    <h3 className="text-sm font-semibold text-gray-800">
+      {t(`vendor_${vendor.id}_name`)}
+    </h3>
+  </div>
 
-              {/* Address */}
-              <div className="flex items-start gap-3 mb-3">
-                <FaMapMarkerAlt className="text-green-500 mt-1" />
-                <p className="text-sm text-gray-700">
-                  {t(`vendor_${vendor.id}_address`)}
-                </p>
-              </div>
+  {/* Address */}
+  <div className="flex items-start gap-3 mb-3">
+    <FaMapMarkerAlt className="text-green-500 mt-1" />
+    <p className="text-sm text-gray-700">
+      {t(`vendor_${vendor.id}_address`)}
+    </p>
+  </div>
 
-              {/* Phone */}
-              <div className="flex items-start gap-3">
-                <FaPhoneAlt className="text-green-500 mt-1" />
-                <p className="text-sm text-gray-700 font-medium">
-                  {vendor.phone}
-                </p>
-              </div>
-            </div>
+  {/* Phone */}
+  <div className="flex items-start gap-3">
+    <FaPhoneAlt className="text-green-500 mt-1" />
+    <p className="text-sm text-gray-700 font-medium">
+      {vendor.phone}
+    </p>
+  </div>
+
+  {/* Animated bottom border */}
+  <span
+    className="
+      absolute bottom-0 left-0
+      h-1 w-full
+      bg-red-600
+      transform scale-x-0
+      origin-left
+      transition-transform duration-1000 ease-out
+      group-hover:scale-x-100
+    "
+  ></span>
+</div>
+
           ))}
         </div>
 

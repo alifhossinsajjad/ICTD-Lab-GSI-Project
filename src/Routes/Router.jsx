@@ -20,17 +20,17 @@ const router = createBrowserRouter([
         Component: AllNotice,
       },
       {
-        path : "lab",
-        Component : Lab,
+        path: "lab",
+        Component: Lab,
       }
-     
+
     ],
   },
-   {
+  {
     path: "/login",
     Component: Login,
   },
-  
+
 ]);
 
 export default router;

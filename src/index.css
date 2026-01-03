@@ -27,7 +27,7 @@
 
 /* Smooth transitions */
 * {
-  transition: all 0.2s ease-in-out;
+  transition: all 0.6s ease-in-out;
 }
 
 /* Map controls styling */
@@ -53,4 +53,14 @@
 
 .animate-bounce-slow {
   animation: bounce-slow 3s infinite ease-in-out;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
 }
