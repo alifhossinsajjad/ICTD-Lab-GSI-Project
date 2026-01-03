@@ -104,14 +104,14 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
   const slide = slides[current];
 
   return (
-    <section className="relative min-h-screen flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden">
+    <section className="relative h-[calc(100vh-4rem)] flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden">
       {/* BACKGROUND SLIDER */}
       <div className="absolute inset-0 -z-10">
         {slides.map((s, i) => (
@@ -180,7 +180,7 @@ const Banner = () => {
   hidden 
   md:block 
   absolute 
-  bottom-1 
+  bottom-3 
   left-1/2 
   -translate-x-1/2 
   w-[94%]
@@ -192,7 +192,7 @@ const Banner = () => {
       bg-white/95 backdrop-blur
       rounded-3xl
       shadow-[0_10px_40px_rgba(0,0,0,0.08)]
-      px-6 py-5
+      px-6 py-4
       grid
       grid-cols-1 md:grid-cols-3
       gap-5
@@ -209,7 +209,7 @@ const Banner = () => {
           transition-all duration-300
           hover:bg-green-50
           md:justify-center
-          lg:justify-start
+          lg:justify-center
         "
             >
               {/* ICON */}

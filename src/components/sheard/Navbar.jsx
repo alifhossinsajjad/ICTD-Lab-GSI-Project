@@ -21,12 +21,12 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { icon: <FiHome />, label: t("home"), href: "#home" },
-    { icon: <FiHome />, label: t("about"), href: "#about" },
-    { icon: <FiBell />, label: t("notice"), href: "#notice" },
-    { icon: <FiTarget />, label: t("goals"), href: "#goals" },
-    { icon: <FiUsers />, label: t("vendor"), href: "#vendor" },
-    { icon: <FiInfo />, label: t("contact"), href: "#contact" },
+    { icon: <FiHome />, label: t("home"), href: "/" },
+    // { icon: <FiBell />, label: t("notice"), href: "#notice" },
+    // { icon: <FiTarget />, label: t("goals"), href: "#goals" },
+    // { icon: <FiHome />, label: t("about"), href: "#about" },
+    { icon: <FiUsers />, label: t("lab"), href: "/lab" },
+    // { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
 
   // Scroll to section
@@ -65,24 +65,24 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden lg:flex items-center space-x-2">
           {navItems.map((item) => (
-            <button
-              key={item.href}
-              onClick={() => handleScroll(item.href)}
+            <Link
+              
+              to={item.href}
               className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700 transition-colors duration-300"
             >
               {item.icon}
               <span>{item.label}</span>
-            </button>
+            </Link>
           ))}
           <Link
             to={"/login"}
-            className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2 hover:scale-105 transition-transform duration-300"
+            className="cursor-pointer hover:scale-105 bg-red-600 text-white px-6 py-2 rounded-lg ml-2 hover:scale-105 transition-transform duration-300"
           >
             {t("login")}
           </Link>
           <button
             onClick={toggleLanguage}
-            className="px-4 py-2 bg-gray-100 hover:bg-red-600 text-black hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300"
+            className="cursor-pointer hover:scale-105  px-4 py-2 bg-gray-100 hover:bg-red-600 text-black hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300"
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
           </button>
@@ -102,19 +102,23 @@ const Navbar = () => {
         <div className="lg:hidden bg-white shadow-md border-t border-gray-200 animate-slideDown">
           <nav className="flex flex-col space-y-2 p-4">
             {navItems.map((item) => (
-              <button
-                key={item.href}
-                onClick={() => handleScroll(item.href)}
+              <Link
+                to={item.href}
+              
+                
                 className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700 transition-colors duration-300"
               >
                 {item.icon}
                 <span>{item.label}</span>
-              </button>
+              </Link>
             ))}
 
+
+<Link to={"/login"}>
             <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2 hover:scale-105 transition-transform duration-300">
               {t("login")}
             </button>
+</Link>
 
             <button
               onClick={toggleLanguage}
