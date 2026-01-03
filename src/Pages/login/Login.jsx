@@ -1,26 +1,20 @@
+import { BiLeaf, BiLeftArrow, BiRightArrow } from "react-icons/bi";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { Link } from "react-router";
 
 const Login = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
       <div className="w-full max-w-md">
-
         {/* Title */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold tracking-widest text-green-800">
-            ICTD
+            ICTD DIGITAL LAB
           </h1>
-          <h2 className="text-4xl font-bold tracking-widest text-green-800">
-            DIGITAL
-          </h2>
-          <h3 className="text-4xl font-bold tracking-widest text-green-800">
-            LAB
-          </h3>
         </div>
 
         {/* Login Card */}
         <div className="bg-white rounded-xl shadow-xl p-8">
-
           <h4 className="text-center text-lg font-semibold text-green-800 mb-6">
             প্রবেশ করুন
           </h4>
@@ -59,7 +53,6 @@ const Login = () => {
                          hover:bg-green-700 transition font-medium"
             >
               প্রবেশ করুন
-
             </button>
           </div>
 
@@ -76,6 +69,15 @@ const Login = () => {
           তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
         </p>
 
+        <div className="flex justify-center ">
+          <Link
+            to={"/"}
+            className="mt-6 flex items-center gap-1 bg-white border border-green-600 text-green-600 px-5 py-2 rounded-md hover:bg-green-50 font-medium relative "
+          >
+            <BiLeftArrow className="l-2 text-green-600 " />
+            Home
+          </Link>
+        </div>
       </div>
     </section>
   );

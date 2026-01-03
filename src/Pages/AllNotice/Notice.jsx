@@ -1,65 +1,67 @@
-import React, { useState } from 'react'
-import { FiDownload, FiSearch } from 'react-icons/fi'
+import React, { useState } from "react";
+import { FiDownload, FiSearch } from "react-icons/fi";
 
 const Notice = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Notice data matching the screenshot
   const notices = [
     {
       id: 1,
-      title: "Letter of Acceptance for Selection of Firm for Training of Trainers (TOT) on Frontier Technology Related Training for the Teachers of Sheikh Russel School of Future. (SP-16 Lot 1 and 2)",
+      title:
+        "Letter of Acceptance for Selection of Firm for Training of Trainers (TOT) on Frontier Technology Related Training for the Teachers of Sheikh Russel School of Future. (SP-16 Lot 1 and 2)",
       publishedDate: "Thu, Jun 20, 2024 12:12 PM",
-      downloads: 2
+      downloads: 2,
     },
     {
       id: 2,
-      title: "১৪ শতাব্দী হাফিজের শেষ রাজসভা ডিজিটাল ন্যারেটিভ অভিজ্ঞতার সংস্করণ",
+      title:
+        "১৪ শতাব্দী হাফিজের শেষ রাজসভা ডিজিটাল ন্যারেটিভ অভিজ্ঞতার সংস্করণ",
       publishedDate: "Sun, Nov 5, 2023 8:08 AM",
-      downloads: 3
+      downloads: 3,
     },
     {
       id: 3,
       title: "রেজিস্ট্রার কর্তৃক ফলাফল হাফিজের পত্র",
       publishedDate: "Sun, Oct 15, 2023 7:53 AM",
-      downloads: 2
+      downloads: 2,
     },
     {
       id: 4,
       title: "পাইথন প্রোগ্রামিং: প্রশিক্ষণ সংক্রান্ত",
       publishedDate: "Mon, Oct 9, 2023 11:40 AM",
-      downloads: 4
+      downloads: 4,
     },
     {
       id: 5,
       title: "শেখ রাসেল স্কুল অব ফিউচার তুলনা অভিজ্ঞান",
       publishedDate: "Sun, Sep 24, 2023 10:02 AM",
-      downloads: 4
+      downloads: 4,
     },
     {
       id: 6,
       title: "Smart Notebook Bangla Manual",
       publishedDate: "Sun, Sep 10, 2023 11:03 AM",
-      downloads: 1
+      downloads: 1,
     },
     {
       id: 7,
       title: "SOF Inspection Form",
       publishedDate: "Wed, Aug 23, 2023 1:07 PM",
-      downloads: 1
+      downloads: 1,
     },
     {
       id: 8,
       title: "SRDL Lab Inspection Form",
       publishedDate: "Wed, Aug 23, 2023 1:07 PM",
-      downloads: 1
-    }
-  ]
+      downloads: 1,
+    },
+  ];
 
   // Filter notices based on search term
-  const filteredNotices = notices.filter(notice =>
+  const filteredNotices = notices.filter((notice) =>
     notice.title.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -105,7 +107,10 @@ const Notice = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {filteredNotices.map((notice) => (
-                <tr key={notice.id} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={notice.id}
+                  className="hover:bg-gray-50 transition-colors"
+                >
                   <td className="px-6 py-4">
                     <div className="text-sm text-gray-900 leading-relaxed">
                       {notice.title}
@@ -139,15 +144,19 @@ const Notice = () => {
         <div className="mt-4 text-center">
           <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow border">
             <span className="text-sm text-gray-600">Showing</span>
-            <span className="text-sm font-semibold text-blue-600">{filteredNotices.length}</span>
+            <span className="text-sm font-semibold text-blue-600">
+              {filteredNotices.length}
+            </span>
             <span className="text-sm text-gray-600">of</span>
-            <span className="text-sm font-semibold text-blue-600">{notices.length}</span>
+            <span className="text-sm font-semibold text-blue-600">
+              {notices.length}
+            </span>
             <span className="text-sm text-gray-600">notices</span>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Notice
+export default Notice;

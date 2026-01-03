@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FiMenu, FiX, FiHome, FiBell, FiTarget, FiUsers, FiInfo } from "react-icons/fi";
+import {
+  FiMenu,
+  FiX,
+  FiHome,
+  FiBell,
+  FiTarget,
+  FiUsers,
+  FiInfo,
+} from "react-icons/fi";
 import logo from "../../assets/govt.png";
+import { Link } from "react-router";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -45,13 +54,13 @@ const Navbar = () => {
       {/* Main Nav */}
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="cursor-pointer flex items-center space-x-2">
+        <Link to={"/"} className="cursor-pointer flex items-center space-x-2">
           <img src={logo} alt="ICTD Logo" className="w-14" />
           <div>
             <h1 className="text-xl font-bold text-gray-800">ICTD Lab</h1>
             <p className="text-sm text-gray-600">GIS Platform</p>
           </div>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden lg:flex items-center space-x-2">
@@ -65,14 +74,17 @@ const Navbar = () => {
               <span>{item.label}</span>
             </button>
           ))}
+          <Link
+            to={"/login"}
+            className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2 hover:scale-105 transition-transform duration-300"
+          >
+            {t("login")}
+          </Link>
           <button
             onClick={toggleLanguage}
             className="px-4 py-2 bg-gray-100 hover:bg-red-600 text-black hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300"
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
-          </button>
-          <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2 hover:scale-105 transition-transform duration-300">
-            {t("login")}
           </button>
         </nav>
 
@@ -99,14 +111,12 @@ const Navbar = () => {
                 <span>{item.label}</span>
               </button>
             ))}
-        
+
             <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2 hover:scale-105 transition-transform duration-300">
               {t("login")}
             </button>
 
-
-
-                <button
+            <button
               onClick={toggleLanguage}
               className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium text-sm mt-2"
             >

@@ -183,7 +183,7 @@ const Banner = () => {
   bottom-1 
   left-1/2 
   -translate-x-1/2 
-  w-[94%] 
+  w-[94%]
   max-w-5xl
 "
       >
