@@ -17,11 +17,13 @@ const Home = () => {
       <section id="home">
         <Banner />
       </section>
-
+ 
       <section id="notice">
         <AllNotice />
       </section>
-
+  <section id="about">
+        <About />
+      </section>
       <section id="map-stats" className="py-20 bg-emerald-50 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Decorative background elements */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-green-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
@@ -67,9 +69,7 @@ const Home = () => {
       </section>
 
 
-      <section id="about">
-        <About />
-      </section>
+   
 
       <section id="vendor">
         <Vendor />

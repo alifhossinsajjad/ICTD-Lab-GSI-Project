@@ -1,16 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FiX } from "react-icons/fi";
-
+import { FiMenu, FiX, FiHome, FiBell, FiTarget, FiUsers, FiInfo } from "react-icons/fi";
 import logo from "../../assets/govt.png";
-import {
-  FiBell,
-  FiHome,
-  FiInfo,
-  FiMenu,
-  FiTarget,
-  FiUsers,
-} from "react-icons/fi";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -20,15 +11,23 @@ const Navbar = () => {
     i18n.changeLanguage(i18n.language === "en" ? "bn" : "en");
   };
 
-  // Scroll to section using refs
-
   const navItems = [
     { icon: <FiHome />, label: t("home"), href: "#home" },
+    { icon: <FiHome />, label: t("about"), href: "#about" },
     { icon: <FiBell />, label: t("notice"), href: "#notice" },
     { icon: <FiTarget />, label: t("goals"), href: "#goals" },
-    { icon: <FiUsers />, label: t("team"), href: "#vendor" },
+    { icon: <FiUsers />, label: t("vendor"), href: "#vendor" },
     { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
+
+  // Scroll to section
+  const handleScroll = (href) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setMenuOpen(false); // close menu after click
+    }
+  };
 
   return (
     <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
@@ -47,9 +46,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="cursor-pointer flex items-center space-x-2">
-          <div className="">
-            <img src={logo} alt="" className="w-14" />
-          </div>
+          <img src={logo} alt="ICTD Logo" className="w-14" />
           <div>
             <h1 className="text-xl font-bold text-gray-800">ICTD Lab</h1>
             <p className="text-sm text-gray-600">GIS Platform</p>
@@ -59,21 +56,22 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <nav className="hidden lg:flex items-center space-x-2">
           {navItems.map((item) => (
-            <NavItem
+            <button
               key={item.href}
-              icon={item.icon}
-              label={item.label}
-              href={item.href}
-            />
+              onClick={() => handleScroll(item.href)}
+              className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700 transition-colors duration-300"
+            >
+              {item.icon}
+              <span>{item.label}</span>
+            </button>
           ))}
-          {/* Language */}
           <button
             onClick={toggleLanguage}
-            className="px-4 py-2 bg-gray-100 hover:bg-red-600 font-bold text-black hover:text-white rounded-lg font-medium text-sm ml-4 cursor-pointer hover:scale-105"
+            className="px-4 py-2 bg-gray-100 hover:bg-red-600 text-black hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300"
           >
             {i18n.language === "en" ? "বাংলা" : "English"}
           </button>
-          <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2 cursor-pointer hover:scale-105">
+          <button className="bg-red-600 text-white px-6 py-2 rounded-lg ml-2 hover:scale-105 transition-transform duration-300">
             {t("login")}
           </button>
         </nav>
@@ -83,32 +81,31 @@ const Navbar = () => {
           className="lg:hidden text-gray-800 text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {menuOpen ? <Fix /> : <FiMenu />}
+          {menuOpen ? <FiX /> : <FiMenu />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-white shadow-md border-t border-gray-200">
-          <nav className="flex flex-col space-y-1 p-4">
+        <div className="lg:hidden bg-white shadow-md border-t border-gray-200 animate-slideDown">
+          <nav className="flex flex-col space-y-2 p-4">
             {navItems.map((item) => (
-              <NavItem
+              <button
                 key={item.href}
-                icon={item.icon}
-                label={item.label}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-              />
+                onClick={() => handleScroll(item.href)}
+                className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700 transition-colors duration-300"
+              >
+                {item.icon}
+                <span>{item.label}</span>
+              </button>
             ))}
-
             <button
               onClick={toggleLanguage}
               className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium text-sm mt-2"
             >
               {i18n.language === "en" ? "বাংলা" : "English"}
             </button>
-
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2">
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2 hover:scale-105 transition-transform duration-300">
               {t("login")}
             </button>
           </nav>
@@ -117,17 +114,5 @@ const Navbar = () => {
     </header>
   );
 };
-
-// Nav Item Component
-const NavItem = ({ icon, label, href, onClick }) => (
-  <a
-    href={href}
-    onClick={onClick}
-    className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700"
-  >
-    {icon}
-    <span>{label}</span>
-  </a>
-);
 
 export default Navbar;
