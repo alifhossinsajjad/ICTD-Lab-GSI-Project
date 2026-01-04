@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaDownload, FaSearch, FaSyncAlt, FaFilePdf, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import Marquee from "react-fast-marquee";
 import { useTranslation } from "react-i18next";
 
 const fetchNotices = async () => {
@@ -43,19 +42,7 @@ const AllNotice = () => {
     <section className="bg-emerald-50 min-h-screen font-sans">
 
       {/* Marquee */}
-      <div className="pt-20 overflow-hidden bg-emerald-50 py-6 border-b border-gray-100">
-        <Marquee pauseOnHover={true} speed={50} gradient={false}>
-          {["/Screenshot_36.jpg","/Screenshot_37.jpg","/Screenshot_38.jpg"].map((src, index) => (
-            <div key={index} className="mx-4 flex bg-white rounded-2xl w-36 md:w-48 p-2 items-center justify-center shadow hover:scale-105 transition-transform duration-300">
-              <img
-                src={src}
-                alt="Partner Logo"
-                className="h-16 md:h-24 w-auto rounded-full object-contain opacity-80 hover:opacity-100 transition-opacity"
-              />
-            </div>
-          ))}
-        </Marquee>
-      </div>
+     
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 

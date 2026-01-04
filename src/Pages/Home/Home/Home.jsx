@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Banner from "../Banner/Banner";
-import AllNotice from "../../../Pages/AllNotice/AllNotice";
 import Goals from "../Goals/Goals";
 import Vendor from "../Vendor/Vendor";
 import Contact from "../../Contact/Contact";
 import About from "../About/About";
 import { BangladeshMap } from "../../../components/BangladeshMap/Mainfile";
 import { StatsChart } from "../../../components/BangladeshMap/StatsChart";
+import Notice from "../../AllNotice/Notice";
 
 const Home = () => {
   const [hoveredDivision, setHoveredDivision] = useState(null);
@@ -18,7 +18,7 @@ const Home = () => {
       </section>
 
       <section id="notice">
-        <AllNotice />
+        <Notice />
       </section>
 
       <section

@@ -1,161 +1,133 @@
-import React, { useState } from "react";
-import { FiDownload, FiSearch } from "react-icons/fi";
+import { useQuery } from "@tanstack/react-query";
+import { FaDownload, FaFilePdf } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import Marquee from "react-fast-marquee";
+
+
+const fetchNotices = async () => {
+  const res = await fetch("/notices.json");
+  if (!res.ok) throw new Error("Failed to load notices");
+  return res.json();
+};
 
 const Notice = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const { t } = useTranslation();
 
-  // Notice data matching the screenshot
-  const notices = [
-    {
-      id: 1,
-      title:
-        "Letter of Acceptance for Selection of Firm for Training of Trainers (TOT) on Frontier Technology Related Training for the Teachers of Sheikh Russel School of Future. (SP-16 Lot 1 and 2)",
-      publishedDate: "Thu, Jun 20, 2024 12:12 PM",
-      downloads: 2,
-    },
-    {
-      id: 2,
-      title:
-        "১৪ শতাব্দী হাফিজের শেষ রাজসভা ডিজিটাল ন্যারেটিভ অভিজ্ঞতার সংস্করণ",
-      publishedDate: "Sun, Nov 5, 2023 8:08 AM",
-      downloads: 3,
-    },
-    {
-      id: 3,
-      title: "রেজিস্ট্রার কর্তৃক ফলাফল হাফিজের পত্র",
-      publishedDate: "Sun, Oct 15, 2023 7:53 AM",
-      downloads: 2,
-    },
-    {
-      id: 4,
-      title: "পাইথন প্রোগ্রামিং: প্রশিক্ষণ সংক্রান্ত",
-      publishedDate: "Mon, Oct 9, 2023 11:40 AM",
-      downloads: 4,
-    },
-    {
-      id: 5,
-      title: "শেখ রাসেল স্কুল অব ফিউচার তুলনা অভিজ্ঞান",
-      publishedDate: "Sun, Sep 24, 2023 10:02 AM",
-      downloads: 4,
-    },
-    {
-      id: 6,
-      title: "Smart Notebook Bangla Manual",
-      publishedDate: "Sun, Sep 10, 2023 11:03 AM",
-      downloads: 1,
-    },
-    {
-      id: 7,
-      title: "SOF Inspection Form",
-      publishedDate: "Wed, Aug 23, 2023 1:07 PM",
-      downloads: 1,
-    },
-    {
-      id: 8,
-      title: "SRDL Lab Inspection Form",
-      publishedDate: "Wed, Aug 23, 2023 1:07 PM",
-      downloads: 1,
-    },
-  ];
+  const { data: notices = [], isLoading } = useQuery({
+    queryKey: ["latest-notices"],
+    queryFn: fetchNotices,
+    staleTime: 1000 * 60 * 5,
+  });
 
-  // Filter notices based on search term
-  const filteredNotices = notices.filter((notice) =>
-    notice.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const latestNotices = [...notices]
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <div className="h-0.5 w-16 bg-blue-500 mr-4"></div>
-            <h1 className="text-3xl font-bold text-gray-800">NOTICE</h1>
-            <div className="h-0.5 w-16 bg-blue-500 ml-4"></div>
-          </div>
-        </div>
+    <section className="bg-green-50 py-5">
+      <div className="pt-20 bg-emerald-50 py-10 overflow-hidden">
+  {/* Track */}
+  <div className="relative">
+    <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
 
-        {/* Search Bar */}
-        <div className="mb-6">
-          <div className="relative max-w-md">
-            <FiSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Search notices..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
+    <Marquee
+      pauseOnHover
+      speed={42}
+      gradient={false}
+    >
+      {[...Array(2)].flatMap(() =>
+        ["/Screenshot_36.jpg", "/Screenshot_37.jpg", "/Screenshot_38.jpg"]
+      ).map((src, index) => (
+        <div
+          key={index}
+          className="mx-10 flex items-center justify-center"
+        >
+          <div className="
+            bg-white px-6 py-3 rounded-lg
+            shadow-sm
+            transition-transform duration-300
+            hover:-translate-y-1
+          ">
+            <img
+              src={src}
+              alt="Partner Logo"
+              className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
           </div>
         </div>
+      ))}
+    </Marquee>
+  </div>
+</div>
 
-        {/* Notice Table */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <table className="w-full">
-            <thead className="bg-gray-50 border-b">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
-                </th>
-                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Download
-                </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Published At
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredNotices.map((notice) => (
-                <tr
-                  key={notice.id}
-                  className="hover:bg-gray-50 transition-colors"
+      <div className="max-w-5xl mx-auto px-4 mt-10">
+
+        {/* 🔹 Title */}
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+            NOTICE
+          </h2>
+          <div className="w-20 h-1 bg-green-600 mx-auto mt-3 rounded-full" />
+        </div>
+
+        {/* 🔹 Notices */}
+        <div className="space-y-4">
+          {isLoading ? (
+            <div className="py-12 text-center text-gray-500">
+              Loading...
+            </div>
+          ) : latestNotices.length === 0 ? (
+            <div className="py-12 text-center text-gray-500">
+              {t("notice_no_data")}
+            </div>
+          ) : (
+            latestNotices.map((notice) => (
+              <div
+                key={notice.id}
+                className="flex items-start gap-4 p-5 bg-white rounded-xl shadow-sm hover:bg-green-100 hover:shadow-emerald-300 transition"
+              >
+                {/* PDF Icon */}
+                <div className="w-10 h-10 flex items-center justify-center rounded-full  text-red-600 shrink-0">
+                  <FaFilePdf />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1">
+                  <p className="text-sm font-medium text-gray-800 leading-snug line-clamp-2">
+                    {notice.title}
+                  </p>
+                  <p className="text-xs text-gray-500 mt-1">
+                    {notice.date}
+                  </p>
+                </div>
+
+                {/* Download */}
+                <a
+                  href={notice.file}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Download notice"
+                  className="w-9 h-9 flex items-center justify-center rounded-full text-gray-500 hover:bg-green-600 hover:text-white transition"
                 >
-                  <td className="px-6 py-4">
-                    <div className="text-sm text-gray-900 leading-relaxed">
-                      {notice.title}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-center">
-                    <div className="flex justify-center space-x-2">
-                      {[...Array(notice.downloads)].map((_, index) => (
-                        <button
-                          key={index}
-                          className="text-blue-500 hover:text-blue-700 p-1 rounded hover:bg-blue-50 transition-colors"
-                          title="Download"
-                        >
-                          <FiDownload className="h-4 w-4" />
-                        </button>
-                      ))}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 text-right">
-                    <div className="text-sm text-gray-600">
-                      {notice.publishedDate}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  <FaDownload className="text-xs" />
+                </a>
+              </div>
+            ))
+          )}
         </div>
 
-        {/* Results Count */}
-        <div className="mt-4 text-center">
-          <div className="inline-flex items-center space-x-2 bg-white px-4 py-2 rounded-lg shadow border">
-            <span className="text-sm text-gray-600">Showing</span>
-            <span className="text-sm font-semibold text-blue-600">
-              {filteredNotices.length}
-            </span>
-            <span className="text-sm text-gray-600">of</span>
-            <span className="text-sm font-semibold text-blue-600">
-              {notices.length}
-            </span>
-            <span className="text-sm text-gray-600">notices</span>
-          </div>
+        {/* 🔹 View All */}
+        <div className="text-center mt-10">
+          <a
+            href="/all-notice"
+            className="inline-block px-8 py-2.5 rounded-full bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition"
+          >
+            View All Notices
+          </a>
         </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 
