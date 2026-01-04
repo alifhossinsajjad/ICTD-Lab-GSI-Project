@@ -26,7 +26,7 @@ const Navbar = () => {
     // { icon: <FiTarget />, label: t("goals"), href: "#goals" },
     // { icon: <FiHome />, label: t("about"), href: "#about" },
     { icon: <FiUsers />, label: t("lab"), href: "/lab" },
-    { icon: <FiUsers />, label: t("allNotice"), href: "/all-notice" },
+    { icon: <FiUsers />, label: t("Notice"), href: "/all-notice" },
     // { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
 
@@ -85,7 +85,7 @@ const Navbar = () => {
             onClick={toggleLanguage}
             className="cursor-pointer hover:scale-105  px-4 py-2 bg-gray-100 hover:bg-red-600 text-black hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300"
           >
-            {i18n.language === "en" ? "বাংলা" : "English"}
+            {i18n.language === "বাংলা" ? "en" : "বাংলা"}
           </button>
         </nav>
 
