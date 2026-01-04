@@ -26,17 +26,18 @@ const Navbar = () => {
     // { icon: <FiTarget />, label: t("goals"), href: "#goals" },
     // { icon: <FiHome />, label: t("about"), href: "#about" },
     { icon: <FiUsers />, label: t("lab"), href: "/lab" },
+    { icon: <FiUsers />, label: t("allNotice"), href: "/all-notice" },
     // { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
 
   // Scroll to section
-  const handleScroll = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false); // close menu after click
-    }
-  };
+  // const handleScroll = (href) => {
+  //   const element = document.querySelector(href);
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: "smooth" });
+  //     setMenuOpen(false); // close menu after click
+  //   }
+  // };
 
   return (
     <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
