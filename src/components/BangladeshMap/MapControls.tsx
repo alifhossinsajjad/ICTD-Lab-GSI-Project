@@ -1,19 +1,21 @@
 import { Plus, Minus, Layers } from "lucide-react";
 
-
 interface MapControlsProps {
   onZoomIn: () => void;
   onZoomOut: () => void;
   onToggleLayers?: () => void;
 }
 
-export const MapControls = ({ onZoomIn, onZoomOut, onToggleLayers }: MapControlsProps) => {
+export const MapControls = ({
+  onZoomIn,
+  onZoomOut,
+  onToggleLayers,
+}: MapControlsProps) => {
   return (
     <>
       {/* Zoom Controls */}
       <div className="absolute top-4 left-4 z-20 flex flex-col gap-0.5 bg-card rounded-md shadow-lg overflow-hidden border border-border">
         <button
-          
           onClick={onZoomIn}
           className="rounded-none h-9 w-9 hover:bg-secondary"
         >
@@ -21,7 +23,6 @@ export const MapControls = ({ onZoomIn, onZoomOut, onToggleLayers }: MapControls
         </button>
         <div className="h-px bg-border" />
         <button
-          
           onClick={onZoomOut}
           className="rounded-none h-9 w-9 hover:bg-secondary"
         >
