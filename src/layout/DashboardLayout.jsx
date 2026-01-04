@@ -8,6 +8,7 @@ import {
   HiOutlineAcademicCap,
   HiOutlineExclamationCircle,
   HiOutlineLockClosed,
+  HiOutlineLogout,
   HiMenuAlt3,
   HiX,
 } from "react-icons/hi";
@@ -19,6 +20,7 @@ const DashboardLayout = () => {
 
   const closeSidebar = () => setIsSidebarOpen(false);
 
+  /* menu items array */
   const menuItems = [
     {
       path: "/dashboard",
@@ -26,32 +28,32 @@ const DashboardLayout = () => {
       icon: <HiOutlineHome className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/items-profile",
+      path: "/dashboard/profile",
       name: "Profile",
       icon: <HiOutlineUser className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/list-of-all-labs",
+      path: "/dashboard/listOfAllLabs",
       name: "List of All Labs",
       icon: <HiOutlineMenuAlt2 className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/labs-under-control",
+      path: "/dashboard/labsundercontrol",
       name: "Labs Under Control",
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/items-training",
+      path: "/dashboard/traning",
       name: "Training",
       icon: <HiOutlineAcademicCap className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/items-complaints",
+      path: "/dashboard/complaints",
       name: "Complaints",
       icon: <HiOutlineExclamationCircle className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/change-password",
+      path: "/dashboard/changePassword",
       name: "Change Password",
       icon: <HiOutlineLockClosed className="w-5 h-5" />,
     },
@@ -59,7 +61,7 @@ const DashboardLayout = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex font-sans">
-      {/* MOBILE OVERLAY */}
+      {/* mobile overview */}
       <AnimatePresence>
         {isSidebarOpen && (
           <motion.div
@@ -72,12 +74,10 @@ const DashboardLayout = () => {
         )}
       </AnimatePresence>
 
-      {/* SIDEBAR */}
       <motion.aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#006A4E] text-white shadow-2xl transform lg:transform-none transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#006A4E] text-white shadow-2xl transform lg:transform-none transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
           }`}
       >
-        {/* LOGO AREA */}
         <div className="h-20 flex items-center justify-between px-6 border-b border-white/10">
           <Link to="/" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
@@ -93,8 +93,8 @@ const DashboardLayout = () => {
           </button>
         </div>
 
-        {/* NAVIGATION */}
-        <nav className="p-4 space-y-2 overflow-y-auto h-[calc(100vh-5rem)]">
+        {/*dynamic navigation with navigation name */}
+        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
           <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-4 px-2">
             Menu
           </div>
@@ -110,11 +110,11 @@ const DashboardLayout = () => {
                 to={item.path}
                 onClick={closeSidebar}
                 className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${isActive
-                    ? "bg-white text-[#006A4E] shadow-lg shadow-black/5"
-                    : "text-white/80 hover:bg-white/10 hover:text-white"
+                  ? "bg-white text-[#006A4E] shadow-lg shadow-black/5"
+                  : "text-white/80 hover:bg-white/10 hover:text-white"
                   }`}
               >
-                {/* Active Indicator */}
+                {/* active link style*/}
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
@@ -134,11 +134,21 @@ const DashboardLayout = () => {
             );
           })}
         </nav>
+
+        {/* LOGOUT BUTTON */}
+        <div className="p-4 border-t border-white/10">
+          <Link
+            to="/login"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:bg-red-500/10 hover:text-red-200 transition-all duration-300 group"
+          >
+            <HiOutlineLogout className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
+            <span className="font-medium">Logout</span>
+          </Link>
+        </div>
       </motion.aside>
 
-      {/* MAIN CONTENT WRAPPER */}
       <div className="flex-1 flex flex-col min-h-screen overflow-hidden">
-        {/* NAVBAR */}
+        {/* navbar */}
         <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-8 shadow-sm">
           <button
             onClick={() => setIsSidebarOpen(true)}
@@ -147,18 +157,17 @@ const DashboardLayout = () => {
             <HiMenuAlt3 className="w-6 h-6" />
           </button>
 
-          {/* Breadcrumbs / Page Title */}
           <div className="flex flex-col">
             <h1 className="text-xl font-bold text-gray-800">
-              {menuItems.find((item) => item.path === location.pathname)?.name ||
-                "Dashboard"}
+              {menuItems.find((item) => item.path === location.pathname)
+                ?.name || "Dashboard"}
             </h1>
             <span className="text-xs text-gray-500">
-              Welcome back to your panel
+              Welcome to ICTD Lab Dashboard
             </span>
           </div>
 
-          {/* Right Actions */}
+          {/* user action*/}
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
               <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#006A4E] to-[#0D9488] flex items-center justify-center text-white font-bold shadow-lg shadow-green-500/20">
@@ -172,7 +181,6 @@ const DashboardLayout = () => {
           </div>
         </header>
 
-        {/* CONTENT AREA */}
         <main className="flex-1 overflow-y-auto p-4 lg:p-8">
           <motion.div
             key={location.pathname}

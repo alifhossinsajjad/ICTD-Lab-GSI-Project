@@ -40,38 +40,34 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: (
-     
-        <DashboardLayout />
-
-    ),
+    element: <DashboardLayout />,
     children: [
       {
         index: true,
         Component: DashboardHome,
       },
       {
-        path: "list-of-all-labs",
+        path: "listOfAllLabs",
         Component: ListOffAllLabs,
       },
       {
-        path: "items-profile",
+        path: "profile",
         Component: Profile,
       },
       {
-        path: "items-training",
+        path: "traning",
         Component: Traning,
       },
       {
-        path: "labs-under-control",
+        path: "labsundercontrol",
         Component: LabsUnderControl,
       },
       {
-        path: "items-complaints",
+        path: "complaints",
         Component: Complaints,
       },
       {
-        path: "change-password",
+        path: "changePassword",
         Component: ChangePassWord,
       },
     ],
