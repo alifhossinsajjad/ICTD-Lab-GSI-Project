@@ -4,13 +4,18 @@ import { Link } from "react-router";
 
 const Login = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-green-200 px-4">
+    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 loginPage to-green-200 px-4">
       <div className="w-full max-w-md">
         {/* Title */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 ">
           <h1 className="text-4xl font-bold tracking-widest text-green-800">
             ICTD DIGITAL LAB
           </h1>
+           <p className="text-center text-md text-green-800 mt-6 leading-relaxed font-bold ">
+          কারিগরি সহায়তায়: তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর,
+          <br />
+          তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
+        </p>
         </div>
 
         {/* Login Card */}
@@ -63,11 +68,7 @@ const Login = () => {
         </div>
 
         {/* Footer */}
-        <p className="text-center text-xs text-gray-600 mt-6 leading-relaxed">
-          কারিগরি সহায়তায়: তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর,
-          <br />
-          তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
-        </p>
+       
 
         <div className="flex justify-center ">
           <Link

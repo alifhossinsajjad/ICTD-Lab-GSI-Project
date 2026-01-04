@@ -28,7 +28,7 @@ const Notice = () => {
       <div className="pt-20 bg-emerald-50 py-10 overflow-hidden">
   {/* Track */}
   <div className="relative">
-    <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+    <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent " />
 
     <Marquee
       pauseOnHover
