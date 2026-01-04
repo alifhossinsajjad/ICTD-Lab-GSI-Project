@@ -64,3 +64,11 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.loginPage {
+  background-image: url('/src/assets/loginBg.svg');
+  background-repeat: repeat;        /* keep pattern repeating */
+  background-position: center;
+  background-size: contain;     /* increase value = smaller icons */
+}
+
