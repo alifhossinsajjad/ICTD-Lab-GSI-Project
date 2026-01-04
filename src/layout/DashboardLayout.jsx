@@ -59,6 +59,11 @@ const DashboardLayout = () => {
     },
   ];
 
+  const handdleLogout = () => {
+    console.log('logout successfully');
+  }
+
+
   return (
     <div className="min-h-screen bg-gray-50 flex font-sans">
       {/* mobile overview */}
@@ -135,15 +140,15 @@ const DashboardLayout = () => {
           })}
         </nav>
 
-        {/* LOGOUT BUTTON */}
+        {/* logout button*/}
         <div className="p-4 border-t border-white/10">
-          <Link
-            to="/login"
+          <button
+          onClick={()=> { handdleLogout() }}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:bg-red-500/10 hover:text-red-200 transition-all duration-300 group"
           >
             <HiOutlineLogout className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
             <span className="font-medium">Logout</span>
-          </Link>
+          </button>
         </div>
       </motion.aside>
 
