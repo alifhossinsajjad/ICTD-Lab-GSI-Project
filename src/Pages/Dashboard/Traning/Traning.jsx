@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UserRoute = () => {
+const Traning = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const UserRoute = () => {
     );
 };
 
-export default UserRoute;
+export default Traning;
