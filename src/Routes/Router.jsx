@@ -4,6 +4,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import AllNotice from "../Pages/AllNotice/AllNotice";
 import Lab from "../Pages/lab/Lab";
+import LabDetails from "../Pages/LabDetails/LabDetails";
 import Login from "../Pages/login/Login";
 import PrivetRoute from "./PrivetRoute";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
         path: "lab",
         Component: Lab,
       },
+      {
+        path: "labdetails",
+        Component: LabDetails,
+      }
+
     ],
   },
   {
