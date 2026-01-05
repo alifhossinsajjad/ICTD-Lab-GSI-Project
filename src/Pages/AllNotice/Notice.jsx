@@ -34,9 +34,9 @@ const Notice = () => {
           <Marquee pauseOnHover speed={42} gradient={false}>
             {[...Array(2)]
               .flatMap(() => [
-                "/Screenshot_36.jpg",
-                "/Screenshot_37.jpg",
-                "/Screenshot_38.jpg",
+                "/src/assets/marque/Screenshot_36.jpg",
+                "/src/assets/marque/Screenshot_37.jpg",
+                "/src/assets/marque/Screenshot_38.jpg",
               ])
               .map((src, index) => (
                 <div

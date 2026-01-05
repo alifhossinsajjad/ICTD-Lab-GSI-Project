@@ -7,9 +7,9 @@ import {
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-import heroBg1 from "../../../../public/heroBg1.jpg";
-import heroBg2 from "../../../../public/heroBg2.jpg";
-import heroBg3 from "../../../../public/heroBg3.jpg";
+import heroBg1 from "../../../assets/banner/heroBg1.jpg";
+import heroBg2 from "../../../assets/banner/heroBg2.jpg";
+import heroBg3 from "../../../assets/banner/heroBg3.jpg";
 
 const slides = [
   {
