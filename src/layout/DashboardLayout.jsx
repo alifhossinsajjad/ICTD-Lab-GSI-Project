@@ -79,8 +79,9 @@ const DashboardLayout = () => {
       </AnimatePresence>
 
       <motion.aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#006A4E] text-white shadow-2xl transform lg:transform-none transition-transform duration-300 ease-in-out flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-          }`}
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#006A4E] text-white shadow-2xl transform lg:transform-none transition-transform duration-300 ease-in-out flex flex-col ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        }`}
       >
         <div className="h-20 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
           <Link to="/" className="flex items-center gap-2">
@@ -113,10 +114,11 @@ const DashboardLayout = () => {
                 key={item.path}
                 to={item.path}
                 onClick={closeSidebar}
-                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${isActive
+                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
+                  isActive
                     ? "bg-white text-[#006A4E] shadow-lg shadow-black/5"
                     : "text-white/80 hover:bg-white/10 hover:text-white"
-                  }`}
+                }`}
               >
                 {/* active link style*/}
                 {isActive && (
@@ -202,7 +204,11 @@ const DashboardLayout = () => {
 
           {/* Footer - Moved inside main to scroll with content if needed, but if below Outlet it finds its place */}
           <footer className="bg-gray-50 text-center p-4 mt-auto">
-            <h1><span className="font-bold">Copyright </span>© 2015 <span className="text-red-500 font-bold">DoICT</span> . All rights reserved.</h1>
+            <h1>
+              <span className="font-bold">Copyright </span>© 2015{" "}
+              <span className="text-red-500 font-bold">DoICT</span> . All rights
+              reserved.
+            </h1>
           </footer>
         </main>
       </div>
