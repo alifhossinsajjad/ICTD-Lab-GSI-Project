@@ -26,7 +26,8 @@ const Navbar = () => {
     // { icon: <FiTarget />, label: t("goals"), href: "#goals" },
     // { icon: <FiHome />, label: t("about"), href: "#about" },
     { icon: <FiUsers />, label: t("lab"), href: "/lab" },
-    { icon: <FiUsers />, label: t("Notice"), href: "/all-notice" },
+    { icon: <FiTarget />, label: t("Notice"), href: "/all-notice" },
+     { icon: <FiBell/>, label: t("Lab Details"), href: "/labdetails" },
     // { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
 

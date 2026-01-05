@@ -4,6 +4,7 @@ import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home"
 import AllNotice from "../Pages/AllNotice/AllNotice";
 import Lab from "../Pages/lab/Lab";
+import LabDetails from "../Pages/LabDetails/LabDetails";
 import Login from "../Pages/login/Login";
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "lab",
         Component: Lab,
+      },
+      {
+        path: "labdetails",
+        Component: LabDetails,
       }
 
     ],
@@ -30,7 +35,7 @@ const router = createBrowserRouter([
     path: "/login",
     Component: Login,
   }
-  
+
 
 ]);
 
