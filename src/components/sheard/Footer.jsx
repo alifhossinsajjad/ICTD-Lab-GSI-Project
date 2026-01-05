@@ -12,7 +12,7 @@ const Footer = () => {
 
       {/* Main Content with Background */}
       <div
-        style={{ backgroundImage: "url('/cnts-bg.png')" }}
+        style={{ backgroundImage: "url('./cnts-bg.png')" }}
         className="relative w-full bg-cover bg-center"
       >
         {/* Dark Gradient Overlay */}
