@@ -3,18 +3,20 @@ import RootLayout from "../layout/RootLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import AllNotice from "../Pages/AllNotice/AllNotice";
-import Lab from "../Pages/lab/Lab";
+import Lab from "../Pages/Dashboard/lab/Lab";
 import LabDetails from "../Pages/LabDetails/LabDetails";
 import Login from "../Pages/login/Login";
 import PrivetRoute from "./PrivetRoute";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import DashboardLayout from "../layout/DashboardLayout";
-import ListOffAllLabs from "../Pages/Dashboard/ListOfAllLabs/ListOfAllLabs";
+
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import Traning from "../Pages/Dashboard/Traning/Traning";
 import LabsUnderControl from "../Pages/Dashboard/LabsUnderControls/LabsUnderControl";
 import Complaints from "../Pages/Dashboard/Complaints/Complaints";
 import ChangePassWord from "../Pages/Dashboard/ChangePassword/ChangePassWord";
+import LabsUpdate from "../Pages/Dashboard/LabsUnderControls/LabsControl/LabsUpdate/LabsUpdate";
+import FilesComplaints from "../Pages/Dashboard/LabsUnderControls/LabsControl/FilesComplaints/FilesComplaints";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,15 +31,11 @@ const router = createBrowserRouter([
         path: "all-notice",
         Component: AllNotice,
       },
-      {
-        path: "lab",
-        Component: Lab,
-      },
+
       {
         path: "labdetails",
         Component: LabDetails,
-      }
-
+      },
     ],
   },
   {
@@ -53,8 +51,8 @@ const router = createBrowserRouter([
         Component: DashboardHome,
       },
       {
-        path: "listOfAllLabs",
-        Component: ListOffAllLabs,
+        path: "labs",
+        Component: Lab,
       },
       {
         path: "profile",
@@ -65,7 +63,7 @@ const router = createBrowserRouter([
         Component: Traning,
       },
       {
-        path: "labsundercontrol",
+        path: "labsUnderControl",
         Component: LabsUnderControl,
       },
       {
@@ -76,6 +74,14 @@ const router = createBrowserRouter([
         path: "changePassword",
         Component: ChangePassWord,
       },
+      {
+        path: 'labsUpdate',
+        Component: LabsUpdate,
+      },
+      {
+        path: "filesComplaints",
+        Component : FilesComplaints,
+      }
     ],
   },
 ]);

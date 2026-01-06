@@ -33,12 +33,12 @@ const DashboardLayout = () => {
       icon: <HiOutlineUser className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/listOfAllLabs",
-      name: "List of All Labs",
+      path: "/dashboard/labs",
+      name: "All Labs",
       icon: <HiOutlineMenuAlt2 className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/labsundercontrol",
+      path: "/dashboard/labsUnderControl",
       name: "Labs Under Control",
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
     },
@@ -107,7 +107,7 @@ const DashboardLayout = () => {
             const isActive =
               item.path === "/dashboard"
                 ? location.pathname === "/dashboard"
-                : location.pathname.startsWith(item.path);
+                : location.pathname === item.path;
 
             return (
               <Link
@@ -191,13 +191,13 @@ const DashboardLayout = () => {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 lg:p-8 scroll-smooth">
+        <main className="flex-1 overflow-y-auto p-4 lg:p-2 scroll-smooth">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="max-w-7xl mx-auto pb-6"
+            className="max-w-8xl mx-auto pb-6"
           >
             <Outlet />
           </motion.div>
