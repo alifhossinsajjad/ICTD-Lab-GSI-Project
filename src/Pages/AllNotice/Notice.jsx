@@ -4,6 +4,9 @@ import { useTranslation } from "react-i18next";
 import Marquee from "react-fast-marquee";
 import { Link } from "react-router";
 import { FaArrowRight, FaArrowRightArrowLeft } from "react-icons/fa6";
+import partner1 from "../../assets/marque/Screenshot_36.jpg"
+import partner2 from "../../assets/marque/Screenshot_37.jpg"
+import partner3 from "../../assets/marque/Screenshot_38.jpg"
 
 const fetchNotices = async () => {
   const res = await fetch("/notices.json");
@@ -24,6 +27,15 @@ const Notice = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 4);
 
+
+
+
+
+    const partners = [partner1, partner2, partner3];
+    
+    const marqueeImages = [...partners, ...partners];
+
+
   return (
     <section className="bg-green-50 py-5">
       <div className="pt-20 bg-emerald-50 py-10 overflow-hidden">
@@ -31,35 +43,30 @@ const Notice = () => {
         <div className="relative">
           <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent " />
 
-          <Marquee pauseOnHover speed={42} gradient={false}>
-            {[...Array(2)]
-              .flatMap(() => [
-                "/src/assets/marque/Screenshot_36.jpg",
-                "/src/assets/marque/Screenshot_37.jpg",
-                "/src/assets/marque/Screenshot_38.jpg",
-              ])
-              .map((src, index) => (
-                <div
-                  key={index}
-                  className="mx-10 flex items-center justify-center"
-                >
-                  <div
-                    className="
-            bg-white px-6 py-3 rounded-lg
-            shadow-sm
-            transition-transform duration-300
-            hover:-translate-y-1
-          "
-                  >
-                    <img
-                      src={src}
-                      alt="Partner Logo"
-                      className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-                    />
-                  </div>
-                </div>
-              ))}
-          </Marquee>
+        <Marquee pauseOnHover speed={42} gradient={false}>
+  {marqueeImages.map((src, index) => (
+    <div
+      key={index}
+      className="mx-10 flex items-center justify-center"
+    >
+      <div
+        className="
+          bg-white px-6 py-3 rounded-lg
+          shadow-sm
+          transition-transform duration-300
+          hover:-translate-y-1
+        "
+      >
+        <img
+          src={src}
+          alt="Partner Logo"
+          className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+        />
+      </div>
+    </div>
+  ))}
+</Marquee>
+
         </div>
       </div>
 
