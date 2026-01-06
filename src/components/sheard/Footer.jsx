@@ -5,6 +5,7 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import footer from "../../assets/banner/fotter.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const Footer = () => {
 
       {/* Main Content with Background */}
       <div
-        style={{ backgroundImage: "url('./cnts-bg.png')" }}
+        style={{ backgroundImage: `url(${footer})` }}
         className="relative w-full bg-cover bg-center"
       >
         {/* Dark Gradient Overlay */}
