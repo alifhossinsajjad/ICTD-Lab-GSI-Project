@@ -3,13 +3,13 @@ import RootLayout from "../layout/RootLayout";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Home from "../Pages/Home/Home/Home";
 import AllNotice from "../Pages/AllNotice/AllNotice";
-import Lab from "../Pages/lab/Lab";
+import Lab from "../Pages/Dashboard/lab/Lab";
 import LabDetails from "../Pages/LabDetails/LabDetails";
 import Login from "../Pages/login/Login";
 import PrivetRoute from "./PrivetRoute";
 import DashboardHome from "../Pages/Dashboard/DashboardHome/DashboardHome";
 import DashboardLayout from "../layout/DashboardLayout";
-import ListOffAllLabs from "../Pages/Dashboard/ListOfAllLabs/ListOfAllLabs";
+
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import Traning from "../Pages/Dashboard/Traning/Traning";
 import LabsUnderControl from "../Pages/Dashboard/LabsUnderControls/LabsUnderControl";

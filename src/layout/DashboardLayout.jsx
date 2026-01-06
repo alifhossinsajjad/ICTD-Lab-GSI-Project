@@ -34,7 +34,7 @@ const DashboardLayout = () => {
     },
     {
       path: "/dashboard/labs",
-      name: "List of All Labs",
+      name: "All Labs",
       icon: <HiOutlineMenuAlt2 className="w-5 h-5" />,
     },
     {
@@ -107,7 +107,7 @@ const DashboardLayout = () => {
             const isActive =
               item.path === "/dashboard"
                 ? location.pathname === "/dashboard"
-                : location.pathname.startsWith(item.path);
+                : location.pathname === item.path;
 
             return (
               <Link
