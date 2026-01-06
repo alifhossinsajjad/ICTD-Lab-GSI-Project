@@ -15,6 +15,8 @@ import Traning from "../Pages/Dashboard/Traning/Traning";
 import LabsUnderControl from "../Pages/Dashboard/LabsUnderControls/LabsUnderControl";
 import Complaints from "../Pages/Dashboard/Complaints/Complaints";
 import ChangePassWord from "../Pages/Dashboard/ChangePassword/ChangePassWord";
+import LabsUpdate from "../Pages/Dashboard/LabsUnderControls/LabsControl/LabsUpdate/LabsUpdate";
+import FilesComplaints from "../Pages/Dashboard/LabsUnderControls/LabsControl/FilesComplaints/FilesComplaints";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -72,6 +74,14 @@ const router = createBrowserRouter([
         path: "changePassword",
         Component: ChangePassWord,
       },
+      {
+        path: 'labsUpdate',
+        Component: LabsUpdate,
+      },
+      {
+        path: "filesComplaints",
+        Component : FilesComplaints,
+      }
     ],
   },
 ]);

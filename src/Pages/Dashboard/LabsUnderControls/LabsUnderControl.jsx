@@ -10,6 +10,7 @@ import {
 } from "react-icons/hi";
 import { FaFileCsv, FaFileExcel } from "react-icons/fa";
 import * as XLSX from "xlsx";
+import { Link } from "react-router";
 
 const LabsUnderControl = () => {
   const [filters, setFilters] = useState({
@@ -21,7 +22,7 @@ const LabsUnderControl = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Sample data - replace with your actual data
+  //load with fake data
   const labsData = [
     {
       id: 1,
@@ -153,7 +154,7 @@ const LabsUnderControl = () => {
 
       return matchesSearch && matchesStage && matchesUpazila && matchesLabType;
     });
-  }, [searchTerm, filters, labsData]);
+  }, [searchTerm, filters,labsData,]);
 
   // Pagination Logic
   const totalEntries = filteredData.length;
@@ -164,13 +165,7 @@ const LabsUnderControl = () => {
     startIndex + entriesPerPage
   );
 
-  const handleUpdateLab = (labId) => {
-    console.log("Update lab:", labId);
-  };
 
-  const handleFileComplaint = (labId) => {
-    console.log("File complaint for lab:", labId);
-  };
 
   const handleResetFilters = () => {
     setFilters({
@@ -234,7 +229,7 @@ const LabsUnderControl = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
           <h1 className="text-2xl font-bold text-gray-800">
-            Sheikh Russell Digital Labs
+             Digital Labs
           </h1>
           <p className="text-gray-500 mt-1">
             Manage and monitor digital labs in Lakshmipur district
@@ -411,18 +406,26 @@ const LabsUnderControl = () => {
             <tbody className="divide-y divide-gray-100">
               {currentEntries.length > 0 ? (
                 currentEntries.map((lab, index) => (
-                  <tr key={lab.id} className="hover:bg-gray-50/50 transition-colors group">
+                  <tr
+                    key={lab.id}
+                    className="hover:bg-gray-50/50 transition-colors group"
+                  >
                     <td className="px-6 py-4">
                       <div className="flex flex-col gap-1">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800 w-fit">
                           {lab.stage} Stage
                         </span>
-                        <span className="text-xs text-gray-400">#{startIndex + index + 1}</span>
+                        <span className="text-xs text-gray-400">
+                          #{startIndex + index + 1}
+                        </span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col max-w-xs">
-                        <span className="text-sm font-semibold text-gray-900 truncate" title={lab.institution}>
+                        <span
+                          className="text-sm font-semibold text-gray-900 truncate"
+                          title={lab.institution}
+                        >
                           {lab.institution}
                         </span>
                         <span className="text-xs text-gray-500 mt-1">
@@ -432,7 +435,9 @@ const LabsUnderControl = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col text-sm">
-                        <span className="text-gray-900 font-medium">{lab.upazila}</span>
+                        <span className="text-gray-900 font-medium">
+                          {lab.upazila}
+                        </span>
                         <span className="text-gray-500 text-xs">
                           {lab.district}, {lab.category}
                         </span>
@@ -440,10 +445,17 @@ const LabsUnderControl = () => {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col text-sm">
-                        <span className="text-gray-900 font-medium">{lab.head}</span>
+                        <span className="text-gray-900 font-medium">
+                          {lab.head}
+                        </span>
                         <div className="flex flex-col gap-0.5 mt-1">
-                          <span className="text-xs text-gray-500">{lab.contact}</span>
-                          <a href={`mailto:${lab.email}`} className="text-xs text-emerald-600 hover:text-emerald-700 hover:underline">
+                          <span className="text-xs text-gray-500">
+                            {lab.contact}
+                          </span>
+                          <a
+                            href={`mailto:${lab.email}`}
+                            className="text-xs text-emerald-600 hover:text-emerald-700 hover:underline"
+                          >
                             {lab.email}
                           </a>
                         </div>
@@ -451,29 +463,32 @@ const LabsUnderControl = () => {
                     </td>
                     <td className="px-6 py-4 text-right no-print">
                       <div className="flex items-center justify-end gap-2 ">
-                        <button
-                          onClick={() => handleUpdateLab(lab.id)}
+                        <Link
+                          to={'/dashboard/labsUpdate'}
                           className="flex items-center gap-2 p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                           title="Update Lab"
                         >
                           <HiOutlinePencil className="w-5 h-5" />
                           Update Lab
-                        </button>
-                        <button
-                          onClick={() => handleFileComplaint(lab.id)}
+                        </Link>
+                        <Link
+                        to={'/dashboard/filesComplaints'}
                           className="flex items-center gap-2 p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           title="File Complaint "
                         >
                           <HiOutlineExclamationCircle className="w-5 h-5" />
                           File Complaint
-                        </button>
+                        </Link>
                       </div>
                     </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="px-6 py-8 text-center text-gray-500">
+                  <td
+                    colSpan="5"
+                    className="px-6 py-8 text-center text-gray-500"
+                  >
                     No labs found matching criteria.
                   </td>
                 </tr>
@@ -500,7 +515,9 @@ const LabsUnderControl = () => {
             </select>
             <span>entries</span>
             <span className="ml-2 text-gray-400">
-              {startIndex + 1}-{Math.min(startIndex + entriesPerPage, totalEntries)} of {totalEntries}
+              {startIndex + 1}-
+              {Math.min(startIndex + entriesPerPage, totalEntries)} of{" "}
+              {totalEntries}
             </span>
           </div>
 
@@ -518,17 +535,20 @@ const LabsUnderControl = () => {
                   <button
                     key={i + 1}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
+                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                      currentPage === i + 1
                         ? "bg-emerald-600 text-white shadow-sm"
                         : "text-gray-600 hover:bg-white hover:shadow-sm"
-                      }`}
+                    }`}
                   >
                     {i + 1}
                   </button>
                 ))}
               </div>
               <button
-                onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                onClick={() =>
+                  setCurrentPage(Math.min(totalPages, currentPage + 1))
+                }
                 disabled={currentPage === totalPages}
                 className="px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-white hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-gray-600 transition-all"
               >
