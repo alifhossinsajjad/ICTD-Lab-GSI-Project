@@ -403,7 +403,7 @@ const LabsUnderControl = () => {
                 <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   Contact Person
                 </th>
-                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right no-print">
+                <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center no-print">
                   Actions
                 </th>
               </tr>
@@ -450,20 +450,22 @@ const LabsUnderControl = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right no-print">
-                      <div className="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-end gap-2 ">
                         <button
                           onClick={() => handleUpdateLab(lab.id)}
-                          className="p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+                          className="flex items-center gap-2 p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                           title="Update Lab"
                         >
                           <HiOutlinePencil className="w-5 h-5" />
+                          Update Lab
                         </button>
                         <button
                           onClick={() => handleFileComplaint(lab.id)}
-                          className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                          title="File Complaint"
+                          className="flex items-center gap-2 p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                          title="File Complaint "
                         >
                           <HiOutlineExclamationCircle className="w-5 h-5" />
+                          File Complaint
                         </button>
                       </div>
                     </td>
