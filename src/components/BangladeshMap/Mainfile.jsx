@@ -1,7 +1,8 @@
 import { useState, useCallback, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+
 import { bangladeshDivisions } from "../../data/bangladeshDivisions";
 import { DivisionPath } from "./DivisionPath";
+import { useNavigate } from "react-router";
 
 export const BangladeshMap = ({ onHover }) => {
     const navigate = useNavigate();
