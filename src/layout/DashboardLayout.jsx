@@ -33,12 +33,12 @@ const DashboardLayout = () => {
       icon: <HiOutlineUser className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/listOfAllLabs",
+      path: "/dashboard/labs",
       name: "List of All Labs",
       icon: <HiOutlineMenuAlt2 className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/labsundercontrol",
+      path: "/dashboard/labsUnderControl",
       name: "Labs Under Control",
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
     },

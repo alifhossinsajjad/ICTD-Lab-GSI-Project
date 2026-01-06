@@ -29,15 +29,11 @@ const router = createBrowserRouter([
         path: "all-notice",
         Component: AllNotice,
       },
-      {
-        path: "lab",
-        Component: Lab,
-      },
+
       {
         path: "labdetails",
         Component: LabDetails,
-      }
-
+      },
     ],
   },
   {
@@ -53,8 +49,8 @@ const router = createBrowserRouter([
         Component: DashboardHome,
       },
       {
-        path: "listOfAllLabs",
-        Component: ListOffAllLabs,
+        path: "labs",
+        Component: Lab,
       },
       {
         path: "profile",
@@ -65,7 +61,7 @@ const router = createBrowserRouter([
         Component: Traning,
       },
       {
-        path: "labsundercontrol",
+        path: "labsUnderControl",
         Component: LabsUnderControl,
       },
       {
