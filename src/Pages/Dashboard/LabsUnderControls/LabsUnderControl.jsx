@@ -154,7 +154,7 @@ const LabsUnderControl = () => {
 
       return matchesSearch && matchesStage && matchesUpazila && matchesLabType;
     });
-  }, [searchTerm, filters,labsData,]);
+  }, [searchTerm, filters, labsData]);
 
   // Pagination Logic
   const totalEntries = filteredData.length;
@@ -164,8 +164,6 @@ const LabsUnderControl = () => {
     startIndex,
     startIndex + entriesPerPage
   );
-
-
 
   const handleResetFilters = () => {
     setFilters({
@@ -228,9 +226,7 @@ const LabsUnderControl = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">
-             Digital Labs
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-800">Digital Labs</h1>
           <p className="text-gray-500 mt-1">
             Manage and monitor digital labs in Lakshmipur district
           </p>
@@ -464,7 +460,7 @@ const LabsUnderControl = () => {
                     <td className="px-6 py-4 text-right no-print">
                       <div className="flex items-center justify-end gap-2 ">
                         <Link
-                          to={'/dashboard/labsUpdate'}
+                          to={"/dashboard/labsUpdate"}
                           className="flex items-center gap-2 p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                           title="Update Lab"
                         >
@@ -472,7 +468,7 @@ const LabsUnderControl = () => {
                           Update Lab
                         </Link>
                         <Link
-                        to={'/dashboard/filesComplaints'}
+                          to={"/dashboard/filesComplaints"}
                           className="flex items-center gap-2 p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                           title="File Complaint "
                         >
