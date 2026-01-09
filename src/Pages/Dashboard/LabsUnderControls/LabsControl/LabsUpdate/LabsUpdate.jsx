@@ -26,12 +26,12 @@ const LabsUpdate = () => {
 
   const SectionHeader = ({ icon: Icon, title, subtitle }) => (
     <div className="flex items-start gap-4 mb-6 pb-4 border-b border-gray-100">
-      <div className="p-3 bg-emerald-50 rounded-lg text-emerald-600">
+      <div className="p-3 bg-green-900 rounded-xl text-white shadow-md">
         <Icon className="w-6 h-6" />
       </div>
       <div>
         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
-        <p className="text-sm text-gray-500">{subtitle}</p>
+        <p className="text-sm text-gray-600">{subtitle}</p>
       </div>
     </div>
   );
@@ -48,14 +48,14 @@ const LabsUpdate = () => {
 
   const Input = ({ className, ...props }) => (
     <input
-      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm ${className}`}
+      className={`w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all text-sm hover:border-gray-300 ${className}`}
       {...props}
     />
   );
 
   const Select = ({ className, children, ...props }) => (
     <select
-      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm ${className}`}
+      className={`w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all text-sm hover:border-gray-300 ${className}`}
       {...props}
     >
       {children}
@@ -63,28 +63,31 @@ const LabsUpdate = () => {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="min-h-screen bg-emerald-50 p-6 space-y-6">
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-3 mb-2">
             <Link
-              to="/dashboard/labs-under-control"
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              to="/dashboard/labsUnderControl"
+              className="p-2 text-gray-400  bg-red-700 rounded-full transition-all"
             >
-              <HiOutlineArrowLeft className="w-5 h-5" />
+              <HiOutlineArrowLeft className="w-7 h-7 text-white hover:text-emerald-600" />
             </Link>
-            <h1 className="text-2xl font-bold text-gray-800">
-              Update Lab Details
-            </h1>
+            <div>
+              <h1 className="text-3xl font-bold text-green-950">
+                Update Lab Details
+              </h1>
+              <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-2"></div>
+            </div>
           </div>
-          <p className="text-gray-500 text-sm ml-7">
+          <p className="text-gray-600 text-sm ml-14">
             Update information for the selected computer lab
           </p>
         </div>
         <button
           onClick={handleSubmit(onSubmit)}
-          className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-sm hover:shadow transition-all font-medium"
+          className="flex items-center gap-2 px-6 py-3 bg-green-900 hover:bg-green-950 text-white rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all font-semibold transform hover:-translate-y-0.5"
         >
           <HiOutlineSave className="w-5 h-5" />
           Save Changes
@@ -95,7 +98,7 @@ const LabsUpdate = () => {
         {/* Left Column - Main Info */}
         <div className="xl:col-span-2 space-y-6">
           {/* Institution Details Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineAcademicCap}
               title="Institution Information"
@@ -152,14 +155,12 @@ const LabsUpdate = () => {
                 <button
                   type="button"
                   onClick={() => setNeedsConnection(!needsConnection)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${
-                    needsConnection ? "bg-emerald-600" : "bg-gray-200"
-                  }`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${needsConnection ? "bg-emerald-600" : "bg-gray-200"
+                    }`}
                 >
                   <span
-                    className={`${
-                      needsConnection ? "translate-x-6" : "translate-x-1"
-                    } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+                    className={`${needsConnection ? "translate-x-6" : "translate-x-1"
+                      } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
                   />
                 </button>
               </div>
@@ -178,7 +179,7 @@ const LabsUpdate = () => {
           </div>
 
           {/* Demographic & Stats Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineIdentification}
               title="Demographics & Stats"
@@ -232,7 +233,7 @@ const LabsUpdate = () => {
           </div>
 
           {/* Contact Info Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineOfficeBuilding}
               title="Contact Information"
@@ -273,7 +274,7 @@ const LabsUpdate = () => {
         {/* Right Column - Location & Meta */}
         <div className="space-y-6">
           {/* Address Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineLocationMarker}
               title="Location Details"
@@ -317,7 +318,7 @@ const LabsUpdate = () => {
           </div>
 
           {/* Parliamentary Seat Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <div className="mb-4">
               <h3 className="font-bold text-gray-800">Parliamentary Info</h3>
             </div>
@@ -357,7 +358,7 @@ const LabsUpdate = () => {
           </div>
 
           {/* Geo Coordinates Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <div className="mb-4">
               <h3 className="font-bold text-gray-800">Geo Coordinates</h3>
             </div>

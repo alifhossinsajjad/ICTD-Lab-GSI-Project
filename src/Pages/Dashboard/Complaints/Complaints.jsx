@@ -222,40 +222,40 @@ const Complaints = () => {
   ];
 
   return (
-    <div className="fade-in-up">
-      {/* Header Stats - Optional but adds premium feel */}
+    <div className="min-h-screen bg-emerald-50 p-6 fade-in-up">
+      {/* Header Stats - Enhanced */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-emerald-100 flex items-center gap-4">
-          <div className="p-4 bg-emerald-50 rounded-xl text-emerald-600">
-            <FaCheckCircle size={24} />
+        <div className="bg-white p-6 rounded-2xl shadow-lg border border-emerald-100 flex items-center gap-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="p-4 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl text-white shadow-md">
+            <FaCheckCircle size={28} />
           </div>
           <div>
-            <h3 className="text-gray-500 text-sm font-medium">
+            <h3 className="text-gray-500 text-sm font-semibold uppercase tracking-wide">
               Total Complaints
             </h3>
-            <p className="text-2xl font-bold text-gray-800">{data.length}</p>
+            <p className="text-3xl font-bold text-green-950">{data.length}</p>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-amber-100 flex items-center gap-4">
-          <div className="p-4 bg-amber-50 rounded-xl text-amber-600">
-            <FaUndo size={24} />
+        <div className="bg-white p-6 rounded-2xl shadow-lg border border-amber-100 flex items-center gap-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="p-4 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl text-white shadow-md">
+            <FaUndo size={28} />
           </div>
           <div>
-            <h3 className="text-gray-500 text-sm font-medium">
+            <h3 className="text-gray-500 text-sm font-semibold uppercase tracking-wide">
               Pending Issues
             </h3>
-            <p className="text-2xl font-bold text-gray-800">
+            <p className="text-3xl font-bold bg-gradient-to-r from-amber-600 to-orange-600 bg-clip-text text-transparent">
               {data.filter((d) => d.status === "Pending").length}
             </p>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100 flex items-center gap-4">
-          <div className="p-4 bg-blue-50 rounded-xl text-blue-600">
-            <FaSync size={24} />
+        <div className="bg-white p-6 rounded-2xl shadow-lg border border-blue-100 flex items-center gap-4 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+          <div className="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl text-white shadow-md">
+            <FaSync size={28} />
           </div>
           <div>
-            <h3 className="text-gray-500 text-sm font-medium">Processing</h3>
-            <p className="text-2xl font-bold text-gray-800">
+            <h3 className="text-gray-500 text-sm font-semibold uppercase tracking-wide">Processing</h3>
+            <p className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
               {data.filter((d) => d.status === "Processing").length}
             </p>
           </div>
@@ -266,12 +266,13 @@ const Complaints = () => {
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4 border-b border-gray-100 pb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-              <span className="text-emerald-600"> অভিযোগ</span> পোর্টাল
+            <h2 className="text-3xl font-bold text-green-950 flex items-center gap-2">
+              অভিযোগ পোর্টাল
             </h2>
-            <p className="text-gray-500 text-sm mt-1">
+            <p className="text-gray-600 text-sm mt-2">
               Manage and track all technical complaints efficiently
             </p>
+            <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3"></div>
           </div>
           <div className="relative w-full md:w-72">
             <input
@@ -462,7 +463,7 @@ const Complaints = () => {
                 filteredData.map((row, index) => (
                   <tr
                     key={row.id}
-                    className="hover:bg-gray-50/50 transition-colors"
+                    className="hover:bg-gradient-to-r hover:from-emerald-50 hover:to-blue-50 transition-all duration-300 border-l-4 border-transparent hover:border-emerald-500"
                   >
                     <td className="px-6 py-4 font-medium text-gray-900 border-l-4 border-transparent hover:border-emerald-500 transition-all">
                       #{index + 1}
@@ -480,11 +481,10 @@ const Complaints = () => {
                     </td>
                     <td className="px-6 py-4">
                       <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          row.deviceStatus === "চালু"
-                            ? "bg-green-100 text-green-700"
-                            : "bg-red-100 text-red-700"
-                        }`}
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${row.deviceStatus === "চালু"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                          }`}
                       >
                         {row.deviceStatus}
                       </span>

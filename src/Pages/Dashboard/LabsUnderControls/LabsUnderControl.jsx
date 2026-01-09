@@ -204,7 +204,7 @@ const LabsUnderControl = () => {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="min-h-screen bg-emerald-50 p-6 space-y-6">
       <style>
         {`
           @media print {
@@ -226,17 +226,18 @@ const LabsUnderControl = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Digital Labs</h1>
-          <p className="text-gray-500 mt-1">
-            Manage and monitor digital labs in Lakshmipur district
+          <h1 className="text-4xl font-bold text-green-950">ডিজিটাল ল্যাব </h1>
+          <p className="text-gray-600 mt-2 text-lg">
+            লক্ষ্মীপুর দেশের ডিজিটাল ল্যাব ম্যানেজমেন্ট সম্পর্কে মনোন করুন
           </p>
+          <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3"></div>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={() => handleExport("excel")}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 hover:shadow-sm transition-all text-sm font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 bg-green-900 hover:bg-green-950 text-white rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all text-sm font-semibold"
           >
-            <HiOutlineDownload className="w-5 h-5 text-gray-500" />
+            <HiOutlineDownload className="w-5 h-5" />
             Export Report
           </button>
         </div>
@@ -404,7 +405,7 @@ const LabsUnderControl = () => {
                 currentEntries.map((lab, index) => (
                   <tr
                     key={lab.id}
-                    className="hover:bg-gray-50/50 transition-colors group"
+                    className="hover:bg-gradient-to-r hover:from-emerald-50 hover:to-blue-50 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
                   >
                     <td className="px-6 py-4">
                       <div className="flex flex-col gap-1">
@@ -458,10 +459,10 @@ const LabsUnderControl = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right no-print">
-                      <div className="flex items-center justify-end gap-2 ">
+                      <div className="flex items-center justify-end gap-2">
                         <Link
                           to={"/dashboard/labsUpdate"}
-                          className="flex items-center gap-2 p-2 text-gray-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
+                          className="flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                           title="Update Lab"
                         >
                           <HiOutlinePencil className="w-5 h-5" />
@@ -469,8 +470,8 @@ const LabsUnderControl = () => {
                         </Link>
                         <Link
                           to={"/dashboard/filesComplaints"}
-                          className="flex items-center gap-2 p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                          title="File Complaint "
+                          className="flex items-center gap-2 px-3 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                          title="File Complaint"
                         >
                           <HiOutlineExclamationCircle className="w-5 h-5" />
                           File Complaint
@@ -531,11 +532,10 @@ const LabsUnderControl = () => {
                   <button
                     key={i + 1}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                      currentPage === i + 1
-                        ? "bg-emerald-600 text-white shadow-sm"
-                        : "text-gray-600 hover:bg-white hover:shadow-sm"
-                    }`}
+                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "text-gray-600 hover:bg-white hover:shadow-sm"
+                      }`}
                   >
                     {i + 1}
                   </button>
