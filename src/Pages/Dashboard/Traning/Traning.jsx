@@ -177,14 +177,13 @@ const Traning = () => {
     const ws = XLSX.utils.json_to_sheet(filteredData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Trainees");
-    const fileName = `Trainees_Report_${
-      new Date().toISOString().split("T")[0]
-    }.${type === "excel" ? "xlsx" : "csv"}`;
+    const fileName = `Trainees_Report_${new Date().toISOString().split("T")[0]
+      }.${type === "excel" ? "xlsx" : "csv"}`;
     XLSX.writeFile(wb, fileName);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50/50 p-6 space-y-6">
+    <div className="min-h-screen bg-emerald-50 p-6 space-y-6">
       <style>
         {`
           @media print {
@@ -199,19 +198,20 @@ const Traning = () => {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
-            Training Management
+          <h1 className="text-4xl font-bold text-green-950">
+            ট্রেনিং ম্যানেজমেন্ট
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Monitor and manage trainee information for Lakshmipur district
+          <p className="text-gray-600 mt-2 text-lg">
+            লক্ষ্মীপুর দেশের ট্রেনিং ম্যানেজমেন্ট সম্পর্কে মনোন করুন
           </p>
+          <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3"></div>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleExport("excel")}
-            className="flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-sm hover:shadow transition-all text-sm font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 bg-green-900 hover:bg-green-950 text-white rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all text-sm font-semibold"
           >
-            <HiOutlineDownload className="w-4 h-4" />
+            <HiOutlineDownload className="w-5 h-5" />
             Download Report
           </button>
         </div>
@@ -404,7 +404,7 @@ const Traning = () => {
                 currentEntries.map((trainee, index) => (
                   <tr
                     key={trainee.id}
-                    className="hover:bg-gray-50/80 transition-colors group"
+                    className="hover:bg-gradient-to-r hover:from-emerald-50 hover:to-blue-50 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
                   >
                     <td className="px-6 py-4 text-gray-400 font-medium">
                       {startIndex + index + 1}
@@ -447,13 +447,13 @@ const Traning = () => {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-center no-print">
-                      <div className="flex items-center justify-center gap-2 ">
+                      <div className="flex items-center justify-center gap-2">
                         <Link
                           to={"/dashboard/trainingUpdate"}
-                          className="flex items-center gap-2 p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors "
+                          className="flex items-center gap-2 px-4 py-2 text-white bg-green-950 hover:bg-green-900 rounded-lg transition-all shadow-md hover:shadow-lg font-medium text-sm"
                         >
                           <HiOutlinePencilAlt className="w-5 h-5" />
-                          update
+                          Update
                         </Link>
                       </div>
                     </td>
@@ -521,11 +521,10 @@ const Traning = () => {
                   <button
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                      currentPage === i + 1
-                        ? "bg-emerald-600 text-white shadow-sm"
-                        : "text-gray-600 hover:bg-white hover:shadow-sm bg-transparent"
-                    }`}
+                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
+                      ? "bg-emerald-600 text-white shadow-sm"
+                      : "text-gray-600 hover:bg-white hover:shadow-sm bg-transparent"
+                      }`}
                   >
                     {i + 1}
                   </button>

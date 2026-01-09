@@ -88,14 +88,14 @@ const FilesComplaints = () => {
 
   const Input = ({ className, ...props }) => (
     <input
-      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm ${className}`}
+      className={`w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all text-sm hover:border-gray-300 ${className}`}
       {...props}
     />
   );
 
   const Select = ({ className, children, ...props }) => (
     <select
-      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm ${className}`}
+      className={`w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all text-sm hover:border-gray-300 ${className}`}
       {...props}
     >
       {children}
@@ -110,20 +110,23 @@ const FilesComplaints = () => {
   );
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-emerald-50 p-6 space-y-8 max-w-7xl mx-auto">
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-3 mb-2">
             <Link
               to="/dashboard/labsUnderControl"
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="p-2 text-gray-400  bg-red-700 rounded-full transition-all"
             >
-              <HiOutlineArrowLeft className="w-5 h-5" />
+              <HiOutlineArrowLeft className="w-7 h-7 text-white hover:text-emerald-600" />
             </Link>
-            <h1 className="text-2xl font-bold text-gray-800">File a Complaint</h1>
+            <div>
+              <h1 className="text-3xl font-bold text-green-950">File a Complaint</h1>
+              <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-2"></div>
+            </div>
           </div>
-          <p className="text-gray-500 text-sm ml-7">
+          <p className="text-gray-600 text-sm ml-14">
             Select a device or feature to report an issue
           </p>
         </div>
@@ -131,30 +134,30 @@ const FilesComplaints = () => {
 
       {/* Digital Devices Section */}
       <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
-          <h2 className="text-lg font-bold text-gray-700">Digital Lab Devices</h2>
+        <div className="flex items-center gap-2 pb-3 border-b-2 border-emerald-100">
+          <h2 className="text-xl font-bold text-green-950">Digital Lab Devices</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {devices.map((device, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all p-5 flex flex-col items-center group cursor-pointer"
+              className="bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:border-emerald-200 transition-all duration-300 p-6 flex flex-col items-center group cursor-pointer transform hover:-translate-y-1"
               onClick={() => openModal(device.name)}
             >
-              <div className="w-20 h-20 mb-4 flex items-center justify-center p-2 bg-gray-50 rounded-full group-hover:bg-emerald-50 transition-colors">
+              <div className="w-24 h-24 mb-4 flex items-center justify-center p-3 bg-gradient-to-br from-gray-50 to-emerald-50 rounded-2xl group-hover:from-emerald-100 group-hover:to-blue-100 transition-all duration-300 shadow-md group-hover:shadow-lg">
                 <img
                   src={device.icon}
                   alt={device.name}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <h3 className="text-center font-semibold text-gray-800 mb-4 h-10 flex items-center leading-tight">
                 {device.name}
               </h3>
               <button
-                className="w-full py-2 px-4 rounded-lg bg-emerald-50 text-emerald-600 font-medium text-sm hover:bg-emerald-600 hover:text-white transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-50 to-blue-50 text-emerald-700 font-semibold text-sm hover:from-emerald-600 hover:to-blue-600 hover:text-white transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2"
               >
-                <HiOutlineExclamationCircle className="w-4 h-4" />
+                <HiOutlineExclamationCircle className="w-5 h-5" />
                 Report Issue
               </button>
             </div>
@@ -164,30 +167,30 @@ const FilesComplaints = () => {
 
       {/* School Features Section */}
       <div className="space-y-4">
-        <div className="flex items-center gap-2 pb-2 border-b border-gray-100">
-          <h2 className="text-lg font-bold text-gray-700">School Features</h2>
+        <div className="flex items-center gap-2 pb-3 border-b-2 border-blue-100">
+          <h2 className="text-xl font-bold text-green-950">School Features</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {schoolFeature.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all p-5 flex flex-col items-center group cursor-pointer"
+              className="bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:border-blue-200 transition-all duration-300 p-6 flex flex-col items-center group cursor-pointer transform hover:-translate-y-1"
               onClick={() => openModal(feature.name)}
             >
-              <div className="w-20 h-20 mb-4 flex items-center justify-center p-2 bg-gray-50 rounded-full group-hover:bg-emerald-50 transition-colors">
+              <div className="w-24 h-24 mb-4 flex items-center justify-center p-3 bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl group-hover:from-blue-100 group-hover:to-emerald-100 transition-all duration-300 shadow-md group-hover:shadow-lg">
                 <img
                   src={feature.icon}
                   alt={feature.name}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
               <h3 className="text-center font-semibold text-gray-800 mb-4 h-10 flex items-center leading-tight">
                 {feature.name}
               </h3>
               <button
-                className="w-full py-2 px-4 rounded-lg bg-emerald-50 text-emerald-600 font-medium text-sm hover:bg-emerald-600 hover:text-white transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-50 to-emerald-50 text-blue-700 font-semibold text-sm hover:from-blue-600 hover:to-emerald-600 hover:text-white transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2"
               >
-                <HiOutlineExclamationCircle className="w-4 h-4" />
+                <HiOutlineExclamationCircle className="w-5 h-5" />
                 Report Issue
               </button>
             </div>
@@ -297,7 +300,7 @@ const FilesComplaints = () => {
               </button>
               <button
                 onClick={handleSubmit(onSubmit)}
-                className="px-5 py-2.5 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 shadow-sm hover:shadow transition-colors"
+                className="px-6 py-2.5 text-sm font-semibold text-white bg-green-950 hover:bg-green-900 rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all transform hover:-translate-y-0.5"
               >
                 Submit Complaint
               </button>

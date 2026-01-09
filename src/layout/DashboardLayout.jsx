@@ -191,7 +191,7 @@ const DashboardLayout = () => {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 lg:p-2 scroll-smooth">
+        <main className="flex-1 overflow-y-auto scroll-smooth">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0, y: 20 }}
@@ -203,7 +203,7 @@ const DashboardLayout = () => {
           </motion.div>
 
           {/* Footer - Moved inside main to scroll with content if needed, but if below Outlet it finds its place */}
-          <footer className="bg-gray-50 text-center p-4 mt-auto">
+          <footer className="bg-green-950 text-white text-center p-4 mt-auto">
             <h1>
               <span className="font-bold">Copyright </span>© 2015{" "}
               <span className="text-red-500 font-bold">DoICT</span> . All rights

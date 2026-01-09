@@ -11,6 +11,9 @@ import {
   FaLocationArrow,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
+import institutionPic from "../../assets/banner/institutionpic.png";
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 // Custom marker icon
 const customIcon = L.icon({
@@ -110,7 +113,7 @@ const LabDetails = () => {
 
   useEffect(() => {
     // Fetch lab data
-    fetch("/srd-data.json")
+    fetch("/srd-data300.json")
       .then((res) => res.json())
       .then((data) => {
         // Sanitize coordinates more efficiently
@@ -167,9 +170,9 @@ const LabDetails = () => {
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return R * c;
   }, []);
@@ -268,10 +271,10 @@ const LabDetails = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-8 "
         >
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent ">
-            আমাদের ল্যাব সমূহ
+          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent ">
+            আমাদের ল্যাব গুলো
           </h1>
         </motion.div>
 
@@ -283,7 +286,7 @@ const LabDetails = () => {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-3 space-y-4"
           >
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200 p-6 max-h-[calc(100vh-120px)]">
+            <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200 p-6 max-h-auto">
               <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
                 <FaBuilding className="text-emerald-600" />
                 Lab Information
@@ -305,13 +308,25 @@ const LabDetails = () => {
                         <FaMapMarkerAlt className="text-emerald-600 mt-1 flex-shrink-0" />
                         <div>
                           <p className="text-sm font-semibold text-gray-700">
-                            District
+                            Division
                           </p>
                           <p className="text-gray-900">
-                            {selectedLab.district}
+                            {selectedLab.division}
                           </p>
                         </div>
                       </div>
+
+                      {selectedLab.seat && (
+                        <div className="flex items-start gap-3">
+                          <FaMapMarkerAlt className="text-purple-600 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-gray-700">
+                              Seat
+                            </p>
+                            <p className="text-gray-900">{selectedLab.seat}</p>
+                          </div>
+                        </div>
+                      )}
 
                       <div className="flex items-start gap-3">
                         <FaMapMarkerAlt className="text-teal-600 mt-1 flex-shrink-0" />
@@ -345,8 +360,27 @@ const LabDetails = () => {
                           >
                             {selectedLab.mobile}
                           </a>
+                          {selectedLab.alt_mobile && (
+                            <p className="text-xs text-gray-600 mt-1">
+                              Alt: {selectedLab.alt_mobile}
+                            </p>
+                          )}
                         </div>
                       </div>
+
+                      {selectedLab.lab_type && (
+                        <div className="flex items-start gap-3">
+                          <FaBuilding className="text-indigo-600 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-gray-700">
+                              Lab Type
+                            </p>
+                            <p className="text-gray-900 uppercase text-xs">
+                              {selectedLab.lab_type}
+                            </p>
+                          </div>
+                        </div>
+                      )}
 
                       <div className="flex items-start gap-3">
                         <FaEnvelope className="text-red-600 mt-1 flex-shrink-0" />
@@ -449,27 +483,15 @@ const LabDetails = () => {
                     >
                       <Popup>
                         <div className="min-w-[200px]">
-                          <h3 className="font-bold text-emerald-700 mb-2">
-                            {lab.institute}
-                          </h3>
-                          <div className="space-y-1 text-sm">
-                            <p>
-                              <span className="font-semibold">District:</span>{" "}
-                              {lab.district}
-                            </p>
-                            <p>
-                              <span className="font-semibold">Upazila:</span>{" "}
-                              {lab.upazila}
-                            </p>
-                            <p>
-                              <span className="font-semibold">Head:</span>{" "}
-                              {lab.head}
-                            </p>
-                            <p>
-                              <span className="font-semibold">Phone:</span>{" "}
-                              {lab.mobile}
-                            </p>
-                          </div>
+                          <PhotoProvider>
+                            <PhotoView src={institutionPic}>
+                          <img
+                            src={institutionPic}
+                            alt={lab.institute}
+                            className="cursor-pointer w-full h-auto rounded-lg shadow-md"
+                          />
+                          </PhotoView>
+                          </PhotoProvider>
                         </div>
                       </Popup>
                     </Marker>
@@ -519,9 +541,8 @@ const LabDetails = () => {
                 <select
                   value={distance}
                   onChange={(e) => handleDistanceChange(Number(e.target.value))}
-                  className={`w-full ${
-                    !currentLocation ? "opacity-50 cursor-not-allowed" : ""
-                  } bg-gray-50 border-2 border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600 outline-none transition-all shadow-sm hover:border-emerald-400`}
+                  className={`w-full ${!currentLocation ? "opacity-50 cursor-not-allowed" : ""
+                    } bg-gray-50 border-2 border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600 outline-none transition-all shadow-sm hover:border-emerald-400`}
                   disabled={!currentLocation}
                 >
                   {[1, 2, 3, 4, 5, 7, 10, 15, 20, 30, 50].map((km) => (

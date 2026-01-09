@@ -52,7 +52,7 @@ const DashboardHome = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 p-2">
+    <div className="max-w-7xl mx-auto space-y-8 p-6 bg-emerald-50">
       {/* Header Section */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -66,7 +66,7 @@ const DashboardHome = () => {
           এই মানদণ্ডগুলি শিক্ষা প্রতিষ্ঠানের ল্যাবগুলির জন্য উপযুক্ততা নির্ধারণে
           সহায়ক।
         </p>
-        <div className="h-1 w-20 bg-emerald-500 mx-auto rounded-full mt-2"></div>
+        <div className="h-1 w-20 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 mx-auto rounded-full mt-2"></div>
       </motion.div>
 
       {/* Enhanced Table Section */}
@@ -74,12 +74,12 @@ const DashboardHome = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="rounded-xl border border-gray-200 bg-white shadow-xl overflow-hidden"
+        className="rounded-xl  border-gray-200 bg-white shadow-xl overflow-hidden "
       >
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto  ">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-emerald-600 text-white">
+              <tr className="bg-green-900 text-white">
                 <th className="py-4 px-6 text-xl font-bold border-b border-emerald-700 w-32 text-center">
                   ক্রমিক নং
                 </th>
@@ -92,7 +92,7 @@ const DashboardHome = () => {
               {labSetup.map((item) => (
                 <tr
                   key={item.id}
-                  className="hover:bg-emerald-50/60 transition-colors duration-200 even:bg-gray-50/50"
+                  className="hover:bg-emerald-100 transition-colors duration-200 even:bg-gray-50/50"
                 >
                   <td className="py-5 px-6 font-bold text-gray-600 text-center border-r border-gray-100/50">
                     <div className="w-10 h-10 rounded-full bg-white border-2 border-emerald-100 flex items-center justify-center mx-auto text-emerald-600 shadow-sm">

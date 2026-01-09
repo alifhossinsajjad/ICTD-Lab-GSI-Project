@@ -115,12 +115,12 @@ const TraningUpdate = () => {
   // Reusable UI Components
   const SectionHeader = ({ icon: Icon, title, subtitle }) => (
     <div className="flex items-start gap-4 mb-6 pb-4 border-b border-gray-100">
-      <div className="p-3 bg-emerald-50 rounded-lg text-emerald-600">
+      <div className="p-3 bg-green-900 rounded-xl text-white shadow-md">
         <Icon className="w-6 h-6" />
       </div>
       <div>
         <h2 className="text-lg font-bold text-gray-800">{title}</h2>
-        {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
+        {subtitle && <p className="text-sm text-gray-600">{subtitle}</p>}
       </div>
     </div>
   );
@@ -136,14 +136,14 @@ const TraningUpdate = () => {
 
   const Input = ({ className, ...props }) => (
     <input
-      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm ${className}`}
+      className={`w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all text-sm hover:border-gray-300 ${className}`}
       {...props}
     />
   );
 
   const Select = ({ className, children, ...props }) => (
     <select
-      className={`w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-sm ${className}`}
+      className={`w-full px-4 py-2.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all text-sm hover:border-gray-300 ${className}`}
       {...props}
     >
       {children}
@@ -152,7 +152,7 @@ const TraningUpdate = () => {
 
   // Helper to render a trainee form section
   const RenderTraineeSection = ({ title, index }) => (
-    <motion.div variants={itemVariants} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+    <motion.div variants={itemVariants} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6 hover:shadow-xl transition-shadow duration-300">
       <SectionHeader
         icon={HiOutlineUser}
         title={title}
@@ -247,24 +247,35 @@ const TraningUpdate = () => {
   );
 
   return (
-    <div className="space-y-6">
-     <div
-       
-        >
-          <div className=" text-center gap-2 mb-1">
-            
-            <h1 className="text-2xl font-bold text-gray-800">
-              Update Training Information
-            </h1>
-          </div>
-          <p className="text-center text-gray-500 text-sm ml-7">
-            Manage trainee details and reservations.
-          </p>
-        </div>
+    <div className="min-h-screen bg-emerald-50 p-4 space-y-6">
+
+      <div className="flex ">
+
+
+      <div className="flex items-center">
+         <Link
+              to="/dashboard/traning"
+              className="p-2 text-gray-400  bg-red-700 rounded-full transition-all"
+            >
+              <HiOutlineArrowLeft className="w-7 h-7 text-white hover:text-emerald-600" />
+            </Link>
+      </div>
+
+      
+      <div className="text-center mb-8 mx-auto">
+        <h1 className="text-3xl font-bold text-green-950">
+          Update Training Information
+        </h1>
+        <div className="h-1 w-32 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3 mx-auto"></div>
+        <p className="text-gray-600 text-sm mt-3">
+          Manage trainee details and reservations.
+        </p>
+      </div>
+      </div>
 
       <motion.form
         variants={containerVariants}
-        
+
         animate="visible"
         onSubmit={handleSubmit(onSubmit)}
       >
@@ -274,9 +285,9 @@ const TraningUpdate = () => {
         <RenderTraineeSection title="4th Trainee Information" index={3} />
       </motion.form>
 
-       {/* Page Header */}
+      {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        
+
 
         <motion.div
           initial={{ opacity: 0, x: 20 }}
@@ -291,13 +302,13 @@ const TraningUpdate = () => {
             Cancel
           </Link>
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleSubmit(onSubmit)}
-            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg shadow-sm hover:shadow transition-all font-medium"
+            className="flex items-center gap-2 px-6 py-3 bg-green-950 hover:bg-green-900 text-white rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all font-semibold transform hover:-translate-y-0.5"
           >
             <HiOutlineSave className="w-5 h-5" />
-            Reservation
+            Save Reservation
           </motion.button>
         </motion.div>
       </div>
