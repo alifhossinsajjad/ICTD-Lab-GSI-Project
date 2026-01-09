@@ -46,9 +46,7 @@ const Profile = () => {
       >
         {/* Page Header */}
         <div className="mb-10">
-          <h1 className="text-4xl font-bold text-green-950">
-            My Profile
-          </h1>
+          <h1 className="text-4xl font-bold text-green-950">My Profile</h1>
           <p className="text-gray-600 mt-2 text-lg">
             Manage your personal information and account settings
           </p>
@@ -64,7 +62,7 @@ const Profile = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
               className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 overflow-hidden border border-gray-100"
             >
-              <div className="h-32 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 relative overflow-hidden">
+              <div className="h-32 bg-gradient-to-r from-emerald-600 to-emerald-500  relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
               </div>
@@ -227,10 +225,13 @@ const Profile = () => {
                 {/* Submit Button */}
                 <div className="pt-6 flex justify-end">
                   <motion.button
-                    whileHover={{ scale: 1.02, boxShadow: "0 20px 25px -5px rgba(16, 185, 129, 0.3)" }}
+                    whileHover={{
+                      scale: 1.02,
+                      boxShadow: "0 20px 25px -5px rgba(16, 185, 129, 0.3)",
+                    }}
                     whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="flex justify-center items-center gap-2 bg-green-900 hover:bg-green-950 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-green-950/30 transition-all duration-300 w-full md:w-auto cursor-pointer"
+                    className="flex justify-center items-center gap-2 bg-red-600 hover:bg-green-900 text-white px-8 py-3.5 rounded-xl font-semibold shadow-lg shadow-green-950/30 transition-all duration-300 w-full md:w-auto cursor-pointer"
                   >
                     <FaUser className="w-5 h-5" />
                     <span>Update Profile</span>

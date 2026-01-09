@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { FaDownload, FaSearch, FaSyncAlt, FaFilePdf, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import {
+  FaDownload,
+  FaSearch,
+  FaSyncAlt,
+  FaFilePdf,
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const fetchNotices = async () => {
@@ -16,7 +23,12 @@ const AllNotice = () => {
   const [page, setPage] = useState(1);
   const [showToast, setShowToast] = useState(false);
 
-  const { data: notices = [], isLoading, refetch, isFetching } = useQuery({
+  const {
+    data: notices = [],
+    isLoading,
+    refetch,
+    isFetching,
+  } = useQuery({
     queryKey: ["notices"],
     queryFn: fetchNotices,
   });
@@ -40,16 +52,14 @@ const AllNotice = () => {
 
   return (
     <section className="bg-emerald-50 min-h-screen font-sans">
-
       {/* Marquee */}
-     
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
         {/* Toast */}
         {showToast && (
           <div className="fixed top-24 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-xl text-sm font-medium z-50 animate-fade-in flex items-center gap-2">
-            <FaSyncAlt className="animate-spin" /> Notices refreshed successfully
+            <FaSyncAlt className="animate-spin" /> Notices refreshed
+            successfully
           </div>
         )}
 
@@ -57,10 +67,14 @@ const AllNotice = () => {
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto mb-2"></div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-2">{t("notice_title")}</h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-2">
+              {t("notice_title")}
+            </h1>
             <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
           </div>
-          <p className="text-gray-500 max-w-2xl mx-auto">{t("notice_subtitle")}</p>
+          <p className="text-gray-500 max-w-2xl mx-auto">
+            {t("notice_subtitle")}
+          </p>
         </div>
 
         {/* Toolbar */}
@@ -69,7 +83,10 @@ const AllNotice = () => {
             <span>{t("notice_show")}</span>
             <select
               value={entries}
-              onChange={(e) => { setEntries(Number(e.target.value)); setPage(1); }}
+              onChange={(e) => {
+                setEntries(Number(e.target.value));
+                setPage(1);
+              }}
               className="border rounded px-2 py-1 text-gray-700 cursor-pointer"
             >
               <option value={10}>10</option>
@@ -77,7 +94,10 @@ const AllNotice = () => {
               <option value={50}>50</option>
             </select>
             <span>{t("notice_entries")}</span>
-            <button onClick={handleReload} className="ml-2 p-2 text-gray-500 hover:text-green-600 border rounded bg-white shadow-sm transition-transform active:scale-95">
+            <button
+              onClick={handleReload}
+              className="ml-2 p-2 text-gray-500 hover:text-green-600 border rounded bg-white shadow-sm transition-transform active:scale-95"
+            >
               <FaSyncAlt className={isFetching ? "animate-spin" : ""} />
             </button>
           </div>
@@ -99,33 +119,50 @@ const AllNotice = () => {
           <table className="w-full text-left border-collapse min-w-[600px] md:min-w-full">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200 text-xs font-bold text-gray-500 uppercase tracking-wider">
-                <th className="px-4 py-3 text-center w-12">{t("notice_th_sl")}</th>
+                <th className="px-4 py-3 text-center w-12">
+                  {t("notice_th_sl")}
+                </th>
                 <th className="px-4 py-3">{t("notice_th_title")}</th>
                 <th className="px-4 py-3 w-36">{t("notice_th_date")}</th>
-                <th className="px-4 py-3 w-20 text-center">{t("notice_th_action")}</th>
+                <th className="px-4 py-3 w-20 text-center">
+                  {t("notice_th_action")}
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {(isLoading || isFetching) ? (
+              {isLoading || isFetching ? (
                 <tr>
-                  <td colSpan="4" className="py-12 text-center text-gray-500">Loading...</td>
+                  <td colSpan="4" className="py-12 text-center text-gray-500">
+                    Loading...
+                  </td>
                 </tr>
               ) : paginated.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="py-12 text-center text-gray-500">{t("notice_no_data")}</td>
+                  <td colSpan="4" className="py-12 text-center text-gray-500">
+                    {t("notice_no_data")}
+                  </td>
                 </tr>
               ) : (
                 paginated.map((notice, index) => (
-                  <tr key={notice.id} className="hover:bg-green-50 transition-colors">
-                    <td className="px-4 py-3 text-center">{start + index + 1}</td>
+                  <tr
+                    key={notice.id}
+                    className="hover:bg-green-50 transition-colors"
+                  >
+                    <td className="px-4 py-3 text-center">
+                      {start + index + 1}
+                    </td>
                     <td className="px-4 py-3 flex items-center gap-2">
                       <FaFilePdf className="text-red-500" /> {notice.title}
                     </td>
                     <td className="px-4 py-3 text-gray-500">{notice.date}</td>
                     <td className="px-4 py-3 text-center">
-                      <a href={notice.file} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 text-gray-500 hover:bg-green-600 hover:text-white transition">
-                        <FaDownload className="text-sm"/>
+                      <a
+                        href={notice.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-9 h-9 rounded-full border border-gray-200 text-gray-500 hover:bg-green-600 hover:text-white transition"
+                      >
+                        <FaDownload className="text-sm" />
                       </a>
                     </td>
                   </tr>
@@ -138,26 +175,41 @@ const AllNotice = () => {
         {/* Pagination */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-4 text-sm">
           <span className="text-gray-500">
-            {t("notice_showing")} {filtered.length ? start + 1 : 0} {t("notice_to")} {Math.min(start + entries, filtered.length)} {t("notice_of")} {filtered.length} {t("notice_entries")}
+            {t("notice_showing")} {filtered.length ? start + 1 : 0}{" "}
+            {t("notice_to")} {Math.min(start + entries, filtered.length)}{" "}
+            {t("notice_of")} {filtered.length} {t("notice_entries")}
           </span>
 
           <div className="flex items-center gap-2">
-            <button disabled={page===1} onClick={()=>setPage(page-1)} className="px-3 py-1 flex items-center border rounded hover:bg-gray-50 disabled:opacity-50">
-              <FaChevronLeft className="text-xs"/> {t("notice_prev")}
+            <button
+              disabled={page === 1}
+              onClick={() => setPage(page - 1)}
+              className="px-3 py-1 flex items-center border rounded hover:bg-gray-50 disabled:opacity-50"
+            >
+              <FaChevronLeft className="text-xs" /> {t("notice_prev")}
             </button>
 
             {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i} onClick={()=>setPage(i+1)} className={`px-2 py-1 rounded ${page===i+1 ? "bg-green-600 text-white" : "bg-white border"}`}>
-                {i+1}
+              <button
+                key={i}
+                onClick={() => setPage(i + 1)}
+                className={`px-2 py-1 rounded ${
+                  page === i + 1 ? "bg-green-600 text-white" : "bg-white border"
+                }`}
+              >
+                {i + 1}
               </button>
             ))}
 
-            <button disabled={page===totalPages} onClick={()=>setPage(page+1)} className="px-3 py-1 flex items-center border rounded hover:bg-gray-50 disabled:opacity-50">
-              {t("notice_next")} <FaChevronRight className="text-xs"/>
+            <button
+              disabled={page === totalPages}
+              onClick={() => setPage(page + 1)}
+              className="px-3 py-1 flex items-center border rounded hover:bg-gray-50 disabled:opacity-50"
+            >
+              {t("notice_next")} <FaChevronRight className="text-xs" />
             </button>
           </div>
         </div>
-
       </div>
     </section>
   );
