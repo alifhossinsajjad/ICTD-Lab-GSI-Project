@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import SRDRechart from "../SRDRechart/SRDRechart";
 
 const DashboardHome = () => {
   const labSetup = [
@@ -54,6 +55,7 @@ const DashboardHome = () => {
   return (
     <div className="max-w-7xl mx-auto space-y-8 p-6 bg-emerald-50">
       {/* Header Section */}
+      <SRDRechart></SRDRechart>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
