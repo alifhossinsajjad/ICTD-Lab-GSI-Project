@@ -3,7 +3,6 @@ import { Link, Outlet, useLocation } from "react-router";
 import {
   HiOutlineHome,
   HiOutlineUser,
-  HiOutlineMenuAlt2,
   HiOutlineDesktopComputer,
   HiOutlineAcademicCap,
   HiOutlineExclamationCircle,
@@ -11,16 +10,18 @@ import {
   HiOutlineLogout,
   HiMenuAlt3,
   HiX,
+  HiChevronLeft,
+  HiChevronRight,
 } from "react-icons/hi";
 import { motion, AnimatePresence } from "framer-motion";
 
 const DashboardLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile open/close
+  const [isCollapsed, setIsCollapsed] = useState(false); // ✅ desktop collapse
   const location = useLocation();
 
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  /* menu items array */
   const menuItems = [
     {
       path: "/dashboard",
@@ -31,11 +32,6 @@ const DashboardLayout = () => {
       path: "/dashboard/profile",
       name: "Profile",
       icon: <HiOutlineUser className="w-5 h-5" />,
-    },
-    {
-      path: "/dashboard/labs",
-      name: "All Labs",
-      icon: <HiOutlineMenuAlt2 className="w-5 h-5" />,
     },
     {
       path: "/dashboard/labsUnderControl",
@@ -64,8 +60,8 @@ const DashboardLayout = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-50 flex font-sans overflow-hidden">
-      {/* mobile overview */}
+    <div className="h-screen bg-emerald-50 flex font-sans overflow-hidden">
+      {/* mobile overlay */}
       <AnimatePresence>
         {isSidebarOpen && (
           <motion.div
@@ -78,18 +74,33 @@ const DashboardLayout = () => {
         )}
       </AnimatePresence>
 
+      {/* sidebar */}
       <motion.aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-72 bg-[#006A4E] text-white shadow-2xl transform lg:transform-none transition-transform duration-300 ease-in-out flex flex-col ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
+        className={`
+          fixed lg:static inset-y-0 left-0 z-50
+          ${isCollapsed ? "w-20" : "w-72"}
+          bg-[#006A4E] text-white shadow-2xl
+          transform lg:transform-none transition-all duration-300 ease-in-out
+          flex flex-col
+          ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
+        `}
       >
+        {/* top brand */}
         <div className="h-20 flex items-center justify-between px-6 border-b border-white/10 shrink-0">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+          <Link to="/" className="flex items-center gap-2 overflow-hidden">
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
               <span className="text-xl font-bold">L</span>
             </div>
-            <span className="text-xl font-bold tracking-wide">ICTD Lab</span>
+
+            {/* ✅ hide title when collapsed */}
+            {!isCollapsed && (
+              <span className="text-xl font-bold tracking-wide whitespace-nowrap">
+                ICTD Lab
+              </span>
+            )}
           </Link>
+
+          {/* mobile close */}
           <button
             onClick={closeSidebar}
             className="lg:hidden p-2 rounded-md hover:bg-white/10 transition-colors"
@@ -98,11 +109,29 @@ const DashboardLayout = () => {
           </button>
         </div>
 
-        {/*dynamic navigation with navigation name */}
+        {/* ✅ desktop collapse toggle button */}
+        <div className="hidden lg:flex justify-end px-3 pt-3">
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="p-2 rounded-lg bg-white/10 hover:bg-white/15 transition"
+            title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {isCollapsed ? (
+              <HiChevronRight className="w-5 h-5 text-white" />
+            ) : (
+              <HiChevronLeft className="w-5 h-5 text-white" />
+            )}
+          </button>
+        </div>
+
+        {/* navigation */}
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar">
-          <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-4 px-2">
-            Menu
-          </div>
+          {!isCollapsed && (
+            <div className="text-xs font-semibold text-white/50 uppercase tracking-wider mb-4 px-2">
+              Menu
+            </div>
+          )}
+
           {menuItems.map((item) => {
             const isActive =
               item.path === "/dashboard"
@@ -119,8 +148,8 @@ const DashboardLayout = () => {
                     ? "bg-white text-[#006A4E] shadow-lg shadow-black/5"
                     : "text-white/80 hover:bg-white/10 hover:text-white"
                 }`}
+                title={isCollapsed ? item.name : ""}
               >
-                {/* active link style*/}
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
@@ -135,26 +164,30 @@ const DashboardLayout = () => {
                 )}
 
                 <span className="relative z-10 text-lg">{item.icon}</span>
-                <span className="relative z-10 font-medium">{item.name}</span>
+
+                {/* ✅ hide item name when collapsed */}
+                {!isCollapsed && (
+                  <span className="relative z-10 font-medium">{item.name}</span>
+                )}
               </Link>
             );
           })}
         </nav>
 
-        {/* logout button*/}
+        {/* logout */}
         <div className="p-4 border-t border-white/10 shrink-0">
           <button
-            onClick={() => {
-              handdleLogout();
-            }}
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:bg-red-500/10 hover:text-red-200 transition-all duration-300 group"
+            onClick={() => handdleLogout()}
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-white/80 hover:bg-red-500/10 hover:text-red-200 transition-all duration-300 group w-full"
+            title={isCollapsed ? "Logout" : ""}
           >
             <HiOutlineLogout className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
-            <span className="font-medium">Logout</span>
+            {!isCollapsed && <span className="font-medium">Logout</span>}
           </button>
         </div>
       </motion.aside>
 
+      {/* main */}
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* navbar */}
         <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-4 lg:px-8 shadow-sm shrink-0">
@@ -167,15 +200,14 @@ const DashboardLayout = () => {
 
           <div className="flex flex-col">
             <h1 className="text-xl font-bold text-gray-800">
-              {menuItems.find((item) => item.path === location.pathname)
-                ?.name || "Dashboard"}
+              {menuItems.find((item) => item.path === location.pathname)?.name ||
+                "Dashboard"}
             </h1>
             <span className="text-xs text-gray-500">
               Welcome to ICTD Lab Dashboard
             </span>
           </div>
 
-          {/* user action*/}
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-3 pl-4 border-l border-gray-200">
               <div className="avatar avatar-online">
@@ -202,7 +234,6 @@ const DashboardLayout = () => {
             <Outlet />
           </motion.div>
 
-          {/* Footer - Moved inside main to scroll with content if needed, but if below Outlet it finds its place */}
           <footer className="bg-green-950 text-white text-center p-4 mt-auto">
             <h1>
               <span className="font-bold">Copyright </span>© 2015{" "}
