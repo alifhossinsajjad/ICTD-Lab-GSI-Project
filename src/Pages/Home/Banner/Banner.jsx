@@ -104,7 +104,7 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
-    }, 2000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -118,8 +118,7 @@ const Banner = () => {
           <div
             key={i}
             className={`absolute inset-0 bg-cover bg-center transition-all duration-1000
-              ${
-                i === current ? "opacity-100 scale-105" : "opacity-0 scale-100"
+              ${i === current ? "opacity-100 scale-105" : "opacity-0 scale-100"
               }`}
             style={{ backgroundImage: `url(${s.bg})` }}
           />

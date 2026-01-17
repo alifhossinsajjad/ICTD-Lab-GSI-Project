@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useParams, useNavigate } from "react-router";
+import { Link } from "react-router";
 import {
   HiOutlineOfficeBuilding,
   HiOutlineLocationMarker,
@@ -8,20 +10,92 @@ import {
   HiOutlineSave,
   HiOutlineArrowLeft,
 } from "react-icons/hi";
-import { Link } from "react-router";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const LabsUpdate = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  const [needsConnection, setNeedsConnection] = useState(false);
+  const [labData, setLabData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const onSubmit = (data) => {
+  
+  const formatMobile = (mobile) => {
+    if (!mobile) return "";
+    const mobileStr = String(mobile);
+    return mobileStr.startsWith("0") ? mobileStr : `0${mobileStr}`;
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/labs/${id}`);
+        const data = await response.json();
+
+        if (id && data.data) {
+          setLabData(data.data);
+          console.log("Lab Data:", data.data);
+
+          // Pre-fill form with lab data
+          Object.keys(data.data).forEach((key) => {
+            const value = data.data[key];
+
+            // Map labType to lab_type
+            if (key === 'labType') {
+              setValue('lab_type', value);
+            }
+            // Handle mobile numbers
+            else if (key === 'mobile') {
+              setValue('mobile', formatMobile(value));
+            }
+            else if (key === 'altMobile') {
+              setValue('alt_mobile', formatMobile(value));
+            }
+            else {
+              setValue(key, value);
+            }
+          });
+
+          // Fallback if lab_type isn't set by the loop
+          if (data.data.labType) {
+            setValue('lab_type', data.data.labType);
+          }
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching lab data:", error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [id, setValue]);
+
+  const onSubmit = async (data) => {
     console.log("Form Data:", data);
-    alert("Form submitted successfully! Check console for data.");
+    try {
+      const response = await fetch(`${API_BASE_URL}/labs/update/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+
+      if (result) {
+        navigate("/dashboard/labsUnderControl");
+      }
+    } catch (error) {
+      console.error("Error updating lab:", error);
+    }
   };
 
   const SectionHeader = ({ icon: Icon, title, subtitle }) => (
@@ -62,6 +136,17 @@ const LabsUpdate = () => {
     </select>
   );
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-emerald-50 p-6 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading lab data...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-emerald-50 p-6 space-y-6">
       {/* Page Header */}
@@ -76,13 +161,13 @@ const LabsUpdate = () => {
             </Link>
             <div>
               <h1 className="text-3xl font-bold text-green-950">
-                Update Lab Details
+                {id ? "ল্যাব হালনাগাদ করুন" : "নতুন ল্যাব যোগ করুন"}
               </h1>
               <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-2"></div>
             </div>
           </div>
           <p className="text-gray-600 text-sm ml-14">
-            Update information for the selected computer lab
+            {labData ? `${labData.institute}` : "নতুন কম্পিউটার ল্যাবের তথ্য যোগ করুন"}
           </p>
         </div>
         <button
@@ -90,7 +175,7 @@ const LabsUpdate = () => {
           className="flex items-center gap-2 px-6 py-3 bg-green-900 hover:bg-green-950 text-white rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all font-semibold transform hover:-translate-y-0.5"
         >
           <HiOutlineSave className="w-5 h-5" />
-          Save Changes
+          সংরক্ষণ করুন
         </button>
       </div>
 
@@ -101,134 +186,37 @@ const LabsUpdate = () => {
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineAcademicCap}
-              title="Institution Information"
-              subtitle="Basic details about the educational institution"
+              title="প্রতিষ্ঠানের তথ্য"
+              subtitle="শিক্ষা প্রতিষ্ঠানের মৌলিক তথ্য"
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <InputGroup label="Lab Type" error={errors.labType} required>
-                <Select {...register("labType", { required: "Required" })}>
-                  <option value="">Select Type</option>
-                  <option value="guided">Guided Lab</option>
-                  <option value="open">Open Lab</option>
-                  <option value="specialized">Specialized Lab</option>
+              <InputGroup label="ল্যাব টাইপ" error={errors.lab_type} required>
+                <Select {...register("lab_type", { required: "Required" })}>
+                  <option value="">টাইপ নির্বাচন করুন</option>
+                  <option value="sof">SOF</option>
+                  <option value="srdl_sof">SRDL & SOF</option>
                 </Select>
               </InputGroup>
 
-              <InputGroup label="Stage" error={errors.stage} required>
-                <Select {...register("stage", { required: "Required" })}>
-                  <option value="">Select Stage</option>
-                  <option value="1st">1st Phase</option>
-                  <option value="2nd">2nd Phase</option>
-                  <option value="3rd">3rd Phase</option>
-                </Select>
+              <InputGroup label="আসন নম্বর" error={errors.seat} required>
+                <Input
+                 readOnly
+                 
+                  {...register("seat", { required: "Required" })}
+                  placeholder="১০০ খুলনা-২"
+                />
               </InputGroup>
 
               <div className="md:col-span-2">
-                <InputGroup label="Institution Name (Bengali)" required>
+                <InputGroup label="প্রতিষ্ঠানের নাম" required>
                   <Input
-                    {...register("institutionNameBengali")}
-                    placeholder="রাজারবাগ পলিটেকনিক ইন্সটিটিউট"
+                  readOnly
+                    {...register("institute", { required: "Required" })}
+                    placeholder="প্রতিষ্ঠানের নাম লিখুন"
                   />
                 </InputGroup>
               </div>
-
-              <div className="md:col-span-2">
-                <InputGroup label="Institution Name (English)">
-                  <Input
-                    {...register("institutionNameEnglish")}
-                    placeholder="Rajabagan Polytechnic Munshikhanda Girls High School"
-                  />
-                </InputGroup>
-              </div>
-
-              {/* Connection Toggle */}
-              <div className="md:col-span-2 p-4 bg-gray-50 rounded-lg border border-gray-200 flex items-center justify-between">
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-800">
-                    Connection Status
-                  </h4>
-                  <p className="text-xs text-gray-500">
-                    Does the company name need to be connected?
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setNeedsConnection(!needsConnection)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 ${needsConnection ? "bg-emerald-600" : "bg-gray-200"
-                    }`}
-                >
-                  <span
-                    className={`${needsConnection ? "translate-x-6" : "translate-x-1"
-                      } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
-                  />
-                </button>
-              </div>
-
-              {needsConnection && (
-                <div className="md:col-span-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                  <InputGroup label="Amended Organization Name">
-                    <Input
-                      {...register("amendedOrgName")}
-                      placeholder="Enter amended name..."
-                    />
-                  </InputGroup>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Demographic & Stats Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
-            <SectionHeader
-              icon={HiOutlineIdentification}
-              title="Demographics & Stats"
-              subtitle="Student and teacher counts, EIIN, and classification"
-            />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              <InputGroup label="Organization Type">
-                <Select {...register("orgType")}>
-                  <option value="general">General</option>
-                  <option value="technical">Technical</option>
-                  <option value="madrasa">Madrasa</option>
-                </Select>
-              </InputGroup>
-
-              <InputGroup label="Level">
-                <Select {...register("orgLevel")}>
-                  <option value="secondary">Secondary</option>
-                  <option value="higher">Higher Secondary</option>
-                  <option value="primary">Primary</option>
-                </Select>
-              </InputGroup>
-
-              <InputGroup label="EIIN Number">
-                <Input {...register("einNumber")} placeholder="107008" />
-              </InputGroup>
-
-              <InputGroup label="Total Teachers">
-                <Input
-                  type="number"
-                  {...register("totalTeachers")}
-                  placeholder="0"
-                />
-              </InputGroup>
-
-              <InputGroup label="Students (Boys)">
-                <Input
-                  type="number"
-                  {...register("totalStudents1")}
-                  placeholder="0"
-                />
-              </InputGroup>
-
-              <InputGroup label="Students (Girls)">
-                <Input
-                  type="number"
-                  {...register("totalStudents2")}
-                  placeholder="0"
-                />
-              </InputGroup>
             </div>
           </div>
 
@@ -236,138 +224,104 @@ const LabsUpdate = () => {
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineOfficeBuilding}
-              title="Contact Information"
-              subtitle="Head of institution and communication details"
+              title="যোগাযোগের তথ্য"
+              subtitle="প্রতিষ্ঠান প্রধান এবং যোগাযোগের বিবরণ"
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <InputGroup label="Head of Institution">
-                <Input {...register("headName")} placeholder="Name" />
+              <InputGroup label="প্রতিষ্ঠান প্রধানের নাম" required>
+                <Input
+                  {...register("head", { required: "Required" })}
+                  placeholder="নাম লিখুন"
+                  defaultValue={labData?.head}
+                />
               </InputGroup>
 
-              <InputGroup label="Email">
+              <InputGroup label="ইমেইল">
                 <Input
                   type="email"
-                  {...register("companyEmail")}
+                  {...register("email")}
                   placeholder="email@example.com"
+                  defaultValue={labData.email}
                 />
               </InputGroup>
 
-              <InputGroup label="Mobile No.">
+              <InputGroup label="মোবাইল নম্বর" required>
                 <Input
+              
                   type="tel"
-                  {...register("orgMobile")}
-                  placeholder="017..."
+                  {...register("mobile", { required: "Required" })}
+                  placeholder="01XXXXXXXXX"
+                  defaultValue={labData ? formatMobile(labData.mobile) : ""}
                 />
               </InputGroup>
 
-              <InputGroup label="Alt. Mobile No.">
+              <InputGroup label="বিকল্প মোবাইল নম্বর">
                 <Input
+                
                   type="tel"
-                  {...register("altMobile")}
-                  placeholder="018..."
+                  {...register("alt_mobile")}
+                  placeholder="01XXXXXXXXX"
+                  defaultValue={labData ? formatMobile(labData.altMobile) : ""}
                 />
               </InputGroup>
             </div>
           </div>
         </div>
 
-        {/* Right Column - Location & Meta */}
+        {/* Right Column - Location & Coordinates */}
         <div className="space-y-6">
           {/* Address Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
             <SectionHeader
               icon={HiOutlineLocationMarker}
-              title="Location Details"
-              subtitle="Geographical and administrative location"
+              title="অবস্থান"
+              subtitle="ভৌগোলিক ও প্রশাসনিক অবস্থান"
             />
 
             <div className="space-y-4">
-              <InputGroup label="Division">
-                <Select {...register("category")}>
-                  <option value="chittagong">Chittagong</option>
-                  <option value="dhaka">Dhaka</option>
-                  <option value="sylhet">Sylhet</option>
+              <InputGroup label="বিভাগ" required>
+                <Select readOnly disabled {...register("division", { required: "Required" })}>
+                  <option value="">বিভাগ নির্বাচন করুন</option>
+                  <option value={labData?.division}>{labData?.division}</option>
                 </Select>
               </InputGroup>
 
-              <InputGroup label="District">
-                <Select {...register("district")}>
-                  <option value="lakshmipur">Lakshmipur</option>
-                  <option value="dhaka">Dhaka</option>
+              <InputGroup label="উপজেলা" required>
+                <Select readOnly disabled {...register("upazila", { required: "Required" })}>
+                  <option value="">উপজেলা নির্বাচন করুন</option>
+                  <option value={labData?.upazila}>{labData?.upazila}</option>
                 </Select>
               </InputGroup>
-
-              <InputGroup label="Upazila">
-                <Select {...register("upazila")}>
-                  <option value="raipur">Raipur</option>
-                  <option value="ramganj">Ramganj</option>
-                </Select>
-              </InputGroup>
-
-              <InputGroup label="Union/Municipality">
-                <Select {...register("union")}>
-                  <option value="north">North Char Ababil</option>
-                  <option value="south">South Char Ababil</option>
-                </Select>
-              </InputGroup>
-
-              <InputGroup label="Ward No.">
-                <Input {...register("wardNo")} placeholder="e.g. 5" />
-              </InputGroup>
-            </div>
-          </div>
-
-          {/* Parliamentary Seat Card */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800">Parliamentary Info</h3>
-            </div>
-
-            <div className="space-y-4">
-              <InputGroup label="Seat Type">
-                <Select {...register("parliamentarySeatType")}>
-                  <option value="general">General</option>
-                  <option value="reserved">Reserved</option>
-                </Select>
-              </InputGroup>
-
-              <InputGroup label="Seat Number">
-                <Input
-                  {...register("parliamentarySeatNo")}
-                  defaultValue="548"
-                  readOnly
-                  className="bg-gray-100 cursor-not-allowed"
-                />
-              </InputGroup>
-
-              <InputGroup label="Constituency">
-                <Select {...register("constituencyName")}>
-                  <option value="women45">Women's seat-45</option>
-                  <option value="general1">General Seat-1</option>
-                </Select>
-              </InputGroup>
-
-              <div className="p-3 bg-orange-50 border border-orange-100 rounded-lg">
-                <p className="text-xs text-orange-700 leading-relaxed">
-                  <strong>Note:</strong> Constituency name updates automatically
-                  based on Union/Ward selection. Contact BNFE map office for
-                  discrepancies.
-                </p>
-              </div>
             </div>
           </div>
 
           {/* Geo Coordinates Card */}
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:shadow-xl transition-shadow duration-300">
-            <div className="mb-4">
-              <h3 className="font-bold text-gray-800">Geo Coordinates</h3>
-            </div>
+            <SectionHeader
+              icon={HiOutlineIdentification}
+              title="জিও কোঅর্ডিনেট"
+              subtitle="অক্ষাংশ ও দ্রাঘিমাংশ"
+            />
             <div className="grid grid-cols-2 gap-3">
-              <InputGroup label="Latitude">
-                <Input {...register("latitude")} placeholder="23.01..." />
+              <InputGroup label="অক্ষাংশ (Latitude)">
+                <Input
+                 readOnly
+                  {...register("lat")}
+                  placeholder="22.81"
+                  type="number"
+                  step="any"
+                  defaultValue={labData?.lat}
+                />
               </InputGroup>
-              <InputGroup label="Longitude">
-                <Input {...register("longitude")} placeholder="90.88..." />
+              <InputGroup label="দ্রাঘিমাংশ (Longitude)">
+                <Input
+                readOnly
+                  {...register("long")}
+                  placeholder="89.57"
+                  type="number"
+                  step="any"
+                  defaultValue={labData?.long}
+                />
               </InputGroup>
             </div>
           </div>

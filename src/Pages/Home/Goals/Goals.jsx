@@ -85,7 +85,7 @@ const Goals = () => {
           >
 
             <div
-  className={`
+              className={`
     absolute inset-0
     bg-gradient-to-br ${goal.color}
     transform scale-0
@@ -93,7 +93,7 @@ const Goals = () => {
    transition-transform duration-2000 ease-out
     group-hover:scale-100
   `}
-></div>
+            ></div>
 
 
 

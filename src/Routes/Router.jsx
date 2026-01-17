@@ -76,15 +76,15 @@ const router = createBrowserRouter([
         Component: ChangePassWord,
       },
       {
-        path: 'labsUpdate',
+        path: 'labsUpdate/:id?',
         Component: LabsUpdate,
       },
       {
-        path: "filesComplaints",
-        Component : FilesComplaints,
+        path: "filesComplaints/:id?",
+        Component: FilesComplaints,
       },
       {
-        path : "trainingUpdate",
+        path: "trainingUpdate",
         Component: TraningUpdate
       }
     ],

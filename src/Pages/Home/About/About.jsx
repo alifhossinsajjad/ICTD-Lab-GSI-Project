@@ -19,7 +19,7 @@ const About = () => {
                                 className="w-full h-full object-cover rounded-2xl overflow-hidden shadow-lg  "
                             />
                             {/* Overlay Gradient */}
-                            
+
                         </div>
 
 
@@ -91,13 +91,13 @@ const About = () => {
                             ))}
                         </div>
 
-                  
+
 
 
                         <button className="group bg-gradient-to-r from-green-600 to-green-400 text-white px-10 py-4 rounded-full font-semibold shadow-lg shadow-green-200 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3">
-  {t("about_btn_explore")}
-  <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-</button>
+                            {t("about_btn_explore")}
+                            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+                        </button>
 
                     </div>
                 </div>
