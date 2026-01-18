@@ -12,7 +12,7 @@ const Home = () => {
     const [hoveredDivision, setHoveredDivision] = useState(null);
 
     return (
-        <div>
+        <div  >
             <section id="home">
                 <Banner />
             </section>
@@ -34,6 +34,8 @@ const Home = () => {
                         <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                             Interactive Division Statistics
                         </h2>
+
+                        <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-green-500 rounded-full mx-auto mb-4"></div>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                             Explore educational infrastructure and SRDL lab distribution
                             across Bangladesh. Hover over the map to see detailed statistics

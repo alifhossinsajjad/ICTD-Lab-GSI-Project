@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   HiOutlineOfficeBuilding,
   HiOutlineUsers,
@@ -6,6 +6,7 @@ import {
 } from "react-icons/hi";
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 import heroBg1 from "../../../assets/banner/heroBg1.jpg";
 import heroBg2 from "../../../assets/banner/heroBg2.jpg";
@@ -98,147 +99,198 @@ const slides = [
   },
 ];
 
+const SLIDE_DURATION = 4000;
+
 const Banner = () => {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
+  const timerRef = useRef(null);
+
+  
+  const resetAuto = () => {
+    clearTimeout(timerRef.current);
+    setPaused(false);
+  };
+
+  const nextSlide = () => {
+    resetAuto();
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    resetAuto();
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  // ✅ Auto swipe
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+    if (paused) return;
 
-  const slide = slides[current];
+    timerRef.current = setTimeout(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, SLIDE_DURATION);
+
+    return () => clearTimeout(timerRef.current);
+  }, [current, paused]);
+
+
 
   return (
-    <section className="relative h-[calc(100vh-4rem)] flex items-center px-4 sm:px-6 lg:px-12 overflow-hidden">
-      {/* BACKGROUND SLIDER */}
-      <div className="absolute inset-0 -z-10">
-        {slides.map((s, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000
-              ${i === current ? "opacity-100 scale-105" : "opacity-0 scale-100"
-              }`}
-            style={{ backgroundImage: `url(${s.bg})` }}
-          />
-        ))}
-        <div className="absolute inset-0 bg-white/70" />
-      </div>
-
-      {/* CONTENT */}
-      <div className="container mx-auto z-10">
-        <div className="max-w-xl sm:max-w-2xl text-center sm:text-left space-y-5">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-flex items-center justify-center sm:justify-start gap-2 text-green-700 text-sm font-medium">
-              <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              {slide.tag}
-            </span>
-
-            <h1 className="mt-4 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#064E3B] leading-tight">
-              {slide.title}
-            </h1>
-
-            <p className="mt-3 text-sm sm:text-base md:text-lg text-gray-700">
-              {slide.desc}
-            </p>
-
-            <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
-              <button className="bg-[#006A4E] hover:bg-[#00563f] text-white px-6 py-3 rounded-full font-medium flex items-center justify-center gap-2 shadow">
-                {slide.btn1}
-                <FaArrowRight />
-              </button>
-              <button className="border border-[#006A4E] text-[#006A4E] px-6 py-3 rounded-full font-medium hover:bg-green-50">
-                {slide.btn2}
-              </button>
-            </div>
-          </motion.div>
-
-          {/* DOTS */}
-          <div className="flex gap-2 pt-6 justify-center sm:justify-start">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all
-                  ${i === current ? "w-8 bg-[#006A4E]" : "w-2 bg-gray-300"}`}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* STATS CARDS (MD & LG ONLY) */}
-      <div
-        className="
-  hidden 
-  md:block 
-  absolute 
-  bottom-3 
-  left-1/2 
-  -translate-x-1/2 
-  w-[94%]
-  max-w-5xl
-"
-      >
-        <div
-          className="
-      bg-white/95 backdrop-blur
-      rounded-3xl
-      shadow-[0_10px_40px_rgba(0,0,0,0.08)]
-      px-6 py-4
-      grid
-      grid-cols-1 md:grid-cols-3
-      gap-5
-    "
+    <section
+      className="relative h-[calc(100vh-4rem)] overflow-hidden select-none"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* ✅ SLIDE TRACK */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="flex h-full w-full"
+          animate={{ x: `-${current * 100}%` }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
+          drag="x"
+          dragMomentum={false}
+          onDragStart={() => setPaused(true)}
+          onDragEnd={(e, info) => {
+            setPaused(false);
+            if (info.offset.x < -80) nextSlide();
+            else if (info.offset.x > 80) prevSlide();
+          }}
         >
-          {slide.stats.map((stat) => (
+          {slides.map((s, i) => (
             <div
-              key={stat.id}
-              className="
-          group
-          flex items-center gap-4
-          p-4
-          rounded-2xl
-          transition-all duration-300
-          hover:bg-green-50
-          md:justify-center
-          lg:justify-center
-        "
+              key={i}
+              className="relative min-w-full h-full bg-cover bg-center"
+              style={{ backgroundImage: `url(${s.bg})` }}
             >
-              {/* ICON */}
-              <div
-                className="
-            w-12 h-12 md:w-13 md:h-13 lg:w-14 lg:h-14
-            rounded-2xl
-            bg-green-100
-            flex items-center justify-center
-            group-hover:bg-[#006A4E]
-            transition
-          "
-              >
-                <div className="text-green-700 group-hover:text-white transition">
-                  {stat.icon}
-                </div>
-              </div>
-
-              {/* TEXT */}
-              <div className="text-center lg:text-left">
-                <h3 className="text-xl md:text-lg lg:text-2xl font-bold text-[#064E3B]">
-                  {stat.count}
-                </h3>
-                <p className="text-xs md:text-sm text-gray-600 mt-0.5">
-                  {stat.label}
-                </p>
-              </div>
+              {/* ✅ Only readability shadow */}
+              <div className="absolute inset-0 bg-black/35" />
             </div>
           ))}
+        </motion.div>
+      </div>
+
+      {/* ✅ CONTENT */}
+      <div className="relative h-full flex items-center px-4 sm:px-6 lg:px-12">
+        <div className="container mx-auto z-10">
+          <div className="max-w-xl sm:max-w-2xl text-center sm:text-left space-y-5">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45 }}
+            >
+              <span className="inline-flex items-center justify-center sm:justify-start gap-2 text-white text-sm font-medium">
+                <span className="w-2 h-2 bg-red-500 rounded-full" />
+                {slides[current].tag}
+              </span>
+
+              <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+                {slides[current].title}
+              </h1>
+
+              <p className="mt-3 text-sm sm:text-base md:text-lg text-white/90">
+                {slides[current].desc}
+              </p>
+
+              <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
+                <button className="bg-[#006A4E] hover:bg-[#00563f] text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-sm">
+                  {slides[current].btn1}
+                  <FaArrowRight />
+                </button>
+
+                <button className="bg-white text-[#006A4E] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 shadow-sm">
+                  {slides[current].btn2}
+                </button>
+              </div>
+            </motion.div>
+
+            {/* ✅ DOTS */}
+            <div className="flex gap-2 pt-6 justify-center sm:justify-start">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrent(i)}
+                  aria-label={`Slide ${i + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${i === current ? "w-8 bg-white" : "w-2 bg-white/50"
+                    }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* ✅ NEXT / PREV (fixed: no text hide on mobile) */}
+        {/* ✅ NEXT / PREV (no bg) */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-2 right-2 sm:left-4 sm:right-4 flex justify-between z-30 pointer-events-none">
+          <button
+            onClick={prevSlide}
+            aria-label="Previous Slide"
+            className="pointer-events-auto flex items-center justify-center text-white opacity-80 hover:opacity-100 transition"
+          >
+            <FiChevronLeft size={28} />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            aria-label="Next Slide"
+            className="pointer-events-auto flex items-center justify-center text-white opacity-80 hover:opacity-100 transition"
+          >
+            <FiChevronRight size={28} />
+          </button>
+        </div>
+
+
+        {/* ✅ STATS (Glass BG) */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-5xl">
+          <div
+            className="
+      bg-white/15
+      backdrop-blur-3xl
+      border border-white/20
+      rounded-3xl
+      shadow-[0_12px_45px_rgba(0,0,0,0.20)]
+      px-4 sm:px-7 py-5
+    "
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {slides[current].stats.map((stat) => (
+                <div
+                  key={stat.id}
+                  className="
+            flex items-center gap-4
+            px-4 py-3
+            rounded-2xl
+            hover:bg-white/10
+            transition-all duration-300
+            md:justify-center
+          "
+                >
+                  {/* ICON */}
+                  <div
+                    className="
+              w-12 h-12 rounded-2xl
+              bg-white/20
+              flex items-center justify-center
+              border border-white/20
+            "
+                  >
+                    <div className="text-white">{stat.icon}</div>
+                  </div>
+
+                  {/* TEXT */}
+                  <div className="leading-tight">
+                    <h3 className="text-2xl font-extrabold text-white">
+                      {stat.count}
+                    </h3>
+                    <p className="text-sm text-white/80">{stat.label}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

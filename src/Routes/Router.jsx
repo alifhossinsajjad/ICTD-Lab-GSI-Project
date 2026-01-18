@@ -29,6 +29,10 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
+        path: "labs",
+        Component: Lab,
+      },
+      {
         path: "all-notice",
         Component: AllNotice,
       },
@@ -51,10 +55,7 @@ const router = createBrowserRouter([
         index: true,
         Component: DashboardHome,
       },
-      {
-        path: "labs",
-        Component: Lab,
-      },
+      
       {
         path: "profile",
         Component: Profile,

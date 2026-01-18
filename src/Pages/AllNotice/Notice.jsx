@@ -35,44 +35,14 @@ const Notice = () => {
 
 
     return (
-        <section className="bg-green-50 py-5">
-            <div className="pt-20 bg-emerald-50 py-10 overflow-hidden">
-                {/* Track */}
-                <div className="relative">
-                    <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent " />
-
-                    <Marquee pauseOnHover speed={42} gradient={false}>
-                        {marqueeImages.map((src, index) => (
-                            <div
-                                key={index}
-                                className="mx-10 flex items-center justify-center"
-                            >
-                                <div
-                                    className="
-          bg-white px-6 py-3 rounded-lg
-          shadow-sm
-          transition-transform duration-300
-          hover:-translate-y-1
-        "
-                                >
-                                    <img
-                                        src={src}
-                                        alt="Partner Logo"
-                                        className="h-14 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-                                    />
-                                </div>
-                            </div>
-                        ))}
-                    </Marquee>
-
-                </div>
-            </div>
+        <section className="bg-emerald-50 relative py-5">
+            
 
             <div className="max-w-5xl mx-auto px-4 mt-10">
                 {/* 🔹 Title */}
                 <div className="text-center mb-10">
-                    <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-                        NOTICE
+                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+                        Notice
                     </h2>
                     <div className="w-20 h-1 bg-green-600 mx-auto mt-3 rounded-full" />
                 </div>
