@@ -107,7 +107,7 @@ const Banner = () => {
 
   const timerRef = useRef(null);
 
-  
+
   const resetAuto = () => {
     clearTimeout(timerRef.current);
     setPaused(false);
@@ -194,12 +194,12 @@ const Banner = () => {
               </p>
 
               <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
-                <button className="bg-[#006A4E] hover:bg-[#00563f] text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-sm">
+                <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-sm transition-colors">
                   {slides[current].btn1}
                   <FaArrowRight />
                 </button>
 
-                <button className="bg-white text-[#006A4E] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 shadow-sm">
+                <button className="bg-white text-emerald-700 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 shadow-sm transition-colors">
                   {slides[current].btn2}
                 </button>
               </div>

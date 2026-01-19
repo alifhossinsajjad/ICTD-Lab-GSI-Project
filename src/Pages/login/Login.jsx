@@ -42,65 +42,71 @@ const Login = () => {
 
   const handleStateDefault = (e) => {
     e.preventDefault();
-    setLoginFormData((prev) => ({...prev, pageState: LoginPageStateOptions[1]}))
+    setLoginFormData((prev) => ({ ...prev, pageState: LoginPageStateOptions[1] }))
     localStorage.setItem("LoginPageState", LoginPageStateOptions[1])
   }
 
   const handleStateVerifyEmail = (e) => {
     e.preventDefault();
-    setLoginFormData((prev) => ({...prev, pageState: LoginPageStateOptions[2]}));
-     localStorage.setItem("LoginPageState", LoginPageStateOptions[2]);
+    setLoginFormData((prev) => ({ ...prev, pageState: LoginPageStateOptions[2] }));
+    localStorage.setItem("LoginPageState", LoginPageStateOptions[2]);
   }
 
   const handleStateEnterCode = (e) => {
     e.preventDefault();
-    setLoginFormData((prev) => ({...prev, pageState: LoginPageStateOptions[3]}));
-     localStorage.setItem("LoginPageState", LoginPageStateOptions[3]);
+    setLoginFormData((prev) => ({ ...prev, pageState: LoginPageStateOptions[3] }));
+    localStorage.setItem("LoginPageState", LoginPageStateOptions[3]);
   }
 
   const handleStateRegistration = (e) => {
     e.preventDefault();
-    setLoginFormData((prev) => ({...prev, pageState: LoginPageStateOptions[0]}));
+    setLoginFormData((prev) => ({ ...prev, pageState: LoginPageStateOptions[0] }));
     localStorage.removeItem("LoginPageState")
-    
+
   }
 
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 loginPage to-green-200 px-4">
-      <form className="w-full max-w-md">
+    <section className="min-h-screen flex items-center justify-center bg-emerald-950 px-4 relative overflow-hidden">
+      {/* Ambient Background Effects */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-emerald-500/10 blur-[120px]"></div>
+        <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-blue-500/10 blur-[100px]"></div>
+      </div>
+
+      <form className="w-full max-w-md relative z-10">
         {/* Title */}
-        <div className="text-center mb-8 ">
-          <h1 className="text-4xl font-bold tracking-widest text-green-800">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold tracking-widest text-white drop-shadow-lg">
             ICTD DIGITAL LAB
           </h1>
-          <p className="text-center text-md text-green-800 mt-6 leading-relaxed font-bold ">
+          <p className="text-center text-md text-emerald-100 mt-6 leading-relaxed font-medium opacity-90">
             কারিগরি সহায়তায়: তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর,
             <br />
             তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-xl p-8  flex flex-co items-center justify-center">
+        <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-8 flex flex-col items-center justify-center">
 
           {
             loginFormData.pageState === "default" &&
-            <StateDefault showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateDefault={handleStateDefault}/>
+            <StateDefault showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateDefault={handleStateDefault} />
           }
 
           {
             loginFormData.pageState === "verifyEmail" &&
-            <StateVerifyEmail showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateVerifyEmail={handleStateVerifyEmail}/>
+            <StateVerifyEmail showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateVerifyEmail={handleStateVerifyEmail} />
           }
 
           {
             loginFormData.pageState === "enterCode" &&
-            <StateEnterCode showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateEnterCode={handleStateEnterCode}/>
+            <StateEnterCode showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateEnterCode={handleStateEnterCode} />
           }
 
           {
             loginFormData.pageState === "registeration" &&
-            <StateRegistration showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateRegistration={handleStateRegistration}/>
+            <StateRegistration showPassword={showPassword} setShowPassword={setShowPassword} loginFormData={loginFormData} setLoginFormData={setLoginFormData} handleFormFieldChanges={handleFormFieldChanges} handleStateRegistration={handleStateRegistration} />
           }
 
         </div>
@@ -112,10 +118,10 @@ const Login = () => {
         <div className="flex justify-center ">
           <Link
             to={"/"}
-            className="mt-6 flex items-center gap-1 bg-white border border-green-600 text-green-600 px-5 py-2 rounded-md hover:bg-green-50 font-medium relative "
+            className="mt-6 flex items-center gap-2 bg-emerald-900/50 border border-emerald-500/30 text-emerald-100 px-6 py-2.5 rounded-full hover:bg-emerald-800/50 hover:text-white hover:border-emerald-400 transition-all duration-300 font-medium shadow-lg"
           >
-            <BiLeftArrow className="l-2 text-green-600 " />
-            Home
+            <BiLeftArrow className="text-emerald-400" />
+            Back to Home
           </Link>
         </div>
       </form>

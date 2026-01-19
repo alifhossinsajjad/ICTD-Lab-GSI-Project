@@ -28,6 +28,7 @@ const Navbar = () => {
     { icon: <FiUsers />, label: t("labs"), href: "/labs" },
     { icon: <FiTarget />, label: t("Notice"), href: "/all-notice" },
     { icon: <FiBell />, label: t("Lab Details"), href: "/labdetails" },
+    { icon: <FiInfo />, label: t("Dashboard"), href: "/dashboard" },
     // { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
 
@@ -43,17 +44,17 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="bg-white shadow-lg border-b border-gray-200 fixed w-full z-50">
+    <header className="bg-emerald-900/80 backdrop-blur-md border-b border-emerald-500/20 fixed w-full z-50">
       {/* Running Marquee Banner */}
-      <div className="bg-gradient-to-r from-emerald-600 via-emerald-700 to-emerald-600 text-white py-2.5 overflow-hidden relative">
+      <div className="bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 text-white py-2.5 overflow-hidden relative border-b border-emerald-500/20">
         {/* Decorative pattern overlay */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
 
         <div className="relative flex items-center">
           {/* Announcement Icon */}
-          <div className="flex-shrink-0 px-4 flex items-center gap-2 bg-emerald-800/50 py-1 rounded-r-full">
+          <div className="flex-shrink-0 px-4 flex items-center gap-2 bg-emerald-900/50 py-1 rounded-r-full border border-emerald-500/30 border-l-0">
             <FiBell className="text-yellow-300 animate-pulse" size={18} />
-            <span className="text-xs font-bold uppercase tracking-wider">সর্বশেষ আপডেট</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-100">সর্বশেষ আপডেট</span>
           </div>
 
           {/* Marquee Content */}
@@ -61,7 +62,7 @@ const Navbar = () => {
             <div className="animate-marquee whitespace-nowrap inline-block">
               {announcements.map((announcement, index) => (
                 <span key={index} className="inline-flex items-center mx-8">
-                  <span className="text-sm font-medium">{announcement}</span>
+                  <span className="text-sm font-medium text-emerald-50">{announcement}</span>
                   {index < announcements.length - 1 && (
                     <span className="mx-8 text-yellow-300">●</span>
                   )}
@@ -70,7 +71,7 @@ const Navbar = () => {
               {/* Duplicate for seamless loop */}
               {announcements.map((announcement, index) => (
                 <span key={`dup-${index}`} className="inline-flex items-center mx-8">
-                  <span className="text-sm font-medium">{announcement}</span>
+                  <span className="text-sm font-medium text-emerald-50">{announcement}</span>
                   {index < announcements.length - 1 && (
                     <span className="mx-8 text-yellow-300">●</span>
                   )}
@@ -84,11 +85,11 @@ const Navbar = () => {
       {/* Main Nav */}
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to={"/"} className="cursor-pointer flex items-center space-x-2">
-          <img src={logo} alt="ICTD Logo" className="w-14" />
+        <Link to={"/"} className="cursor-pointer flex items-center space-x-2 group">
+          <img src={logo} alt="ICTD Logo" className="w-14 drop-shadow-lg group-hover:scale-105 transition-transform duration-300" />
           <div>
-            <h1 className="text-xl font-bold text-gray-800">ICTD Lab</h1>
-            <p className="text-sm text-gray-600">GIS Platform</p>
+            <h1 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">ICTD Lab</h1>
+            <p className="text-sm text-emerald-200/70">GIS Platform</p>
           </div>
         </Link>
 
@@ -96,23 +97,23 @@ const Navbar = () => {
         <nav className="hidden lg:flex items-center space-x-2">
           {navItems.map((item) => (
             <Link
-
+              key={item.href}
               to={item.href}
-              className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700 transition-colors duration-300"
+              className="flex items-center gap-2 px-4 py-2 hover:bg-emerald-800/50 rounded-lg font-medium text-emerald-100 hover:text-white transition-all duration-300 border border-transparent hover:border-emerald-500/30"
             >
-              {item.icon}
+              <span className="text-emerald-400">{item.icon}</span>
               <span>{item.label}</span>
             </Link>
           ))}
           <Link
             to={"/login"}
-            className="cursor-pointer hover:scale-105 bg-red-600 text-white px-6 py-2 rounded-lg ml-2 hover:scale-105 transition-transform duration-300"
+            className="cursor-pointer hover:scale-105 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg ml-2 transition-all duration-300 shadow-lg shadow-emerald-900/20 border border-emerald-500/30"
           >
             {t("login")}
           </Link>
           <button
             onClick={toggleLanguage}
-            className="cursor-pointer hover:scale-105  px-4 py-2 bg-gray-100 hover:bg-red-600 text-black hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300"
+            className="cursor-pointer hover:scale-105 px-4 py-2 bg-emerald-900/50 hover:bg-emerald-800 text-emerald-100 hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300 border border-emerald-500/30"
           >
             {i18n.language === "en" ? "English" : "বাংলা"}
           </button>
@@ -120,7 +121,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-gray-800 text-2xl"
+          className="lg:hidden text-white text-2xl hover:text-emerald-300 transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FiX /> : <FiMenu />}
@@ -129,30 +130,32 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-white shadow-md border-t border-gray-200 animate-slideDown">
+        <div className="lg:hidden bg-emerald-900/95 backdrop-blur-xl shadow-xl border-t border-emerald-500/20 animate-slideDown absolute w-full">
           <nav className="flex flex-col space-y-2 p-4">
             {navItems.map((item) => (
               <Link
+                key={item.href}
                 to={item.href}
-
-
-                className="flex items-center gap-2 px-4 py-2 hover:bg-blue-50 rounded-lg font-medium text-gray-700 transition-colors duration-300"
+                className="flex items-center gap-2 px-4 py-3 hover:bg-emerald-800/50 rounded-lg font-medium text-emerald-100 hover:text-white transition-all duration-300 border border-transparent hover:border-emerald-500/30"
+                onClick={() => setMenuOpen(false)}
               >
-                {item.icon}
+                <span className="text-emerald-400">{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             ))}
 
-
-            <Link to={"/login"}>
-              <button className="bg-red-600 text-white px-6 py-2 rounded-lg mt-2 hover:scale-105 transition-transform duration-300">
+            <Link to={"/login"} onClick={() => setMenuOpen(false)}>
+              <button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white px-6 py-3 rounded-lg mt-2 transition-all duration-300 shadow-lg border border-emerald-500/30">
                 {t("login")}
               </button>
             </Link>
 
             <button
-              onClick={toggleLanguage}
-              className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium text-sm mt-2"
+              onClick={() => {
+                toggleLanguage();
+                setMenuOpen(false);
+              }}
+              className="w-full px-4 py-3 bg-emerald-950/50 hover:bg-emerald-800 text-emerald-100 hover:text-white rounded-lg font-medium text-sm mt-2 border border-emerald-500/30 transition-all"
             >
               {i18n.language === "en" ? "English" : "বাংলা"}
             </button>

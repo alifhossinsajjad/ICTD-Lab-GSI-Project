@@ -53,26 +53,26 @@ const DashboardHome = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 p-6 bg-emerald-50">
+    <div className="max-w-7xl mx-auto space-y-8 p-6 bg-emerald-950 min-h-screen">
       {/* Header Section */}
-       <SRDRechart></SRDRechart>
-    
+      <SRDRechart></SRDRechart>
+
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="text-center space-y-3 mb-12"
       >
-        <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-700 via-emerald-600 to-blue-600 bg-clip-text text-transparent">
-          ল্যাবের জন্য উপযুক্ত শিক্ষা প্রতিষ্ঠানের মানদণ্ড
+        <h1 className="text-4xl font-bold text-white">
+          ল্যাবের জন্য উপযুক্ত <span className="text-emerald-400">শিক্ষা প্রতিষ্ঠানের মানদণ্ড</span>
         </h1>
-        
+
         <div className="h-1 w-24 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 mx-auto rounded-full mt-4"></div>
       </motion.div>
 
       {/* Enhanced Vertical Timeline/Stepper Diagram */}
       <div className="relative max-w-5xl mx-auto">
         {/* Vertical connecting line */}
-        <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-200 via-emerald-300 to-blue-300 hidden md:block"></div>
+        <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-800 via-emerald-700 to-blue-900 hidden md:block"></div>
 
         <div className="space-y-6">
           {labSetup.map((item, index) => (
@@ -85,7 +85,7 @@ const DashboardHome = () => {
             >
               {/* Timeline Badge */}
               <div className="absolute left-0 md:left-8 transform md:-translate-x-1/2 z-10">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center shadow-lg border-4 border-white">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shadow-lg border-4 border-emerald-950">
                   <span className="text-white font-bold text-xl">{item.id}</span>
                 </div>
               </div>
@@ -94,13 +94,13 @@ const DashboardHome = () => {
               <div className="ml-24 md:ml-32 group">
                 <motion.div
                   whileHover={{ scale: 1.02, x: 10 }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 border-l-4 border-emerald-500 relative overflow-hidden"
+                  className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 p-6 border border-emerald-500/20 border-l-4 border-l-emerald-500 relative overflow-hidden"
                 >
                   {/* Decorative gradient overlay */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-100/50 to-blue-100/50 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   {/* Step number indicator */}
-                  <div className="absolute top-4 right-4 text-6xl font-bold text-emerald-50 group-hover:text-emerald-100 transition-colors">
+                  <div className="absolute top-4 right-4 text-6xl font-bold text-emerald-800/20 group-hover:text-emerald-700/30 transition-colors">
                     {String(item.id).padStart(2, '0')}
                   </div>
 
@@ -108,7 +108,7 @@ const DashboardHome = () => {
                   <div className="relative z-10">
                     <div className="flex items-start gap-4">
                       {/* Icon/Badge for mobile */}
-                      <div className="md:hidden w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-blue-500 flex items-center justify-center shadow-md flex-shrink-0">
+                      <div className="md:hidden w-12 h-12 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shadow-md flex-shrink-0">
                         <span className="text-white font-bold">{item.id}</span>
                       </div>
 
@@ -116,12 +116,12 @@ const DashboardHome = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-3">
                           <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full"></div>
-                          <span className="text-sm font-semibold text-emerald-600 uppercase tracking-wider">
+                          <span className="text-sm font-semibold text-emerald-400 uppercase tracking-wider">
                             মানদণ্ড {item.id}
                           </span>
                         </div>
 
-                        <p className="text-gray-700 leading-relaxed text-lg text-justify pr-16">
+                        <p className="text-emerald-100 leading-relaxed text-lg text-justify pr-16">
                           {item.description}
                         </p>
                       </div>
@@ -144,7 +144,7 @@ const DashboardHome = () => {
           className="relative mt-8"
         >
           <div className="absolute left-0 md:left-8 transform md:-translate-x-1/2 z-10">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center shadow-lg border-4 border-white">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-600 to-emerald-600 flex items-center justify-center shadow-lg border-4 border-emerald-950">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
@@ -152,14 +152,14 @@ const DashboardHome = () => {
           </div>
 
           <div className="ml-24 md:ml-32">
-            <div className="bg-gradient-to-r from-emerald-500 to-blue-500 rounded-2xl shadow-xl p-6 text-white text-center">
+            <div className="bg-gradient-to-r from-emerald-900/80 to-blue-900/80 backdrop-blur-xl rounded-2xl shadow-xl p-6 text-white text-center border border-emerald-500/30">
               <h3 className="text-2xl font-bold mb-2">সকল মানদণ্ড পূরণ করুন</h3>
-              <p className="text-emerald-50">উপরের সকল শর্ত পূরণ করলে আপনার প্রতিষ্ঠান ল্যাব স্থাপনের জন্য উপযুক্ত বিবেচিত হবে</p>
+              <p className="text-emerald-200/80">উপরের সকল শর্ত পূরণ করলে আপনার প্রতিষ্ঠান ল্যাব স্থাপনের জন্য উপযুক্ত বিবেচিত হবে</p>
             </div>
           </div>
         </motion.div>
       </div>
-       
+
     </div>
   );
 };

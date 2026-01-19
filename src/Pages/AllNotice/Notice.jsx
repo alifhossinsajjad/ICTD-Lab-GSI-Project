@@ -35,13 +35,13 @@ const Notice = () => {
 
 
     return (
-        <section className="bg-emerald-50 relative py-5">
-            
+        <section className="bg-emerald-950 relative py-5">
+
 
             <div className="max-w-5xl mx-auto px-4 mt-10">
                 {/* 🔹 Title */}
                 <div className="text-center mb-10">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
                         Notice
                     </h2>
                     <div className="w-20 h-1 bg-green-600 mx-auto mt-3 rounded-full" />
@@ -59,19 +59,19 @@ const Notice = () => {
                         latestNotices.map((notice) => (
                             <div
                                 key={notice.id}
-                                className="flex items-start gap-4 p-5 bg-white rounded-xl shadow-sm hover:bg-green-100 hover:shadow-emerald-300 transition"
+                                className="flex items-start gap-4 p-5 bg-emerald-900/40 backdrop-blur-md rounded-xl shadow-lg border border-emerald-500/20 hover:border-emerald-400 hover:shadow-emerald-500/20 transition group"
                             >
                                 {/* PDF Icon */}
-                                <div className="w-10 h-10 flex items-center justify-center rounded-full  text-red-600 shrink-0">
+                                <div className="w-10 h-10 flex items-center justify-center rounded-full text-red-400 shrink-0 bg-red-500/10">
                                     <FaFilePdf />
                                 </div>
 
                                 {/* Content */}
                                 <div className="flex-1">
-                                    <p className="text-sm font-medium text-gray-800 leading-snug line-clamp-2">
+                                    <p className="text-sm font-medium text-emerald-50 leading-snug line-clamp-2 group-hover:text-white transition-colors">
                                         {notice.title}
                                     </p>
-                                    <p className="text-xs text-gray-500 mt-1">{notice.date}</p>
+                                    <p className="text-xs text-emerald-300/70 mt-1">{notice.date}</p>
                                 </div>
 
                                 {/* Download */}
@@ -80,7 +80,7 @@ const Notice = () => {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     aria-label="Download notice"
-                                    className="w-9 h-9 flex items-center justify-center rounded-full text-gray-500 hover:bg-green-600 hover:text-white transition"
+                                    className="w-9 h-9 flex items-center justify-center rounded-full text-emerald-300 bg-emerald-500/10 group-hover:bg-emerald-500 group-hover:text-white transition"
                                 >
                                     <FaDownload className="text-xs" />
                                 </a>

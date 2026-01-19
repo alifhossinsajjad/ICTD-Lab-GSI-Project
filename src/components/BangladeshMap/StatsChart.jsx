@@ -50,16 +50,16 @@ export const StatsChart = ({ division }) => {
     const CustomTooltip = ({ active, payload, label }) => {
         if (active && payload && payload.length) {
             return (
-                <div className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-2xl border border-emerald-100 animate-in fade-in zoom-in duration-300">
-                    <p className="text-sm font-bold text-gray-900 mb-2 border-b pb-1">{label} Statistics</p>
+                <div className="bg-emerald-950/90 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-emerald-500/30 animate-in fade-in zoom-in duration-300">
+                    <p className="text-sm font-bold text-white mb-2 border-b border-emerald-500/20 pb-1">{label} Statistics</p>
                     <div className="space-y-1">
                         <p className="text-xs flex items-center justify-between gap-4">
-                            <span className="text-emerald-600 font-medium">Institutions:</span>
-                            <span className="font-bold text-gray-800">{payload[0].value.toLocaleString()}</span>
+                            <span className="text-emerald-400 font-medium">Institutions:</span>
+                            <span className="font-bold text-emerald-100">{payload[0].value.toLocaleString()}</span>
                         </p>
                         <p className="text-xs flex items-center justify-between gap-4">
-                            <span className="text-rose-500 font-medium">SRDL Labs:</span>
-                            <span className="font-bold text-gray-800">{payload[1].value.toLocaleString()}</span>
+                            <span className="text-rose-400 font-medium">SRDL Labs:</span>
+                            <span className="font-bold text-emerald-100">{payload[1].value.toLocaleString()}</span>
                         </p>
                     </div>
                 </div>
@@ -69,32 +69,32 @@ export const StatsChart = ({ division }) => {
     };
 
     return (
-        <div className="w-full h-full bg-white p-8 rounded-[2rem] border-4 border-white shadow-2xl flex flex-col transition-all duration-500 hover:shadow-emerald-200/50 relative overflow-hidden group">
+        <div className="w-full h-full bg-emerald-900/20 backdrop-blur-sm p-8 rounded-[2rem] border-4 border-emerald-500/10 shadow-2xl flex flex-col transition-all duration-500 hover:shadow-emerald-500/20 relative overflow-hidden group">
             {/* Background Decoration */}
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-50 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
 
             <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <h2 className="text-2xl font-black text-gray-900 tracking-tight">
-                            {activeDivision.name} <span className="text-emerald-500">Division</span>
+                        <h2 className="text-2xl font-black text-white tracking-tight">
+                            {activeDivision.name} <span className="text-emerald-400">Division</span>
                         </h2>
-                        <p className="text-sm text-gray-500 font-medium">Infrastructure & Lab Distribution</p>
+                        <p className="text-sm text-emerald-200/80 font-medium">Infrastructure & Lab Distribution</p>
                     </div>
-                    <div className="bg-emerald-50 p-3 rounded-2xl">
-                        <FaChartBar className="text-emerald-500 text-xl" />
+                    <div className="bg-emerald-500/10 p-3 rounded-2xl">
+                        <FaChartBar className="text-emerald-400 text-xl" />
                     </div>
                 </div>
 
                 {/* Summary Mini Cards */}
                 <div className="grid grid-cols-2 gap-4 mb-8">
-                    <div className="bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100/50">
-                        <p className="text-[10px] uppercase tracking-wider font-bold text-emerald-600 mb-1">Total Institutions</p>
-                        <p className="text-xl font-black text-gray-900">{activeDivision.stats.total.institutions.toLocaleString()}</p>
+                    <div className="bg-emerald-500/10 p-4 rounded-2xl border border-emerald-500/20">
+                        <p className="text-[10px] uppercase tracking-wider font-bold text-emerald-400 mb-1">Total Institutions</p>
+                        <p className="text-xl font-black text-white">{activeDivision.stats.total.institutions.toLocaleString()}</p>
                     </div>
-                    <div className="bg-rose-50/50 p-4 rounded-2xl border border-rose-100/50">
-                        <p className="text-[10px] uppercase tracking-wider font-bold text-rose-600 mb-1">Total SRDL Labs</p>
-                        <p className="text-xl font-black text-gray-900">{activeDivision.stats.total.labs.toLocaleString()}</p>
+                    <div className="bg-rose-500/10 p-4 rounded-2xl border border-rose-500/20">
+                        <p className="text-[10px] uppercase tracking-wider font-bold text-rose-400 mb-1">Total SRDL Labs</p>
+                        <p className="text-xl font-black text-white">{activeDivision.stats.total.labs.toLocaleString()}</p>
                     </div>
                 </div>
             </div>
@@ -106,47 +106,47 @@ export const StatsChart = ({ division }) => {
                         margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
                         barGap={12}
                     >
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(16, 185, 129, 0.1)" />
                         <XAxis
                             dataKey="name"
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fill: '#64748b', fontSize: 11, fontWeight: 700 }}
+                            tick={{ fill: '#a7f3d0', fontSize: 11, fontWeight: 700 }}
                             dy={10}
                         />
                         <YAxis
                             axisLine={false}
                             tickLine={false}
-                            tick={{ fill: '#94a3b8', fontSize: 10 }}
+                            tick={{ fill: '#6ee7b7', fontSize: 10 }}
                         />
-                        <Tooltip content={<CustomTooltip />} cursor={{ fill: '#f8fafc', radius: 12 }} />
+                        <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(16, 185, 129, 0.1)', radius: 12 }} />
                         <Legend
                             verticalAlign="top"
                             align="right"
                             iconType="circle"
-                            wrapperStyle={{ paddingTop: '0px', paddingBottom: '20px', fontSize: '11px', fontWeight: 700 }}
+                            wrapperStyle={{ paddingTop: '0px', paddingBottom: '20px', fontSize: '11px', fontWeight: 700, color: '#d1fae5' }}
                         />
 
                         <Bar
                             dataKey="institutions"
                             name="Institutions"
-                            fill="#10b981"
+                            fill="#34d399"
                             radius={[6, 6, 0, 0]}
                             barSize={32}
                             animationDuration={1500}
                         >
-                            <LabelList dataKey="institutions" position="top" style={{ fill: '#10b981', fontSize: 10, fontWeight: 800 }} offset={8} />
+                            <LabelList dataKey="institutions" position="top" style={{ fill: '#34d399', fontSize: 10, fontWeight: 800 }} offset={8} />
                         </Bar>
 
                         <Bar
                             dataKey="labs"
                             name="SRDL Labs"
-                            fill="#f43f5e"
+                            fill="#fb7185"
                             radius={[6, 6, 0, 0]}
                             barSize={32}
                             animationDuration={2000}
                         >
-                            <LabelList dataKey="labs" position="top" style={{ fill: '#f43f5e', fontSize: 10, fontWeight: 800 }} offset={8} />
+                            <LabelList dataKey="labs" position="top" style={{ fill: '#fb7185', fontSize: 10, fontWeight: 800 }} offset={8} />
                         </Bar>
                     </BarChart>
                 </ResponsiveContainer>

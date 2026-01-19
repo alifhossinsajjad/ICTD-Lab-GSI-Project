@@ -52,25 +52,25 @@ const LabListItem = memo(({ lab, index, onSelect }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(index * 0.02, 0.3) }}
       onClick={() => onSelect(lab)}
-      className="p-3 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-emerald-50 hover:to-teal-50 rounded-xl border-2 border-gray-200 hover:border-emerald-300 cursor-pointer transition-all shadow-sm hover:shadow-md"
+      className="p-3 bg-emerald-950/50 hover:bg-emerald-900/80 rounded-xl border border-emerald-500/20 hover:border-emerald-400 cursor-pointer transition-all shadow-sm hover:shadow-emerald-500/20"
     >
-      <h4 className="font-semibold text-sm text-gray-900 mb-1 line-clamp-2">
+      <h4 className="font-semibold text-sm text-white mb-1 line-clamp-2">
         {lab.institute}
       </h4>
-      <div className="flex items-center gap-2 text-xs text-gray-600">
-        <FaMapMarkerAlt className="text-emerald-600" />
+      <div className="flex items-center gap-2 text-xs text-emerald-200/70">
+        <FaMapMarkerAlt className="text-emerald-500" />
         <span>{lab.upazila}</span>
       </div>
-      <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
-        <FaUser className="text-blue-600" />
+      <div className="flex items-center gap-2 text-xs text-emerald-200/70 mt-1">
+        <FaUser className="text-blue-400" />
         <span className="line-clamp-1">{lab.head}</span>
       </div>
-      <div className="flex items-center gap-2 text-xs text-gray-600 mt-1">
-        <FaPhone className="text-green-600" />
+      <div className="flex items-center gap-2 text-xs text-emerald-200/70 mt-1">
+        <FaPhone className="text-green-400" />
         <span>{lab.mobile}</span>
       </div>
       {lab.distance && (
-        <div className="mt-1 text-xs font-semibold text-emerald-600">
+        <div className="mt-1 text-xs font-semibold text-emerald-400">
           {lab.distance.toFixed(2)} km away
         </div>
       )}
@@ -265,16 +265,22 @@ const LabDetails = () => {
   }, [filteredLabs]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 pt-3 pb-2 px-12 relative">
-      <div className="max-w-[1800px] mx-auto">
+    <div className="min-h-screen bg-emerald-950 pt-3 pb-2 px-12 relative overflow-hidden">
+      {/* Ambient Background */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-500/10 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-500/10 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div className="max-w-[1800px] mx-auto relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-8 "
         >
-          <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent ">
-            আমাদের ল্যাব গুলো
+          <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+            আমাদের <span className="text-emerald-400">ল্যাব গুলো</span>
           </h1>
         </motion.div>
 
@@ -286,9 +292,9 @@ const LabDetails = () => {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-3 space-y-4"
           >
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200 p-6 max-h-auto">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <FaBuilding className="text-emerald-600" />
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-6 max-h-auto">
+              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                <FaBuilding className="text-emerald-400" />
                 Lab Information
               </h2>
 
@@ -298,19 +304,19 @@ const LabDetails = () => {
                   animate={{ opacity: 1 }}
                   className="space-y-4"
                 >
-                  <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-4 border-2 border-emerald-200">
-                    <h3 className="font-bold text-lg text-emerald-800 mb-3">
+                  <div className="bg-emerald-950/50 rounded-xl p-4 border border-emerald-500/30">
+                    <h3 className="font-bold text-lg text-emerald-300 mb-3">
                       {selectedLab.institute}
                     </h3>
 
                     <div className="space-y-3">
                       <div className="flex items-start gap-3">
-                        <FaMapMarkerAlt className="text-emerald-600 mt-1 flex-shrink-0" />
+                        <FaMapMarkerAlt className="text-emerald-500 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-semibold text-gray-700">
+                          <p className="text-sm font-semibold text-emerald-200/70">
                             Division
                           </p>
-                          <p className="text-gray-900">
+                          <p className="text-white">
                             {selectedLab.division}
                           </p>
                         </div>
@@ -318,50 +324,50 @@ const LabDetails = () => {
 
                       {selectedLab.seat && (
                         <div className="flex items-start gap-3">
-                          <FaMapMarkerAlt className="text-purple-600 mt-1 flex-shrink-0" />
+                          <FaMapMarkerAlt className="text-purple-400 mt-1 flex-shrink-0" />
                           <div>
-                            <p className="text-sm font-semibold text-gray-700">
+                            <p className="text-sm font-semibold text-emerald-200/70">
                               Seat
                             </p>
-                            <p className="text-gray-900">{selectedLab.seat}</p>
+                            <p className="text-white">{selectedLab.seat}</p>
                           </div>
                         </div>
                       )}
 
                       <div className="flex items-start gap-3">
-                        <FaMapMarkerAlt className="text-teal-600 mt-1 flex-shrink-0" />
+                        <FaMapMarkerAlt className="text-teal-400 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-semibold text-gray-700">
+                          <p className="text-sm font-semibold text-emerald-200/70">
                             Upazila
                           </p>
-                          <p className="text-gray-900">{selectedLab.upazila}</p>
+                          <p className="text-white">{selectedLab.upazila}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <FaUser className="text-blue-600 mt-1 flex-shrink-0" />
+                        <FaUser className="text-blue-400 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-semibold text-gray-700">
+                          <p className="text-sm font-semibold text-emerald-200/70">
                             Head
                           </p>
-                          <p className="text-gray-900">{selectedLab.head}</p>
+                          <p className="text-white">{selectedLab.head}</p>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <FaPhone className="text-green-600 mt-1 flex-shrink-0" />
+                        <FaPhone className="text-green-400 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-semibold text-gray-700">
+                          <p className="text-sm font-semibold text-emerald-200/70">
                             Phone
                           </p>
                           <a
                             href={`tel:${selectedLab.mobile}`}
-                            className="text-green-600 hover:text-green-700 font-medium"
+                            className="text-green-400 hover:text-green-300 font-medium"
                           >
                             {selectedLab.mobile}
                           </a>
                           {selectedLab.alt_mobile && (
-                            <p className="text-xs text-gray-600 mt-1">
+                            <p className="text-xs text-emerald-400/70 mt-1">
                               Alt: {selectedLab.alt_mobile}
                             </p>
                           )}
@@ -370,12 +376,12 @@ const LabDetails = () => {
 
                       {selectedLab.lab_type && (
                         <div className="flex items-start gap-3">
-                          <FaBuilding className="text-indigo-600 mt-1 flex-shrink-0" />
+                          <FaBuilding className="text-indigo-400 mt-1 flex-shrink-0" />
                           <div>
-                            <p className="text-sm font-semibold text-gray-700">
+                            <p className="text-sm font-semibold text-emerald-200/70">
                               Lab Type
                             </p>
-                            <p className="text-gray-900 uppercase text-xs">
+                            <p className="text-white uppercase text-xs">
                               {selectedLab.lab_type}
                             </p>
                           </div>
@@ -383,14 +389,14 @@ const LabDetails = () => {
                       )}
 
                       <div className="flex items-start gap-3">
-                        <FaEnvelope className="text-red-600 mt-1 flex-shrink-0" />
+                        <FaEnvelope className="text-rose-400 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-semibold text-gray-700">
+                          <p className="text-sm font-semibold text-emerald-200/70">
                             Email
                           </p>
                           <a
                             href={`mailto:${selectedLab.email}`}
-                            className="text-red-600 hover:text-red-700 text-sm break-all"
+                            className="text-rose-400 hover:text-rose-300 text-sm break-all"
                           >
                             {selectedLab.email}
                           </a>
@@ -398,17 +404,17 @@ const LabDetails = () => {
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <FaMapMarkerAlt className="text-orange-600 mt-1 flex-shrink-0" />
+                        <FaMapMarkerAlt className="text-orange-400 mt-1 flex-shrink-0" />
                         <div>
-                          <p className="text-sm font-semibold text-gray-700">
+                          <p className="text-sm font-semibold text-emerald-200/70">
                             Address (from GPS)
                           </p>
                           {isFetchingAddress ? (
-                            <p className="text-gray-500 text-sm animate-pulse">
+                            <p className="text-emerald-400/50 text-sm animate-pulse">
                               Fetching address...
                             </p>
                           ) : (
-                            <p className="text-gray-900 text-sm leading-relaxed">
+                            <p className="text-white text-sm leading-relaxed">
                               {address || "N/A"}
                             </p>
                           )}
@@ -419,8 +425,8 @@ const LabDetails = () => {
                 </motion.div>
               ) : (
                 <div className="text-center py-12">
-                  <FaBuilding className="text-6xl text-gray-300 mx-auto mb-4" />
-                  <p className="text-gray-500">
+                  <FaBuilding className="text-6xl text-emerald-800/50 mx-auto mb-4" />
+                  <p className="text-emerald-200/50">
                     Click on a marker to view lab details
                   </p>
                 </div>
@@ -434,7 +440,7 @@ const LabDetails = () => {
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-6"
           >
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200 h-[500px] xl:lg:h-[calc(100vh-180px)]  md:h-[calc(50vh-180px)] sticky top-[72px]">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 h-[500px] xl:lg:h-[calc(100vh-180px)]  md:h-[calc(50vh-180px)] sticky top-[72px] overflow-hidden">
               <MapContainer
                 center={mapCenter}
                 zoom={8}
@@ -485,12 +491,12 @@ const LabDetails = () => {
                         <div className="min-w-[200px]">
                           <PhotoProvider>
                             <PhotoView src={institutionPic}>
-                          <img
-                            src={institutionPic}
-                            alt={lab.institute}
-                            className="cursor-pointer w-full h-auto rounded-lg shadow-md"
-                          />
-                          </PhotoView>
+                              <img
+                                src={institutionPic}
+                                alt={lab.institute}
+                                className="cursor-pointer w-full h-auto rounded-lg shadow-md"
+                              />
+                            </PhotoView>
                           </PhotoProvider>
                         </div>
                       </Popup>
@@ -499,7 +505,7 @@ const LabDetails = () => {
                 })}
               </MapContainer>
               {filteredLabs.length > 100 && (
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-amber-100 border-2 border-amber-400 text-amber-800 px-4 py-2 rounded-lg text-xs font-semibold shadow-lg">
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-emerald-950/90 border border-emerald-500/50 text-emerald-100 px-4 py-2 rounded-lg text-xs font-semibold shadow-lg backdrop-blur-md">
                   Showing 100 of {filteredLabs.length} labs on map
                 </div>
               )}
@@ -513,8 +519,8 @@ const LabDetails = () => {
             className="lg:col-span-3 space-y-4"
           >
             {/* Controls */}
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200 p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-6">
+              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                 Filters
               </h2>
 
@@ -522,7 +528,7 @@ const LabDetails = () => {
               <button
                 onClick={getCurrentLocation}
                 disabled={isLoadingLocation}
-                className="cursor-pointer hover:scale-105 w-full mb-4 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-4 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="cursor-pointer hover:scale-105 w-full mb-4 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white px-4 py-3 rounded-xl font-semibold shadow-lg hover:shadow-emerald-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-500/30"
               >
                 <FaLocationArrow
                   className={isLoadingLocation ? "animate-spin" : ""}
@@ -534,41 +540,41 @@ const LabDetails = () => {
 
               {/* Distance Selector */}
               <div className="space-y-2">
-                <label className="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                  <FaMapMarkerAlt className="text-emerald-600" />
+                <label className="text-sm font-semibold text-emerald-100 flex items-center gap-2">
+                  <FaMapMarkerAlt className="text-emerald-400" />
                   Select Distance (km)
                 </label>
                 <select
                   value={distance}
                   onChange={(e) => handleDistanceChange(Number(e.target.value))}
                   className={`w-full ${!currentLocation ? "opacity-50 cursor-not-allowed" : ""
-                    } bg-gray-50 border-2 border-gray-300 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-600 outline-none transition-all shadow-sm hover:border-emerald-400`}
+                    } bg-emerald-950/50 border border-emerald-500/30 rounded-xl px-4 py-3 text-sm text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-400`}
                   disabled={!currentLocation}
                 >
                   {[1, 2, 3, 4, 5, 7, 10, 15, 20, 30, 50].map((km) => (
-                    <option key={km} value={km}>
+                    <option key={km} value={km} className="bg-emerald-900 text-white">
                       {km} km
                     </option>
                   ))}
                 </select>
                 {!currentLocation && (
-                  <p className="text-xs text-gray-500 italic">
+                  <p className="text-xs text-emerald-400/70 italic">
                     Enable location to use distance filter
                   </p>
                 )}
               </div>
 
               {/* Results Count */}
-              <div className="mt-4 p-3 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border-2 border-emerald-200">
-                <p className="text-sm font-semibold text-emerald-800">
+              <div className="mt-4 p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
+                <p className="text-sm font-semibold text-emerald-300">
                   Found {filteredLabs.length} lab(s)
                 </p>
               </div>
             </div>
 
             {/* Nearby Labs List */}
-            <div className="bg-white rounded-2xl shadow-2xl border-2 border-emerald-200 p-6 max-h-[400px] overflow-y-auto">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-6 max-h-[400px] overflow-y-auto custom-scrollbar">
+              <h3 className="text-xl font-bold text-white mb-4">
                 Nearby Labs
               </h3>
 
@@ -584,8 +590,8 @@ const LabDetails = () => {
 
                 {filteredLabs.length === 0 && (
                   <div className="text-center py-8">
-                    <FaMapMarkerAlt className="text-4xl text-gray-300 mx-auto mb-2" />
-                    <p className="text-gray-500 text-sm">
+                    <FaMapMarkerAlt className="text-4xl text-emerald-800/50 mx-auto mb-2" />
+                    <p className="text-emerald-200/50 text-sm">
                       No labs found in this area
                     </p>
                   </div>
