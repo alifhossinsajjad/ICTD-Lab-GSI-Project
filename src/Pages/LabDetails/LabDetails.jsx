@@ -265,7 +265,7 @@ const LabDetails = () => {
   }, [filteredLabs]);
 
   return (
-    <div className="min-h-screen bg-emerald-950 pt-3 pb-2 px-12 relative overflow-hidden">
+    <div className="min-h-screen bg-emerald-950 pt-3 pb-2 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
       {/* Ambient Background */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-emerald-500/10 rounded-full blur-[120px]"></div>
@@ -277,22 +277,22 @@ const LabDetails = () => {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8 "
+          className="text-center mb-6 sm:mb-8"
         >
-          <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight px-4">
             আমাদের <span className="text-emerald-400">ল্যাব গুলো</span>
           </h1>
         </motion.div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 mb-8">
           {/* Left Sidebar - Lab Details */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-3 space-y-4"
+            className="lg:col-span-3 space-y-4 order-2 lg:order-1"
           >
-            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-6 max-h-auto">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-4 sm:p-6 max-h-auto">
               <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaBuilding className="text-emerald-400" />
                 Lab Information
@@ -438,9 +438,9 @@ const LabDetails = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="lg:col-span-6"
+            className="lg:col-span-6 order-1 lg:order-2"
           >
-            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 h-[500px] xl:lg:h-[calc(100vh-180px)]  md:h-[calc(50vh-180px)] sticky top-[72px] overflow-hidden">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 h-[400px] sm:h-[500px] lg:h-[600px] xl:h-[calc(100vh-180px)] lg:sticky lg:top-[72px] overflow-hidden">
               <MapContainer
                 center={mapCenter}
                 zoom={8}
@@ -516,10 +516,10 @@ const LabDetails = () => {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="lg:col-span-3 space-y-4"
+            className="lg:col-span-3 space-y-4 order-3"
           >
             {/* Controls */}
-            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-6">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-4 sm:p-6">
               <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
                 Filters
               </h2>
@@ -573,7 +573,7 @@ const LabDetails = () => {
             </div>
 
             {/* Nearby Labs List */}
-            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-6 max-h-[400px] overflow-y-auto custom-scrollbar">
+            <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-4 sm:p-6 max-h-[400px] overflow-y-auto custom-scrollbar">
               <h3 className="text-xl font-bold text-white mb-4">
                 Nearby Labs
               </h3>

@@ -10,6 +10,7 @@ import StateEnterCode from "./StateEnterCode";
 import StateRegistration from "./StateRegistration";
 import StateVerifyEmail from "./StateVerifyEmail";
 import { LocateOff } from "lucide";
+import lo from "../../assets/favicon.png";
 
 const Login = () => {
 
@@ -68,26 +69,29 @@ const Login = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-emerald-950 px-4 relative overflow-hidden">
-      {/* Ambient Background Effects */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -left-[10%] w-[70%] h-[70%] rounded-full bg-emerald-500/10 blur-[120px]"></div>
-        <div className="absolute top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-blue-500/10 blur-[100px]"></div>
+      {/* Premium Ambient Background Effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[30%] -left-[10%] w-[80%] h-[80%] rounded-full bg-emerald-600/20 blur-[150px] animate-pulse-slow"></div>
+        <div className="absolute top-[20%] -right-[20%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[150px] animate-pulse-slow delay-1000"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-gradient-to-t from-emerald-950 via-emerald-900/50 to-transparent"></div>
       </div>
 
-      <form className="w-full max-w-md relative z-10">
-        {/* Title */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold tracking-widest text-white drop-shadow-lg">
+      <div className="w-full max-w-md relative z-10 flex flex-col items-center">
+        {/* Logo & Title */}
+        <div className="text-center mb-10 transform transition-all hover:scale-105 duration-500">
+          <div className="inline-block  mb-4 w-26 h-26">
+           <img className="w-full h-full object-contain" src={lo} alt="" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-white to-emerald-200 drop-shadow-sm">
             ICTD DIGITAL LAB
           </h1>
-          <p className="text-center text-md text-emerald-100 mt-6 leading-relaxed font-medium opacity-90">
-            কারিগরি সহায়তায়: তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর,
-            <br />
-            তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
-          </p>
+          
         </div>
 
-        <div className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 p-8 flex flex-col items-center justify-center">
+        {/* Glass Card */}
+        <div className="w-full bg-emerald-900/30 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-emerald-400/20 p-8 md:p-10 relative overflow-hidden group">
+          {/* Card Shine Effect */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
           {
             loginFormData.pageState === "default" &&
@@ -112,19 +116,25 @@ const Login = () => {
         </div>
 
 
+
+<p className="text-center text-sm md:text-base text-emerald-200/80 mt-4 leading-relaxed font-medium tracking-wide">
+            কারিগরি সহায়তায়: তথ্য ও যোগাযোগ প্রযুক্তি অধিদপ্তর,
+            <br />
+            তথ্য ও যোগাযোগ প্রযুক্তি বিভাগ
+          </p>
+          
         {/* Footer */}
-
-
-        <div className="flex justify-center ">
+        <div className="flex justify-center mt-8">
+          
           <Link
             to={"/"}
-            className="mt-6 flex items-center gap-2 bg-emerald-900/50 border border-emerald-500/30 text-emerald-100 px-6 py-2.5 rounded-full hover:bg-emerald-800/50 hover:text-white hover:border-emerald-400 transition-all duration-300 font-medium shadow-lg"
+            className="group flex items-center gap-2 px-6 py-2.5 rounded-full bg-emerald-900/30 border border-emerald-500/20 text-emerald-200/80 hover:text-white hover:bg-emerald-800/50 hover:border-emerald-400/40 transition-all duration-300 backdrop-blur-sm"
           >
-            <BiLeftArrow className="text-emerald-400" />
-            Back to Home
+            <BiLeftArrow className="text-emerald-400 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-medium">Back to Home</span>
           </Link>
         </div>
-      </form>
+      </div>
     </section>
   );
 };

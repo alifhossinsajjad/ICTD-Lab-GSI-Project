@@ -228,7 +228,7 @@ const LabsUnderControl = () => {
               </button>
               <button
                 onClick={() => handleExport("print")}
-                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-emerald-800/50 text-emerald-300 border border-emerald-500/30 rounded-lg hover:bg-emerald-700/50 hover:text-white transition-colors text-sm font-medium"
+                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-red-600 text-white border border-emerald-500/30 rounded-lg hover:bg-emerald-700/50 hover:text-white transition-colors text-sm font-medium"
                 title="Print"
               >
                 <HiOutlinePrinter className="w-5 h-5" />
@@ -259,7 +259,7 @@ const LabsUnderControl = () => {
               >
                 <option value="All">সকল বিভাগ</option>
                 {filterOptions.divisions.map((division) => (
-                  <option key={division} value={division}>
+                  <option className="text-black" key={division} value={division}>
                     {division}
                   </option>
                 ))}
@@ -280,7 +280,7 @@ const LabsUnderControl = () => {
               >
                 <option value="All">সকল উপজেলা</option>
                 {filterOptions.upazilas.map((upazila) => (
-                  <option key={upazila} value={upazila}>
+                  <option className="text-black" key={upazila} value={upazila}>
                     {upazila}
                   </option>
                 ))}
@@ -301,7 +301,7 @@ const LabsUnderControl = () => {
               >
                 <option value="All">সকল টাইপ</option>
                 {filterOptions.labTypes.map((type) => (
-                  <option key={type} value={type}>
+                  <option className="text-black" key={type} value={type}>
                     {type === "sof" ? "SOF" : type === "srdl_sof" ? "SRDL & SOF" : type.toUpperCase()}
                   </option>
                 ))}
@@ -466,9 +466,9 @@ const LabsUnderControl = () => {
               }}
               className="bg-emerald-900/50 border border-emerald-500/30 rounded-md text-sm py-1 pl-2 pr-8 focus:ring-emerald-500 focus:border-emerald-500 text-emerald-100"
             >
-              <option value={10}>10</option>
-              <option value={25}>25</option>
-              <option value={50}>50</option>
+              <option className="text-black" value={10}>10</option>
+              <option className="text-black" value={25}>25</option>
+              <option className="text-black" value={50}>50</option>
             </select>
             <span>entries</span>
             <span className="ml-2 text-emerald-500/50">

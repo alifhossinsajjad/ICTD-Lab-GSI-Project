@@ -237,14 +237,14 @@ const Complaints = () => {
           </div>
         </div>
         <div className="bg-emerald-900/40 backdrop-blur-xl p-6 rounded-2xl shadow-lg border border-amber-500/20 flex items-center gap-4 hover:shadow-amber-500/10 transition-all duration-300 hover:-translate-y-1">
-          <div className="p-4 bg-gradient-to-br from-amber-600 to-amber-700 rounded-xl text-white shadow-md shadow-amber-900/30">
+          <div className="p-4 bg-red-700 rounded-xl text-white shadow-md shadow-amber-900/30">
             <FaUndo size={28} />
           </div>
           <div>
-            <h3 className="text-amber-400/70 text-sm font-semibold uppercase tracking-wide">
+            <h3 className="text-red-600 text-sm font-semibold uppercase tracking-wide">
               Pending Issues
             </h3>
-            <p className="text-3xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+            <p className="text-3xl font-bold bg-red-500 bg-clip-text text-transparent">
               {data.filter((d) => d.status === "Pending").length}
             </p>
           </div>
@@ -300,9 +300,9 @@ const Complaints = () => {
               }
               className="w-full px-3 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100 outline-none hover:border-emerald-400"
             >
-              <option value="">All Stages</option>
-              <option value="1st">1st Stage</option>
-              <option value="2nd">2nd Stage</option>
+              <option className="text-black" value="">All Stages</option>
+              <option className="text-black" value="1st">1st Stage</option>
+              <option className="text-black" value="2nd">2nd Stage</option>
             </select>
           </div>
 
@@ -317,12 +317,12 @@ const Complaints = () => {
               }
               className="w-full px-3 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100 outline-none hover:border-emerald-400"
             >
-              <option value="">All Upazilas</option>
-              <option value="Lakshmipur Sadar">Lakshmipur Sadar</option>
-              <option value="Raipur">Raipur</option>
-              <option value="Ramganj">Ramganj</option>
-              <option value="টঙ্গী">টঙ্গী</option>
-              <option value="দাউদকান্দি">দাউদকান্দি</option>
+              <option className="text-black" value="">All Upazilas</option>
+              <option className="text-black" value="Lakshmipur Sadar">Lakshmipur Sadar</option>
+              <option className="text-black" value="Raipur">Raipur</option>
+              <option className="text-black" value="Ramganj">Ramganj</option>
+              <option className="text-black" value="টঙ্গী">টঙ্গী</option>
+              <option className="text-black" value="দাউদকান্দি">দাউদকান্দি</option>
             </select>
           </div>
 
@@ -339,15 +339,15 @@ const Complaints = () => {
             >
               <option value="">All Devices</option>
               {deviceTypesList.map((device, index) => (
-                <option key={index} value={device}>
+                <option className="text-black" key={index} value={device}>
                   {device}
                 </option>
               ))}
               {/* Add Bengali mappings if needed based on fake data */}
-              <option value="স্মার্ট বোর্ড">স্মার্ট বোর্ড</option>
-              <option value="ল্যাপটপ">ল্যাপটপ</option>
-              <option value="প্রজেক্টর">প্রজেক্টর</option>
-              <option value="রাউটার">রাউটার</option>
+              <option className="text-black" value="স্মার্ট বোর্ড">স্মার্ট বোর্ড</option>
+              <option className="text-black" value="ল্যাপটপ">ল্যাপটপ</option>
+              <option className="text-black" value="প্রজেক্টর">প্রজেক্টর</option>
+              <option className="text-black" value="রাউটার">রাউটার</option>
             </select>
           </div>
 
@@ -362,10 +362,10 @@ const Complaints = () => {
               }
               className="w-full px-3 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100 outline-none hover:border-emerald-400"
             >
-              <option value="">All Statuses</option>
-              <option value="চালু">চালু (Active)</option>
-              <option value="নষ্ট">নষ্ট (Damaged)</option>
-              <option value="মেরামত প্রয়োজন">মেরামত প্রয়োজন (Repair)</option>
+              <option className="text-black" value="">All Statuses</option>
+              <option className="text-black" value="চালু">চালু (Active)</option>
+              <option className="text-black" value="নষ্ট">নষ্ট (Damaged)</option>
+              <option className="text-black" value="মেরামত প্রয়োজন">মেরামত প্রয়োজন (Repair)</option>
             </select>
           </div>
 
@@ -378,12 +378,12 @@ const Complaints = () => {
               onChange={(e) =>
                 setFilters({ ...filters, supportStatus: e.target.value })
               }
-              className="w-full px-3 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100 outline-none hover:border-emerald-400"
+              className="w-full  px-3 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100 outline-none hover:border-emerald-400"
             >
-              <option value="">All</option>
-              <option value="Pending">Pending</option>
-              <option value="Processing">Processing</option>
-              <option value="Resolved">Resolved</option>
+              <option className="text-black" value="">All</option>
+              <option className="text-black" value="Pending">Pending</option>
+              <option className="text-black" value="Processing">Processing</option>
+              <option className="text-black" value="Resolved">Resolved</option>
             </select>
           </div>
         </div>
@@ -417,7 +417,7 @@ const Complaints = () => {
           </button>
           <button
             onClick={handlePrint}
-            className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-purple-900/30 text-purple-400 border border-purple-500/30 rounded-lg hover:bg-purple-800/50 transition-all text-sm font-medium"
+            className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-red-600 text-white border-red-500/30 rounded-lg hover:bg-red-800/50 transition-all text-sm font-medium"
           >
             <FaPrint /> Print
           </button>

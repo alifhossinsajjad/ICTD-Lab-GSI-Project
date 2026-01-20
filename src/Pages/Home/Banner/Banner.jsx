@@ -246,6 +246,7 @@ const Banner = () => {
           <div
             className="
       bg-white/15
+      hidden md:block
       backdrop-blur-3xl
       border border-white/20
       rounded-3xl

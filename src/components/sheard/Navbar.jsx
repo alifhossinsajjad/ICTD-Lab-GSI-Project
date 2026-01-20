@@ -10,10 +10,11 @@ import {
   FiInfo,
 } from "react-icons/fi";
 import logo from "../../assets/govt.png";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleLanguage = () => {
@@ -22,14 +23,10 @@ const Navbar = () => {
 
   const navItems = [
     { icon: <FiHome />, label: t("home"), href: "/" },
-    // { icon: <FiBell />, label: t("notice"), href: "#notice" },
-    // { icon: <FiTarget />, label: t("goals"), href: "#goals" },
-    // { icon: <FiHome />, label: t("about"), href: "#about" },
     { icon: <FiUsers />, label: t("labs"), href: "/labs" },
-    { icon: <FiTarget />, label: t("Notice"), href: "/all-notice" },
+    { icon: <FiTarget />, label: t("notice"), href: "/all-notice" },
     { icon: <FiBell />, label: t("Lab Details"), href: "/labdetails" },
     { icon: <FiInfo />, label: t("Dashboard"), href: "/dashboard" },
-    // { icon: <FiInfo />, label: t("contact"), href: "#contact" },
   ];
 
   // Marquee announcements - contextually relevant to ICTD Lab GSI Project
@@ -94,30 +91,45 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center space-x-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              to={item.href}
-              className="flex items-center gap-2 px-4 py-2 hover:bg-emerald-800/50 rounded-lg font-medium text-emerald-100 hover:text-white transition-all duration-300 border border-transparent hover:border-emerald-500/30"
-            >
-              <span className="text-emerald-400">{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
-          ))}
+        <div className="hidden lg:flex flex-1 items-center justify-center">
+          <nav className="flex items-center space-x-6 bg-emerald-900/40 px-8 py-2 rounded-full border border-emerald-500/20 backdrop-blur-sm">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={`relative px-2 py-1 font-medium transition-all duration-300 ${isActive
+                    ? "text-white"
+                    : "text-emerald-200/80 hover:text-white"
+                    }`}
+                >
+                  <span>{item.label}</span>
+                  {isActive && (
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-400 to-green-300 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                  )}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* Right Side Actions */}
+        <div className="hidden lg:flex items-center space-x-4">
+          <button
+            onClick={toggleLanguage}
+            className="cursor-pointer hover:scale-105 px-4 py-2 bg-emerald-900/50 hover:bg-emerald-800 text-emerald-100 hover:text-white rounded-lg font-medium text-sm transition-all duration-300 border border-emerald-500/30 shadow-sm"
+          >
+            {i18n.language === "bn" ? "বাংলা" : "English"}
+          </button>
+
           <Link
             to={"/login"}
-            className="cursor-pointer hover:scale-105 bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg ml-2 transition-all duration-300 shadow-lg shadow-emerald-900/20 border border-emerald-500/30"
+            className="cursor-pointer hover:scale-105 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-lg shadow-red-900/20 border border-red-500/30 font-medium tracking-wide"
           >
             {t("login")}
           </Link>
-          <button
-            onClick={toggleLanguage}
-            className="cursor-pointer hover:scale-105 px-4 py-2 bg-emerald-900/50 hover:bg-emerald-800 text-emerald-100 hover:text-white rounded-lg font-medium text-sm ml-4 transition-all duration-300 border border-emerald-500/30"
-          >
-            {i18n.language === "en" ? "English" : "বাংলা"}
-          </button>
-        </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -139,13 +151,13 @@ const Navbar = () => {
                 className="flex items-center gap-2 px-4 py-3 hover:bg-emerald-800/50 rounded-lg font-medium text-emerald-100 hover:text-white transition-all duration-300 border border-transparent hover:border-emerald-500/30"
                 onClick={() => setMenuOpen(false)}
               >
-                <span className="text-emerald-400">{item.icon}</span>
+                
                 <span>{item.label}</span>
               </Link>
             ))}
 
             <Link to={"/login"} onClick={() => setMenuOpen(false)}>
-              <button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white px-6 py-3 rounded-lg mt-2 transition-all duration-300 shadow-lg border border-emerald-500/30">
+              <button className="w-full bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg mt-2 transition-all duration-300 shadow-lg border border-emerald-500/30">
                 {t("login")}
               </button>
             </Link>

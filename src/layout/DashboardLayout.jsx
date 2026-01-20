@@ -16,6 +16,7 @@ import {
 import { FaChartPie, FaTimes, FaSignOutAlt, FaBars, FaBell } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
+import lo from "../assets/favicon.png";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile open/close
@@ -96,8 +97,10 @@ const DashboardLayout = () => {
         {/* top brand */}
         <div className="h-20 flex items-center justify-between px-6 border-b border-emerald-500/20 shrink-0 bg-emerald-950/30">
           <Link to="/" className="flex items-center gap-3 overflow-hidden group">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
-              <span className="text-2xl font-bold text-emerald-950">L</span>
+            <div className="w-10 h-10 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
+              <span className="text-2xl font-bold text-emerald-950">
+                <img src={lo} alt="" />
+              </span>
             </div>
 
             {/* hide title when collapsed */}
@@ -185,11 +188,11 @@ const DashboardLayout = () => {
         <div className="p-4 border-t border-emerald-500/20 shrink-0 bg-emerald-950/30">
           <button
             onClick={() => handdleLogout()}
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-300 hover:bg-rose-500/10 hover:text-rose-200 transition-all duration-300 group w-full border border-transparent hover:border-rose-500/20"
+            className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-500/10 hover:text-white transition-all duration-300 group w-full border border-transparent hover:border-red-500/20"
             title={isCollapsed ? "Logout" : ""}
           >
             <HiOutlineLogout className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
-            {!isCollapsed && <span className="font-medium">Logout</span>}
+            {!isCollapsed && <span className="font-bold">Logout</span>}
           </button>
         </div>
       </motion.aside>
@@ -249,7 +252,7 @@ const DashboardLayout = () => {
           <footer className="bg-emerald-900/50 backdrop-blur-md border-t border-emerald-500/20 text-emerald-200/70 text-center p-4 mt-auto rounded-t-2xl">
             <h1 className="text-sm">
               <span className="font-bold text-emerald-400">Copyright </span>© 2025{" "}
-              <span className="text-rose-400 font-bold">DoICT</span> . All rights
+              <span className="text-red-500 font-bold">DoICT</span> . All rights
               reserved.
             </h1>
           </footer>

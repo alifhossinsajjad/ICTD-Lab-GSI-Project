@@ -105,7 +105,7 @@ const SRDRechart = () => {
           <h2 className="text-4xl font-bold bg-gradient-to-r from-emerald-700 via-emerald-600 to-blue-600 bg-clip-text text-transparent mb-3">
             বিভাগভিত্তিক ল্যাব বিশ্লেষণ
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-300 text-lg">
             বাংলাদেশের ৮টি বিভাগে স্থাপিত ল্যাবের পরিসংখ্যান
           </p>
           <div className="h-1 w-24 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 mx-auto rounded-full mt-4"></div>

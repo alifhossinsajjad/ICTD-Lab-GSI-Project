@@ -38,7 +38,53 @@ const Notice = () => {
         <section className="bg-emerald-950 relative py-5">
 
 
+
+            <div className="relative w-full py-4 sm:py-6">
+                <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+
+                <Marquee pauseOnHover speed={60} gradient={false} className="w-full">
+                    {[
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC00170-1.avif',
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC00690.avif',
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/ucbdcc2.avif',
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC02243.avif',
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/ucbdcc1.avif',
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/ucbdcc4.avif',
+                        'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC02298.avif'
+                    ].map((src, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center justify-center opacity-0 animate-fade-in-up mx-2 sm:mx-3"
+                            style={{
+                                animationDelay: `${index * 0.1}s`,
+                                animationFillMode: 'forwards'
+                            }}
+                        >
+                            <div className="bg-white/15 backdrop-blur-3xl   p-2 sm:p-3 rounded-xl sm:rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-[280px] h-[200px] sm:w-[400px] sm:h-[280px] md:w-[500px] md:h-[350px] lg:w-[600px] lg:h-[400px] flex items-center justify-center">
+                                <img
+                                    src={src}
+                                    alt={`University Campus ${index + 1}`}
+                                    className="w-full h-full object-cover rounded-lg sm:rounded-xl opacity-90 hover:opacity-100 transition-all duration-300"
+                                    onError={(e) => {
+                                        console.log(`Image failed to load: ${src}`);
+                                        // Show placeholder instead
+                                        e.target.style.display = 'none';
+                                        e.target.parentElement.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-indigo-600 text-xl sm:text-2xl font-bold">Campus ${index + 1}</div>`;
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </Marquee>
+            </div>
+
+
+
+
             <div className="max-w-5xl mx-auto px-4 mt-10">
+
+
+
                 {/* 🔹 Title */}
                 <div className="text-center mb-10">
                     <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
@@ -101,7 +147,7 @@ const Notice = () => {
                     </Link>
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 
