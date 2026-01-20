@@ -9,13 +9,13 @@ function StateDefault({ showPassword, setShowPassword, loginFormData, handleForm
         <>
             {/* Login Card */}
             <div className='w-full h-full'>
-            
-                <h4 className="text-center text-lg font-semibold text-green-800 mb-6">
+
+                <h4 className="text-center text-2xl font-bold text-white mb-8 tracking-wide">
                     প্রবেশ করুন
                 </h4>
 
                 {/* User ID */}
-                <div className="relative mb-5">
+                <div className="relative mb-6 group">
                     <input
                         type="text"
                         name="email"
@@ -23,14 +23,14 @@ function StateDefault({ showPassword, setShowPassword, loginFormData, handleForm
                         value={loginFormData.email}
                         required={true}
                         placeholder="ইউজার আইডি"
-                        className="w-full border border-green-300 px-4 py-3 pr-10 rounded-md
-                         focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
+                         focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 placeholder-emerald-300/60 transition-all duration-300"
                     />
-                    <FaUserAlt className="absolute right-3 top-3.5 text-green-600" />
+                    <FaUserAlt className="absolute right-4 top-4 text-emerald-500 group-focus-within:text-emerald-300 transition-colors" />
                 </div>
 
                 {/* Password */}
-                <div className="relative mb-4"> 
+                <div className="relative mb-6 group">
                     <input
                         onChange={handleFormFieldChanges}
                         value={loginFormData.password}
@@ -38,11 +38,11 @@ function StateDefault({ showPassword, setShowPassword, loginFormData, handleForm
                         required={true}
                         name="password"
                         placeholder="পাসওয়ার্ড"
-                        className="w-full border border-green-300 px-4 py-3 pr-10 rounded-md
-                         focus:outline-none focus:ring-2 focus:ring-green-500"
+                        className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
+                         focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 placeholder-emerald-300/60 transition-all duration-300"
                     />
 
-                    <span className="absolute right-3 top-3.5 text-green-600 cursor-pointer">
+                    <span className="absolute right-4 top-4 text-emerald-500 cursor-pointer hover:text-emerald-300 transition-colors">
                         {
                             !loginFormData.password.trim().length > 0 ? <FaLock /> : <span onClick={() => {
                                 setShowPassword((prev) => !prev);
@@ -56,31 +56,31 @@ function StateDefault({ showPassword, setShowPassword, loginFormData, handleForm
                 </div>
 
                 {/* Remember + Button */}
-                <div className="flex items-center justify-between mb-4 text-sm">  
-                    <label className="flex items-center gap-2 text-gray-700">
-                        <input type="checkbox" name="remmember-me" className="accent-green-600 cursor-pointer" />
+                <div className="flex items-center justify-between mb-8 text-sm">
+                    <label className="flex items-center gap-2 text-emerald-200/80 hover:text-white cursor-pointer transition-colors select-none">
+                        <input type="checkbox" name="remmember-me" className="accent-emerald-500 w-4 h-4 cursor-pointer rounded border-emerald-500/30 bg-emerald-900/50" />
                         মনে রাখুন
                     </label>
 
                     <button type="submit"
-                        className="bg-green-600 text-white px-6 py-2 rounded-md
-                         hover:bg-green-700 transition font-medium cursor-pointer"
+                        className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
+                         hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5"
                     >
                         প্রবেশ করুন
                     </button>
                 </div>
-                
-                {/* Forgot + Register */}
-                <div className="flex justify-between items-center">
-                {/* Forgot */}
-                <p className="text-sm text-green-700 hover:underline cursor-pointer"> 
-                    পাসওয়ার্ড ভুলে গেছেন?
-                </p>
 
-                {/* Forgot */}
-                <p onClick={handleStateDefault} className="text-sm text-green-700 underline cursor-pointer"> 
-                    নিবন্ধন করুন
-                </p>
+                {/* Forgot + Register */}
+                <div className="flex justify-between items-center border-t border-emerald-500/20 pt-6">
+                    {/* Forgot */}
+                    <p className="text-sm text-emerald-300/80 hover:text-emerald-200 hover:underline cursor-pointer transition-colors">
+                        পাসওয়ার্ড ভুলে গেছেন?
+                    </p>
+
+                    {/* Register */}
+                    <p onClick={handleStateDefault} className="text-sm text-emerald-300 font-medium hover:text-white hover:underline cursor-pointer transition-colors">
+                        নিবন্ধন করুন
+                    </p>
                 </div>
             </div>
         </>

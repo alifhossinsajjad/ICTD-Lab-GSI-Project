@@ -70,28 +70,28 @@ export const BangladeshMap = ({ onHover }) => {
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-full bg-[#f8fafc] overflow-hidden cursor-grab select-none group/map"
+            className="relative w-full h-full bg-transparent overflow-hidden cursor-grab select-none group/map"
             style={{ cursor: isDragging ? "grabbing" : "grab" }}
         >
             {/* Map Controls Overlay */}
             <div className="absolute top-6 right-6 z-20 flex flex-col gap-2 opacity-0 group-hover/map:opacity-100 transition-opacity duration-300">
                 <button
                     onClick={handleZoomIn}
-                    className="p-3 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-100 text-gray-700 hover:bg-emerald-500 hover:text-white transition-all duration-300 active:scale-95"
+                    className="p-3 bg-emerald-950/80 backdrop-blur-md rounded-xl shadow-lg border border-emerald-500/30 text-emerald-100 hover:bg-emerald-500 hover:text-white transition-all duration-300 active:scale-95"
                     title="Zoom In"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>
                 <button
                     onClick={handleZoomOut}
-                    className="p-3 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-100 text-gray-700 hover:bg-emerald-500 hover:text-white transition-all duration-300 active:scale-95"
+                    className="p-3 bg-emerald-950/80 backdrop-blur-md rounded-xl shadow-lg border border-emerald-500/30 text-emerald-100 hover:bg-emerald-500 hover:text-white transition-all duration-300 active:scale-95"
                     title="Zoom Out"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>
                 <button
                     onClick={handleReset}
-                    className="p-3 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-100 text-gray-700 hover:bg-emerald-500 hover:text-white transition-all duration-300 active:scale-95"
+                    className="p-3 bg-emerald-950/80 backdrop-blur-md rounded-xl shadow-lg border border-emerald-500/30 text-emerald-100 hover:bg-emerald-500 hover:text-white transition-all duration-300 active:scale-95"
                     title="Reset View"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>

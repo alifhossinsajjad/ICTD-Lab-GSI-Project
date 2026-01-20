@@ -66,13 +66,13 @@ const Goals = () => {
 
       <div className="text-center mb-16">
         <div className="inline-block mb-4">
-          
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             {t("goals_title")}
           </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mx-auto"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-green-400 rounded-full mx-auto"></div>
         </div>
-        <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+        <p className="text-lg md:text-xl text-emerald-100 max-w-3xl mx-auto">
           {t("goals_subtitle")}
         </p>
       </div>
@@ -85,9 +85,10 @@ const Goals = () => {
     group relative
     rounded-[28px]
     p-[1px]
-    bg-gradient-to-br from-emerald-400 via-green-400 to-emerald-600
+    bg-gradient-to-br from-emerald-500/20 via-white to-emerald-500/20
     transition-all duration-500
     hover:scale-[1.02]
+    hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.3)]
   "
           >
             {/* Inner card */}
@@ -95,10 +96,10 @@ const Goals = () => {
               className="
       relative h-full
       rounded-[27px]
-      bg-white
+      bg-emerald-950/80 backdrop-blur-xl
       p-8
       transition-all duration-500
-      group-hover:bg-gradient-to-br group-hover:from-emerald-600 group-hover:to-green-600
+      group-hover:bg-emerald-900/90
     "
             >
               {/* Floating icon */}
@@ -108,11 +109,12 @@ const Goals = () => {
         w-16 h-16
         items-center justify-center
         rounded-2xl
-        bg-gradient-to-br from-emerald-500 to-green-500
+        bg-gradient-to-br from-emerald-500 to-emerald-700
         text-white
         shadow-lg
         transition-transform duration-500
         group-hover:-translate-y-1 group-hover:scale-110
+        border border-emerald-400/20
       "
               >
                 <goal.icon size={30} />
@@ -122,10 +124,10 @@ const Goals = () => {
               <h3
                 className="
         text-xl font-bold
-        text-gray-900
+        text-white
         mb-3
         transition-colors duration-500
-        group-hover:text-white
+        group-hover:text-emerald-300
       "
               >
                 {goal.title}
@@ -134,10 +136,10 @@ const Goals = () => {
               {/* Description */}
               <p
                 className="
-        text-gray-600
+        text-emerald-100/70
         leading-relaxed
         transition-colors duration-500
-        group-hover:text-white/90
+        group-hover:text-emerald-100
       "
               >
                 {goal.description}
@@ -145,7 +147,7 @@ const Goals = () => {
 
               {/* Soft glow */}
               <div className="pointer-events-none absolute inset-0 rounded-[27px] opacity-0 group-hover:opacity-100 transition">
-                <div className="absolute inset-0 rounded-[27px] ring-1 ring-white/30" />
+                <div className="absolute inset-0 rounded-[27px] ring-1 ring-emerald-400/30" />
               </div>
             </div>
           </div>

@@ -183,7 +183,7 @@ const Traning = () => {
   };
 
   return (
-    <div className="min-h-screen bg-emerald-50 p-6 space-y-6">
+    <div className="min-h-screen bg-emerald-950 p-6 space-y-6">
       <style>
         {`
           @media print {
@@ -198,10 +198,10 @@ const Traning = () => {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
-          <h1 className="text-4xl font-bold text-green-950">
+          <h1 className="text-4xl font-bold text-white">
             ট্রেনিং ম্যানেজমেন্ট
           </h1>
-          <p className="text-gray-600 mt-2 text-lg">
+          <p className="text-emerald-200/70 mt-2 text-lg">
             লক্ষ্মীপুর দেশের ট্রেনিং ম্যানেজমেন্ট সম্পর্কে মনোন করুন
           </p>
           <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3"></div>
@@ -209,7 +209,7 @@ const Traning = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleExport("excel")}
-            className="flex items-center gap-2 px-5 py-2.5 bg-green-900 hover:bg-green-950 text-white rounded-xl shadow-lg shadow-green-950/30 hover:shadow-xl transition-all text-sm font-semibold"
+            className="cursor-pointer flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/50 transition-all text-sm font-semibold border border-emerald-500/30"
           >
             <HiOutlineDownload className="w-5 h-5" />
             Download Report
@@ -218,10 +218,10 @@ const Traning = () => {
       </div>
 
       {/* Filters Card */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 no-print">
-        <div className="flex items-center gap-2 mb-4 pb-2 border-b border-gray-50">
-          <HiOutlineFilter className="text-emerald-500" />
-          <span className="text-sm font-semibold text-gray-700">
+      <div className="bg-emerald-900/40 backdrop-blur-xl rounded-xl shadow-sm border border-emerald-500/20 p-5 no-print">
+        <div className="flex items-center gap-2 mb-4 pb-2 border-b border-emerald-500/20">
+          <HiOutlineFilter className="text-emerald-400" />
+          <span className="text-sm font-semibold text-emerald-100">
             Advanced Filters
           </span>
         </div>
@@ -229,7 +229,7 @@ const Traning = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {/* Stage Filter */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">
+            <label className="text-xs font-medium text-emerald-400 uppercase">
               Stage
             </label>
             <select
@@ -237,7 +237,7 @@ const Traning = () => {
               onChange={(e) =>
                 setFilters({ ...filters, stage: e.target.value })
               }
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-gray-700"
+              className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
             >
               <option value="">All Stages</option>
               <option value="1st">1st Stage</option>
@@ -247,7 +247,7 @@ const Traning = () => {
 
           {/* Upazila Filter */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">
+            <label className="text-xs font-medium text-emerald-400 uppercase">
               Upazila
             </label>
             <select
@@ -255,7 +255,7 @@ const Traning = () => {
               onChange={(e) =>
                 setFilters({ ...filters, upazila: e.target.value })
               }
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-gray-700"
+              className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
             >
               <option value="">All Upazilas</option>
               <option value="Lakshmipur Sadar">Lakshmipur Sadar</option>
@@ -266,7 +266,7 @@ const Traning = () => {
 
           {/* Lab Type Filter */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">
+            <label className="text-xs font-medium text-emerald-400 uppercase">
               Lab Type
             </label>
             <select
@@ -274,7 +274,7 @@ const Traning = () => {
               onChange={(e) =>
                 setFilters({ ...filters, labType: e.target.value })
               }
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-gray-700"
+              className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
             >
               <option value="">All Types</option>
               <option value="Type A">Type A</option>
@@ -285,7 +285,7 @@ const Traning = () => {
 
           {/* Vendor Filter */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">
+            <label className="text-xs font-medium text-emerald-400 uppercase">
               Vendor
             </label>
             <select
@@ -293,7 +293,7 @@ const Traning = () => {
               onChange={(e) =>
                 setFilters({ ...filters, vendor: e.target.value })
               }
-              className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-gray-700"
+              className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
             >
               <option value="">All Vendors</option>
               <option value="Vendor A">Vendor A</option>
@@ -304,7 +304,7 @@ const Traning = () => {
 
           {/* Batch Filter - Input for flexibility */}
           <div className="space-y-1.5">
-            <label className="text-xs font-medium text-gray-500 uppercase">
+            <label className="text-xs font-medium text-emerald-400 uppercase">
               Batch
             </label>
             <div className="relative">
@@ -315,7 +315,7 @@ const Traning = () => {
                   setFilters({ ...filters, batch: e.target.value })
                 }
                 placeholder="Search Batch..."
-                className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all text-gray-700 pl-3"
+                className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100 pl-3 placeholder-emerald-500/50"
               />
             </div>
           </div>
@@ -323,17 +323,17 @@ const Traning = () => {
       </div>
 
       {/* Main Table Card */}
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="bg-emerald-900/40 backdrop-blur-xl rounded-xl shadow-sm border border-emerald-500/20 overflow-hidden">
         {/* Table Toolbar */}
-        <div className="p-5 border-b border-gray-100 flex flex-col md:flex-row gap-4 justify-between items-center bg-gray-50/30 no-print">
+        <div className="p-5 border-b border-emerald-500/20 flex flex-col md:flex-row gap-4 justify-between items-center bg-emerald-950/30 no-print">
           {/* Search */}
           <div className="relative w-full md:w-80 order-2 md:order-1">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <HiOutlineSearch className="h-5 w-5 text-gray-400" />
+              <HiOutlineSearch className="h-5 w-5 text-emerald-400" />
             </div>
             <input
               type="text"
-              className="block w-full pl-10 pr-3 py-2 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-sm transition-all"
+              className="block w-full pl-10 pr-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-sm transition-all text-white placeholder-emerald-500/50"
               placeholder="Search trainees..."
               value={searchTerm}
               onChange={(e) => {
@@ -347,35 +347,35 @@ const Traning = () => {
           <div className="flex items-center gap-2 order-1 md:order-2 w-full md:w-auto overflow-x-auto">
             <button
               onClick={() => handleExport("excel")}
-              className="p-2 text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors"
+              className="cursor-pointer p-2 text-emerald-300 bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-500/30 rounded-lg transition-colors"
               title="Export Excel"
             >
               <FaFileExcel className="w-5 h-5" />
             </button>
             <button
               onClick={() => handleExport("csv")}
-              className="p-2 text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors"
+              className="cursor-pointer p-2 text-blue-300 bg-blue-900/30 hover:bg-blue-800/50 border border-blue-500/30 rounded-lg transition-colors"
               title="Export CSV"
             >
               <FaFileCsv className="w-5 h-5" />
             </button>
             <button
               onClick={() => handleExport("print")}
-              className="p-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              className="cursor-pointer p-2 text-emerald-300 bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-500/30 rounded-lg transition-colors"
               title="Print Table"
             >
               <HiOutlinePrinter className="w-5 h-5" />
             </button>
             <button
               onClick={() => handleExport("reload")}
-              className="p-2 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              className="cursor-pointer p-2 text-emerald-300 bg-emerald-800/50 hover:bg-emerald-700/50 border border-emerald-500/30 rounded-lg transition-colors"
               title="Reload Data"
             >
               <HiOutlineRefresh className="w-5 h-5" />
             </button>
             <button
               onClick={() => handleExport("reset")}
-              className="px-3 py-2 text-sm font-medium text-orange-700 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors flex items-center gap-1"
+              className="cursor-pointer px-3 py-2 text-sm font-medium text-orange-300 bg-orange-900/30 hover:bg-orange-800/50 border border-orange-500/30 rounded-lg transition-colors flex items-center gap-1"
               title="Reset All"
             >
               <HiOutlineRefresh className="w-4 h-4" />
@@ -387,7 +387,7 @@ const Traning = () => {
         {/* Table Content */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
-            <thead className="bg-gray-50 border-b border-gray-100 text-gray-500 font-semibold uppercase text-xs tracking-wider">
+            <thead className="bg-emerald-950/50 border-b border-emerald-500/20 text-emerald-400 font-semibold uppercase text-xs tracking-wider">
               <tr>
                 <th className="px-6 py-4">#</th>
                 <th className="px-6 py-4">Trainee</th>
@@ -399,49 +399,49 @@ const Traning = () => {
                 <th className="px-6 py-4 text-center no-print">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-emerald-500/10">
               {currentEntries.length > 0 ? (
                 currentEntries.map((trainee, index) => (
                   <tr
                     key={trainee.id}
-                    className="hover:bg-gradient-to-r hover:from-emerald-50 hover:to-blue-50 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
+                    className="hover:bg-emerald-800/30 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
                   >
-                    <td className="px-6 py-4 text-gray-400 font-medium">
+                    <td className="px-6 py-4 text-emerald-500/50 font-medium">
                       {startIndex + index + 1}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col">
-                        <span className="font-semibold text-gray-800">
+                        <span className="font-semibold text-white">
                           {trainee.name}
                         </span>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-emerald-400/70">
                           {trainee.lastName} • ID: {trainee.traineeId}
                         </span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
                       <div
-                        className="max-w-xs truncate"
+                        className="max-w-xs truncate text-emerald-100"
                         title={trainee.institution}
                       >
                         {trainee.institution}
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-gray-600">
+                    <td className="px-6 py-4 text-emerald-200/70">
                       {trainee.upazila}
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                         {trainee.stage}
                       </span>
                     </td>
-                    <td className="px-6 py-4 font-mono text-gray-600">
+                    <td className="px-6 py-4 font-mono text-emerald-300">
                       {trainee.batch}
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex flex-col gap-0.5">
-                        <span className="text-gray-700">{trainee.mobile}</span>
-                        <span className="text-xs text-gray-400 capitalize">
+                        <span className="text-emerald-100">{trainee.mobile}</span>
+                        <span className="text-xs text-emerald-500/70 capitalize">
                           {trainee.gender}
                         </span>
                       </div>
@@ -450,7 +450,7 @@ const Traning = () => {
                       <div className="flex items-center justify-center gap-2">
                         <Link
                           to={"/dashboard/trainingUpdate"}
-                          className="flex items-center gap-2 px-4 py-2 text-white bg-green-950 hover:bg-green-900 rounded-lg transition-all shadow-md hover:shadow-lg font-medium text-sm"
+                          className="flex items-center gap-2 px-4 py-2 text-emerald-300 bg-emerald-900/50 hover:bg-emerald-800/50 border border-emerald-500/30 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                         >
                           <HiOutlinePencilAlt className="w-5 h-5" />
                           Update
@@ -463,14 +463,14 @@ const Traning = () => {
                 <tr>
                   <td
                     colSpan="8"
-                    className="px-6 py-12 text-center text-gray-500"
+                    className="px-6 py-12 text-center text-emerald-400/50"
                   >
                     <div className="flex flex-col items-center justify-center gap-2">
-                      <HiOutlineSearch className="w-10 h-10 text-gray-300" />
+                      <HiOutlineSearch className="w-10 h-10 text-emerald-500/30" />
                       <p>No trainees found matching your filters.</p>
                       <button
                         onClick={() => handleExport("reset")}
-                        className="text-emerald-600 hover:underline text-sm"
+                        className="text-emerald-400 hover:text-emerald-300 hover:underline text-sm"
                       >
                         Clear all filters
                       </button>
@@ -483,8 +483,8 @@ const Traning = () => {
         </div>
 
         {/* Pagination */}
-        <div className="px-6 py-4 border-t border-gray-100 bg-gray-50/30 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+        <div className="px-6 py-4 border-t border-emerald-500/20 bg-emerald-950/30 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
+          <div className="flex items-center gap-2 text-sm text-emerald-300">
             <span>Show</span>
             <select
               value={entriesPerPage}
@@ -492,7 +492,7 @@ const Traning = () => {
                 setEntriesPerPage(Number(e.target.value));
                 setCurrentPage(1);
               }}
-              className="border border-gray-200 rounded-md py-1 pl-2 pr-6 text-sm focus:ring-emerald-500 focus:border-emerald-500 bg-white"
+              className="border border-emerald-500/30 rounded-md py-1 pl-2 pr-6 text-sm focus:ring-emerald-500 focus:border-emerald-500 bg-emerald-900/50 text-emerald-100"
             >
               <option value={10}>10</option>
               <option value={25}>25</option>
@@ -500,7 +500,7 @@ const Traning = () => {
               <option value={100}>100</option>
             </select>
             <span>entries</span>
-            <span className="hidden sm:inline-block ml-2 text-gray-400 border-l border-gray-200 pl-3">
+            <span className="hidden sm:inline-block ml-2 text-emerald-500/50 border-l border-emerald-500/20 pl-3">
               Showing {startIndex + 1} to{" "}
               {Math.min(startIndex + entriesPerPage, filteredData.length)} of{" "}
               {filteredData.length} records
@@ -512,7 +512,7 @@ const Traning = () => {
               <button
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-white hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-gray-600 transition-all bg-white"
+                className="px-3 py-1.5 border border-emerald-500/30 rounded-lg hover:bg-emerald-800/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-emerald-300 transition-all bg-transparent"
               >
                 Previous
               </button>
@@ -522,8 +522,8 @@ const Traning = () => {
                     key={i}
                     onClick={() => setCurrentPage(i + 1)}
                     className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
-                      ? "bg-emerald-600 text-white shadow-sm"
-                      : "text-gray-600 hover:bg-white hover:shadow-sm bg-transparent"
+                      ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
+                      : "text-emerald-300 hover:bg-emerald-800/50 hover:text-white border border-transparent"
                       }`}
                   >
                     {i + 1}
@@ -535,7 +535,7 @@ const Traning = () => {
                   setCurrentPage((p) => Math.min(totalPages, p + 1))
                 }
                 disabled={currentPage === totalPages}
-                className="px-3 py-1.5 border border-gray-200 rounded-lg hover:bg-white hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-gray-600 transition-all bg-white"
+                className="px-3 py-1.5 border border-emerald-500/30 rounded-lg hover:bg-emerald-800/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-emerald-300 transition-all bg-transparent"
               >
                 Next
               </button>
