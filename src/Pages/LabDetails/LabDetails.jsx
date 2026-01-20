@@ -84,11 +84,26 @@ const LabDetails = () => {
   const [selectedLab, setSelectedLab] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
   const [distance, setDistance] = useState(5);
+  const [selectedDivision, setSelectedDivision] = useState("Dhaka"); // Default to Dhaka
   const [mapCenter, setMapCenter] = useState([23.8103, 90.4125]);
   const [mapZoom, setMapZoom] = useState(8);
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
   const [address, setAddress] = useState("");
   const [isFetchingAddress, setIsFetchingAddress] = useState(false);
+
+  // Static lab images for Lab Information section
+  const staticLabImages = [
+    'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC00170-1.avif',
+    'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC00690.avif',
+    'https://ucbd.edu.bd/wp-content/uploads/2025/08/ucbdcc2.avif',
+    'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC02243.avif'
+  ];
+
+  // Extract unique divisions from labs - Memoized
+  const divisions = useMemo(() => {
+    const uniqueDivisions = [...new Set(labs.map(lab => lab.division).filter(Boolean))];
+    return uniqueDivisions.sort();
+  }, [labs]);
 
   // Selected Lab Icon (Blue & Pulsing) - Memoized
   const selectedIcon = useMemo(
@@ -126,7 +141,10 @@ const LabDetails = () => {
           return { ...lab, lat, long };
         });
         setLabs(sanitizedData);
-        setFilteredLabs(sanitizedData.slice(0, 400));
+
+        // Filter by Dhaka division by default for better performance
+        const dhakaLabs = sanitizedData.filter(lab => lab.division === "Dhaka");
+        setFilteredLabs(dhakaLabs.slice(0, 200)); // Limit initial load
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
@@ -178,9 +196,15 @@ const LabDetails = () => {
   }, []);
 
   // Get current location
+  // Get current location
   const getCurrentLocation = useCallback(() => {
     setIsLoadingLocation(true);
     if (navigator.geolocation) {
+      const options = {
+        enableHighAccuracy: true,
+        maximumAge: 0
+      };
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -188,6 +212,9 @@ const LabDetails = () => {
           setCurrentLocation(location);
           setMapCenter(location);
           setMapZoom(13);
+          setSelectedDivision("All"); // Reset division when using location
+          setSelectedLab(null); // Reset selected lab
+          setAddress(""); // Reset address
 
           // Filter labs by distance
           const nearby = labs
@@ -211,11 +238,27 @@ const LabDetails = () => {
         },
         (error) => {
           console.error("Error getting location:", error);
-          alert(
-            "Unable to get your location. Please enable location services."
-          );
+          let errorMessage = "Unable to get your location.";
+
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = "Location permission denied. Please enable location services in your browser and system settings.";
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = "Location information is unavailable. Please check your network connection or GPS.";
+              break;
+            case error.TIMEOUT:
+              errorMessage = "The request to get your location timed out. Please try again.";
+              break;
+            default:
+              errorMessage = "An unknown error occurred while retrieving location.";
+              break;
+          }
+
+          alert(errorMessage);
           setIsLoadingLocation(false);
-        }
+        },
+        options
       );
     } else {
       alert("Geolocation is not supported by your browser.");
@@ -223,11 +266,75 @@ const LabDetails = () => {
     }
   }, [labs, distance, calculateDistance]);
 
+  // Handle division change
+  const handleDivisionChange = useCallback((newDivision) => {
+    setSelectedDivision(newDivision);
+    setCurrentLocation(null); // Reset current location when changing division
+    setSelectedLab(null); // Reset selected lab when changing division
+    setAddress(""); // Reset address
+  }, []);
+
+  // Filter labs by selected division
+  useEffect(() => {
+    if (!labs.length) return;
+
+    let filtered = labs;
+
+    // Filter by division
+    if (selectedDivision && selectedDivision !== "All") {
+      filtered = filtered.filter(lab => lab.division === selectedDivision);
+    }
+
+    // If current location is set, filter by distance
+    if (currentLocation) {
+      filtered = filtered
+        .map((lab) => ({
+          ...lab,
+          distance: calculateDistance(
+            currentLocation[0],
+            currentLocation[1],
+            lab.lat,
+            lab.long
+          ),
+        }))
+        .filter(
+          (lab) =>
+            lab.distance <= distance && lab.lat !== 0 && lab.long !== 0
+        )
+        .sort((a, b) => a.distance - b.distance);
+
+      // Center map on current location when using distance filter
+      setMapCenter(currentLocation);
+      setMapZoom(distance <= 5 ? 12 : distance <= 15 ? 10 : 8);
+    } else {
+      // Limit results for performance
+      filtered = filtered.filter(lab => lab.lat !== 0 && lab.long !== 0).slice(0, 200);
+
+      // Calculate center of filtered labs for division-based filtering
+      if (filtered.length > 0) {
+        const validLabs = filtered.filter(lab => lab.lat && lab.long && lab.lat !== 0 && lab.long !== 0);
+        if (validLabs.length > 0) {
+          const avgLat = validLabs.reduce((sum, lab) => sum + lab.lat, 0) / validLabs.length;
+          const avgLong = validLabs.reduce((sum, lab) => sum + lab.long, 0) / validLabs.length;
+          setMapCenter([avgLat, avgLong]);
+          // Adjust zoom based on number of labs and division
+          setMapZoom(selectedDivision && selectedDivision !== "All" ? 9 : 7);
+        }
+      }
+    }
+
+    setFilteredLabs(filtered);
+  }, [selectedDivision, labs, currentLocation, distance, calculateDistance]);
+
   // Handle distance change
   const handleDistanceChange = useCallback(
     (newDistance) => {
       setDistance(newDistance);
       if (currentLocation) {
+        setSelectedDivision("All"); // Reset division when using distance filter
+        // Update map zoom based on distance
+        setMapZoom(newDistance <= 5 ? 12 : newDistance <= 15 ? 10 : 8);
+
         const nearby = labs
           .map((lab) => ({
             ...lab,
@@ -261,7 +368,7 @@ const LabDetails = () => {
 
   // Memoize visible labs for map (limit to prevent performance issues)
   const visibleMapLabs = useMemo(() => {
-    return filteredLabs.slice(0, 100); // Show max 100 markers on map
+    return filteredLabs.slice(0, 200); // Show max 100 markers on map
   }, [filteredLabs]);
 
   return (
@@ -299,130 +406,155 @@ const LabDetails = () => {
               </h2>
 
               {selectedLab ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="space-y-4"
-                >
-                  <div className="bg-emerald-950/50 rounded-xl p-4 border border-emerald-500/30">
-                    <h3 className="font-bold text-lg text-emerald-300 mb-3">
-                      {selectedLab.institute}
-                    </h3>
+                <div>
 
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <FaMapMarkerAlt className="text-emerald-500 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-semibold text-emerald-200/70">
-                            Division
-                          </p>
-                          <p className="text-white">
-                            {selectedLab.division}
-                          </p>
-                        </div>
-                      </div>
-
-                      {selectedLab.seat && (
-                        <div className="flex items-start gap-3">
-                          <FaMapMarkerAlt className="text-purple-400 mt-1 flex-shrink-0" />
-                          <div>
-                            <p className="text-sm font-semibold text-emerald-200/70">
-                              Seat
-                            </p>
-                            <p className="text-white">{selectedLab.seat}</p>
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-start gap-3">
-                        <FaMapMarkerAlt className="text-teal-400 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-semibold text-emerald-200/70">
-                            Upazila
-                          </p>
-                          <p className="text-white">{selectedLab.upazila}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3">
-                        <FaUser className="text-blue-400 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-semibold text-emerald-200/70">
-                            Head
-                          </p>
-                          <p className="text-white">{selectedLab.head}</p>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3">
-                        <FaPhone className="text-green-400 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-semibold text-emerald-200/70">
-                            Phone
-                          </p>
-                          <a
-                            href={`tel:${selectedLab.mobile}`}
-                            className="text-green-400 hover:text-green-300 font-medium"
-                          >
-                            {selectedLab.mobile}
-                          </a>
-                          {selectedLab.alt_mobile && (
-                            <p className="text-xs text-emerald-400/70 mt-1">
-                              Alt: {selectedLab.alt_mobile}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      {selectedLab.lab_type && (
-                        <div className="flex items-start gap-3">
-                          <FaBuilding className="text-indigo-400 mt-1 flex-shrink-0" />
-                          <div>
-                            <p className="text-sm font-semibold text-emerald-200/70">
-                              Lab Type
-                            </p>
-                            <p className="text-white uppercase text-xs">
-                              {selectedLab.lab_type}
-                            </p>
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex items-start gap-3">
-                        <FaEnvelope className="text-rose-400 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-semibold text-emerald-200/70">
-                            Email
-                          </p>
-                          <a
-                            href={`mailto:${selectedLab.email}`}
-                            className="text-rose-400 hover:text-rose-300 text-sm break-all"
-                          >
-                            {selectedLab.email}
-                          </a>
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-3">
-                        <FaMapMarkerAlt className="text-orange-400 mt-1 flex-shrink-0" />
-                        <div>
-                          <p className="text-sm font-semibold text-emerald-200/70">
-                            Address (from GPS)
-                          </p>
-                          {isFetchingAddress ? (
-                            <p className="text-emerald-400/50 text-sm animate-pulse">
-                              Fetching address...
-                            </p>
-                          ) : (
-                            <p className="text-white text-sm leading-relaxed">
-                              {address || "N/A"}
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                  {/* Static Lab Images Gallery */}
+                  <div className="mt-4 pt-4 border-t border-emerald-500/20">
+                    <p className="text-sm font-semibold text-emerald-200/70 mb-3">Lab Images</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <PhotoProvider>
+                        {staticLabImages.map((imgSrc, idx) => (
+                          <PhotoView key={idx} src={imgSrc}>
+                            <img
+                              src={imgSrc}
+                              alt={`Lab ${idx + 1}`}
+                              className="w-full h-24 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity border border-emerald-500/20"
+                              loading="lazy"
+                            />
+                          </PhotoView>
+                        ))}
+                      </PhotoProvider>
                     </div>
                   </div>
-                </motion.div>
+
+
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="space-y-4"
+                  >
+                    <div className="bg-emerald-950/50 rounded-xl p-4 border border-emerald-500/30">
+                      <h3 className="font-bold text-lg text-emerald-300 mb-3">
+                        {selectedLab.institute}
+                      </h3>
+
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                          <FaMapMarkerAlt className="text-emerald-500 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-200/70">
+                              Division
+                            </p>
+                            <p className="text-white">
+                              {selectedLab.division}
+                            </p>
+                          </div>
+                        </div>
+
+                        {selectedLab.seat && (
+                          <div className="flex items-start gap-3">
+                            <FaMapMarkerAlt className="text-purple-400 mt-1 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-emerald-200/70">
+                                Seat
+                              </p>
+                              <p className="text-white">{selectedLab.seat}</p>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex items-start gap-3">
+                          <FaMapMarkerAlt className="text-teal-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-200/70">
+                              Upazila
+                            </p>
+                            <p className="text-white">{selectedLab.upazila}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <FaUser className="text-blue-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-200/70">
+                              Head
+                            </p>
+                            <p className="text-white">{selectedLab.head}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <FaPhone className="text-green-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-200/70">
+                              Phone
+                            </p>
+                            <a
+                              href={`tel:${selectedLab.mobile}`}
+                              className="text-green-400 hover:text-green-300 font-medium"
+                            >
+                              {selectedLab.mobile}
+                            </a>
+                            {selectedLab.alt_mobile && (
+                              <p className="text-xs text-emerald-400/70 mt-1">
+                                Alt: {selectedLab.alt_mobile}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        {selectedLab.lab_type && (
+                          <div className="flex items-start gap-3">
+                            <FaBuilding className="text-indigo-400 mt-1 flex-shrink-0" />
+                            <div>
+                              <p className="text-sm font-semibold text-emerald-200/70">
+                                Lab Type
+                              </p>
+                              <p className="text-white uppercase text-xs">
+                                {selectedLab.lab_type}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex items-start gap-3">
+                          <FaEnvelope className="text-rose-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-200/70">
+                              Email
+                            </p>
+                            <a
+                              href={`mailto:${selectedLab.email}`}
+                              className="text-rose-400 hover:text-rose-300 text-sm break-all"
+                            >
+                              {selectedLab.email}
+                            </a>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <FaMapMarkerAlt className="text-orange-400 mt-1 flex-shrink-0" />
+                          <div>
+                            <p className="text-sm font-semibold text-emerald-200/70">
+                              Address (from GPS)
+                            </p>
+                            {isFetchingAddress ? (
+                              <p className="text-emerald-400/50 text-sm animate-pulse">
+                                Fetching address...
+                              </p>
+                            ) : (
+                              <p className="text-white text-sm leading-relaxed">
+                                {address || "N/A"}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
               ) : (
                 <div className="text-center py-12">
                   <FaBuilding className="text-6xl text-emerald-800/50 mx-auto mb-4" />
@@ -487,10 +619,10 @@ const LabDetails = () => {
                         click: () => handleLabSelect(lab),
                       }}
                     >
-                      <Popup>
+                      {/* <Popup>
                         <div className="min-w-[200px]">
                           <PhotoProvider>
-                            <PhotoView src={institutionPic}>
+                            <PhotoView src={staticLabImages}>
                               <img
                                 src={institutionPic}
                                 alt={lab.institute}
@@ -499,7 +631,7 @@ const LabDetails = () => {
                             </PhotoView>
                           </PhotoProvider>
                         </div>
-                      </Popup>
+                      </Popup> */}
                     </Marker>
                   );
                 })}
@@ -528,7 +660,7 @@ const LabDetails = () => {
               <button
                 onClick={getCurrentLocation}
                 disabled={isLoadingLocation}
-                className="cursor-pointer hover:scale-105 w-full mb-4 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white px-4 py-3 rounded-xl font-semibold shadow-lg hover:shadow-emerald-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-500/30"
+                className="cursor-pointer hover:scale-105 w-full mb-4 flex items-center justify-center gap-2 bg-red-600 text-white px-4 py-3 rounded-xl font-semibold shadow-lg hover:shadow-emerald-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-500/30"
               >
                 <FaLocationArrow
                   className={isLoadingLocation ? "animate-spin" : ""}
@@ -537,6 +669,26 @@ const LabDetails = () => {
                   ? "Getting Location..."
                   : "Use Current Location"}
               </button>
+
+              {/* Division Selector */}
+              <div className="space-y-2 mb-4">
+                <label className="text-sm font-semibold text-emerald-100 flex items-center gap-2">
+                  <FaMapMarkerAlt className="text-emerald-400" />
+                  Select Division
+                </label>
+                <select
+                  value={selectedDivision}
+                  onChange={(e) => handleDivisionChange(e.target.value)}
+                  className="w-full bg-emerald-950/50 border border-emerald-500/30 rounded-xl px-4 py-3 text-sm text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-400"
+                >
+                  <option value="All" className="bg-emerald-900 text-white">All Divisions</option>
+                  {divisions.map((division) => (
+                    <option key={division} value={division} className="bg-emerald-900 text-white">
+                      {division}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
               {/* Distance Selector */}
               <div className="space-y-2">
@@ -600,8 +752,8 @@ const LabDetails = () => {
             </div>
           </motion.div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
