@@ -14,7 +14,6 @@ import { Link } from "react-router";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-
 const LabsUnderControl = () => {
   const [filters, setFilters] = useState({
     division: "All",
@@ -57,12 +56,17 @@ const LabsUnderControl = () => {
       try {
         // Build query params
         const params = new URLSearchParams();
-        if (filters.division !== "All") params.append("division", filters.division);
-        if (filters.upazila !== "All") params.append("upazila", filters.upazila);
-        if (filters.labType !== "All") params.append("labType", filters.labType);
+        if (filters.division !== "All")
+          params.append("division", filters.division);
+        if (filters.upazila !== "All")
+          params.append("upazila", filters.upazila);
+        if (filters.labType !== "All")
+          params.append("labType", filters.labType);
         if (searchTerm) params.append("search", searchTerm);
 
-        const response = await fetch(`${API_BASE_URL}/labs?${params.toString()}`);
+        const response = await fetch(
+          `${API_BASE_URL}/labs?${params.toString()}`
+        );
         const result = await response.json();
 
         if (result.success) {
@@ -259,7 +263,11 @@ const LabsUnderControl = () => {
               >
                 <option value="All">সকল বিভাগ</option>
                 {filterOptions.divisions.map((division) => (
-                  <option className="text-black" key={division} value={division}>
+                  <option
+                    className="text-black"
+                    key={division}
+                    value={division}
+                  >
                     {division}
                   </option>
                 ))}
@@ -302,7 +310,11 @@ const LabsUnderControl = () => {
                 <option value="All">সকল টাইপ</option>
                 {filterOptions.labTypes.map((type) => (
                   <option className="text-black" key={type} value={type}>
-                    {type === "sof" ? "SOF" : type === "srdl_sof" ? "SRDL & SOF" : type.toUpperCase()}
+                    {type === "sof"
+                      ? "SOF"
+                      : type === "srdl_sof"
+                      ? "SRDL & SOF"
+                      : type.toUpperCase()}
                   </option>
                 ))}
               </select>
@@ -366,7 +378,13 @@ const LabsUnderControl = () => {
                     >
                       <td className="px-6 py-4">
                         <div className="flex flex-col gap-1">
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${lab.labType === "sof" ? "bg-blue-900/50 text-blue-300 border border-blue-500/30" : "bg-purple-900/50 text-purple-300 border border-purple-500/30"}`}>
+                          <span
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${
+                              lab.labType === "sof"
+                                ? "bg-blue-900/50 text-blue-300 border border-blue-500/30"
+                                : "bg-purple-900/50 text-purple-300 border border-purple-500/30"
+                            }`}
+                          >
                             {lab.labType === "sof" ? "SOF" : "SRDL & SOF"}
                           </span>
                           <span className="text-xs text-emerald-500/50">
@@ -404,7 +422,10 @@ const LabsUnderControl = () => {
                           </span>
                           <div className="flex flex-col gap-0.5 mt-1">
                             <span className="text-xs text-emerald-500/70">
-                              {formatMobile(lab.mobile)}{lab.altMobile ? `, ${formatMobile(lab.altMobile)}` : ""}
+                              {formatMobile(lab.mobile)}
+                              {lab.altMobile
+                                ? `, ${formatMobile(lab.altMobile)}`
+                                : ""}
                             </span>
                             {lab.email && (
                               <a
@@ -466,9 +487,15 @@ const LabsUnderControl = () => {
               }}
               className="bg-emerald-900/50 border border-emerald-500/30 rounded-md text-sm py-1 pl-2 pr-8 focus:ring-emerald-500 focus:border-emerald-500 text-emerald-100"
             >
-              <option className="text-black" value={10}>10</option>
-              <option className="text-black" value={25}>25</option>
-              <option className="text-black" value={50}>50</option>
+              <option className="text-black" value={10}>
+                10
+              </option>
+              <option className="text-black" value={25}>
+                25
+              </option>
+              <option className="text-black" value={50}>
+                50
+              </option>
             </select>
             <span>entries</span>
             <span className="ml-2 text-emerald-500/50">
@@ -492,10 +519,11 @@ const LabsUnderControl = () => {
                   <button
                     key={i + 1}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
-                      ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
-                      : "text-emerald-300 hover:bg-emerald-800/50 hover:text-white border border-transparent"
-                      }`}
+                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                      currentPage === i + 1
+                        ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
+                        : "text-emerald-300 hover:bg-emerald-800/50 hover:text-white border border-transparent"
+                    }`}
                   >
                     {i + 1}
                   </button>

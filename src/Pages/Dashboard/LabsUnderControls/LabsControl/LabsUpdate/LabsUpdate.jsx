@@ -27,7 +27,6 @@ const LabsUpdate = () => {
   const [labData, setLabData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  
   const formatMobile = (mobile) => {
     if (!mobile) return "";
     const mobileStr = String(mobile);
@@ -49,24 +48,22 @@ const LabsUpdate = () => {
             const value = data.data[key];
 
             // Map labType to lab_type
-            if (key === 'labType') {
-              setValue('lab_type', value);
+            if (key === "labType") {
+              setValue("lab_type", value);
             }
             // Handle mobile numbers
-            else if (key === 'mobile') {
-              setValue('mobile', formatMobile(value));
-            }
-            else if (key === 'altMobile') {
-              setValue('alt_mobile', formatMobile(value));
-            }
-            else {
+            else if (key === "mobile") {
+              setValue("mobile", formatMobile(value));
+            } else if (key === "altMobile") {
+              setValue("alt_mobile", formatMobile(value));
+            } else {
               setValue(key, value);
             }
           });
 
           // Fallback if lab_type isn't set by the loop
           if (data.data.labType) {
-            setValue('lab_type', data.data.labType);
+            setValue("lab_type", data.data.labType);
           }
         }
         setLoading(false);
@@ -167,7 +164,9 @@ const LabsUpdate = () => {
             </div>
           </div>
           <p className="text-gray-600 text-sm ml-14">
-            {labData ? `${labData.institute}` : "নতুন কম্পিউটার ল্যাবের তথ্য যোগ করুন"}
+            {labData
+              ? `${labData.institute}`
+              : "নতুন কম্পিউটার ল্যাবের তথ্য যোগ করুন"}
           </p>
         </div>
         <button
@@ -201,8 +200,7 @@ const LabsUpdate = () => {
 
               <InputGroup label="আসন নম্বর" error={errors.seat} required>
                 <Input
-                 readOnly
-                 
+                  readOnly
                   {...register("seat", { required: "Required" })}
                   placeholder="১০০ খুলনা-২"
                 />
@@ -211,7 +209,7 @@ const LabsUpdate = () => {
               <div className="md:col-span-2">
                 <InputGroup label="প্রতিষ্ঠানের নাম" required>
                   <Input
-                  readOnly
+                    readOnly
                     {...register("institute", { required: "Required" })}
                     placeholder="প্রতিষ্ঠানের নাম লিখুন"
                   />
@@ -247,7 +245,6 @@ const LabsUpdate = () => {
 
               <InputGroup label="মোবাইল নম্বর" required>
                 <Input
-              
                   type="tel"
                   {...register("mobile", { required: "Required" })}
                   placeholder="01XXXXXXXXX"
@@ -257,7 +254,6 @@ const LabsUpdate = () => {
 
               <InputGroup label="বিকল্প মোবাইল নম্বর">
                 <Input
-                
                   type="tel"
                   {...register("alt_mobile")}
                   placeholder="01XXXXXXXXX"
@@ -280,14 +276,22 @@ const LabsUpdate = () => {
 
             <div className="space-y-4">
               <InputGroup label="বিভাগ" required>
-                <Select readOnly disabled {...register("division", { required: "Required" })}>
+                <Select
+                  readOnly
+                  disabled
+                  {...register("division", { required: "Required" })}
+                >
                   <option value="">বিভাগ নির্বাচন করুন</option>
                   <option value={labData?.division}>{labData?.division}</option>
                 </Select>
               </InputGroup>
 
               <InputGroup label="উপজেলা" required>
-                <Select readOnly disabled {...register("upazila", { required: "Required" })}>
+                <Select
+                  readOnly
+                  disabled
+                  {...register("upazila", { required: "Required" })}
+                >
                   <option value="">উপজেলা নির্বাচন করুন</option>
                   <option value={labData?.upazila}>{labData?.upazila}</option>
                 </Select>
@@ -305,7 +309,7 @@ const LabsUpdate = () => {
             <div className="grid grid-cols-2 gap-3">
               <InputGroup label="অক্ষাংশ (Latitude)">
                 <Input
-                 readOnly
+                  readOnly
                   {...register("lat")}
                   placeholder="22.81"
                   type="number"
@@ -315,7 +319,7 @@ const LabsUpdate = () => {
               </InputGroup>
               <InputGroup label="দ্রাঘিমাংশ (Longitude)">
                 <Input
-                readOnly
+                  readOnly
                   {...register("long")}
                   placeholder="89.57"
                   type="number"
