@@ -65,7 +65,7 @@ const LabsUnderControl = () => {
         if (searchTerm) params.append("search", searchTerm);
 
         const response = await fetch(
-          `${API_BASE_URL}/labs?${params.toString()}`
+          `${API_BASE_URL}/labs?${params.toString()}`,
         );
         const result = await response.json();
 
@@ -98,7 +98,7 @@ const LabsUnderControl = () => {
   const startIndex = (currentPage - 1) * entriesPerPage;
   const currentEntries = labsData.slice(
     startIndex,
-    startIndex + entriesPerPage
+    startIndex + entriesPerPage,
   );
 
   const handleResetFilters = () => {
@@ -313,8 +313,8 @@ const LabsUnderControl = () => {
                     {type === "sof"
                       ? "SOF"
                       : type === "srdl_sof"
-                      ? "SRDL & SOF"
-                      : type.toUpperCase()}
+                        ? "SRDL & SOF"
+                        : type.toUpperCase()}
                   </option>
                 ))}
               </select>
