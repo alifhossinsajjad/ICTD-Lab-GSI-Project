@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState,  useEffect } from "react";
 import {
   HiOutlineSearch,
   HiOutlinePencil,
@@ -11,6 +11,7 @@ import {
 import { FaFileCsv, FaFileExcel } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { Link } from "react-router";
+import ReportForm from "./ReportForm/ReportForm";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -31,21 +32,60 @@ const LabsUnderControl = () => {
     upazilas: [],
     labTypes: [],
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentLab, setCurrentLab] = useState(null);
+
+
+
+  const demoLabs = [
+    {
+      id: 1,
+      labType: "sof",
+      institute: "Lakshmipur Govt. High School",
+      division: "Chattogram",
+      upazila: "Lakshmipur Sadar",
+      seat: "Ward-01",
+      head: "Md. Rahim",
+      mobile: "1712345678",
+      altMobile: "1812345678",
+      email: "demo1@gmail.com",
+    },
+    {
+      id: 2,
+      labType: "srdl_sof",
+      institute: "Raipur Model School",
+      division: "Chattogram",
+      upazila: "Raipur",
+      seat: "Ward-03",
+      head: "Ms. Jannat",
+      mobile: "1912345678",
+      altMobile: "",
+      email: "demo2@gmail.com",
+    },
+    {
+      id: 3,
+      labType: "sof",
+      institute: "Ramganj Pilot School",
+      division: "Dhaka",
+      upazila: "Ramganj",
+      seat: "Ward-02",
+      head: "Mr. Hasan",
+      mobile: "1612345678",
+      altMobile: "",
+      email: "demo3@gmail.com",
+    },
+  ];
+
+
 
   // Fetch filter options
   useEffect(() => {
-    const fetchFilterOptions = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/labs/filter-options`);
-        const result = await response.json();
-        if (result.success) {
-          setFilterOptions(result.data);
-        }
-      } catch (error) {
-        console.error("Error fetching filter options:", error);
-      }
-    };
-    fetchFilterOptions();
+    setLoading(true);
+
+    setTimeout(() => {
+      setLabsData(demoLabs);
+      setLoading(false);
+    }, 800); // fake loading effect
   }, []);
 
   // Fetch labs data
@@ -65,7 +105,7 @@ const LabsUnderControl = () => {
         if (searchTerm) params.append("search", searchTerm);
 
         const response = await fetch(
-          `${API_BASE_URL}/labs?${params.toString()}`
+          `${API_BASE_URL}/labs?${params.toString()}`,
         );
         const result = await response.json();
 
@@ -98,7 +138,7 @@ const LabsUnderControl = () => {
   const startIndex = (currentPage - 1) * entriesPerPage;
   const currentEntries = labsData.slice(
     startIndex,
-    startIndex + entriesPerPage
+    startIndex + entriesPerPage,
   );
 
   const handleResetFilters = () => {
@@ -146,9 +186,17 @@ const LabsUnderControl = () => {
 
     if (type === "excel") {
       XLSX.writeFile(workBook, "Labs_Data.xlsx");
-    } else if (type === "csv") {
-      XLSX.writeFile(workBook, "Labs_Data.csv");
     }
+  };
+
+  const handleOpenModal = (lab) => {
+    setCurrentLab(lab);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setCurrentLab(null);
   };
 
   return (
@@ -313,8 +361,8 @@ const LabsUnderControl = () => {
                     {type === "sof"
                       ? "SOF"
                       : type === "srdl_sof"
-                      ? "SRDL & SOF"
-                      : type.toUpperCase()}
+                        ? "SRDL & SOF"
+                        : type.toUpperCase()}
                   </option>
                 ))}
               </select>
@@ -379,11 +427,10 @@ const LabsUnderControl = () => {
                       <td className="px-6 py-4">
                         <div className="flex flex-col gap-1">
                           <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${
-                              lab.labType === "sof"
-                                ? "bg-blue-900/50 text-blue-300 border border-blue-500/30"
-                                : "bg-purple-900/50 text-purple-300 border border-purple-500/30"
-                            }`}
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${lab.labType === "sof"
+                              ? "bg-blue-900/50 text-blue-300 border border-blue-500/30"
+                              : "bg-purple-900/50 text-purple-300 border border-purple-500/30"
+                              }`}
                           >
                             {lab.labType === "sof" ? "SOF" : "SRDL & SOF"}
                           </span>
@@ -456,6 +503,13 @@ const LabsUnderControl = () => {
                             <HiOutlineExclamationCircle className="w-5 h-5" />
                             Complaint
                           </Link>
+                          <button
+                            onClick={() => handleOpenModal(lab)}
+                            className="cursor-pointer flex items-center gap-1.5 text-white hover:text-emerald-300 transition-colors pointer-events-auto"
+                          >
+                            <HiOutlinePencil className="w-5 h-5" />
+                            Send Report
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -519,11 +573,10 @@ const LabsUnderControl = () => {
                   <button
                     key={i + 1}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
-                      currentPage === i + 1
-                        ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
-                        : "text-emerald-300 hover:bg-emerald-800/50 hover:text-white border border-transparent"
-                    }`}
+                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
+                      ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
+                      : "text-emerald-300 hover:bg-emerald-800/50 hover:text-white border border-transparent"
+                      }`}
                   >
                     {i + 1}
                   </button>
@@ -542,8 +595,19 @@ const LabsUnderControl = () => {
           )}
         </div>
       </div>
+
+      {/* Report Modal */}
+      {isModalOpen && currentLab && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm print:hidden">
+          <ReportForm
+            onClose={handleCloseModal}
+            instituteName={currentLab.institute}
+            labId={currentLab.id}
+          />
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default LabsUnderControl;
