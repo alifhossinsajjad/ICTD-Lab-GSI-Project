@@ -60,7 +60,7 @@ const DashboardLayout = () => {
 
     {
       path: "/dashboard/sendReport",
-      name: "Send Report",
+      name: "All Report",
       icon: <FaChartPie className="w-5 h-5" />,
     },
     {

@@ -41,7 +41,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="bg-emerald-900/80 backdrop-blur-md border-b border-emerald-500/20 fixed w-full z-50">
+    <header className="bg-white-400/80 backdrop-blur-md border-b border-emerald-100/20 fixed w-full z-50">
       {/* Running Marquee Banner */}
       <div className="bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 text-white py-2.5 overflow-hidden relative border-b border-emerald-500/20">
         {/* Decorative pattern overlay */}
@@ -51,7 +51,9 @@ const Navbar = () => {
           {/* Announcement Icon */}
           <div className="flex-shrink-0 px-4 flex items-center gap-2 bg-emerald-900/50 py-1 rounded-r-full border border-emerald-500/30 border-l-0">
             <FiBell className="text-yellow-300 animate-pulse" size={18} />
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-100">সর্বশেষ আপডেট</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-100">
+              সর্বশেষ আপডেট
+            </span>
           </div>
 
           {/* Marquee Content */}
@@ -59,7 +61,9 @@ const Navbar = () => {
             <div className="animate-marquee whitespace-nowrap inline-block">
               {announcements.map((announcement, index) => (
                 <span key={index} className="inline-flex items-center mx-8">
-                  <span className="text-sm font-medium text-emerald-50">{announcement}</span>
+                  <span className="text-sm font-medium text-emerald-50">
+                    {announcement}
+                  </span>
                   {index < announcements.length - 1 && (
                     <span className="mx-8 text-yellow-300">●</span>
                   )}
@@ -67,8 +71,13 @@ const Navbar = () => {
               ))}
               {/* Duplicate for seamless loop */}
               {announcements.map((announcement, index) => (
-                <span key={`dup-${index}`} className="inline-flex items-center mx-8">
-                  <span className="text-sm font-medium text-emerald-50">{announcement}</span>
+                <span
+                  key={`dup-${index}`}
+                  className="inline-flex items-center mx-8"
+                >
+                  <span className="text-sm font-medium text-emerald-50">
+                    {announcement}
+                  </span>
                   {index < announcements.length - 1 && (
                     <span className="mx-8 text-yellow-300">●</span>
                   )}
@@ -82,10 +91,19 @@ const Navbar = () => {
       {/* Main Nav */}
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <Link to={"/"} className="cursor-pointer flex items-center space-x-2 group">
-          <img src={logo} alt="ICTD Logo" className="w-14 drop-shadow-lg group-hover:scale-105 transition-transform duration-300" />
+        <Link
+          to={"/"}
+          className="cursor-pointer flex items-center space-x-2 group"
+        >
+          <img
+            src={logo}
+            alt="ICTD Logo"
+            className="w-14 drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
+          />
           <div>
-            <h1 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">ICTD Lab</h1>
+            <h1 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+              ICTD Lab
+            </h1>
             <p className="text-sm text-emerald-200/70">GIS Platform</p>
           </div>
         </Link>
@@ -99,10 +117,11 @@ const Navbar = () => {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`relative px-2 py-1 font-medium transition-all duration-300 ${isActive
-                    ? "text-white"
-                    : "text-emerald-200/80 hover:text-white"
-                    }`}
+                  className={`relative px-2 py-1 font-medium transition-all duration-300 ${
+                    isActive
+                      ? "text-white"
+                      : "text-emerald-200/80 hover:text-white"
+                  }`}
                 >
                   <span>{item.label}</span>
                   {isActive && (
@@ -151,7 +170,6 @@ const Navbar = () => {
                 className="flex items-center gap-2 px-4 py-3 hover:bg-emerald-800/50 rounded-lg font-medium text-emerald-100 hover:text-white transition-all duration-300 border border-transparent hover:border-emerald-500/30"
                 onClick={() => setMenuOpen(false)}
               >
-                
                 <span>{item.label}</span>
               </Link>
             ))}
