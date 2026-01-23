@@ -28,7 +28,7 @@ const About = () => {
               <motion.img
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.6 }}
-                src="https://i.ibb.co/Zpk688v6/rel.webp"
+                src="https://i.ibb.co/p6y68j4Q/Whats-App-Image.jpg"
                 alt="ICT Lab"
                 className="w-full h-full object-cover"
               />
