@@ -13,7 +13,13 @@ import {
   HiChevronLeft,
   HiChevronRight,
 } from "react-icons/hi";
-import { FaChartPie, FaTimes, FaSignOutAlt, FaBars, FaBell } from "react-icons/fa";
+import {
+  FaChartPie,
+  FaTimes,
+  FaSignOutAlt,
+  FaBars,
+  FaBell,
+} from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu } from "lucide-react";
 import lo from "../assets/favicon.png";
@@ -37,6 +43,11 @@ const DashboardLayout = () => {
       icon: <HiOutlineUser className="w-5 h-5" />,
     },
     {
+      path: "/dashboard/changePassword",
+      name: "Change Password",
+      icon: <HiOutlineLockClosed className="w-5 h-5" />,
+    },
+    {
       path: "/dashboard/labsUnderControl",
       name: "Labs Under Control",
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
@@ -46,15 +57,16 @@ const DashboardLayout = () => {
     //   name: "Training",
     //   icon: <HiOutlineAcademicCap className="w-5 h-5" />,
     // },
+
+    {
+      path: "/dashboard/sendReport",
+      name: "Send Report",
+      icon: <FaChartPie className="w-5 h-5" />,
+    },
     {
       path: "/dashboard/complaints",
       name: "Complaints",
       icon: <HiOutlineExclamationCircle className="w-5 h-5" />,
-    },
-    {
-      path: "/dashboard/changePassword",
-      name: "Change Password",
-      icon: <HiOutlineLockClosed className="w-5 h-5" />,
     },
   ];
 
@@ -96,7 +108,10 @@ const DashboardLayout = () => {
       >
         {/* top brand */}
         <div className="h-20 flex items-center justify-between px-6 border-b border-emerald-500/20 shrink-0 bg-emerald-950/30">
-          <Link to="/" className="flex items-center gap-3 overflow-hidden group">
+          <Link
+            to="/"
+            className="flex items-center gap-3 overflow-hidden group"
+          >
             <div className="w-10 h-10 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/20 group-hover:scale-110 transition-transform duration-300">
               <span className="text-2xl font-bold text-emerald-950">
                 <img src={lo} alt="" />
@@ -154,10 +169,11 @@ const DashboardLayout = () => {
                 key={item.path}
                 to={item.path}
                 onClick={closeSidebar}
-                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${isActive
+                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
+                  isActive
                     ? "bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 border border-emerald-500"
                     : "text-emerald-100/70 hover:bg-emerald-800/50 hover:text-white border border-transparent hover:border-emerald-500/20"
-                  }`}
+                }`}
                 title={isCollapsed ? item.name : ""}
               >
                 {isActive && (
@@ -173,7 +189,11 @@ const DashboardLayout = () => {
                   />
                 )}
 
-                <span className={`relative z-10 text-xl ${isActive ? "text-white" : "text-emerald-400 group-hover:text-emerald-300"}`}>{item.icon}</span>
+                <span
+                  className={`relative z-10 text-xl ${isActive ? "text-white" : "text-emerald-400 group-hover:text-emerald-300"}`}
+                >
+                  {item.icon}
+                </span>
 
                 {/* hide item name when collapsed */}
                 {!isCollapsed && (
@@ -211,8 +231,8 @@ const DashboardLayout = () => {
 
             <div className="flex flex-col">
               <h1 className="text-xl font-bold text-white tracking-tight">
-                {menuItems.find((item) => item.path === location.pathname)?.name ||
-                  "Dashboard"}
+                {menuItems.find((item) => item.path === location.pathname)
+                  ?.name || "Dashboard"}
               </h1>
               <span className="text-xs text-emerald-300/70 font-medium">
                 Welcome to ICTD Lab Dashboard
@@ -251,9 +271,9 @@ const DashboardLayout = () => {
 
           <footer className="bg-emerald-900/50 backdrop-blur-md border-t border-emerald-500/20 text-emerald-200/70 text-center p-4 mt-auto rounded-t-2xl">
             <h1 className="text-sm">
-              <span className="font-bold text-emerald-400">Copyright </span>© 2025{" "}
-              <span className="text-red-500 font-bold">DoICT</span> . All rights
-              reserved.
+              <span className="font-bold text-emerald-400">Copyright </span>©
+              2025 <span className="text-red-500 font-bold">DoICT</span> . All
+              rights reserved.
             </h1>
           </footer>
         </main>
