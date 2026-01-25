@@ -731,14 +731,28 @@ const SendReport = () => {
                                 </div>
                             )}
 
-                            {selectedReport.storageConditions && (
+                            {selectedReport.storageImages && selectedReport.storageImages.length > 0 && (
                                 <div className="bg-emerald-50/50 backdrop-blur-sm rounded-xl p-5 border border-emerald-100">
-                                    <h3 className="text-lg font-bold text-emerald-800 mb-3">
-                                        D. Storage Conditions
+                                    <h3 className="text-lg font-bold text-emerald-800 mb-4">
+                                        D. Storage Images
                                     </h3>
-                                    <p className="text-emerald-900 leading-relaxed">
-                                        {selectedReport.storageConditions}
-                                    </p>
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                        {selectedReport.storageImages.map((imageUrl, index) => (
+                                            <div key={index} className="group relative overflow-hidden rounded-lg border-2 border-emerald-200 shadow-lg hover:shadow-xl transition-all">
+                                                <img
+                                                    src={imageUrl}
+                                                    alt={`Storage ${index + 1}`}
+                                                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                                                    onError={(e) => {
+                                                        e.target.src = "https://via.placeholder.com/300x200?text=Image+Not+Found";
+                                                    }}
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                                                    <span className="text-white text-sm font-semibold">Image {index + 1}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             )}
 

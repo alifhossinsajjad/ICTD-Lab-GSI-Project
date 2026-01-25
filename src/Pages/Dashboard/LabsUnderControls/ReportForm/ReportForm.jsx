@@ -1,57 +1,59 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
-  HiOutlineX,
-  HiCheck,
+  HiOutlineDocumentText,
   HiOutlineChip,
+  HiOutlineX,
   HiOutlineCube,
-  HiOutlineDocumentText
+  HiCheck,
 } from "react-icons/hi";
 
-const ReportForm = ({ onClose, instituteName, labId }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+const ReportForm = ({ onClose, instituteName, labId }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
-
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
-    setIsSubmitting(true);
     setSubmitError(null);
+    setIsSubmitting(true);
 
     try {
-      // Prepare data for backend
-      const reportData = {
-        labId: labId,
-        basicRobotics: parseInt(data.basicRobotics) || 0,
-        advancedRobotics: parseInt(data.advancedRobotics) || 0,
-        "3dPrinter": parseInt(data["3dPrinter"]) || 0,
-        vrHeadset: parseInt(data.vrHeadset) || 0,
-        networkCamera: parseInt(data.networkCamera) || 0,
-        ups: parseInt(data.ups) || 0,
-        isFunctional: data.isFunctional || null,
-        damageDetails: data.damageDetails || null,
-        storageConditions: data.storageConditions || null,
-        recommendations: data.recommendations || null,
-      };
+      // Create FormData for multipart/form-data
+      const formData = new FormData();
+
+      // Append basic data
+      formData.append("labId", labId);
+      formData.append("basicRobotics", parseInt(data.basicRobotics) || 0);
+      formData.append("advancedRobotics", parseInt(data.advancedRobotics) || 0);
+      formData.append("3dPrinter", parseInt(data["3dPrinter"]) || 0);
+      formData.append("vrHeadset", parseInt(data.vrHeadset) || 0);
+      formData.append("networkCamera", parseInt(data.networkCamera) || 0);
+      formData.append("ups", parseInt(data.ups) || 0);
+      formData.append("isFunctional", data.isFunctional || "");
+      formData.append("damageDetails", data.damageDetails || "");
+      formData.append("recommendations", data.recommendations || "");
+
+      // Append image files
+      selectedFiles.forEach((file) => {
+        formData.append("storageImages", file);
+      });
 
       const response = await fetch(`${API_BASE_URL}/lab-reports`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reportData),
+        body: formData,
+        // Don't set Content-Type header - browser will set it with boundary
       });
 
       const result = await response.json();
 
       if (result.success) {
         alert("✅ Report submitted successfully!");
+        // Clean up image previews
+        imagePreviews.forEach(preview => URL.revokeObjectURL(preview));
         onClose();
       } else {
         setSubmitError(result.message || "Failed to submit report");
@@ -200,16 +202,65 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
             ></textarea>
           </div>
 
-          {/* Section D: Usage conditions and storage conditions */}
+          {/* Section D: Storage Images */}
           <div className="bg-gradient-to-br from-teal-900/30 to-emerald-900/20 backdrop-blur-sm rounded-2xl p-6 border border-teal-400/20 shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-teal-400/40">
             <h3 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-emerald-200 mb-4 uppercase tracking-wide">
-              D. Usage conditions and storage conditions
+              D. Storage Images
             </h3>
-            <textarea
-              {...register("storageConditions")}
-              className="w-full bg-gradient-to-br from-teal-950/80 to-emerald-950/60 border-2 border-teal-500/40 rounded-xl p-5 text-emerald-100 focus:outline-none focus:ring-2 focus:ring-teal-400/60 focus:border-teal-400 transition-all resize-y min-h-[120px] placeholder-teal-500/40 hover:border-teal-400/60 shadow-inner font-medium leading-relaxed"
-              placeholder="Describe usage frequency, storage environment, temperature, humidity, etc..."
-            ></textarea>
+            <div className="space-y-4">
+              <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-teal-500/40 rounded-xl cursor-pointer bg-gradient-to-br from-teal-950/40 to-emerald-950/30 hover:border-teal-400/60 transition-all group">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg className="w-10 h-10 mb-3 text-teal-400 group-hover:text-teal-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  </svg>
+                  <p className="mb-2 text-sm text-teal-200 font-semibold">
+                    <span className="font-bold">Click to upload</span> or drag and drop
+                  </p>
+                  <p className="text-xs text-teal-400">PNG, JPG, JPEG (MAX. 5MB each)</p>
+                </div>
+                <input
+                  id="storageImages"
+                  type="file"
+                  multiple
+                  accept="image/png,image/jpeg,image/jpg"
+                  className="hidden"
+                  onChange={(e) => {
+                    const files = Array.from(e.target.files);
+                    // Store files in state for preview
+                    const previews = files.map(file => URL.createObjectURL(file));
+                    setImagePreviews(previews);
+                    setSelectedFiles(files);
+                  }}
+                />
+              </label>
+              {imagePreviews.length > 0 && (
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {imagePreviews.map((preview, index) => (
+                    <div key={index} className="relative group">
+                      <img
+                        src={preview}
+                        alt={`Preview ${index + 1}`}
+                        className="w-full h-32 object-cover rounded-lg border-2 border-teal-500/30 shadow-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const newPreviews = imagePreviews.filter((_, i) => i !== index);
+                          const newFiles = selectedFiles.filter((_, i) => i !== index);
+                          setImagePreviews(newPreviews);
+                          setSelectedFiles(newFiles);
+                        }}
+                        className="absolute top-1 right-1 p-1 bg-rose-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Section E: Problems encountered and necessary recommendations */}
