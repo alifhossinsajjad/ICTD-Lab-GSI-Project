@@ -1,4 +1,4 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   HiOutlineSearch,
   HiOutlinePencil,
@@ -37,55 +37,26 @@ const LabsUnderControl = () => {
 
 
 
-  const demoLabs = [
-    {
-      id: 1,
-      labType: "sof",
-      institute: "Lakshmipur Govt. High School",
-      division: "Chattogram",
-      upazila: "Lakshmipur Sadar",
-      seat: "Ward-01",
-      head: "Md. Rahim",
-      mobile: "1712345678",
-      altMobile: "1812345678",
-      email: "demo1@gmail.com",
-    },
-    {
-      id: 2,
-      labType: "srdl_sof",
-      institute: "Raipur Model School",
-      division: "Chattogram",
-      upazila: "Raipur",
-      seat: "Ward-03",
-      head: "Ms. Jannat",
-      mobile: "1912345678",
-      altMobile: "",
-      email: "demo2@gmail.com",
-    },
-    {
-      id: 3,
-      labType: "sof",
-      institute: "Ramganj Pilot School",
-      division: "Dhaka",
-      upazila: "Ramganj",
-      seat: "Ward-02",
-      head: "Mr. Hasan",
-      mobile: "1612345678",
-      altMobile: "",
-      email: "demo3@gmail.com",
-    },
-  ];
-
-
-
-  // Fetch filter options
+  // Fetch filter options on mount
   useEffect(() => {
-    setLoading(true);
+    const fetchFilterOptions = async () => {
+      try {
+        const response = await fetch(`${API_BASE_URL}/labs/filter-options`);
+        const result = await response.json();
 
-    setTimeout(() => {
-      setLabsData(demoLabs);
-      setLoading(false);
-    }, 800); // fake loading effect
+        if (result.success) {
+          setFilterOptions({
+            divisions: result.data.divisions || [],
+            upazilas: result.data.upazilas || [],
+            labTypes: result.data.labTypes || [],
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching filter options:", error);
+      }
+    };
+
+    fetchFilterOptions();
   }, []);
 
   // Fetch labs data
@@ -169,7 +140,7 @@ const LabsUnderControl = () => {
 
     // Export Logic
     const exportData = labsData.map((lab) => ({
-      "Lab Type": lab.labType === "sof" ? "SOF" : "SRDL & SOF",
+      "Lab Type": lab.labType === "sof" ? "SOF" : "ICTDL & SOF",
       Institute: lab.institute,
       Division: lab.division,
       Upazila: lab.upazila,
@@ -200,7 +171,7 @@ const LabsUnderControl = () => {
   };
 
   return (
-    <div className="min-h-screen bg-emerald-950 p-6 space-y-6">
+    <div className="min-h-screen bg-emerald-50 p-6 space-y-6">
       <style>
         {`
           @media print {
@@ -223,8 +194,8 @@ const LabsUnderControl = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
-          <h1 className="text-4xl font-bold text-white">ডিজিটাল ল্যাব </h1>
-          <p className="text-emerald-200/70 mt-2 text-lg">
+          <h1 className="text-4xl font-bold text-emerald-950">ডিজিটাল ল্যাব </h1>
+          <p className="text-emerald-600 mt-2 text-lg">
             লক্ষ্মীপুর দেশের ডিজিটাল ল্যাব ম্যানেজমেন্ট সম্পর্কে মনোন করুন
           </p>
           <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3"></div>
@@ -232,7 +203,7 @@ const LabsUnderControl = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => handleExport("excel")}
-            className="cursor-pointer hover:scale-105 flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/50 transition-all text-sm font-semibold border border-emerald-500/30"
+            className="cursor-pointer hover:scale-105 flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-lg shadow-emerald-200 hover:shadow-emerald-300 transition-all text-sm font-semibold border border-emerald-100"
           >
             <HiOutlineDownload className="w-5 h-5" />
             Export Report
@@ -241,7 +212,7 @@ const LabsUnderControl = () => {
       </div>
 
       {/* Controls & Filters Card */}
-      <div className="bg-emerald-900/40 backdrop-blur-xl rounded-xl shadow-sm border border-emerald-500/20 p-5 no-print">
+      <div className="bg-white backdrop-blur-xl rounded-xl shadow-sm border border-emerald-100 p-5 no-print">
         <div className="flex flex-col gap-6">
           {/* Top Row: Search & Action Buttons */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -251,7 +222,7 @@ const LabsUnderControl = () => {
               </div>
               <input
                 type="text"
-                className="block w-full pl-10 pr-3 py-2.5 bg-emerald-950/50 border border-emerald-500/30 rounded-lg focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-sm transition-all text-white placeholder-emerald-500/50"
+                className="block w-full pl-10 pr-3 py-2.5 bg-emerald-50 border border-emerald-200 rounded-lg focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 text-sm transition-all text-emerald-950 placeholder-emerald-400"
                 placeholder="Search by institution, head, or contact..."
                 value={searchTerm}
                 onChange={(e) => {
@@ -264,7 +235,7 @@ const LabsUnderControl = () => {
             <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
               <button
                 onClick={() => handleExport("excel")}
-                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-emerald-800/50 text-emerald-300 border border-emerald-500/30 rounded-lg hover:bg-emerald-700/50 hover:text-white transition-colors text-sm font-medium"
+                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:text-emerald-800 transition-colors text-sm font-medium"
                 title="Export Excel"
               >
                 <FaFileExcel />
@@ -272,7 +243,7 @@ const LabsUnderControl = () => {
               </button>
               <button
                 onClick={() => handleExport("csv")}
-                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-blue-900/30 text-blue-300 border border-blue-500/30 rounded-lg hover:bg-blue-800/50 hover:text-white transition-colors text-sm font-medium"
+                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-600 border border-blue-200 rounded-lg hover:bg-blue-100 hover:text-blue-800 transition-colors text-sm font-medium"
                 title="Export CSV"
               >
                 <FaFileCsv />
@@ -280,14 +251,14 @@ const LabsUnderControl = () => {
               </button>
               <button
                 onClick={() => handleExport("print")}
-                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-red-600 text-white border border-emerald-500/30 rounded-lg hover:bg-emerald-700/50 hover:text-white transition-colors text-sm font-medium"
+                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-red-600 text-white border border-emerald-200 rounded-lg hover:bg-red-700 hover:text-white transition-colors text-sm font-medium"
                 title="Print"
               >
                 <HiOutlinePrinter className="w-5 h-5" />
               </button>
               <button
                 onClick={() => handleExport("reload")}
-                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-emerald-800/50 text-emerald-300 border border-emerald-500/30 rounded-lg hover:bg-emerald-700/50 hover:text-white transition-colors text-sm font-medium"
+                className="cursor-pointer flex items-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:text-emerald-800 transition-colors text-sm font-medium"
                 title="Reload"
               >
                 <HiOutlineRefresh className="w-5 h-5" />
@@ -296,9 +267,9 @@ const LabsUnderControl = () => {
           </div>
 
           {/* Filters Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-emerald-500/20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-emerald-100">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">
+              <label className="text-xs font-semibold text-emerald-600 uppercase tracking-wide">
                 বিভাগ (Division)
               </label>
               <select
@@ -307,7 +278,7 @@ const LabsUnderControl = () => {
                   setFilters({ ...filters, division: e.target.value });
                   setCurrentPage(1);
                 }}
-                className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
+                className="w-full px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-900"
               >
                 <option value="All">সকল বিভাগ</option>
                 {filterOptions.divisions.map((division) => (
@@ -323,7 +294,7 @@ const LabsUnderControl = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">
+              <label className="text-xs font-semibold text-emerald-600 uppercase tracking-wide">
                 উপজেলা (Upazila)
               </label>
               <select
@@ -332,7 +303,7 @@ const LabsUnderControl = () => {
                   setFilters({ ...filters, upazila: e.target.value });
                   setCurrentPage(1);
                 }}
-                className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
+                className="w-full px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-900"
               >
                 <option value="All">সকল উপজেলা</option>
                 {filterOptions.upazilas.map((upazila) => (
@@ -344,7 +315,7 @@ const LabsUnderControl = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-emerald-400 uppercase tracking-wide">
+              <label className="text-xs font-semibold text-emerald-600 uppercase tracking-wide">
                 ল্যাব টাইপ (Lab Type)
               </label>
               <select
@@ -353,15 +324,15 @@ const LabsUnderControl = () => {
                   setFilters({ ...filters, labType: e.target.value });
                   setCurrentPage(1);
                 }}
-                className="w-full px-3 py-2 bg-emerald-950/50 border border-emerald-500/30 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-100"
+                className="w-full px-3 py-2 bg-emerald-50 border border-emerald-200 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all text-emerald-900"
               >
                 <option value="All">সকল টাইপ</option>
                 {filterOptions.labTypes.map((type) => (
                   <option className="text-black" key={type} value={type}>
                     {type === "sof"
                       ? "SOF"
-                      : type === "srdl_sof"
-                        ? "SRDL & SOF"
+                      : type === "ictdl_sof"
+                        ? "ICTDL & SOF"
                         : type.toUpperCase()}
                   </option>
                 ))}
@@ -371,7 +342,7 @@ const LabsUnderControl = () => {
             <div className="flex items-end">
               <button
                 onClick={handleResetFilters}
-                className="cursor-pointer hover:scale-105 w-full px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg shadow-sm hover:shadow transition-all text-sm font-medium flex items-center justify-center gap-2 border border-emerald-500/30"
+                className="cursor-pointer hover:scale-105 w-full px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg shadow-sm hover:shadow transition-all text-sm font-medium flex items-center justify-center gap-2 border border-emerald-100"
               >
                 <HiOutlineFilter className="w-5 h-5" />
                 Clear Filters
@@ -383,15 +354,15 @@ const LabsUnderControl = () => {
 
       {/* Error Message */}
       {error && (
-        <div className="bg-red-900/20 border border-red-500/30 text-red-300 px-4 py-3 rounded-lg backdrop-blur-sm">
+        <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg backdrop-blur-sm">
           {error}
         </div>
       )}
 
       {/* Main Table Card */}
-      <div className="bg-emerald-900/40 backdrop-blur-xl rounded-xl shadow-sm border border-emerald-500/20 overflow-hidden">
+      <div className="bg-white backdrop-blur-xl rounded-xl shadow-sm border border-emerald-100 overflow-hidden">
         {loading ? (
-          <div className="p-8 text-center text-emerald-300">
+          <div className="p-8 text-center text-emerald-600">
             <div className="animate-spin w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full mx-auto mb-4"></div>
             Loading labs data...
           </div>
@@ -399,42 +370,42 @@ const LabsUnderControl = () => {
           <div className="overflow-x-auto">
             <table className="w-full whitespace-nowrap">
               <thead>
-                <tr className="bg-emerald-950/50 border-b border-emerald-500/20 text-left">
-                  <th className="px-6 py-4 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+                <tr className="bg-emerald-50/50 border-b border-emerald-100 text-left">
+                  <th className="px-6 py-4 text-xs font-semibold text-emerald-600 uppercase tracking-wider">
                     ক্রম / ল্যাব টাইপ
                   </th>
-                  <th className="px-6 py-4 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-xs font-semibold text-emerald-600 uppercase tracking-wider">
                     প্রতিষ্ঠানের নাম
                   </th>
-                  <th className="px-6 py-4 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-xs font-semibold text-emerald-600 uppercase tracking-wider">
                     অবস্থান
                   </th>
-                  <th className="px-6 py-4 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+                  <th className="px-6 py-4 text-xs font-semibold text-emerald-600 uppercase tracking-wider">
                     যোগাযোগ
                   </th>
-                  <th className="px-6 py-4 text-xs font-semibold text-emerald-400 uppercase tracking-wider text-center no-print">
+                  <th className="px-6 py-4 text-xs font-semibold text-emerald-600 uppercase tracking-wider text-center no-print">
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-emerald-500/10">
+              <tbody className="divide-y divide-emerald-50">
                 {currentEntries.length > 0 ? (
                   currentEntries.map((lab, index) => (
                     <tr
                       key={lab.id}
-                      className="hover:bg-emerald-800/30 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
+                      className="hover:bg-emerald-50/50 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
                     >
                       <td className="px-6 py-4">
                         <div className="flex flex-col gap-1">
                           <span
                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${lab.labType === "sof"
-                              ? "bg-blue-900/50 text-blue-300 border border-blue-500/30"
-                              : "bg-purple-900/50 text-purple-300 border border-purple-500/30"
+                              ? "bg-blue-50 text-blue-600 border border-blue-100"
+                              : "bg-purple-50 text-purple-600 border border-purple-100"
                               }`}
                           >
-                            {lab.labType === "sof" ? "SOF" : "SRDL & SOF"}
+                            {lab.labType === "sof" ? "SOF" : "ICTDL & SOF"}
                           </span>
-                          <span className="text-xs text-emerald-500/50">
+                          <span className="text-xs text-emerald-400">
                             #{startIndex + index + 1}
                           </span>
                         </div>
@@ -442,33 +413,33 @@ const LabsUnderControl = () => {
                       <td className="px-6 py-4">
                         <div className="flex flex-col max-w-xs">
                           <span
-                            className="text-sm font-semibold text-white truncate"
+                            className="text-sm font-semibold text-emerald-950 truncate"
                             title={lab.institute}
                           >
                             {lab.institute}
                           </span>
-                          <span className="text-xs text-emerald-400/70 mt-1">
+                          <span className="text-xs text-emerald-500 mt-1">
                             আসন: {lab.seat}
                           </span>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col text-sm">
-                          <span className="text-emerald-100 font-medium">
+                          <span className="text-emerald-800 font-medium">
                             {lab.upazila}
                           </span>
-                          <span className="text-emerald-500/70 text-xs">
+                          <span className="text-emerald-500 text-xs">
                             বিভাগ: {lab.division}
                           </span>
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col text-sm">
-                          <span className="text-emerald-100 font-medium">
+                          <span className="text-emerald-800 font-medium">
                             {lab.head}
                           </span>
                           <div className="flex flex-col gap-0.5 mt-1">
-                            <span className="text-xs text-emerald-500/70">
+                            <span className="text-xs text-emerald-500">
                               {formatMobile(lab.mobile)}
                               {lab.altMobile
                                 ? `, ${formatMobile(lab.altMobile)}`
@@ -477,7 +448,7 @@ const LabsUnderControl = () => {
                             {lab.email && (
                               <a
                                 href={`mailto:${lab.email}`}
-                                className="text-xs text-emerald-400 hover:text-emerald-300 hover:underline"
+                                className="text-xs text-emerald-600 hover:text-emerald-800 hover:underline"
                               >
                                 {lab.email}
                               </a>
@@ -489,7 +460,7 @@ const LabsUnderControl = () => {
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             to={`/dashboard/labsUpdate/${lab.id}`}
-                            className="flex items-center gap-2 px-3 py-2 text-emerald-300 bg-emerald-900/50 hover:bg-emerald-800/50 border border-emerald-500/30 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                            className="flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                             title="Update Lab"
                           >
                             <HiOutlinePencil className="w-5 h-5" />
@@ -497,7 +468,7 @@ const LabsUnderControl = () => {
                           </Link>
                           <Link
                             to={`/dashboard/filesComplaints/${lab.id}`}
-                            className="flex items-center gap-2 px-3 py-2 text-rose-300 bg-rose-900/30 hover:bg-rose-900/50 border border-rose-500/30 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                            className="flex items-center gap-2 px-3 py-2 text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                             title="File Complaint"
                           >
                             <HiOutlineExclamationCircle className="w-5 h-5" />
@@ -505,7 +476,7 @@ const LabsUnderControl = () => {
                           </Link>
                           <button
                             onClick={() => handleOpenModal(lab)}
-                            className="cursor-pointer flex items-center gap-1.5 text-white hover:text-emerald-300 transition-colors pointer-events-auto"
+                            className="cursor-pointer flex items-center gap-1.5 text-emerald-600 hover:text-emerald-800 transition-colors pointer-events-auto"
                           >
                             <HiOutlinePencil className="w-5 h-5" />
                             Send Report
@@ -518,7 +489,7 @@ const LabsUnderControl = () => {
                   <tr>
                     <td
                       colSpan="5"
-                      className="px-6 py-8 text-center text-emerald-400/50"
+                      className="px-6 py-8 text-center text-emerald-400"
                     >
                       No labs found matching criteria.
                     </td>
@@ -530,8 +501,8 @@ const LabsUnderControl = () => {
         )}
 
         {/* Pagination */}
-        <div className="px-6 py-4 border-t border-emerald-500/20 bg-emerald-950/30 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
-          <div className="flex items-center gap-2 text-sm text-emerald-300">
+        <div className="px-6 py-4 border-t border-emerald-100 bg-emerald-50/50 flex flex-col sm:flex-row items-center justify-between gap-4 no-print">
+          <div className="flex items-center gap-2 text-sm text-emerald-600">
             <span>Show</span>
             <select
               value={entriesPerPage}
@@ -539,7 +510,7 @@ const LabsUnderControl = () => {
                 setEntriesPerPage(Number(e.target.value));
                 setCurrentPage(1);
               }}
-              className="bg-emerald-900/50 border border-emerald-500/30 rounded-md text-sm py-1 pl-2 pr-8 focus:ring-emerald-500 focus:border-emerald-500 text-emerald-100"
+              className="bg-white border border-emerald-200 rounded-md text-sm py-1 pl-2 pr-8 focus:ring-emerald-500 focus:border-emerald-500 text-emerald-900"
             >
               <option className="text-black" value={10}>
                 10
@@ -552,7 +523,7 @@ const LabsUnderControl = () => {
               </option>
             </select>
             <span>entries</span>
-            <span className="ml-2 text-emerald-500/50">
+            <span className="ml-2 text-emerald-400">
               {startIndex + 1}-
               {Math.min(startIndex + entriesPerPage, totalEntries)} of{" "}
               {totalEntries}
@@ -564,7 +535,7 @@ const LabsUnderControl = () => {
               <button
                 onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
-                className="px-3 py-1.5 border border-emerald-500/30 rounded-lg hover:bg-emerald-800/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-emerald-300 transition-all"
+                className="px-3 py-1.5 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:text-emerald-800 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-emerald-600 transition-all"
               >
                 Previous
               </button>
@@ -575,7 +546,7 @@ const LabsUnderControl = () => {
                     onClick={() => setCurrentPage(i + 1)}
                     className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
                       ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
-                      : "text-emerald-300 hover:bg-emerald-800/50 hover:text-white border border-transparent"
+                      : "text-emerald-600 hover:bg-emerald-100 hover:text-emerald-800 border border-transparent"
                       }`}
                   >
                     {i + 1}
@@ -587,7 +558,7 @@ const LabsUnderControl = () => {
                   setCurrentPage(Math.min(totalPages, currentPage + 1))
                 }
                 disabled={currentPage === totalPages}
-                className="px-3 py-1.5 border border-emerald-500/30 rounded-lg hover:bg-emerald-800/50 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-emerald-300 transition-all"
+                className="px-3 py-1.5 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:text-emerald-800 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-emerald-600 transition-all"
               >
                 Next
               </button>
@@ -598,7 +569,7 @@ const LabsUnderControl = () => {
 
       {/* Report Modal */}
       {isModalOpen && currentLab && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm print:hidden">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/20 backdrop-blur-sm print:hidden">
           <ReportForm
             onClose={handleCloseModal}
             instituteName={currentLab.institute}

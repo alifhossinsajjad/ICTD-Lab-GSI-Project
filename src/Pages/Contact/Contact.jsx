@@ -36,13 +36,13 @@ const Contact = () => {
     return (
         <section
             id="contact-section"
-            className="relative py-20 lg:py-28 bg-emerald-950 overflow-hidden font-sans"
+            className="relative py-20 lg:py-28 bg-emerald-50 overflow-hidden font-sans"
         >
             {/* Ambient Background Effects */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-emerald-600/20 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute top-[40%] -right-[10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[100px]" />
-                <div className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-teal-600/10 rounded-full blur-[80px]" />
+                <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-emerald-200/40 rounded-full blur-[120px] animate-pulse" />
+                <div className="absolute top-[40%] -right-[10%] w-[40%] h-[40%] bg-blue-200/30 rounded-full blur-[100px]" />
+                <div className="absolute -bottom-[10%] left-[20%] w-[30%] h-[30%] bg-teal-200/30 rounded-full blur-[80px]" />
             </div>
 
             <div className="relative max-w-7xl mx-auto px-6 z-10">
@@ -55,13 +55,13 @@ const Contact = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16 lg:mb-20"
                 >
-                    <span className="inline-block py-1 px-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-bold tracking-widest uppercase mb-4">
+                    <span className="inline-block py-1 px-3 rounded-full bg-emerald-100 border border-emerald-200 text-emerald-700 text-xs font-bold tracking-widest uppercase mb-4">
                         Get in Touch
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-6">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-emerald-950 tracking-tight mb-6">
                         {t("contact_title")}
                     </h2>
-                    <p className="text-emerald-100/80 max-w-2xl mx-auto text-lg leading-relaxed">
+                    <p className="text-emerald-700 max-w-2xl mx-auto text-lg leading-relaxed">
                         {t("contact_subtitle")}
                     </p>
                 </motion.div>
@@ -76,36 +76,36 @@ const Contact = () => {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="lg:col-span-5 space-y-8"
                     >
-                        <div className="bg-emerald-900/40 backdrop-blur-xl border border-emerald-500/20 rounded-3xl p-8 lg:p-10 shadow-2xl relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="bg-white backdrop-blur-xl border border-emerald-100 rounded-3xl p-8 lg:p-10 shadow-xl relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                            <h3 className="text-2xl font-bold text-white mb-2 relative z-10">{t("contact_info_title")}</h3>
-                            <p className="text-emerald-200/70 mb-8 relative z-10">{t("contact_info_desc")}</p>
+                            <h3 className="text-2xl font-bold text-emerald-950 mb-2 relative z-10">{t("contact_info_title")}</h3>
+                            <p className="text-emerald-600 mb-8 relative z-10">{t("contact_info_desc")}</p>
 
                             <div className="space-y-6 relative z-10">
                                 {contactInfo.map((item, index) => (
                                     <a
                                         key={index}
                                         href={item.link}
-                                        className="flex items-start gap-5 p-4 rounded-2xl hover:bg-white/5 transition-all duration-300 group/item"
+                                        className="flex items-start gap-5 p-4 rounded-2xl hover:bg-emerald-50 transition-all duration-300 group/item"
                                     >
                                         <div className={`w-12 h-12 rounded-xl ${item.bg} flex items-center justify-center shrink-0 group-hover/item:scale-110 transition-transform duration-300`}>
                                             <item.icon className={`text-xl ${item.color}`} />
                                         </div>
                                         <div>
-                                            <h4 className="text-emerald-100 font-semibold text-sm uppercase tracking-wide opacity-80 mb-1">{item.title}</h4>
-                                            <p className="text-white font-medium text-lg group-hover/item:text-emerald-300 transition-colors">{item.value}</p>
+                                            <h4 className="text-emerald-800 font-semibold text-sm uppercase tracking-wide opacity-80 mb-1">{item.title}</h4>
+                                            <p className="text-emerald-950 font-medium text-lg group-hover/item:text-emerald-600 transition-colors">{item.value}</p>
                                         </div>
                                     </a>
                                 ))}
                             </div>
 
                             {/* Social Links */}
-                            <div className="mt-10 pt-8 border-t border-emerald-500/20 relative z-10">
-                                <h4 className="text-emerald-100 font-semibold mb-4">Follow Us</h4>
+                            <div className="mt-10 pt-8 border-t border-emerald-100 relative z-10">
+                                <h4 className="text-emerald-800 font-semibold mb-4">Follow Us</h4>
                                 <div className="flex gap-4">
                                     {[FaFacebookF, FaTwitter, FaLinkedinIn].map((Icon, i) => (
-                                        <a key={i} href="#" className="w-10 h-10 rounded-full bg-emerald-800/50 flex items-center justify-center text-emerald-300 hover:bg-emerald-500 hover:text-white transition-all duration-300 hover:-translate-y-1">
+                                        <a key={i} href="#" className="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-300 hover:-translate-y-1 border border-emerald-100">
                                             <Icon />
                                         </a>
                                     ))}
@@ -122,8 +122,8 @@ const Contact = () => {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="lg:col-span-7"
                     >
-                        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 lg:p-12 shadow-2xl">
-                            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                        <div className="bg-white backdrop-blur-xl border border-emerald-100 rounded-3xl p-8 lg:p-12 shadow-xl">
+                            <h3 className="text-2xl font-bold text-emerald-950 mb-8 flex items-center gap-3">
                                 <span className="w-8 h-1 bg-emerald-500 rounded-full"></span>
                                 {t("contact_form_title")}
                             </h3>
@@ -131,57 +131,57 @@ const Contact = () => {
                             <form className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-emerald-200/80 ml-1">{t("contact_label_fname")}</label>
+                                        <label className="text-sm font-medium text-emerald-700 ml-1">{t("contact_label_fname")}</label>
                                         <input
                                             type="text"
                                             placeholder="John"
-                                            className="w-full px-5 py-4 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-white placeholder-emerald-500/30 focus:border-emerald-400 focus:bg-emerald-900/80 focus:ring-4 focus:ring-emerald-500/10 transition-all outline-none"
+                                            className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-emerald-200/80 ml-1">{t("contact_label_lname")}</label>
+                                        <label className="text-sm font-medium text-emerald-700 ml-1">{t("contact_label_lname")}</label>
                                         <input
                                             type="text"
                                             placeholder="Doe"
-                                            className="w-full px-5 py-4 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-white placeholder-emerald-500/30 focus:border-emerald-400 focus:bg-emerald-900/80 focus:ring-4 focus:ring-emerald-500/10 transition-all outline-none"
+                                            className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-emerald-200/80 ml-1">Email Address</label>
+                                        <label className="text-sm font-medium text-emerald-700 ml-1">Email Address</label>
                                         <input
                                             type="email"
                                             placeholder="john@example.com"
-                                            className="w-full px-5 py-4 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-white placeholder-emerald-500/30 focus:border-emerald-400 focus:bg-emerald-900/80 focus:ring-4 focus:ring-emerald-500/10 transition-all outline-none"
+                                            className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium text-emerald-200/80 ml-1">Phone Number</label>
+                                        <label className="text-sm font-medium text-emerald-700 ml-1">Phone Number</label>
                                         <input
                                             type="tel"
                                             placeholder="+880..."
-                                            className="w-full px-5 py-4 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-white placeholder-emerald-500/30 focus:border-emerald-400 focus:bg-emerald-900/80 focus:ring-4 focus:ring-emerald-500/10 transition-all outline-none"
+                                            className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-emerald-200/80 ml-1">Subject</label>
+                                    <label className="text-sm font-medium text-emerald-700 ml-1">Subject</label>
                                     <input
                                         type="text"
                                         placeholder="How can we help?"
-                                        className="w-full px-5 py-4 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-white placeholder-emerald-500/30 focus:border-emerald-400 focus:bg-emerald-900/80 focus:ring-4 focus:ring-emerald-500/10 transition-all outline-none"
+                                        className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                     />
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label className="text-sm font-medium text-emerald-200/80 ml-1">Message</label>
+                                    <label className="text-sm font-medium text-emerald-700 ml-1">Message</label>
                                     <textarea
                                         rows="4"
                                         placeholder="Write your message here..."
-                                        className="w-full px-5 py-4 rounded-xl bg-emerald-950/50 border border-emerald-500/30 text-white placeholder-emerald-500/30 focus:border-emerald-400 focus:bg-emerald-900/80 focus:ring-4 focus:ring-emerald-500/10 transition-all outline-none resize-none"
+                                        className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none resize-none"
                                     />
                                 </div>
 
@@ -189,7 +189,7 @@ const Contact = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
-                                    className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-lg rounded-xl shadow-lg shadow-emerald-900/40 hover:shadow-emerald-500/20 hover:from-emerald-500 hover:to-teal-500 transition-all duration-300"
+                                    className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-lg rounded-xl shadow-lg shadow-emerald-200/40 hover:shadow-emerald-500/20 hover:from-emerald-500 hover:to-teal-500 transition-all duration-300"
                                 >
                                     <FaPaperPlane className="text-sm" />
                                     {t("contact_btn_send")}

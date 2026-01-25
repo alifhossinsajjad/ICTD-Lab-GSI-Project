@@ -26,29 +26,29 @@ const Notice = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 4);
 
-  
+
 
 
   return (
-    <section className="relative bg-gradient-to-b from-emerald-50 via-white to-emerald-50 py-20 overflow-hidden">
+    <section className="relative bg-emerald-50 py-20 overflow-hidden">
 
 
       {/* ===== NOTICE SECTION ===== */}
       <div className="max-w-5xl mx-auto px-4">
-        
+
         {/* ===== BEAUTIFUL IMAGE MARQUEE SECTION ===== */}
         <div className="mb-16 -mx-4 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
           {/* Professional Headline */}
           <div className="text-center mb-8 px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-        ICTD Lab – Advanced GIS Research Platform
+            <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-3">
+              {t('notice_hero_title')}
             </h2>
-         
-            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-green-500 mx-auto mt-4 rounded-full" />
+
+            <div className="w-32 h-1 bg-gradient-to-r from-emerald-500 to-green-500 mx-auto mt-4 rounded-full" />
           </div>
-          
+
           <div className="relative w-full">
-            <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent" />
+            <div className="absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-emerald-200 to-transparent" />
 
             <Marquee pauseOnHover speed={60} gradient={false} className="w-full">
               {[
@@ -60,15 +60,15 @@ const Notice = () => {
                 'https://ucbd.edu.bd/wp-content/uploads/2025/08/ucbdcc4.avif',
                 'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC02298.avif'
               ].map((src, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="flex items-center justify-center opacity-0 animate-fade-in-up"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: 'forwards'
                   }}
                 >
-                  <div className="bg-white p-3 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-[600px] h-[400px] flex items-center justify-center">
+                  <div className="bg-white p-3 rounded-2xl border border-emerald-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-[600px] h-[400px] flex items-center justify-center">
                     <img
                       src={src}
                       alt={`University Campus ${index + 1}`}
@@ -77,7 +77,7 @@ const Notice = () => {
                         console.log(`Image failed to load: ${src}`);
                         // Show placeholder instead
                         e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center text-indigo-600 text-2xl font-bold">Campus ${index + 1}</div>`;
+                        e.target.parentElement.innerHTML = `<div class="w-full h-full bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-xl flex items-center justify-center text-emerald-600 text-2xl font-bold">Campus ${index + 1}</div>`;
                       }}
                     />
                   </div>
@@ -89,28 +89,28 @@ const Notice = () => {
 
         {/* Title */}
         <div className="text-center mb-12">
-        
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-            Notice Board
+
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 mt-2">
+            {t('notice_board_title')}
           </h2>
-          <div className="w-24 h-1 bg-green-600 mx-auto mt-4 rounded-full" />
+          <div className="w-24 h-1 bg-emerald-600 mx-auto mt-4 rounded-full" />
         </div>
 
         {/* Notices */}
         <div className="space-y-4">
           {isLoading ? (
-            <div className="py-12 text-center text-gray-500">
-              Loading notices...
+            <div className="py-12 text-center text-emerald-600">
+              {t('notice_loading')}
             </div>
           ) : latestNotices.length === 0 ? (
-            <div className="py-12 text-center text-gray-500">
+            <div className="py-12 text-center text-emerald-600">
               {t("notice_no_data")}
             </div>
           ) : (
             latestNotices.map((notice) => (
               <div
                 key={notice.id}
-                className="group flex items-start gap-4 p-5 bg-white border border-gray-200 rounded-xl hover:border-green-300 hover:shadow-md transition"
+                className="group flex items-start gap-4 p-5 bg-white border border-emerald-100 rounded-xl hover:border-emerald-300 hover:shadow-md transition"
               >
                 {/* Icon */}
                 <div className="w-11 h-11 flex items-center justify-center rounded-lg bg-red-50 text-red-600 shrink-0">
@@ -119,10 +119,10 @@ const Notice = () => {
 
                 {/* Content */}
                 <div className="flex-1">
-                  <p className="text-sm md:text-base font-medium text-gray-800 leading-snug line-clamp-2 group-hover:text-green-700 transition">
+                  <p className="text-sm md:text-base font-medium text-emerald-900 leading-snug line-clamp-2 group-hover:text-emerald-700 transition">
                     {notice.title}
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-emerald-600 mt-1">
                     {notice.date}
                   </p>
                 </div>
@@ -133,7 +133,7 @@ const Notice = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Download notice"
-                  className="w-9 h-9 flex items-center justify-center rounded-full text-gray-500 hover:bg-green-600 hover:text-white transition"
+                  className="w-9 h-9 flex items-center justify-center rounded-full text-emerald-400 hover:bg-emerald-600 hover:text-white transition"
                 >
                   <FaDownload className="text-xs" />
                 </a>
@@ -146,9 +146,9 @@ const Notice = () => {
         <div className="flex justify-center mt-12">
           <Link
             to="/all-notice"
-            className="inline-flex items-center gap-2 px-10 py-3 rounded-full bg-gradient-to-r from-green-600 to-green-500 text-white text-sm font-semibold shadow-lg shadow-green-300/40 hover:shadow-xl hover:scale-[1.03] transition"
+            className="inline-flex items-center gap-2 px-10 py-3 rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 text-white text-sm font-semibold shadow-lg shadow-emerald-300/40 hover:shadow-xl hover:scale-[1.03] transition"
           >
-            View All Notices
+            {t('notice_view_all')}
             <FaArrowRight />
           </Link>
         </div>

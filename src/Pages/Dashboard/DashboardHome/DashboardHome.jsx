@@ -53,7 +53,7 @@ const DashboardHome = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 p-4 sm:p-6 bg-emerald-950 min-h-screen">
+    <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8 p-4 sm:p-6 bg-emerald-50 min-h-screen">
       {/* Header Section */}
       <SRDRechart></SRDRechart>
 
@@ -62,8 +62,8 @@ const DashboardHome = () => {
         animate={{ opacity: 1, y: 0 }}
         className="text-center space-y-3 mb-8 sm:mb-12 px-4"
       >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-          ল্যাবের জন্য উপযুক্ত <span className="text-emerald-400">শিক্ষা প্রতিষ্ঠানের মানদণ্ড</span>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-950">
+          ল্যাবের জন্য উপযুক্ত <span className="text-emerald-600">শিক্ষা প্রতিষ্ঠানের মানদণ্ড</span>
         </h1>
 
         <div className="h-1 w-20 sm:w-24 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 mx-auto rounded-full mt-4"></div>
@@ -72,7 +72,7 @@ const DashboardHome = () => {
       {/* Enhanced Vertical Timeline/Stepper Diagram */}
       <div className="relative max-w-5xl mx-auto px-2 sm:px-4">
         {/* Vertical connecting line */}
-        <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 sm:w-1 bg-gradient-to-b from-emerald-800 via-emerald-700 to-blue-900 hidden md:block"></div>
+        <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-0.5 sm:w-1 bg-gradient-to-b from-emerald-200 via-emerald-100 to-blue-200 hidden md:block"></div>
 
         <div className="space-y-4 sm:space-y-6">
           {labSetup.map((item, index) => (
@@ -85,7 +85,7 @@ const DashboardHome = () => {
             >
               {/* Timeline Badge */}
               <div className="absolute left-0 md:left-8 transform md:-translate-x-1/2 z-10">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shadow-lg border-2 sm:border-4 border-emerald-950">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg border-2 sm:border-4 border-emerald-50">
                   <span className="text-white font-bold text-lg sm:text-xl">{item.id}</span>
                 </div>
               </div>
@@ -94,13 +94,13 @@ const DashboardHome = () => {
               <div className="ml-16 sm:ml-24 md:ml-32 group">
                 <motion.div
                   whileHover={{ scale: 1.02, x: 10 }}
-                  className="bg-emerald-900/40 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 p-4 sm:p-6 border border-emerald-500/20 border-l-4 border-l-emerald-500 relative overflow-hidden"
+                  className="bg-white backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 p-4 sm:p-6 border border-emerald-100 border-l-4 border-l-emerald-500 relative overflow-hidden"
                 >
                   {/* Decorative gradient overlay */}
-                  <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-emerald-500/10 to-blue-500/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-gradient-to-br from-emerald-50 to-blue-50 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                   {/* Step number indicator */}
-                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4 text-4xl sm:text-6xl font-bold text-emerald-800/20 group-hover:text-emerald-700/30 transition-colors">
+                  <div className="absolute top-2 right-2 sm:top-4 sm:right-4 text-4xl sm:text-6xl font-bold text-emerald-100 group-hover:text-emerald-200 transition-colors">
                     {String(item.id).padStart(2, '0')}
                   </div>
 
@@ -108,7 +108,7 @@ const DashboardHome = () => {
                   <div className="relative z-10">
                     <div className="flex items-start gap-3 sm:gap-4">
                       {/* Icon/Badge for mobile */}
-                      <div className="md:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shadow-md flex-shrink-0">
+                      <div className="md:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md flex-shrink-0">
                         <span className="text-white font-bold text-sm sm:text-base">{item.id}</span>
                       </div>
 
@@ -116,12 +116,12 @@ const DashboardHome = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                           <div className="h-0.5 sm:h-1 w-8 sm:w-12 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full"></div>
-                          <span className="text-xs sm:text-sm font-semibold text-emerald-400 uppercase tracking-wider">
+                          <span className="text-xs sm:text-sm font-semibold text-emerald-600 uppercase tracking-wider">
                             মানদণ্ড {item.id}
                           </span>
                         </div>
 
-                        <p className="text-emerald-100 leading-relaxed text-sm sm:text-base md:text-lg text-justify pr-8 sm:pr-16">
+                        <p className="text-emerald-800 leading-relaxed text-sm sm:text-base md:text-lg text-justify pr-8 sm:pr-16">
                           {item.description}
                         </p>
                       </div>
@@ -144,7 +144,7 @@ const DashboardHome = () => {
           className="relative mt-6 sm:mt-8"
         >
           <div className="absolute left-0 md:left-8 transform md:-translate-x-1/2 z-10">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-600 to-emerald-600 flex items-center justify-center shadow-lg border-2 sm:border-4 border-emerald-950">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center shadow-lg border-2 sm:border-4 border-emerald-50">
               <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
@@ -152,9 +152,9 @@ const DashboardHome = () => {
           </div>
 
           <div className="ml-16 sm:ml-24 md:ml-32">
-            <div className="bg-gradient-to-r from-emerald-900/80 to-blue-900/80 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 text-white text-center border border-emerald-500/30">
+            <div className="bg-gradient-to-r from-emerald-600 to-blue-600 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 text-white text-center border border-emerald-500/30">
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">সকল মানদণ্ড পূরণ করুন</h3>
-              <p className="text-sm sm:text-base text-emerald-200/80">উপরের সকল শর্ত পূরণ করলে আপনার প্রতিষ্ঠান ল্যাব স্থাপনের জন্য উপযুক্ত বিবেচিত হবে</p>
+              <p className="text-sm sm:text-base text-emerald-100">উপরের সকল শর্ত পূরণ করলে আপনার প্রতিষ্ঠান ল্যাব স্থাপনের জন্য উপযুক্ত বিবেচিত হবে</p>
             </div>
           </div>
         </motion.div>

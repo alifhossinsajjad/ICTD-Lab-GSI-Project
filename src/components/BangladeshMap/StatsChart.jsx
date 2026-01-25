@@ -69,17 +69,17 @@ export const StatsChart = ({ division }) => {
     };
 
     return (
-        <div className="w-full h-full bg-emerald-900/20 backdrop-blur-sm p-8 rounded-[2rem] border-4 border-emerald-500/10 shadow-2xl flex flex-col transition-all duration-500 hover:shadow-emerald-500/20 relative overflow-hidden group">
+        <div className="w-full h-full  backdrop-blur-sm p-8 rounded-[2rem] border-4 border-emerald-500/10 shadow-2xl flex flex-col transition-all duration-500 hover:shadow-emerald-500/20 relative overflow-hidden group">
             {/* Background Decoration */}
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
 
             <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                     <div>
-                        <h2 className="text-2xl font-black text-white tracking-tight">
+                        <h2 className="text-2xl font-black text-black tracking-tight">
                             {activeDivision.name} <span className="text-emerald-400">Division</span>
                         </h2>
-                        <p className="text-sm text-emerald-200/80 font-medium">Infrastructure & Lab Distribution</p>
+                        <p className="text-sm text-emerald-400/80 font-medium">Infrastructure & Lab Distribution</p>
                     </div>
                     <div className="bg-emerald-500/10 p-3 rounded-2xl">
                         <FaChartBar className="text-emerald-400 text-xl" />
@@ -90,11 +90,11 @@ export const StatsChart = ({ division }) => {
                 <div className="grid grid-cols-2 gap-4 mb-8">
                     <div className="bg-emerald-500/10 p-4 rounded-2xl border border-emerald-500/20">
                         <p className="text-[10px] uppercase tracking-wider font-bold text-emerald-400 mb-1">Total Institutions</p>
-                        <p className="text-xl font-black text-white">{activeDivision.stats.total.institutions.toLocaleString()}</p>
+                        <p className="text-xl font-black text-black">{activeDivision.stats.total.institutions.toLocaleString()}</p>
                     </div>
                     <div className="bg-rose-500/10 p-4 rounded-2xl border border-rose-500/20">
                         <p className="text-[10px] uppercase tracking-wider font-bold text-rose-400 mb-1">Total SRDL Labs</p>
-                        <p className="text-xl font-black text-white">{activeDivision.stats.total.labs.toLocaleString()}</p>
+                        <p className="text-xl font-black text-black">{activeDivision.stats.total.labs.toLocaleString()}</p>
                     </div>
                 </div>
             </div>

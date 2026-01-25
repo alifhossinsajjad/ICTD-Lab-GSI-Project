@@ -41,17 +41,17 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="bg-white-400/80 backdrop-blur-md border-b border-emerald-100/20 fixed w-full z-50">
+    <header className="bg-white/90 backdrop-blur-md border-b border-emerald-100 fixed w-full z-50 shadow-sm">
       {/* Running Marquee Banner */}
-      <div className="bg-gradient-to-r from-emerald-800 via-emerald-700 to-emerald-800 text-white py-2.5 overflow-hidden relative border-b border-emerald-500/20">
+      <div className="bg-gradient-to-r from-emerald-50 via-white to-emerald-50 text-emerald-900 py-2.5 overflow-hidden relative border-b border-emerald-100">
         {/* Decorative pattern overlay */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px]" />
 
         <div className="relative flex items-center">
           {/* Announcement Icon */}
-          <div className="flex-shrink-0 px-4 flex items-center gap-2 bg-emerald-900/50 py-1 rounded-r-full border border-emerald-500/30 border-l-0">
-            <FiBell className="text-yellow-300 animate-pulse" size={18} />
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-100">
+          <div className="flex-shrink-0 px-4 flex items-center gap-2 bg-white/80 py-1 rounded-r-full border border-emerald-200 border-l-0 shadow-sm">
+            <FiBell className="text-red-500 animate-pulse" size={18} />
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-800">
               সর্বশেষ আপডেট
             </span>
           </div>
@@ -61,11 +61,11 @@ const Navbar = () => {
             <div className="animate-marquee whitespace-nowrap inline-block">
               {announcements.map((announcement, index) => (
                 <span key={index} className="inline-flex items-center mx-8">
-                  <span className="text-sm font-medium text-emerald-50">
+                  <span className="text-sm font-medium text-emerald-800">
                     {announcement}
                   </span>
                   {index < announcements.length - 1 && (
-                    <span className="mx-8 text-yellow-300">●</span>
+                    <span className="mx-8 text-red-400">●</span>
                   )}
                 </span>
               ))}
@@ -75,11 +75,11 @@ const Navbar = () => {
                   key={`dup-${index}`}
                   className="inline-flex items-center mx-8"
                 >
-                  <span className="text-sm font-medium text-emerald-50">
+                  <span className="text-sm font-medium text-emerald-800">
                     {announcement}
                   </span>
                   {index < announcements.length - 1 && (
-                    <span className="mx-8 text-yellow-300">●</span>
+                    <span className="mx-8 text-red-400">●</span>
                   )}
                 </span>
               ))}
@@ -98,34 +98,33 @@ const Navbar = () => {
           <img
             src={logo}
             alt="ICTD Logo"
-            className="w-14 drop-shadow-lg group-hover:scale-105 transition-transform duration-300"
+            className="w-14 drop-shadow-md group-hover:scale-105 transition-transform duration-300"
           />
           <div>
-            <h1 className="text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+            <h1 className="text-xl font-bold text-emerald-950 group-hover:text-emerald-700 transition-colors">
               ICTD Lab
             </h1>
-            <p className="text-sm text-emerald-200/70">GIS Platform</p>
+            <p className="text-sm text-emerald-600">GIS Platform</p>
           </div>
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex flex-1 items-center justify-center">
-          <nav className="flex items-center space-x-6 bg-emerald-900/40 px-8 py-2 rounded-full border border-emerald-500/20 backdrop-blur-sm">
+          <nav className="flex items-center space-x-6 bg-emerald-50/80 px-8 py-2 rounded-full border border-emerald-100 backdrop-blur-sm shadow-sm">
             {navItems.map((item) => {
               const isActive = location.pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`relative px-2 py-1 font-medium transition-all duration-300 ${
-                    isActive
-                      ? "text-white"
-                      : "text-emerald-200/80 hover:text-white"
-                  }`}
+                  className={`relative px-2 py-1 font-medium transition-all duration-300 ${isActive
+                      ? "text-emerald-800"
+                      : "text-emerald-600 hover:text-emerald-900"
+                    }`}
                 >
                   <span>{item.label}</span>
                   {isActive && (
-                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-400 to-green-300 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+                    <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-emerald-500 to-green-400 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
                   )}
                 </Link>
               );
@@ -137,14 +136,14 @@ const Navbar = () => {
         <div className="hidden lg:flex items-center space-x-4">
           <button
             onClick={toggleLanguage}
-            className="cursor-pointer hover:scale-105 px-4 py-2 bg-emerald-900/50 hover:bg-emerald-800 text-emerald-100 hover:text-white rounded-lg font-medium text-sm transition-all duration-300 border border-emerald-500/30 shadow-sm"
+            className="cursor-pointer hover:scale-105 px-4 py-2 bg-white hover:bg-emerald-50 text-emerald-700 hover:text-emerald-900 rounded-lg font-medium text-sm transition-all duration-300 border border-emerald-200 shadow-sm"
           >
             {i18n.language === "bn" ? "বাংলা" : "English"}
           </button>
 
           <Link
             to={"/login"}
-            className="cursor-pointer hover:scale-105 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-lg shadow-red-900/20 border border-red-500/30 font-medium tracking-wide"
+            className="cursor-pointer hover:scale-105 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-lg transition-all duration-300 shadow-lg shadow-red-500/20 border border-red-400 font-medium tracking-wide"
           >
             {t("login")}
           </Link>
@@ -152,7 +151,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-white text-2xl hover:text-emerald-300 transition-colors"
+          className="lg:hidden text-emerald-800 text-2xl hover:text-emerald-600 transition-colors"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FiX /> : <FiMenu />}
@@ -161,13 +160,13 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="lg:hidden bg-emerald-900/95 backdrop-blur-xl shadow-xl border-t border-emerald-500/20 animate-slideDown absolute w-full">
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl shadow-xl border-t border-emerald-100 animate-slideDown absolute w-full">
           <nav className="flex flex-col space-y-2 p-4">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
-                className="flex items-center gap-2 px-4 py-3 hover:bg-emerald-800/50 rounded-lg font-medium text-emerald-100 hover:text-white transition-all duration-300 border border-transparent hover:border-emerald-500/30"
+                className="flex items-center gap-2 px-4 py-3 hover:bg-emerald-50 rounded-lg font-medium text-emerald-800 hover:text-emerald-950 transition-all duration-300 border border-transparent hover:border-emerald-100"
                 onClick={() => setMenuOpen(false)}
               >
                 <span>{item.label}</span>
@@ -175,7 +174,7 @@ const Navbar = () => {
             ))}
 
             <Link to={"/login"} onClick={() => setMenuOpen(false)}>
-              <button className="w-full bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg mt-2 transition-all duration-300 shadow-lg border border-emerald-500/30">
+              <button className="w-full bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg mt-2 transition-all duration-300 shadow-lg border border-red-400">
                 {t("login")}
               </button>
             </Link>
@@ -185,7 +184,7 @@ const Navbar = () => {
                 toggleLanguage();
                 setMenuOpen(false);
               }}
-              className="w-full px-4 py-3 bg-emerald-950/50 hover:bg-emerald-800 text-emerald-100 hover:text-white rounded-lg font-medium text-sm mt-2 border border-emerald-500/30 transition-all"
+              className="w-full px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 hover:text-emerald-950 rounded-lg font-medium text-sm mt-2 border border-emerald-200 transition-all"
             >
               {i18n.language === "en" ? "English" : "বাংলা"}
             </button>

@@ -241,16 +241,16 @@ const Banner = () => {
         </div>
 
 
-        {/* ✅ STATS (Glass BG) */}
+        {/* ✅ STATS (Light Glass BG) */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-5xl">
           <div
             className="
-      bg-white/15
+      bg-white/90
       hidden md:block
-      backdrop-blur-3xl
-      border border-white/20
+      backdrop-blur-xl
+      border border-emerald-100
       rounded-3xl
-      shadow-[0_12px_45px_rgba(0,0,0,0.20)]
+      shadow-[0_12px_45px_rgba(0,0,0,0.10)]
       px-4 sm:px-7 py-5
     "
           >
@@ -262,7 +262,7 @@ const Banner = () => {
             flex items-center gap-4
             px-4 py-3
             rounded-2xl
-            hover:bg-white/10
+            hover:bg-emerald-50
             transition-all duration-300
             md:justify-center
           "
@@ -271,20 +271,20 @@ const Banner = () => {
                   <div
                     className="
               w-12 h-12 rounded-2xl
-              bg-white/20
+              bg-emerald-100
               flex items-center justify-center
-              border border-white/20
+              border border-emerald-200
             "
                   >
-                    <div className="text-white">{stat.icon}</div>
+                    <div className="text-emerald-600">{stat.icon}</div>
                   </div>
 
                   {/* TEXT */}
                   <div className="leading-tight">
-                    <h3 className="text-2xl font-extrabold text-white">
+                    <h3 className="text-2xl font-extrabold text-emerald-900">
                       {stat.count}
                     </h3>
-                    <p className="text-sm text-white/80">{stat.label}</p>
+                    <p className="text-sm text-emerald-700">{stat.label}</p>
                   </div>
                 </div>
               ))}

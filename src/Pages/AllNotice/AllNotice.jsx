@@ -133,7 +133,7 @@ const AllNotice = () => {
               {isLoading || isFetching ? (
                 <tr>
                   <td colSpan="4" className="py-12 text-center text-emerald-200/50">
-                    Loading...
+                    {t('notice_loading')}
                   </td>
                 </tr>
               ) : paginated.length === 0 ? (
