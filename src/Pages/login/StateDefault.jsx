@@ -1,90 +1,105 @@
-import React from 'react'
+import React from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
 
-function StateDefault({ showPassword, setShowPassword, loginFormData, handleFormFieldChanges, handleStateDefault }) {
+function StateDefault({
+  showPassword,
+  setShowPassword,
+  loginFormData,
+  handleFormFieldChanges,
+  handleStateDefault,
+}) {
+  return (
+    <>
+      {/* Login Card */}
+      <div className="w-full h-full">
+        <h4 className="text-center text-2xl font-bold text-white mb-8 tracking-wide">
+          প্রবেশ করুন
+        </h4>
 
-    return (
-        <>
-            {/* Login Card */}
-            <div className='w-full h-full'>
-
-                <h4 className="text-center text-2xl font-bold text-white mb-8 tracking-wide">
-                    প্রবেশ করুন
-                </h4>
-
-                {/* User ID */}
-                <div className="relative mb-6 group">
-                    <input
-                        type="text"
-                        name="email"
-                        onChange={handleFormFieldChanges}
-                        value={loginFormData.email}
-                        required={true}
-                        placeholder="ইউজার আইডি"
-                        className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
+        {/* User ID */}
+        <div className="relative mb-6 group">
+          <input
+            type="text"
+            name="email"
+            onChange={handleFormFieldChanges}
+            value={loginFormData.email}
+            required={true}
+            placeholder="ইউজার আইডি"
+            className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
                          focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 placeholder-emerald-300/60 transition-all duration-300"
-                    />
-                    <FaUserAlt className="absolute right-4 top-4 text-emerald-500 group-focus-within:text-emerald-300 transition-colors" />
-                </div>
+          />
+          <FaUserAlt className="absolute right-4 top-4 text-emerald-500 group-focus-within:text-emerald-300 transition-colors" />
+        </div>
 
-                {/* Password */}
-                <div className="relative mb-6 group">
-                    <input
-                        onChange={handleFormFieldChanges}
-                        value={loginFormData.password}
-                        type={showPassword ? "text" : "password"}
-                        required={true}
-                        name="password"
-                        placeholder="পাসওয়ার্ড"
-                        className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
+        {/* Password */}
+        <div className="relative mb-6 group">
+          <input
+            onChange={handleFormFieldChanges}
+            value={loginFormData.password}
+            type={showPassword ? "text" : "password"}
+            required={true}
+            name="password"
+            placeholder="পাসওয়ার্ড"
+            className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
                          focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 placeholder-emerald-300/60 transition-all duration-300"
-                    />
+          />
 
-                    <span className="absolute right-4 top-4 text-emerald-500 cursor-pointer hover:text-emerald-300 transition-colors">
-                        {
-                            !loginFormData.password.trim().length > 0 ? <FaLock /> : <span onClick={() => {
-                                setShowPassword((prev) => !prev);
-                            }} className="text-lg">
-                                {
-                                    showPassword ? <FaRegEye /> : <FaRegEyeSlash />
-                                }
-                            </span>
-                        }
-                    </span>
-                </div>
+          <span className="absolute right-4 top-4 text-emerald-500 cursor-pointer hover:text-emerald-300 transition-colors">
+            {!loginFormData.password.trim().length > 0 ? (
+              <FaLock />
+            ) : (
+              <span
+                onClick={() => {
+                  setShowPassword((prev) => !prev);
+                }}
+                className="text-lg"
+              >
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+              </span>
+            )}
+          </span>
+        </div>
 
-                {/* Remember + Button */}
-                <div className="flex items-center justify-between mb-8 text-sm">
-                    <label className="flex items-center gap-2 text-emerald-200/80 hover:text-white cursor-pointer transition-colors select-none">
-                        <input type="checkbox" name="remmember-me" className="accent-emerald-500 w-4 h-4 cursor-pointer rounded border-emerald-500/30 bg-emerald-900/50" />
-                        মনে রাখুন
-                    </label>
+        {/* Remember + Button */}
+        <div className="flex items-center justify-between mb-8 text-sm">
+          <label className="flex items-center gap-2 text-emerald-200/80 hover:text-white cursor-pointer transition-colors select-none">
+            <input
+              type="checkbox"
+              name="remmember-me"
+              className="accent-emerald-500 w-4 h-4 cursor-pointer rounded border-emerald-500/30 bg-emerald-900/50"
+            />
+            মনে রাখুন
+          </label>
 
-                    <button type="submit"
-                        className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
                          hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5"
-                    >
-                        প্রবেশ করুন
-                    </button>
-                </div>
+          >
+            প্রবেশ করুন
+          </button>
+        </div>
 
-                {/* Forgot + Register */}
-                <div className="flex justify-between items-center border-t border-emerald-500/20 pt-6">
-                    {/* Forgot */}
-                    <p className="text-sm text-emerald-300/80 hover:text-emerald-200 hover:underline cursor-pointer transition-colors">
-                        পাসওয়ার্ড ভুলে গেছেন?
-                    </p>
+        {/* Forgot + Register */}
+        <div className="flex justify-between items-center border-t border-emerald-500/20 pt-6">
+          {/* Forgot */}
+          <p className="text-sm text-emerald-300/80 hover:text-emerald-200 hover:underline cursor-pointer transition-colors">
+            পাসওয়ার্ড ভুলে গেছেন?
+          </p>
 
-                    {/* Register */}
-                    <p onClick={handleStateDefault} className="text-sm text-emerald-300 font-medium hover:text-white hover:underline cursor-pointer transition-colors">
-                        নিবন্ধন করুন
-                    </p>
-                </div>
-            </div>
-        </>
-    )
+          {/* Register */}
+          <p
+            onClick={handleStateDefault}
+            className="text-sm text-emerald-300 font-medium hover:text-white hover:underline cursor-pointer transition-colors"
+          >
+            নিবন্ধন করুন
+          </p>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default StateDefault
+export default StateDefault;
