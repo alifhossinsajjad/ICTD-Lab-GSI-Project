@@ -11,6 +11,8 @@ function StateRegistration({
   loginFormData,
   handleFormFieldChanges,
   handleStateRegistration,
+  setLoginFormData,
+  LoginPageStateOptions,
 }) {
   const [showRegisterPassword, setShowRegisterPassword] = useState(false);
   const [showRegisterRetypePassword, setShowRegisterRetypePassword] =
@@ -30,7 +32,7 @@ function StateRegistration({
           onChange={handleFormFieldChanges}
           value={loginFormData.email}
           required={true}
-          placeholder="ইউজার আইডি"
+          placeholder="ইউজার ইমেইল"
           className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
                              focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 placeholder-emerald-300/60 transition-all duration-300"
         />
@@ -67,7 +69,7 @@ function StateRegistration({
       </div>
 
       {/* Retype-Password */}
-      <div className="relative mb-6 group">
+      <div className="relative mb-2 group">
         <input
           onChange={handleFormFieldChanges}
           value={loginFormData.retypePassword}
@@ -95,22 +97,43 @@ function StateRegistration({
         </span>
       </div>
 
+      <label className="flex items-center gap-2 text-emerald-200/80 hover:text-white cursor-pointer transition-colors select-none mb-6">
+        <input
+          type="checkbox"
+          name="remmember-me"
+          className="accent-emerald-500 w-4 h-4 cursor-pointer rounded border-emerald-500/30 bg-emerald-900/50"
+        />
+        মনে রাখুন
+      </label>
+      {/* 
+      <section className="w-full flex items-center justify-center my-5">
+        {loginFormData.password !== loginFormData.retypePassword
+          ? "password not matched"
+          : "password matched"}
+      </section> */}
+
       {/* Remember + Button */}
-      <div className="flex items-center justify-between mb-2 text-sm">
-        <label className="flex items-center gap-2 text-emerald-200/80 hover:text-white cursor-pointer transition-colors select-none">
-          <input
-            type="checkbox"
-            name="remmember-me"
-            className="accent-emerald-500 w-4 h-4 cursor-pointer rounded border-emerald-500/30 bg-emerald-900/50"
-          />
-          মনে রাখুন
-        </label>
+      <div className="flex w-full items-center justify-between mb-2 text-sm">
+        <button
+          type="button"
+          onClick={() => {
+            setLoginFormData((prev) => ({
+              ...prev,
+              pageState: LoginPageStateOptions[0],
+            }));
+            localStorage.setItem("LoginPageState", LoginPageStateOptions[0]);
+          }}
+          className="w-[48%] bg-gradient-to-r from-red-950 to-red-500 text-white px-8 py-2.5 rounded-xl
+                             hover:from-red-950 hover:to-red-700 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer"
+        >
+          বাতিল করুন
+        </button>
 
         <button
           type="button"
           onClick={handleStateRegistration}
-          className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
-                             hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5"
+          className="w-[48%] bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
+                             hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer"
         >
           নিবন্ধন করুন
         </button>
