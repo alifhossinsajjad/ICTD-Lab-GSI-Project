@@ -12,6 +12,7 @@ import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import heroBg1 from "../../../assets/banner/heroBg1.jpg";
 import heroBg2 from "../../../assets/banner/heroBg2.jpg";
 import heroBg3 from "../../../assets/banner/heroBg3.jpg";
+import { Link, useNavigate } from "react-router";
 
 const SLIDE_DURATION = 4000;
 
@@ -134,6 +135,9 @@ const Banner = () => {
 
     return () => clearTimeout(timerRef.current);
   }, [current, paused, slides.length]);
+  
+
+  const navigate = useNavigate();
 
   return (
     <section
@@ -192,14 +196,18 @@ const Banner = () => {
               </p>
 
               <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center sm:justify-start">
-                <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-sm transition-colors">
+                <Link to="/labdetails">
+                <button className="cursor-pointer bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-sm transition-colors">
                   {slides[current].btn1}
                   <FaArrowRight />
                 </button>
-
-                <button className="bg-white text-emerald-700 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 shadow-sm transition-colors">
+                </Link>
+               
+               {/* <Link to="/labdetails">
+                <button className="cursor-pointer bg-white text-emerald-700 px-6 py-3 rounded-lg font-semibold hover:bg-emerald-50 shadow-sm transition-colors">
                   {slides[current].btn2}
                 </button>
+                </Link> */}
               </div>
             </motion.div>
 
