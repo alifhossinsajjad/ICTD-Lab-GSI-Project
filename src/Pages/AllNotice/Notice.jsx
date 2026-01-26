@@ -52,7 +52,6 @@ const Notice = () => {
 
             <Marquee pauseOnHover speed={60} gradient={false} className="w-full">
               {[
-                'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC00170-1.avif',
                 'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC00690.avif',
                 'https://ucbd.edu.bd/wp-content/uploads/2025/08/ucbdcc2.avif',
                 'https://ucbd.edu.bd/wp-content/uploads/2025/08/DSC02243.avif',

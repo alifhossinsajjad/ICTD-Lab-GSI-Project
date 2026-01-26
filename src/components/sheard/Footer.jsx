@@ -6,7 +6,6 @@ import {
 } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-
 const Footer = () => {
   const { t } = useTranslation();
   return (
@@ -15,10 +14,7 @@ const Footer = () => {
       {/* Partner Marquee */}
 
       {/* Main Content with Background */}
-      <div
-      
-        className="relative w-full bg-cover bg-center"
-      >
+      <div className="relative w-full bg-cover bg-center">
         {/* Light Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/95 via-emerald-50/90 to-emerald-100/85"></div>
 

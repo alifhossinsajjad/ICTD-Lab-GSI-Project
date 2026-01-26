@@ -158,13 +158,13 @@ const Goals = () => {
 
 
       <div className="mt-16 text-center">
-        <div className="inline-flex items-center justify-center gap-4 px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-full">
+        {/* <div className="inline-flex items-center justify-center gap-4 px-6 py-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-full">
           <div className="w-3 h-3 rounded-full bg-green-600 animate-pulse"></div>
           <p className="text-gray-700 font-medium">
             {t("goals_footer")}
           </p>
           <div className="w-3 h-3 rounded-full bg-emerald-700 animate-pulse delay-300"></div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

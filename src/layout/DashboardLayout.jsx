@@ -34,7 +34,7 @@ const DashboardLayout = () => {
   const menuItems = [
     {
       path: "/dashboard",
-      name: "Dashboard Home",
+      name: "Dashboard",
       icon: <HiOutlineHome className="w-5 h-5" />,
     },
     {
@@ -49,7 +49,7 @@ const DashboardLayout = () => {
     },
     {
       path: "/dashboard/labsUnderControl",
-      name: "Labs Under Control",
+      name: "Labs Control",
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
     },
     // {
@@ -271,7 +271,7 @@ const DashboardLayout = () => {
           <footer className="bg-white/50 backdrop-blur-md border-t border-emerald-100 text-emerald-600 text-center p-4 mt-auto rounded-t-2xl">
             <h1 className="text-sm">
               <span className="font-bold text-emerald-700">Copyright </span>©
-              2025 <span className="text-red-500 font-bold">DoICT</span> . All
+              {new Date().getFullYear()} <span className=" text-emerald-700 font-bold">DoICT</span> . All
               rights reserved.
             </h1>
           </footer>

@@ -58,7 +58,7 @@ export const StatsChart = ({ division }) => {
                             <span className="font-bold text-emerald-100">{payload[0].value.toLocaleString()}</span>
                         </p>
                         <p className="text-xs flex items-center justify-between gap-4">
-                            <span className="text-rose-400 font-medium">SRDL Labs:</span>
+                            <span className="text-rose-400 font-medium">ICTD Labs:</span>
                             <span className="font-bold text-emerald-100">{payload[1].value.toLocaleString()}</span>
                         </p>
                     </div>
@@ -93,7 +93,7 @@ export const StatsChart = ({ division }) => {
                         <p className="text-xl font-black text-black">{activeDivision.stats.total.institutions.toLocaleString()}</p>
                     </div>
                     <div className="bg-rose-500/10 p-4 rounded-2xl border border-rose-500/20">
-                        <p className="text-[10px] uppercase tracking-wider font-bold text-rose-400 mb-1">Total SRDL Labs</p>
+                        <p className="text-[10px] uppercase tracking-wider font-bold text-rose-400 mb-1">Total ICTD Labs</p>
                         <p className="text-xl font-black text-black">{activeDivision.stats.total.labs.toLocaleString()}</p>
                     </div>
                 </div>

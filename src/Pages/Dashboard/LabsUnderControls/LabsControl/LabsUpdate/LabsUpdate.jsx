@@ -194,7 +194,7 @@ const LabsUpdate = () => {
                 <Select {...register("lab_type", { required: "Required" })}>
                   <option value="">টাইপ নির্বাচন করুন</option>
                   <option value="sof">SOF</option>
-                  <option value="srdl_sof">SRDL & SOF</option>
+                  <option value="srdl_sof">ICTD & SOF</option>
                 </Select>
               </InputGroup>
 

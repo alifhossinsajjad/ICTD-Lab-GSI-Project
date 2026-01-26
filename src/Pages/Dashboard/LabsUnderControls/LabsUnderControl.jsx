@@ -8,7 +8,7 @@ import {
   HiOutlinePrinter,
   HiOutlineRefresh,
 } from "react-icons/hi";
-import { FaFileCsv, FaFileExcel } from "react-icons/fa";
+import { FaBookOpen, FaFileCsv, FaFileExcel } from "react-icons/fa";
 import * as XLSX from "xlsx";
 import { Link } from "react-router";
 import ReportForm from "./ReportForm/ReportForm";
@@ -34,8 +34,6 @@ const LabsUnderControl = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentLab, setCurrentLab] = useState(null);
-
-
 
   // Fetch filter options on mount
   useEffect(() => {
@@ -194,7 +192,9 @@ const LabsUnderControl = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 no-print">
         <div>
-          <h1 className="text-4xl font-bold text-emerald-950">ডিজিটাল ল্যাব </h1>
+          <h1 className="text-4xl font-bold text-emerald-950">
+            ডিজিটাল ল্যাব{" "}
+          </h1>
           <p className="text-emerald-600 mt-2 text-lg">
             লক্ষ্মীপুর দেশের ডিজিটাল ল্যাব ম্যানেজমেন্ট সম্পর্কে মনোন করুন
           </p>
@@ -396,17 +396,18 @@ const LabsUnderControl = () => {
                       className="hover:bg-emerald-50/50 transition-all duration-300 group border-l-4 border-transparent hover:border-emerald-500"
                     >
                       <td className="px-6 py-4">
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-1 items-center space-y-1.5">
                           <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${lab.labType === "sof"
-                              ? "bg-blue-50 text-blue-600 border border-blue-100"
-                              : "bg-purple-50 text-purple-600 border border-purple-100"
-                              }`}
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium w-fit ${
+                              lab.labType === "sof"
+                                ? "bg-blue-50 text-blue-600 border border-blue-100"
+                                : "bg-purple-50 text-purple-600 border border-purple-100"
+                            }`}
                           >
                             {lab.labType === "sof" ? "SOF" : "ICTDL & SOF"}
                           </span>
                           <span className="text-xs text-emerald-400">
-                            #{startIndex + index + 1}
+                            {startIndex + index + 1}
                           </span>
                         </div>
                       </td>
@@ -456,7 +457,7 @@ const LabsUnderControl = () => {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-right no-print">
+                      <td className="px-4 py-2 text-right no-print">
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             to={`/dashboard/labsUpdate/${lab.id}`}
@@ -476,9 +477,10 @@ const LabsUnderControl = () => {
                           </Link>
                           <button
                             onClick={() => handleOpenModal(lab)}
-                            className="cursor-pointer flex items-center gap-1.5 text-emerald-600 hover:text-emerald-800 transition-colors pointer-events-auto"
+                            className="flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                            title="send report"
                           >
-                            <HiOutlinePencil className="w-5 h-5" />
+                            <FaBookOpen className="w-5 h-5" />
                             Send Report
                           </button>
                         </div>
@@ -544,10 +546,11 @@ const LabsUnderControl = () => {
                   <button
                     key={i + 1}
                     onClick={() => setCurrentPage(i + 1)}
-                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${currentPage === i + 1
-                      ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
-                      : "text-emerald-600 hover:bg-emerald-100 hover:text-emerald-800 border border-transparent"
-                      }`}
+                    className={`w-8 h-8 rounded-lg text-sm font-medium transition-colors ${
+                      currentPage === i + 1
+                        ? "bg-emerald-600 text-white shadow-sm border border-emerald-500"
+                        : "text-emerald-600 hover:bg-emerald-100 hover:text-emerald-800 border border-transparent"
+                    }`}
                   >
                     {i + 1}
                   </button>
@@ -579,6 +582,6 @@ const LabsUnderControl = () => {
       )}
     </div>
   );
-}
+};
 
 export default LabsUnderControl;

@@ -135,36 +135,33 @@ const Lab = () => {
       initial="hidden"
       animate="visible"
       variants={containerVariants}
-      className="min-h-screen bg-emerald-950 py-8 px-4 md:px-8 relative overflow-hidden"
+      className="min-h-screen relative overflow-hidden py-8 px-4 md:px-8 bg-white"
     >
-      {/* Ambient Background */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-emerald-500/10 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]"></div>
-      </div>
+      {/* Footer-like Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/95 via-emerald-50/90 to-emerald-100/85 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto mt-16 relative z-10">
         {/* HEADER SECTION */}
         <div className="text-center mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 tracking-tight">
-            এসআরডি ল্যাব তালিকা
+          <h1 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-2 tracking-tight">
+            ICTD ল্যাব তালিকা
           </h1>
-          <p className="text-emerald-200/70 max-w-2xl mx-auto">
+          <p className="text-emerald-700 max-w-2xl mx-auto">
             সকল এসআরডি ল্যাবের বিস্তারিত তথ্য, যোগাযোগ এবং অবস্থান অনুসন্ধান করুন।
           </p>
         </div>
 
         {/* FILTER & SEARCH BAR */}
-        <motion.div variants={itemVariants} className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-lg border border-emerald-500/20 overflow-hidden mb-8 hover:shadow-emerald-500/10 transition-shadow duration-300">
+        <motion.div variants={itemVariants} className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-lg border border-emerald-100 overflow-hidden mb-8 hover:shadow-emerald-500/10 transition-shadow duration-300">
           <div
             onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="px-6 py-4 flex items-center justify-between cursor-pointer hover:bg-emerald-500/10 transition-all duration-200 border-b border-emerald-500/20"
+            className="px-6 py-4 flex items-center justify-between cursor-pointer hover:bg-emerald-50 transition-all duration-200 border-b border-emerald-100"
           >
-            <div className="flex items-center gap-2 font-semibold text-emerald-100">
-              <FaFilter className="text-emerald-400" />
+            <div className="flex items-center gap-2 font-semibold text-emerald-800">
+              <FaFilter className="text-emerald-600" />
               <span>ফিল্টার অপশন</span>
             </div>
-            {isFilterOpen ? <FaChevronUp className="text-emerald-200" /> : <FaChevronDown className="text-emerald-200" />}
+            {isFilterOpen ? <FaChevronUp className="text-emerald-600" /> : <FaChevronDown className="text-emerald-600" />}
           </div>
 
           <AnimatePresence>
@@ -174,40 +171,40 @@ const Lab = () => {
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="border-t border-emerald-500/20"
+                className="border-t border-emerald-100"
               >
                 <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">জেলা</label>
+                    <label className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">জেলা</label>
                     <select
                       value={district}
                       onChange={(e) => {
                         setDistrict(e.target.value);
                         setUpazila("");
                       }}
-                      className="w-full bg-emerald-950/50 border border-emerald-500/30 rounded-xl px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-400"
+                      className="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm text-emerald-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-300"
                     >
-                      <option value="" className="bg-emerald-900">সকল জেলা</option>
-                      {districts.map((d) => <option key={d} value={d} className="bg-emerald-900">{d}</option>)}
+                      <option value="" className="bg-white">সকল জেলা</option>
+                      {districts.map((d) => <option key={d} value={d} className="bg-white">{d}</option>)}
                     </select>
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">উপজেলা</label>
+                    <label className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">উপজেলা</label>
                     <select
                       value={upazila}
                       onChange={(e) => setUpazila(e.target.value)}
-                      className="w-full bg-emerald-950/50 border border-emerald-500/30 rounded-xl px-3 py-2 text-sm text-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-400"
+                      className="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm text-emerald-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-300"
                     >
-                      <option value="" className="bg-emerald-900">সকল উপজেলা</option>
-                      {upazilas.map((u) => <option key={u} value={u} className="bg-emerald-900">{u}</option>)}
+                      <option value="" className="bg-white">সকল উপজেলা</option>
+                      {upazilas.map((u) => <option key={u} value={u} className="bg-white">{u}</option>)}
                     </select>
                   </div>
                 </div>
                 <div className="px-6 pb-6 flex justify-end">
                   <button
                     onClick={resetFilters}
-                    className="flex items-center gap-2 bg-emerald-800/50 hover:bg-emerald-700/50 text-emerald-100 px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md hover:shadow-lg border border-emerald-500/30"
+                    className="flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow-md border border-emerald-200"
                   >
                     <FaUndo className="text-xs" />
                     রিসেট ফিল্টার
@@ -221,15 +218,15 @@ const Lab = () => {
         {/* CONTROLS & SEARCH */}
         <motion.div variants={itemVariants} className="flex flex-col lg:flex-row justify-between items-center gap-4 mb-6">
           <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
-            <div className="flex items-center gap-2 bg-emerald-900/40 border border-emerald-500/30 rounded-xl px-3 py-2 shadow-md hover:shadow-lg transition-shadow">
-              <span className="text-sm text-emerald-200 font-medium">Show</span>
+            <div className="flex items-center gap-2 bg-white/60 border border-emerald-200 rounded-xl px-3 py-2 shadow-sm hover:shadow-md transition-shadow">
+              <span className="text-sm text-emerald-700 font-medium">Show</span>
               <select
                 value={entries}
                 onChange={(e) => {
                   setEntries(+e.target.value);
                   setPage(1);
                 }}
-                className="bg-transparent font-semibold text-white outline-none cursor-pointer [&>option]:bg-emerald-900"
+                className="bg-transparent font-semibold text-emerald-900 outline-none cursor-pointer [&>option]:bg-white"
               >
                 <option value={25}>25</option>
                 <option value={50}>50</option>
@@ -237,33 +234,33 @@ const Lab = () => {
               </select>
             </div>
 
-            <div className="h-8 w-[1px] bg-emerald-500/20 mx-1 hidden sm:block"></div>
+            <div className="h-8 w-[1px] bg-emerald-300 mx-1 hidden sm:block"></div>
 
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={exportExcel}
-                className="cursor-pointer flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg hover:shadow-emerald-500/20 transition-all border border-emerald-500 hover:scale-105"
+                className="cursor-pointer flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-emerald-500/20 transition-all border border-emerald-500 hover:scale-105"
               >
                 <FaFileExcel />
                 Excel
               </button>
               <button
                 onClick={exportCSV}
-                className="cursor-pointer flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg hover:shadow-blue-500/20 transition-all border border-blue-500 hover:scale-105"
+                className="cursor-pointer flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-blue-500/20 transition-all border border-blue-500 hover:scale-105"
               >
                 <FaFileCsv />
                 CSV
               </button>
               <button
                 onClick={fetchLabs}
-                className="cursor-pointer flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg hover:shadow-gray-500/20 transition-all border border-gray-600 hover:scale-105"
+                className="cursor-pointer flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-gray-500/20 transition-all border border-gray-600 hover:scale-105"
               >
                 <FaSyncAlt />
                 Reload
               </button>
               <button
                 onClick={() => window.print()}
-                className="cursor-pointer flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg hover:shadow-rose-500/20 transition-all border border-rose-500 hover:scale-105"
+                className="cursor-pointer flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-rose-500/20 transition-all border border-rose-500 hover:scale-105"
               >
                 <FaPrint />
                 Print
@@ -272,9 +269,9 @@ const Lab = () => {
           </div>
 
           <div className="relative w-full lg:w-72">
-            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" />
+            <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500" />
             <input
-              className="w-full bg-emerald-950/50 border border-emerald-500/30 rounded-xl pl-11 pr-4 py-2.5 text-sm text-white shadow-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all hover:border-emerald-400 focus:shadow-lg placeholder-emerald-500/50"
+              className="w-full bg-white border border-emerald-200 rounded-xl pl-11 pr-4 py-2.5 text-sm text-emerald-900 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all hover:border-emerald-300 focus:shadow-md placeholder-emerald-400"
               placeholder="Search labs..."
               value={search}
               onChange={(e) => {
@@ -288,12 +285,12 @@ const Lab = () => {
         {/* TABLE SECTION */}
         <motion.div
           variants={itemVariants}
-          className="bg-emerald-900/40 backdrop-blur-xl rounded-2xl shadow-2xl border border-emerald-500/20 overflow-hidden hover:shadow-emerald-500/10 transition-shadow duration-300"
+          className="bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl border border-emerald-100 overflow-hidden hover:shadow-2xl transition-shadow duration-300"
         >
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
               <thead>
-                <tr className="bg-emerald-950/80 border-b border-emerald-500/30">
+                <tr className="bg-emerald-100/50 border-b border-emerald-200">
                   {[
                     "ক্রম",
                     "জেলা",
@@ -303,13 +300,13 @@ const Lab = () => {
                     "মোবাইল",
                     "ইমেইল",
                   ].map((h) => (
-                    <th key={h} className="px-6 py-4 font-semibold text-emerald-100 whitespace-nowrap">
+                    <th key={h} className="px-6 py-4 font-semibold text-emerald-800 whitespace-nowrap">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-emerald-500/10">
+              <tbody className="divide-y divide-emerald-100">
                 <AnimatePresence mode="wait">
                   {paginated.length > 0 ? (
                     paginated.map((l, i) => (
@@ -318,30 +315,30 @@ const Lab = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="hover:bg-emerald-500/10 transition-all duration-200 group border-b border-emerald-500/5 hover:shadow-md"
+                        className="hover:bg-emerald-50 transition-all duration-200 group border-b border-emerald-50/50 hover:shadow-sm"
                       >
-                        <td className={`px-6 font-medium text-emerald-400 ${start + i + 1 === 1 ? 'py-5' : 'py-4'}`}>
+                        <td className={`px-6 font-medium text-emerald-600 ${start + i + 1 === 1 ? 'py-5' : 'py-4'}`}>
                           {l["sl."]}
                         </td>
-                        <td className="px-6 py-4 text-emerald-100/80">{l.district}</td>
-                        <td className="px-6 py-4 text-emerald-100/80">{l.upazila}</td>
+                        <td className="px-6 py-4 text-emerald-900/80">{l.district}</td>
+                        <td className="px-6 py-4 text-emerald-900/80">{l.upazila}</td>
                         <td className="px-6 py-4">
-                          <div className="font-semibold text-white">{l.institute}</div>
+                          <div className="font-semibold text-emerald-950">{l.institute}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="flex items-center gap-2 text-emerald-200/70">
+                          <div className="flex items-center gap-2 text-emerald-700">
                             <FaUser className="text-xs text-emerald-500" />
                             <span className="text-sm">{l.head}</span>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="flex items-center gap-2 text-emerald-200/70">
+                          <div className="flex items-center gap-2 text-emerald-700">
                             <FaPhone className="text-xs text-emerald-500" />
                             <span className="text-sm">{l.mobile}</span>
                           </div>
                         </td>
                         <td className="px-6 py-4">
-                          <div className="flex items-center gap-2 text-emerald-200/70 hover:text-emerald-400 transition-colors cursor-pointer">
+                          <div className="flex items-center gap-2 text-emerald-700 hover:text-emerald-500 transition-colors cursor-pointer">
                             <FaEnvelope className="text-xs" />
                             <span className="text-xs">{l.email}</span>
                           </div>
@@ -351,7 +348,7 @@ const Lab = () => {
                   ) : (
                     <tr>
                       <td colSpan="7" className="px-6 py-12 text-center">
-                        <div className="flex flex-col items-center gap-2 text-emerald-500/30">
+                        <div className="flex flex-col items-center gap-2 text-emerald-500">
                           <FaSearch className="text-4xl opacity-50" />
                           <p>কোন তথ্য পাওয়া যায়নি</p>
                         </div>
@@ -364,18 +361,18 @@ const Lab = () => {
           </div>
 
           {/* PAGINATION */}
-          <div className="px-6 py-4 bg-emerald-950/50 border-t border-emerald-500/20 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-inner">
-            <p className="text-sm text-emerald-200/60">
-              Showing <span className="font-semibold text-white">{start + 1}</span> to{" "}
-              <span className="font-semibold text-white">{Math.min(start + entries, filtered.length)}</span> of{" "}
-              <span className="font-semibold text-white">{filtered.length}</span> entries
+          <div className="px-6 py-4 bg-emerald-50/50 border-t border-emerald-100 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-inner">
+            <p className="text-sm text-emerald-700">
+              Showing <span className="font-semibold text-emerald-900">{start + 1}</span> to{" "}
+              <span className="font-semibold text-emerald-900">{Math.min(start + entries, filtered.length)}</span> of{" "}
+              <span className="font-semibold text-emerald-900">{filtered.length}</span> entries
             </p>
 
             <div className="flex items-center gap-2">
               <button
                 disabled={page === 1}
                 onClick={() => setPage(page - 1)}
-                className="px-4 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-xl text-sm font-semibold text-emerald-100 hover:bg-emerald-800/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
+                className="px-4 py-2 bg-white border border-emerald-200 rounded-xl text-sm font-semibold text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
               >
                 Previous
               </button>
@@ -393,7 +390,7 @@ const Lab = () => {
                       onClick={() => setPage(pageNum)}
                       className={`w-10 h-10 rounded-xl text-sm font-semibold transition-all ${page === pageNum
                         ? "bg-emerald-600 text-white shadow-lg shadow-emerald-500/20 border border-emerald-500 scale-110"
-                        : "bg-emerald-900/50 border border-emerald-500/30 text-emerald-100 hover:bg-emerald-800/50 shadow-md hover:shadow-lg hover:scale-105"
+                        : "bg-white border border-emerald-200 text-emerald-700 hover:bg-emerald-50 shadow-sm hover:shadow-md hover:scale-105"
                         }`}
                     >
                       {pageNum}
@@ -404,7 +401,7 @@ const Lab = () => {
               <button
                 disabled={page === totalPages}
                 onClick={() => setPage(page + 1)}
-                className="px-4 py-2 bg-emerald-900/50 border border-emerald-500/30 rounded-xl text-sm font-semibold text-emerald-100 hover:bg-emerald-800/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg"
+                className="px-4 py-2 bg-white border border-emerald-200 rounded-xl text-sm font-semibold text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
               >
                 Next
               </button>

@@ -134,7 +134,7 @@ const Contact = () => {
                                         <label className="text-sm font-medium text-emerald-700 ml-1">{t("contact_label_fname")}</label>
                                         <input
                                             type="text"
-                                            placeholder="John"
+                                            placeholder="First Name"
                                             className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>
@@ -142,7 +142,7 @@ const Contact = () => {
                                         <label className="text-sm font-medium text-emerald-700 ml-1">{t("contact_label_lname")}</label>
                                         <input
                                             type="text"
-                                            placeholder="Doe"
+                                            placeholder="Last name"
                                             className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>
@@ -153,7 +153,7 @@ const Contact = () => {
                                         <label className="text-sm font-medium text-emerald-700 ml-1">Email Address</label>
                                         <input
                                             type="email"
-                                            placeholder="john@example.com"
+                                            placeholder="your@example.com"
                                             className="w-full px-5 py-4 rounded-xl bg-white border border-emerald-200 text-emerald-900 placeholder-emerald-300 focus:border-emerald-400 focus:bg-emerald-50 focus:ring-4 focus:ring-emerald-100 transition-all outline-none"
                                         />
                                     </div>

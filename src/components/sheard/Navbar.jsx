@@ -23,7 +23,8 @@ const Navbar = () => {
 
   const navItems = [
     { icon: <FiHome />, label: t("home"), href: "/" },
-    { icon: <FiUsers />, label: t("labs"), href: "/labs" },
+    { icon: <FiUsers />, label: t("ICTD Labs"), href: "/labs" },
+    { icon: <FiUsers />, label: t("SOF Labs"), href: "/soflabs" },
     { icon: <FiTarget />, label: t("notice"), href: "/all-notice" },
     { icon: <FiBell />, label: t("Lab Details"), href: "/labdetails" },
     { icon: <FiInfo />, label: t("Dashboard"), href: "/dashboard" },
