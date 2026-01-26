@@ -101,7 +101,7 @@ const Login = () => {
         </div>
 
         {/* Glass Card */}
-        <div className="w-full bg-emerald-900/30 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-emerald-400/20 p-8 md:p-10 relative overflow-hidden group">
+        <div className="w-full bg-emerald-900/30 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] border border-emerald-400/20 p-8 md:px-10 md:pt-10 md:pb-4 relative overflow-hidden group">
           {/* Card Shine Effect */}
           <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -124,6 +124,7 @@ const Login = () => {
               setLoginFormData={setLoginFormData}
               handleFormFieldChanges={handleFormFieldChanges}
               handleStateVerifyEmail={handleStateVerifyEmail}
+              LoginPageStateOptions={LoginPageStateOptions}
             />
           )}
 
@@ -135,6 +136,7 @@ const Login = () => {
               setLoginFormData={setLoginFormData}
               handleFormFieldChanges={handleFormFieldChanges}
               handleStateEnterCode={handleStateEnterCode}
+              LoginPageStateOptions={LoginPageStateOptions}
             />
           )}
 
@@ -146,6 +148,7 @@ const Login = () => {
               setLoginFormData={setLoginFormData}
               handleFormFieldChanges={handleFormFieldChanges}
               handleStateRegistration={handleStateRegistration}
+              LoginPageStateOptions={LoginPageStateOptions}
             />
           )}
         </div>
