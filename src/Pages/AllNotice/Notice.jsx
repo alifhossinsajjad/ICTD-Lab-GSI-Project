@@ -40,7 +40,7 @@ const Notice = () => {
         <div className="mb-16 -mx-4 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden">
           {/* Professional Headline */}
           <div className="text-center mb-8 px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-3">
+            <h2 className="text-3xl md:text-5xl font-bold text-emerald-950 mb-3">
               {t('notice_hero_title')}
             </h2>
 
@@ -89,7 +89,7 @@ const Notice = () => {
         {/* Title */}
         <div className="text-center mb-12">
 
-          <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 mt-2">
+          <h2 className="text-3xl md:text-5xl font-bold text-emerald-950 mt-2">
             {t('notice_board_title')}
           </h2>
           <div className="w-24 h-1 bg-emerald-600 mx-auto mt-4 rounded-full" />

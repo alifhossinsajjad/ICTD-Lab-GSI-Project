@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FaPrint,
   FaFileExcel,
@@ -17,6 +18,7 @@ import * as XLSX from "xlsx";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Lab = () => {
+  const { t } = useTranslation();
   const [labs, setLabs] = useState([]);
   const [search, setSearch] = useState("");
   const [entries, setEntries] = useState(25);
@@ -78,13 +80,13 @@ const Lab = () => {
 
   const exportCSV = () => {
     const headers = [
-      "ক্রম",
-      "জেলা",
-      "উপজেলা",
-      "শিক্ষা প্রতিষ্ঠান",
-      "প্রধান",
-      "মোবাইল",
-      "ইমেইল",
+      t('serial'),
+      t('district'),
+      t('upazila'),
+      t('institute'),
+      t('head'),
+      t('mobile'),
+      t('email'),
     ];
 
     const rows = filtered.map((l) => [
@@ -137,17 +139,16 @@ const Lab = () => {
       variants={containerVariants}
       className="min-h-screen relative overflow-hidden py-8 px-4 md:px-8 bg-white"
     >
-      {/* Footer-like Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-r from-emerald-100/95 via-emerald-50/90 to-emerald-100/85 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto mt-16 relative z-10">
         {/* HEADER SECTION */}
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-2 tracking-tight">
-            ICTD ল্যাব তালিকা
+            {t('lab_list_title')}
           </h1>
           <p className="text-emerald-700 max-w-2xl mx-auto">
-            সকল এসআরডি ল্যাবের বিস্তারিত তথ্য, যোগাযোগ এবং অবস্থান অনুসন্ধান করুন।
+            {t('lab_list_subtitle')}
           </p>
         </div>
 
@@ -159,7 +160,7 @@ const Lab = () => {
           >
             <div className="flex items-center gap-2 font-semibold text-emerald-800">
               <FaFilter className="text-emerald-600" />
-              <span>ফিল্টার অপশন</span>
+              <span>{t('filter_options')}</span>
             </div>
             {isFilterOpen ? <FaChevronUp className="text-emerald-600" /> : <FaChevronDown className="text-emerald-600" />}
           </div>
@@ -175,7 +176,9 @@ const Lab = () => {
               >
                 <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">জেলা</label>
+                    <label className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">
+                      {t('district_label')}
+                    </label>
                     <select
                       value={district}
                       onChange={(e) => {
@@ -184,19 +187,21 @@ const Lab = () => {
                       }}
                       className="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm text-emerald-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-300"
                     >
-                      <option value="" className="bg-white">সকল জেলা</option>
+                      <option value="" className="bg-white">{t('all_districts')}</option>
                       {districts.map((d) => <option key={d} value={d} className="bg-white">{d}</option>)}
                     </select>
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">উপজেলা</label>
+                    <label className="text-xs font-semibold text-emerald-700 uppercase tracking-wider">
+                      {t('upazila_label')}
+                    </label>
                     <select
                       value={upazila}
                       onChange={(e) => setUpazila(e.target.value)}
                       className="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm text-emerald-900 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all shadow-sm hover:border-emerald-300"
                     >
-                      <option value="" className="bg-white">সকল উপজেলা</option>
+                      <option value="" className="bg-white">{t('all_upazilas')}</option>
                       {upazilas.map((u) => <option key={u} value={u} className="bg-white">{u}</option>)}
                     </select>
                   </div>
@@ -207,7 +212,7 @@ const Lab = () => {
                     className="flex items-center gap-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-sm hover:shadow-md border border-emerald-200"
                   >
                     <FaUndo className="text-xs" />
-                    রিসেট ফিল্টার
+                    {t('reset_filters')}
                   </button>
                 </div>
               </motion.div>
@@ -219,7 +224,7 @@ const Lab = () => {
         <motion.div variants={itemVariants} className="flex flex-col lg:flex-row justify-between items-center gap-4 mb-6">
           <div className="flex flex-wrap items-center gap-2 w-full lg:w-auto">
             <div className="flex items-center gap-2 bg-white/60 border border-emerald-200 rounded-xl px-3 py-2 shadow-sm hover:shadow-md transition-shadow">
-              <span className="text-sm text-emerald-700 font-medium">Show</span>
+              <span className="text-sm text-emerald-700 font-medium">{t('show')}</span>
               <select
                 value={entries}
                 onChange={(e) => {
@@ -242,28 +247,28 @@ const Lab = () => {
                 className="cursor-pointer flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-emerald-500/20 transition-all border border-emerald-500 hover:scale-105"
               >
                 <FaFileExcel />
-                Excel
+                {t('export_excel')}
               </button>
               <button
                 onClick={exportCSV}
                 className="cursor-pointer flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-blue-500/20 transition-all border border-blue-500 hover:scale-105"
               >
                 <FaFileCsv />
-                CSV
+                {t('export_csv')}
               </button>
               <button
                 onClick={fetchLabs}
                 className="cursor-pointer flex items-center gap-2 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-gray-500/20 transition-all border border-gray-600 hover:scale-105"
               >
                 <FaSyncAlt />
-                Reload
+                {t('reload')}
               </button>
               <button
                 onClick={() => window.print()}
                 className="cursor-pointer flex items-center gap-2 bg-rose-600 hover:bg-rose-500 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-md hover:shadow-rose-500/20 transition-all border border-rose-500 hover:scale-105"
               >
                 <FaPrint />
-                Print
+                {t('print')}
               </button>
             </div>
           </div>
@@ -272,7 +277,7 @@ const Lab = () => {
             <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-500" />
             <input
               className="w-full bg-white border border-emerald-200 rounded-xl pl-11 pr-4 py-2.5 text-sm text-emerald-900 shadow-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400 outline-none transition-all hover:border-emerald-300 focus:shadow-md placeholder-emerald-400"
-              placeholder="Search labs..."
+              placeholder={t('search_placeholder')}
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -292,13 +297,13 @@ const Lab = () => {
               <thead>
                 <tr className="bg-emerald-100/50 border-b border-emerald-200">
                   {[
-                    "ক্রম",
-                    "জেলা",
-                    "উপজেলা",
-                    "প্রতিষ্ঠান",
-                    "প্রধান",
-                    "মোবাইল",
-                    "ইমেইল",
+                    t('serial'),
+                    t('district'),
+                    t('upazila'),
+                    t('institute'),
+                    t('head'),
+                    t('mobile'),
+                    t('email'),
                   ].map((h) => (
                     <th key={h} className="px-6 py-4 font-semibold text-emerald-800 whitespace-nowrap">
                       {h}
@@ -350,7 +355,7 @@ const Lab = () => {
                       <td colSpan="7" className="px-6 py-12 text-center">
                         <div className="flex flex-col items-center gap-2 text-emerald-500">
                           <FaSearch className="text-4xl opacity-50" />
-                          <p>কোন তথ্য পাওয়া যায়নি</p>
+                          <p>{t('no_data_found')}</p>
                         </div>
                       </td>
                     </tr>
@@ -363,9 +368,9 @@ const Lab = () => {
           {/* PAGINATION */}
           <div className="px-6 py-4 bg-emerald-50/50 border-t border-emerald-100 flex flex-col sm:flex-row justify-between items-center gap-4 shadow-inner">
             <p className="text-sm text-emerald-700">
-              Showing <span className="font-semibold text-emerald-900">{start + 1}</span> to{" "}
-              <span className="font-semibold text-emerald-900">{Math.min(start + entries, filtered.length)}</span> of{" "}
-              <span className="font-semibold text-emerald-900">{filtered.length}</span> entries
+              {t('showing')} <span className="font-semibold text-emerald-900">{start + 1}</span> {t('to')}{" "}
+              <span className="font-semibold text-emerald-900">{Math.min(start + entries, filtered.length)}</span> {t('of')}{" "}
+              <span className="font-semibold text-emerald-900">{filtered.length}</span> {t('entries')}
             </p>
 
             <div className="flex items-center gap-2">
@@ -374,7 +379,7 @@ const Lab = () => {
                 onClick={() => setPage(page - 1)}
                 className="px-4 py-2 bg-white border border-emerald-200 rounded-xl text-sm font-semibold text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
               >
-                Previous
+                {t('previous')}
               </button>
               <div className="flex items-center gap-1">
                 {[...Array(Math.min(5, totalPages))].map((_, i) => {
@@ -403,7 +408,7 @@ const Lab = () => {
                 onClick={() => setPage(page + 1)}
                 className="px-4 py-2 bg-white border border-emerald-200 rounded-xl text-sm font-semibold text-emerald-700 hover:bg-emerald-50 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm hover:shadow-md"
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>

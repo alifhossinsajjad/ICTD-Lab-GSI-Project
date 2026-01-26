@@ -36,7 +36,7 @@ const Contact = () => {
     return (
         <section
             id="contact-section"
-            className="relative py-20 lg:py-28 bg-emerald-50 overflow-hidden font-sans"
+            className="relative py-16 lg:py-12 bg-emerald-50 overflow-hidden font-sans"
         >
             {/* Ambient Background Effects */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

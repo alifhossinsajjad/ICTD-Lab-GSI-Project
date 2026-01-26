@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   HiOutlineOfficeBuilding,
   HiOutlineUsers,
@@ -12,101 +13,101 @@ import heroBg1 from "../../../assets/banner/heroBg1.jpg";
 import heroBg2 from "../../../assets/banner/heroBg2.jpg";
 import heroBg3 from "../../../assets/banner/heroBg3.jpg";
 
-const slides = [
-  {
-    bg: heroBg1,
-    tag: "ডিজিটাল বাংলাদেশ",
-    title: "ডিজিটাল দক্ষতার পথে বাংলাদেশ",
-    desc: "আইসিটি ডিজিটাল ল্যাবের মাধ্যমে প্রযুক্তিনির্ভর আধুনিক শিক্ষা নিশ্চিত করা।",
-    btn1: "ল্যাবের তালিকা",
-    btn2: "আরও জানুন",
-    stats: [
-      {
-        id: 1,
-        icon: <HiOutlineOfficeBuilding className="w-6 h-6" />,
-        count: "12+",
-        label: "বছরের অভিজ্ঞতা",
-      },
-      {
-        id: 2,
-        icon: <HiOutlineUsers className="w-6 h-6" />,
-        count: "100K+",
-        label: "শিক্ষক সহায়তা",
-      },
-      {
-        id: 3,
-        icon: <HiOutlineLocationMarker className="w-6 h-6" />,
-        count: "All",
-        label: "বাংলাদেশ",
-      },
-    ],
-  },
-  {
-    bg: heroBg2,
-    tag: "শিক্ষা রূপান্তর",
-    title: "প্রযুক্তির মাধ্যমে স্মার্ট শিক্ষা",
-    desc: "দেশব্যাপী শিক্ষার্থীদের জন্য প্রযুক্তিনির্ভর বাস্তবমুখী শিক্ষা।",
-    btn1: "ল্যাব খুঁজুন",
-    btn2: "প্রকল্প",
-    stats: [
-      {
-        id: 1,
-        icon: <HiOutlineOfficeBuilding className="w-6 h-6" />,
-        count: "9,001",
-        label: "ডিজিটাল ল্যাব",
-      },
-      {
-        id: 2,
-        icon: <HiOutlineUsers className="w-6 h-6" />,
-        count: "36,020+",
-        label: "প্রশিক্ষিত শিক্ষক",
-      },
-      {
-        id: 3,
-        icon: <HiOutlineLocationMarker className="w-6 h-6" />,
-        count: "64",
-        label: "জেলা",
-      },
-    ],
-  },
-  {
-    bg: heroBg3,
-    tag: "স্মার্ট বাংলাদেশ",
-    title: "ভবিষ্যৎ প্রজন্মের প্রস্তুতি",
-    desc: "স্মার্ট বাংলাদেশ গঠনে প্রযুক্তিনির্ভর শিক্ষা অপরিহার্য।",
-    btn1: "পরিসংখ্যান",
-    btn2: "যোগাযোগ",
-    stats: [
-      {
-        id: 1,
-        icon: <HiOutlineOfficeBuilding className="w-6 h-6" />,
-        count: "6,500+",
-        label: "স্কুল কাভারেজ",
-      },
-      {
-        id: 2,
-        icon: <HiOutlineUsers className="w-6 h-6" />,
-        count: "4M+",
-        label: "শিক্ষার্থী",
-      },
-      {
-        id: 3,
-        icon: <HiOutlineLocationMarker className="w-6 h-6" />,
-        count: "492",
-        label: "উপজেলা",
-      },
-    ],
-  },
-];
-
 const SLIDE_DURATION = 4000;
 
 const Banner = () => {
+  const { t } = useTranslation();
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
-
   const timerRef = useRef(null);
 
+  // Dynamic slides configuration using i18n
+  const slides = [
+    {
+      bg: heroBg1,
+      tag: t('banner_slide_1_tag'),
+      title: t('banner_slide_1_title'),
+      desc: t('banner_slide_1_desc'),
+      btn1: t('banner_slide_1_btn1'),
+      btn2: t('banner_slide_1_btn2'),
+      stats: [
+        {
+          id: 1,
+          icon: <HiOutlineOfficeBuilding className="w-6 h-6" />,
+          count: t('banner_slide_1_stat1_count'),
+          label: t('banner_slide_1_stat1_label'),
+        },
+        {
+          id: 2,
+          icon: <HiOutlineUsers className="w-6 h-6" />,
+          count: t('banner_slide_1_stat2_count'),
+          label: t('banner_slide_1_stat2_label'),
+        },
+        {
+          id: 3,
+          icon: <HiOutlineLocationMarker className="w-6 h-6" />,
+          count: t('banner_slide_1_stat3_count'),
+          label: t('banner_slide_1_stat3_label'),
+        },
+      ],
+    },
+    {
+      bg: heroBg2,
+      tag: t('banner_slide_2_tag'),
+      title: t('banner_slide_2_title'),
+      desc: t('banner_slide_2_desc'),
+      btn1: t('banner_slide_2_btn1'),
+      btn2: t('banner_slide_2_btn2'),
+      stats: [
+        {
+          id: 1,
+          icon: <HiOutlineOfficeBuilding className="w-6 h-6" />,
+          count: t('banner_slide_2_stat1_count'),
+          label: t('banner_slide_2_stat1_label'),
+        },
+        {
+          id: 2,
+          icon: <HiOutlineUsers className="w-6 h-6" />,
+          count: t('banner_slide_2_stat2_count'),
+          label: t('banner_slide_2_stat2_label'),
+        },
+        {
+          id: 3,
+          icon: <HiOutlineLocationMarker className="w-6 h-6" />,
+          count: t('banner_slide_2_stat3_count'),
+          label: t('banner_slide_2_stat3_label'),
+        },
+      ],
+    },
+    {
+      bg: heroBg3,
+      tag: t('banner_slide_3_tag'),
+      title: t('banner_slide_3_title'),
+      desc: t('banner_slide_3_desc'),
+      btn1: t('banner_slide_3_btn1'),
+      btn2: t('banner_slide_3_btn2'),
+      stats: [
+        {
+          id: 1,
+          icon: <HiOutlineOfficeBuilding className="w-6 h-6" />,
+          count: t('banner_slide_3_stat1_count'),
+          label: t('banner_slide_3_stat1_label'),
+        },
+        {
+          id: 2,
+          icon: <HiOutlineUsers className="w-6 h-6" />,
+          count: t('banner_slide_3_stat2_count'),
+          label: t('banner_slide_3_stat2_label'),
+        },
+        {
+          id: 3,
+          icon: <HiOutlineLocationMarker className="w-6 h-6" />,
+          count: t('banner_slide_3_stat3_count'),
+          label: t('banner_slide_3_stat3_label'),
+        },
+      ],
+    },
+  ];
 
   const resetAuto = () => {
     clearTimeout(timerRef.current);
@@ -123,7 +124,7 @@ const Banner = () => {
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // ✅ Auto swipe
+  // Auto swipe
   useEffect(() => {
     if (paused) return;
 
@@ -132,9 +133,7 @@ const Banner = () => {
     }, SLIDE_DURATION);
 
     return () => clearTimeout(timerRef.current);
-  }, [current, paused]);
-
-
+  }, [current, paused, slides.length]);
 
   return (
     <section
@@ -142,7 +141,7 @@ const Banner = () => {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* ✅ SLIDE TRACK */}
+      {/* SLIDE TRACK */}
       <div className="absolute inset-0">
         <motion.div
           className="flex h-full w-full"
@@ -163,14 +162,13 @@ const Banner = () => {
               className="relative min-w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${s.bg})` }}
             >
-              {/* ✅ Only readability shadow */}
               <div className="absolute inset-0 bg-black/35" />
             </div>
           ))}
         </motion.div>
       </div>
 
-      {/* ✅ CONTENT */}
+      {/* CONTENT */}
       <div className="relative h-full flex items-center px-4 sm:px-6 lg:px-12">
         <div className="container mx-auto z-10">
           <div className="max-w-xl sm:max-w-2xl text-center sm:text-left space-y-5">
@@ -205,23 +203,23 @@ const Banner = () => {
               </div>
             </motion.div>
 
-            {/* ✅ DOTS */}
+            {/* DOTS */}
             <div className="flex gap-2 pt-6 justify-center sm:justify-start">
               {slides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
                   aria-label={`Slide ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${i === current ? "w-8 bg-white" : "w-2 bg-white/50"
-                    }`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    i === current ? "w-8 bg-white" : "w-2 bg-white/50"
+                  }`}
                 />
               ))}
             </div>
           </div>
         </div>
 
-        {/* ✅ NEXT / PREV (fixed: no text hide on mobile) */}
-        {/* ✅ NEXT / PREV (no bg) */}
+        {/* NEXT / PREV */}
         <div className="absolute top-1/2 -translate-y-1/2 left-2 right-2 sm:left-4 sm:right-4 flex justify-between z-30 pointer-events-none">
           <button
             onClick={prevSlide}
@@ -240,42 +238,17 @@ const Banner = () => {
           </button>
         </div>
 
-
-        {/* ✅ STATS (Light Glass BG) */}
+        {/* STATS */}
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[94%] max-w-5xl">
-          <div
-            className="
-      bg-white/90
-      hidden md:block
-      backdrop-blur-xl
-      border border-emerald-100
-      rounded-3xl
-      shadow-[0_12px_45px_rgba(0,0,0,0.10)]
-      px-4 sm:px-7 py-5
-    "
-          >
+          <div className="bg-white/90 hidden md:block backdrop-blur-xl border border-emerald-100 rounded-3xl shadow-[0_12px_45px_rgba(0,0,0,0.10)] px-4 sm:px-7 py-5">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {slides[current].stats.map((stat) => (
                 <div
                   key={stat.id}
-                  className="
-            flex items-center gap-4
-            px-4 py-3
-            rounded-2xl
-            hover:bg-emerald-50
-            transition-all duration-300
-            md:justify-center
-          "
+                  className="flex items-center gap-4 px-4 py-3 rounded-2xl hover:bg-emerald-50 transition-all duration-300 md:justify-center"
                 >
                   {/* ICON */}
-                  <div
-                    className="
-              w-12 h-12 rounded-2xl
-              bg-emerald-100
-              flex items-center justify-center
-              border border-emerald-200
-            "
-                  >
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center border border-emerald-200">
                     <div className="text-emerald-600">{stat.icon}</div>
                   </div>
 
@@ -291,7 +264,6 @@ const Banner = () => {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

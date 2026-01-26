@@ -14,13 +14,13 @@ const Vendor = () => {
     ];
 
     return (
-        <section className="py-24 bg-emerald-50" id="vendor">
+        <section className="py-12 bg-emerald-50" id="vendor">
 
             <div className="max-w-7xl mx-auto px-6">
 
                 {/* Header */}
                 <div className="mb-16 text-center">
-                    <h2 className="text-4xl md:text-5xl font-semibold text-emerald-950 tracking-tight">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-emerald-950 tracking-tight">
                         {t("vendor_title")}
                     </h2>
                     <div className="w-24 h-[3px] bg-gradient-to-r from-emerald-400 to-green-400 mx-auto mt-5 rounded-full" />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, Outlet, useLocation, NavLink } from "react-router";
+import { Link, Outlet, useLocation } from "react-router";
 import {
   HiOutlineHome,
   HiOutlineUser,
@@ -10,62 +10,53 @@ import {
   HiOutlineLogout,
   HiMenuAlt3,
   HiX,
-  HiChevronLeft,
-  HiChevronRight,
 } from "react-icons/hi";
 import {
   FaChartPie,
-  FaTimes,
-  FaSignOutAlt,
-  FaBars,
   FaBell,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu } from "lucide-react";
+import { Menu, Languages } from "lucide-react";
 import lo from "../assets/favicon.png";
+import { useLanguage } from "../contexts/LanguageContext";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile open/close
   const [isCollapsed, setIsCollapsed] = useState(false); // desktop collapse
   const location = useLocation();
+  const { t, language, toggleLanguage } = useLanguage();
 
   const closeSidebar = () => setIsSidebarOpen(false);
 
   const menuItems = [
     {
       path: "/dashboard",
-      name: "Dashboard",
+      name: t("Dashboard"),
       icon: <HiOutlineHome className="w-5 h-5" />,
     },
     {
       path: "/dashboard/profile",
-      name: "Profile",
+      name: t("dashboard_profile"),
       icon: <HiOutlineUser className="w-5 h-5" />,
     },
     {
       path: "/dashboard/changePassword",
-      name: "Change Password",
+      name: t("dashboard_change_password"),
       icon: <HiOutlineLockClosed className="w-5 h-5" />,
     },
     {
       path: "/dashboard/labsUnderControl",
-      name: "Labs Control",
+      name: t("dashboard_labs_control"),
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
     },
-    // {
-    //   path: "/dashboard/traning",
-    //   name: "Training",
-    //   icon: <HiOutlineAcademicCap className="w-5 h-5" />,
-    // },
-
     {
       path: "/dashboard/sendReport",
-      name: "All Report",
+      name: t("dashboard_all_report"),
       icon: <FaChartPie className="w-5 h-5" />,
     },
     {
       path: "/dashboard/complaints",
-      name: "Complaints",
+      name: t("dashboard_complaints"),
       icon: <HiOutlineExclamationCircle className="w-5 h-5" />,
     },
   ];
@@ -142,11 +133,7 @@ const DashboardLayout = () => {
             className={`cursor-pointer p-2 ${isCollapsed ? "mx-auto" : ""} rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-600 hover:text-emerald-900 transition-all border border-emerald-100 hover:border-emerald-200`}
             title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            {isCollapsed ? (
-              <Menu className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
+            <Menu className="w-5 h-5" />
           </button>
         </div>
 
@@ -154,7 +141,7 @@ const DashboardLayout = () => {
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto custom-scrollbar">
           {!isCollapsed && (
             <div className="text-xs font-bold text-emerald-500 uppercase tracking-wider mb-4 px-2">
-              Menu
+              {t("dashboard_menu")}
             </div>
           )}
 
@@ -170,8 +157,8 @@ const DashboardLayout = () => {
                 to={item.path}
                 onClick={closeSidebar}
                 className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${isActive
-                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
-                    : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
+                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
+                  : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
                   }`}
                 title={isCollapsed ? item.name : ""}
               >
@@ -208,10 +195,10 @@ const DashboardLayout = () => {
           <button
             onClick={() => handdleLogout()}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 hover:text-red-700 transition-all duration-300 group w-full border border-transparent hover:border-red-100"
-            title={isCollapsed ? "Logout" : ""}
+            title={isCollapsed ? t("dashboard_logout") : ""}
           >
             <HiOutlineLogout className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
-            {!isCollapsed && <span className="font-bold">Logout</span>}
+            {!isCollapsed && <span className="font-bold">{t("dashboard_logout")}</span>}
           </button>
         </div>
       </motion.aside>
@@ -231,15 +218,25 @@ const DashboardLayout = () => {
             <div className="flex flex-col">
               <h1 className="text-xl font-bold text-emerald-950 tracking-tight">
                 {menuItems.find((item) => item.path === location.pathname)
-                  ?.name || "Dashboard"}
+                  ?.name || t("Dashboard")}
               </h1>
               <span className="text-xs text-emerald-500 font-medium">
-                Welcome to ICTD Lab Dashboard
+                {t("dashboard_welcome")}
               </span>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Language Toggle Button */}
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:text-emerald-800 transition-all shadow-sm hover:shadow font-medium text-sm"
+              title={language === 'bn' ? 'Switch to English' : 'বাংলায় পরিবর্তন করুন'}
+            >
+              <Languages className="w-5 h-5" />
+              <span className="hidden sm:inline">{language === 'bn' ? 'EN' : 'বাংলা'}</span>
+            </button>
+
             <button className="p-2 text-emerald-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-full transition-all relative">
               <FaBell size={20} />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full animate-pulse shadow-lg shadow-rose-500/50"></span>
@@ -247,7 +244,7 @@ const DashboardLayout = () => {
 
             <div className="flex items-center gap-3 pl-4 border-l border-emerald-100">
               <div className="hidden md:block text-right">
-                <p className="font-semibold text-emerald-900 text-sm">Admin User</p>
+                <p className="font-semibold text-emerald-900 text-sm">{t("dashboard_admin_user")}</p>
                 <p className="text-xs text-emerald-500">admin@ictd.gov.bd</p>
               </div>
               <div className="h-10 w-10 rounded-full bg-emerald-100 border-2 border-emerald-200 flex items-center justify-center text-emerald-700 font-bold shadow-sm ring-2 ring-emerald-50">
@@ -270,9 +267,8 @@ const DashboardLayout = () => {
 
           <footer className="bg-white/50 backdrop-blur-md border-t border-emerald-100 text-emerald-600 text-center p-4 mt-auto rounded-t-2xl">
             <h1 className="text-sm">
-              <span className="font-bold text-emerald-700">Copyright </span>©
-              {new Date().getFullYear()} <span className=" text-emerald-700 font-bold">DoICT</span> . All
-              rights reserved.
+              <span className="font-bold text-emerald-700">{t("dashboard_copyright")} </span>©
+              {new Date().getFullYear()} <span className=" text-emerald-700 font-bold">DoICT</span> . {t("dashboard_all_rights")}.
             </h1>
           </footer>
         </main>
