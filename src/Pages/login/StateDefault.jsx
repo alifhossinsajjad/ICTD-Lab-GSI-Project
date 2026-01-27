@@ -26,7 +26,7 @@ function StateDefault({
             onChange={handleFormFieldChanges}
             value={loginFormData.email}
             required={true}
-            placeholder="ইউজার আইডি"
+            placeholder="ইউজার ইমেইল"
             className="w-full bg-emerald-950/50 border border-emerald-500/30 text-white px-5 py-3.5 pr-12 rounded-xl
                          focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400/50 placeholder-emerald-300/60 transition-all duration-300"
           />
@@ -76,7 +76,7 @@ function StateDefault({
           <button
             type="submit"
             className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
-                         hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5"
+                         hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer"
           >
             প্রবেশ করুন
           </button>
