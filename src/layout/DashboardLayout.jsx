@@ -10,6 +10,7 @@ import {
   HiOutlineLogout,
   HiMenuAlt3,
   HiX,
+  HiChevronDown,
 } from "react-icons/hi";
 import { FaChartPie, FaBell } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
@@ -21,6 +22,7 @@ import { AuthContext } from "../contexts/AuthContext";
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile open/close
   const [isCollapsed, setIsCollapsed] = useState(false); // desktop collapse
+  const [openDropdown, setOpenDropdown] = useState(null); // track which dropdown is open
   const location = useLocation();
   const navigate = useNavigate();
   const { t, language, toggleLanguage } = useLanguage();
@@ -45,9 +47,21 @@ const DashboardLayout = () => {
       icon: <HiOutlineLockClosed className="w-5 h-5" />,
     },
     {
-      path: "/dashboard/labsUnderControl",
+      id: "labsControl", // unique identifier for dropdown
+      path: null, // No direct path, only dropdown
       name: t("dashboard_labs_control"),
       icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
+      hasDropdown: true,
+      subItems: [
+        {
+          path: "/dashboard/labsUnderControl",
+          name: "SOF Labs",
+        },
+        {
+          path: "/dashboard/ictdLabs",
+          name: "ICTD Labs",
+        },
+      ],
     },
     {
       path: "/dashboard/sendReport",
@@ -147,47 +161,141 @@ const DashboardLayout = () => {
           )}
 
           {menuItems.map((item) => {
+            const itemKey = item.id || item.path; // Use id if available, otherwise path
             const isActive =
               item.path === "/dashboard"
                 ? location.pathname === "/dashboard"
                 : location.pathname === item.path;
 
+            const isDropdownOpen = openDropdown === itemKey;
+            const hasActiveSubItem = item.subItems?.some(
+              (subItem) => location.pathname === subItem.path
+            );
+
             return (
-              <Link
-                key={item.path}
-                to={item.path}
-                onClick={closeSidebar}
-                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
-                  isActive
-                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
-                    : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
-                }`}
-                title={isCollapsed ? item.name : ""}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-emerald-600 rounded-xl -z-10"
-                    initial={false}
-                    transition={{
-                      type: "spring",
-                      stiffness: 500,
-                      damping: 30,
-                    }}
-                  />
-                )}
+              <div key={itemKey}>
+                {item.hasDropdown ? (
+                  // Dropdown menu item
+                  <>
+                    <button
+                      onClick={() =>
+                        setOpenDropdown(isDropdownOpen ? null : itemKey)
+                      }
+                      className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden w-full ${isActive || hasActiveSubItem
+                        ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
+                        : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
+                        }`}
+                      title={isCollapsed ? item.name : ""}
+                    >
+                      {(isActive || hasActiveSubItem) && (
+                        <motion.div
+                          layoutId="activeTab"
+                          className="absolute inset-0 bg-emerald-600 rounded-xl -z-10"
+                          initial={false}
+                          transition={{
+                            type: "spring",
+                            stiffness: 500,
+                            damping: 30,
+                          }}
+                        />
+                      )}
 
-                <span
-                  className={`relative z-10 text-xl ${isActive ? "text-white" : "text-emerald-500 group-hover:text-emerald-700"}`}
-                >
-                  {item.icon}
-                </span>
+                      <span
+                        className={`relative z-10 text-xl ${isActive || hasActiveSubItem
+                          ? "text-white"
+                          : "text-emerald-500 group-hover:text-emerald-700"
+                          }`}
+                      >
+                        {item.icon}
+                      </span>
 
-                {/* hide item name when collapsed */}
-                {!isCollapsed && (
-                  <span className="relative z-10 font-medium">{item.name}</span>
+                      {!isCollapsed && (
+                        <>
+                          <span className="relative z-10 font-medium flex-1 text-left">
+                            {item.name}
+                          </span>
+                          <HiChevronDown
+                            className={`relative z-10 w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""
+                              }`}
+                          />
+                        </>
+                      )}
+                    </button>
+
+                    {/* Dropdown submenu */}
+                    <AnimatePresence>
+                      {isDropdownOpen && !isCollapsed && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="ml-8 mt-1 space-y-1">
+                            {item.subItems.map((subItem) => {
+                              const isSubActive =
+                                location.pathname === subItem.path;
+                              return (
+                                <Link
+                                  key={subItem.path}
+                                  to={subItem.path}
+                                  onClick={closeSidebar}
+                                  className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 ${isSubActive
+                                    ? "bg-emerald-100 text-emerald-900 font-semibold"
+                                    : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900"
+                                    }`}
+                                >
+                                  <span className="text-sm">{subItem.name}</span>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </>
+                ) : (
+                  // Regular menu item
+                  <Link
+                    to={item.path}
+                    onClick={closeSidebar}
+                    className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${isActive
+                      ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
+                      : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
+                      }`}
+                    title={isCollapsed ? item.name : ""}
+                  >
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-emerald-600 rounded-xl -z-10"
+                        initial={false}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+
+                    <span
+                      className={`relative z-10 text-xl ${isActive
+                        ? "text-white"
+                        : "text-emerald-500 group-hover:text-emerald-700"
+                        }`}
+                    >
+                      {item.icon}
+                    </span>
+
+                    {!isCollapsed && (
+                      <span className="relative z-10 font-medium">
+                        {item.name}
+                      </span>
+                    )}
+                  </Link>
                 )}
-              </Link>
+              </div>
             );
           })}
         </nav>

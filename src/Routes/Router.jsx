@@ -21,6 +21,7 @@ import TraningUpdate from "../Pages/Dashboard/Traning/TraningUpdate/TraningUpdat
 import SendReport from "../Pages/Dashboard/SendReport/SendReport";
 import SOFLabs from "../Pages/SOFLabs/SOFLabs";
 import AddUser from "../Pages/Dashboard/add-user/AddUser";
+import ICTDLabs from "../Pages/Dashboard/LabsUnderControls/ICTDLabs/ICTDLabs";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
       {
         path: "sendReport",
         Component: SendReport,
+      },
+      {
+        path: "ictdLabs",
+        Component: ICTDLabs,
       },
     ],
   },

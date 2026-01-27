@@ -458,14 +458,14 @@ const LabsUnderControl = () => {
                         </div>
                       </td>
                       <td className="px-4 py-2 text-right no-print">
-                        <div className="flex items-center justify-end gap-2">
+                        <div className="flex items-center justify-center gap-2 ">
                           <Link
                             to={`/dashboard/labsUpdate/${lab.id}`}
                             className="flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                             title="Update Lab"
                           >
                             <HiOutlinePencil className="w-5 h-5" />
-                            Update
+                     
                           </Link>
                           <Link
                             to={`/dashboard/filesComplaints/${lab.id}`}
@@ -473,7 +473,7 @@ const LabsUnderControl = () => {
                             title="File Complaint"
                           >
                             <HiOutlineExclamationCircle className="w-5 h-5" />
-                            Complaint
+                           
                           </Link>
                           <button
                             onClick={() => handleOpenModal(lab)}
@@ -481,7 +481,7 @@ const LabsUnderControl = () => {
                             title="send report"
                           >
                             <FaBookOpen className="w-5 h-5" />
-                            Send Report
+                           
                           </button>
                         </div>
                       </td>

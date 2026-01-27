@@ -53,7 +53,7 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
       if (result.success) {
         alert("✅ Report submitted successfully!");
         // Clean up image previews
-        imagePreviews.forEach(preview => URL.revokeObjectURL(preview));
+        imagePreviews.forEach((preview) => URL.revokeObjectURL(preview));
         onClose();
       } else {
         setSubmitError(result.message || "Failed to submit report");
@@ -67,12 +67,12 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
   };
 
   return (
-    <div className="ml-20 bg-gradient-to-br from-emerald-950 via-emerald-900 to-teal-950 border-2 border-emerald-400/30 rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300 relative">
+    <div className="ml-20 bg-gradient-to-r from-emerald-50 to-green-100 rounded-2xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-300 relative">
       {/* Decorative Background Elements */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-400/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-teal-400/10 to-transparent rounded-full blur-3xl"></div>
-      </div>
+      {/* <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-950 via-emerald-900 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-emerald-950 via-emerald-900 rounded-full blur-3xl"></div>
+      </div> */}
 
       {/* Error Alert */}
       {submitError && (
@@ -124,11 +124,31 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[
-                { label: "Basic Robotics Instruments", name: "basicRobotics", icon: "🤖" },
-                { label: "Advanced Robotics Instruments", name: "advancedRobotics", icon: "🦾" },
-                { label: "3D Printer & Filament", name: "3dPrinter", icon: "🖨️" },
-                { label: "VR Headset with Controller", name: "vrHeadset", icon: "🥽" },
-                { label: "IR Fixed Bullet Network Camera", name: "networkCamera", icon: "📹" },
+                {
+                  label: "Basic Robotics Instruments",
+                  name: "basicRobotics",
+                  icon: "🤖",
+                },
+                {
+                  label: "Advanced Robotics Instruments",
+                  name: "advancedRobotics",
+                  icon: "🦾",
+                },
+                {
+                  label: "3D Printer & Filament",
+                  name: "3dPrinter",
+                  icon: "🖨️",
+                },
+                {
+                  label: "VR Headset with Controller",
+                  name: "vrHeadset",
+                  icon: "🥽",
+                },
+                {
+                  label: "IR Fixed Bullet Network Camera",
+                  name: "networkCamera",
+                  icon: "📹",
+                },
                 { label: "UPS", name: "ups", icon: "🔋" },
               ].map((item) => (
                 <div
@@ -210,13 +230,26 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
             <div className="space-y-4">
               <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-teal-500/40 rounded-xl cursor-pointer bg-gradient-to-br from-teal-950/40 to-emerald-950/30 hover:border-teal-400/60 transition-all group">
                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg className="w-10 h-10 mb-3 text-teal-400 group-hover:text-teal-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                  <svg
+                    className="w-10 h-10 mb-3 text-teal-400 group-hover:text-teal-300 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    />
                   </svg>
                   <p className="mb-2 text-sm text-teal-200 font-semibold">
-                    <span className="font-bold">Click to upload</span> or drag and drop
+                    <span className="font-bold">Click to upload</span> or drag
+                    and drop
                   </p>
-                  <p className="text-xs text-teal-400">PNG, JPG, JPEG (MAX. 5MB each)</p>
+                  <p className="text-xs text-teal-400">
+                    PNG, JPG, JPEG (MAX. 5MB each)
+                  </p>
                 </div>
                 <input
                   id="storageImages"
@@ -227,7 +260,9 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
                   onChange={(e) => {
                     const files = Array.from(e.target.files);
                     // Store files in state for preview
-                    const previews = files.map(file => URL.createObjectURL(file));
+                    const previews = files.map((file) =>
+                      URL.createObjectURL(file),
+                    );
                     setImagePreviews(previews);
                     setSelectedFiles(files);
                   }}
@@ -245,15 +280,29 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
                       <button
                         type="button"
                         onClick={() => {
-                          const newPreviews = imagePreviews.filter((_, i) => i !== index);
-                          const newFiles = selectedFiles.filter((_, i) => i !== index);
+                          const newPreviews = imagePreviews.filter(
+                            (_, i) => i !== index,
+                          );
+                          const newFiles = selectedFiles.filter(
+                            (_, i) => i !== index,
+                          );
                           setImagePreviews(newPreviews);
                           setSelectedFiles(newFiles);
                         }}
                         className="absolute top-1 right-1 p-1 bg-rose-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
                       >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
                         </svg>
                       </button>
                     </div>
@@ -311,4 +360,3 @@ const ReportForm = ({ onClose, instituteName, labId }) => {
 };
 
 export default ReportForm;
-
