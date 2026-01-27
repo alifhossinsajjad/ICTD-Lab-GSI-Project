@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import AuthCode from "react-auth-code-input";
 import { LuArrowLeftFromLine } from "react-icons/lu";
 import { LuLoader } from "react-icons/lu";
+import { AuthContext } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
 
 function StateEnterCode({
   loginFormData,
@@ -12,8 +14,25 @@ function StateEnterCode({
   LoginPageStateOptions,
   onResendCode, // Add this prop to handle resending code
 }) {
+  const { verifyEmailCode, verifyEmail } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+
   const handleOnChange = (res) => {
     setLoginFormData((prev) => ({ ...prev, code: res }));
+  };
+
+  const handleVerifyCode = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await verifyEmailCode(loginFormData.email, loginFormData.code);
+      toast.success("কোড যাচাই সফল হয়েছে!");
+      handleStateEnterCode(e);
+    } catch (error) {
+      toast.error(error.response?.data?.message || "কোড যাচাই ব্যর্থ হয়েছে");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const [timeLeft, setTimeLeft] = useState(60);
@@ -46,16 +65,15 @@ function StateEnterCode({
 
     try {
       // Call your API to resend the code
-      if (onResendCode) {
-        await onResendCode(loginFormData.email || loginFormData.userId);
-      }
+      await verifyEmail(loginFormData.email);
+      toast.success("কোড পুনরায় পাঠানো হয়েছে");
 
       // Reset timer
       setTimeLeft(60);
       setCanResend(false);
     } catch (error) {
       console.error("Failed to resend code:", error);
-      // You might want to show an error message to the user
+      toast.error("কোড পাঠাতে ব্যর্থ হয়েছে");
     } finally {
       setIsResending(false);
     }
@@ -85,11 +103,12 @@ function StateEnterCode({
       <div className="">
         <button
           type="button"
-          onClick={handleStateEnterCode}
+          onClick={handleVerifyCode}
+          disabled={loading}
           className="w-full bg-gradient-to-r from-emerald-500 to-green-600 text-white px-6 py-3 rounded-xl
-            hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer"
+            hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          কোড যাচাই করুন
+          {loading ? "অপেক্ষা করুন..." : "কোড যাচাই করুন"}
         </button>
       </div>
 

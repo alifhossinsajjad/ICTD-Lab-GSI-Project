@@ -27,7 +27,7 @@ const Navbar = () => {
     { icon: <FiUsers />, label: t("SOF Labs"), href: "/soflabs" },
     { icon: <FiTarget />, label: t("notice"), href: "/all-notice" },
     { icon: <FiBell />, label: t("Lab Details"), href: "/labdetails" },
-    { icon: <FiInfo />, label: t("Dashboard"), href: "/dashboard" },
+    // { icon: <FiInfo />, label: t("Dashboard"), href: "/dashboard" },
   ];
 
   // Marquee announcements - contextually relevant to ICTD Lab GSI Project

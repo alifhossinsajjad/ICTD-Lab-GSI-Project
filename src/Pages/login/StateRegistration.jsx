@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useState } from "react";
 import { IoIosLock } from "react-icons/io";
+import { AuthContext } from "../../contexts/AuthContext";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 function StateRegistration({
   showPassword,
@@ -14,9 +17,54 @@ function StateRegistration({
   setLoginFormData,
   LoginPageStateOptions,
 }) {
+  const { register } = useContext(AuthContext);
   const [showRegisterPassword, setShowRegisterPassword] = useState(false);
   const [showRegisterRetypePassword, setShowRegisterRetypePassword] =
     useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleRegister = async () => {
+    if (loginFormData.password !== loginFormData.retypePassword) {
+      toast.error("পাসওয়ার্ড মেলেনি!");
+      return;
+    }
+    setLoading(true);
+    try {
+      await register(loginFormData.email, loginFormData.password);
+      toast.success("নিবন্ধন সফল হয়েছে!");
+      // Optionally auto-login or redirect to login
+      // Since `signup` returns token (if I recall correctly or if I modified it - wait, auth service register returns response.data)
+      // Check auth.controller: signup returns token?
+      // TypeCheck.type === "cookie" for WebApp. It returns `201` with `data` (user info). No token in JSON body for WebApp, it's in cookie?
+      // Wait, `auth.controller.ts`:
+      // if (typeCheck.type === "cookie") -> res.cookie(...) is missing in the controller code I saw!
+      // Ah, `assignJwtToken` util likely handles `res.cookie`.
+      // The JSON response: `success: true, message: "User Register successfully", data: {...}`.
+      // It does NOT return the token in the JSON for WebApp flow?
+      // If it sets a cookie, then subsequent requests will work.
+      // But `AuthService.login` manually sets `localStorage` user.
+      // `AuthService.register` does NOT set `localStorage` user.
+      // So I should probably redirect to login page or auto-login.
+      // Let's redirect to login (default state) for safety, or just navigate to dashboard if cookie is set.
+      // I'll try to navigate to dashboard, assuming cookie is set.
+      // Actually, if I want to update `user` state in context for a "logged in" UI, I need to fetch current user or set acts like login.
+      // `register` in AuthContext just calls service.
+      // Let's redirect to Default State (Login) so they can login.
+
+      setLoginFormData((prev) => ({
+        ...prev,
+        pageState: LoginPageStateOptions[0],
+      }));
+      localStorage.setItem("LoginPageState", LoginPageStateOptions[0]);
+      toast.success("অনুগ্রহ করে লগইন করুন");
+
+    } catch (error) {
+      toast.error(error.response?.data?.message || "নিবন্ধন ব্যর্থ হয়েছে");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="w-full h-full">
@@ -105,12 +153,6 @@ function StateRegistration({
         />
         মনে রাখুন
       </label>
-      {/* 
-      <section className="w-full flex items-center justify-center my-5">
-        {loginFormData.password !== loginFormData.retypePassword
-          ? "password not matched"
-          : "password matched"}
-      </section> */}
 
       {/* Remember + Button */}
       <div className="flex w-full items-center justify-between mb-2 text-sm">
@@ -131,11 +173,12 @@ function StateRegistration({
 
         <button
           type="button"
-          onClick={handleStateRegistration}
+          onClick={handleRegister}
+          disabled={loading}
           className="w-[48%] bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
-                             hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer"
+                             hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          নিবন্ধন করুন
+          {loading ? "অপেক্ষা করুন..." : "নিবন্ধন করুন"}
         </button>
       </div>
     </div>
