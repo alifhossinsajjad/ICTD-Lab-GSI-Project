@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, Outlet, useLocation } from "react-router";
+import React, { useState, useContext } from "react";
+import { Link, Outlet, useLocation, useNavigate } from "react-router";
 import {
   HiOutlineHome,
   HiOutlineUser,
@@ -11,20 +11,20 @@ import {
   HiMenuAlt3,
   HiX,
 } from "react-icons/hi";
-import {
-  FaChartPie,
-  FaBell,
-} from "react-icons/fa";
+import { FaChartPie, FaBell } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, Languages } from "lucide-react";
 import lo from "../assets/favicon.png";
 import { useLanguage } from "../contexts/LanguageContext";
+import { AuthContext } from "../contexts/AuthContext";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // mobile open/close
   const [isCollapsed, setIsCollapsed] = useState(false); // desktop collapse
   const location = useLocation();
+  const navigate = useNavigate();
   const { t, language, toggleLanguage } = useLanguage();
+  const { logout } = useContext(AuthContext);
 
   const closeSidebar = () => setIsSidebarOpen(false);
 
@@ -61,8 +61,9 @@ const DashboardLayout = () => {
     },
   ];
 
-  const handdleLogout = () => {
-    console.log("logout successfully");
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
 
   return (
@@ -156,10 +157,11 @@ const DashboardLayout = () => {
                 key={item.path}
                 to={item.path}
                 onClick={closeSidebar}
-                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${isActive
-                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
-                  : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
-                  }`}
+                className={`relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 group overflow-hidden ${
+                  isActive
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200 border border-emerald-500"
+                    : "text-emerald-600 hover:bg-emerald-50 hover:text-emerald-900 border border-transparent hover:border-emerald-100"
+                }`}
                 title={isCollapsed ? item.name : ""}
               >
                 {isActive && (
@@ -193,12 +195,14 @@ const DashboardLayout = () => {
         {/* logout */}
         <div className="p-4 border-t border-emerald-100 shrink-0 bg-white/50">
           <button
-            onClick={() => handdleLogout()}
+            onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 hover:text-red-700 transition-all duration-300 group w-full border border-transparent hover:border-red-100"
             title={isCollapsed ? t("dashboard_logout") : ""}
           >
             <HiOutlineLogout className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
-            {!isCollapsed && <span className="font-bold">{t("dashboard_logout")}</span>}
+            {!isCollapsed && (
+              <span className="font-bold">{t("dashboard_logout")}</span>
+            )}
           </button>
         </div>
       </motion.aside>
@@ -231,10 +235,16 @@ const DashboardLayout = () => {
             <button
               onClick={toggleLanguage}
               className="flex items-center gap-2 px-3 py-2 bg-emerald-50 text-emerald-600 border border-emerald-200 rounded-lg hover:bg-emerald-100 hover:text-emerald-800 transition-all shadow-sm hover:shadow font-medium text-sm"
-              title={language === 'bn' ? 'Switch to English' : 'বাংলায় পরিবর্তন করুন'}
+              title={
+                language === "bn"
+                  ? "Switch to English"
+                  : "বাংলায় পরিবর্তন করুন"
+              }
             >
               <Languages className="w-5 h-5" />
-              <span className="hidden sm:inline">{language === 'bn' ? 'EN' : 'বাংলা'}</span>
+              <span className="hidden sm:inline">
+                {language === "bn" ? "EN" : "বাংলা"}
+              </span>
             </button>
 
             <button className="p-2 text-emerald-500 hover:text-emerald-700 hover:bg-emerald-50 rounded-full transition-all relative">
@@ -244,7 +254,9 @@ const DashboardLayout = () => {
 
             <div className="flex items-center gap-3 pl-4 border-l border-emerald-100">
               <div className="hidden md:block text-right">
-                <p className="font-semibold text-emerald-900 text-sm">{t("dashboard_admin_user")}</p>
+                <p className="font-semibold text-emerald-900 text-sm">
+                  {t("dashboard_admin_user")}
+                </p>
                 <p className="text-xs text-emerald-500">admin@ictd.gov.bd</p>
               </div>
               <div className="h-10 w-10 rounded-full bg-emerald-100 border-2 border-emerald-200 flex items-center justify-center text-emerald-700 font-bold shadow-sm ring-2 ring-emerald-50">
@@ -267,8 +279,12 @@ const DashboardLayout = () => {
 
           <footer className="bg-white/50 backdrop-blur-md border-t border-emerald-100 text-emerald-600 text-center p-4 mt-auto rounded-t-2xl">
             <h1 className="text-sm">
-              <span className="font-bold text-emerald-700">{t("dashboard_copyright")} </span>©
-              {new Date().getFullYear()} <span className=" text-emerald-700 font-bold">DoICT</span> . {t("dashboard_all_rights")}.
+              <span className="font-bold text-emerald-700">
+                {t("dashboard_copyright")}{" "}
+              </span>
+              ©{new Date().getFullYear()}{" "}
+              <span className=" text-emerald-700 font-bold">DoICT</span> .{" "}
+              {t("dashboard_all_rights")}.
             </h1>
           </footer>
         </main>
