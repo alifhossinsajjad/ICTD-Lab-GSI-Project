@@ -20,6 +20,7 @@ import FilesComplaints from "../Pages/Dashboard/LabsUnderControls/LabsControl/Fi
 import TraningUpdate from "../Pages/Dashboard/Traning/TraningUpdate/TraningUpdate";
 import SendReport from "../Pages/Dashboard/SendReport/SendReport";
 import SOFLabs from "../Pages/SOFLabs/SOFLabs";
+import AddUser from "../Pages/Dashboard/add-user/AddUser";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,10 +45,9 @@ const router = createBrowserRouter([
         Component: LabDetails,
       },
       {
-        path : '/soflabs',
-        Component :SOFLabs
+        path : 'add-user',
+        Component : AddUser,
       }
-     
     ],
   },
   {
@@ -98,7 +98,7 @@ const router = createBrowserRouter([
       {
         path : 'sendReport',
         Component : SendReport,
-      },
+      }
      
     ],
   },
