@@ -1,9 +1,10 @@
-import { Axios } from "axios";
+import axios from "axios";
+
 
 const API_URL = import.meta.env.VITE_API_URL + "/auth";
 
 const register = async (email, password) => {
-    const response = await Axios.post(`${API_URL}/signup`, {
+    const response = await axios.post(`${API_URL}/signup`, {
         email,
         password,
     });
@@ -11,7 +12,7 @@ const register = async (email, password) => {
 };
 
 const login = async (email, password) => {
-    const response = await Axios.post(`${API_URL}/signin`, {
+    const response = await axios.post(`${API_URL}/signin`, {
         email,
         password,
     });
@@ -22,14 +23,14 @@ const login = async (email, password) => {
 };
 
 const verifyEmail = async (email) => {
-    const response = await Axios.post(`${API_URL}/verify/email`, {
+    const response = await axios.post(`${API_URL}/verify/email`, {
         email,
     });
     return response.data;
 };
 
 const verifyEmailCode = async (email, emailCode) => {
-    const response = await Axios.post(`${API_URL}/verify/code`, {
+    const response = await axios.post(`${API_URL}/verify/code`, {
         email,
         emailCode,
     });
