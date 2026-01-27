@@ -45,6 +45,10 @@ const router = createBrowserRouter([
         Component: LabDetails,
       },
       {
+        path : 'soflabs',
+        Component: SOFLabs,
+      },
+      {
         path : 'add-user',
         Component : AddUser,
       }
