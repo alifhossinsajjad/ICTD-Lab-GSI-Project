@@ -45,13 +45,13 @@ const router = createBrowserRouter([
         Component: LabDetails,
       },
       {
-        path : 'soflabs',
+        path: "soflabs",
         Component: SOFLabs,
       },
       {
-        path : 'add-user',
-        Component : AddUser,
-      }
+        path: "add-user",
+        Component: AddUser,
+      },
     ],
   },
   {
@@ -64,9 +64,13 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        Component: DashboardHome,
+        element: (
+          <PrivetRoute>
+            <DashboardHome />
+          </PrivetRoute>
+        ),
       },
-      
+
       {
         path: "profile",
         Component: Profile,
@@ -88,7 +92,7 @@ const router = createBrowserRouter([
         Component: ChangePassWord,
       },
       {
-        path: 'labsUpdate/:id?',
+        path: "labsUpdate/:id?",
         Component: LabsUpdate,
       },
       {
@@ -97,13 +101,12 @@ const router = createBrowserRouter([
       },
       {
         path: "trainingUpdate",
-        Component: TraningUpdate
+        Component: TraningUpdate,
       },
       {
-        path : 'sendReport',
-        Component : SendReport,
-      }
-     
+        path: "sendReport",
+        Component: SendReport,
+      },
     ],
   },
 ]);

@@ -2,6 +2,10 @@ import React from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 function StateDefault({
   showPassword,
@@ -10,10 +14,28 @@ function StateDefault({
   handleFormFieldChanges,
   handleStateDefault,
 }) {
+  const { login } = React.useContext(AuthContext);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await login(loginFormData.email, loginFormData.password);
+      toast.success("প্রবেশ সফল হয়েছে!");
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "প্রবেশ ব্যর্থ হয়েছে");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       {/* Login Card */}
-      <div className="w-full h-full">
+      <form onSubmit={handleLogin} className="w-full h-full">
         <h4 className="text-center text-2xl font-bold text-white mb-8 tracking-wide">
           প্রবেশ করুন
         </h4>
@@ -75,10 +97,11 @@ function StateDefault({
 
           <button
             type="submit"
+            disabled={loading}
             className="bg-gradient-to-r from-emerald-500 to-green-600 text-white px-8 py-2.5 rounded-xl
-                         hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer"
+                         hover:from-emerald-400 hover:to-green-500 transition-all duration-300 font-semibold shadow-lg shadow-emerald-900/20 transform hover:-translate-y-0.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            প্রবেশ করুন
+            {loading ? "অপেক্ষা করুন..." : "প্রবেশ করুন"}
           </button>
         </div>
 
@@ -97,7 +120,7 @@ function StateDefault({
             নিবন্ধন করুন
           </p>
         </div>
-      </div>
+      </form>
     </>
   );
 }
