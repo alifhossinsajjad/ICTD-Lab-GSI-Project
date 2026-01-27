@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const API_URL = "http://localhost:4000/api/v1/auth";
 
 const register = async (email, password) => {
