@@ -1,11 +1,5 @@
 {
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "memory": 8192
-      }
-    }
-  ]
+  "rewrites": [
+    { "source": "/(.*)", "destination":"/"}
+]
 }
