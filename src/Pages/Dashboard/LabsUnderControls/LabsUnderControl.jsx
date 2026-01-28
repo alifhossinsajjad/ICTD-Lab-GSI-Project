@@ -196,7 +196,7 @@ const LabsUnderControl = () => {
             ডিজিটাল ল্যাব{" "}
           </h1>
           <p className="text-emerald-600 mt-2 text-lg">
-            লক্ষ্মীপুর দেশের ডিজিটাল ল্যাব ম্যানেজমেন্ট সম্পর্কে মনোন করুন
+            বাংলাদেশের ডিজিটাল ল্যাব ম্যানেজমেন্ট সম্পর্কে মনোন করুন
           </p>
           <div className="h-1 w-24 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-full mt-3"></div>
         </div>
@@ -461,7 +461,7 @@ const LabsUnderControl = () => {
                         <div className="flex items-center justify-center gap-2 ">
                           <Link
                             to={`/dashboard/labsUpdate/${lab.id}`}
-                            className="flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                            className="hover:scale-110 flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                             title="Update Lab"
                           >
                             <HiOutlinePencil className="w-5 h-5" />
@@ -469,7 +469,7 @@ const LabsUnderControl = () => {
                           </Link>
                           <Link
                             to={`/dashboard/filesComplaints/${lab.id}`}
-                            className="flex items-center gap-2 px-3 py-2 text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                            className="hover:scale-110 flex items-center gap-2 px-3 py-2 text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
                             title="File Complaint"
                           >
                             <HiOutlineExclamationCircle className="w-5 h-5" />
@@ -477,8 +477,8 @@ const LabsUnderControl = () => {
                           </Link>
                           <button
                             onClick={() => handleOpenModal(lab)}
-                            className="flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
-                            title="send report"
+                            className="cursor-pointer  hover:scale-110 flex items-center gap-2 px-3 py-2 text-emerald-600 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-lg transition-all shadow-sm hover:shadow font-medium text-sm"
+                            title="Send Report"
                           >
                             <FaBookOpen className="w-5 h-5" />
                            

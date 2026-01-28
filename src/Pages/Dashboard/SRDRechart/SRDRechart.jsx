@@ -23,7 +23,26 @@ const DIVISIONS_8 = [
   "ময়মনসিংহ বিভাগ",
 ];
 
-// Gradient colors for each division
+// District to Division Mapping (Standard 64 Districts)
+const DISTRICT_TO_DIVISION = {
+  // Dhaka
+  "ঢাকা": "ঢাকা", "গাজীপুর": "ঢাকা", "কিশোরগঞ্জ": "ঢাকা", "মানিকগঞ্জ": "ঢাকা", "মুন্সীগঞ্জ": "ঢাকা", "নারায়ণগঞ্জ": "ঢাকা", "নরসিংদী": "ঢাকা", "ফরিদপুর": "ঢাকা", "গোপালগঞ্জ": "ঢাকা", "মাদারীপুর": "ঢাকা", "রাজবাড়ী": "ঢাকা", "শরীয়তপুর": "ঢাকা", "টাঙ্গাইল": "ঢাকা",
+  // Chittagong
+  "চট্টগ্রাম": "চট্টগ্রাম", "কক্সবাজার": "চট্টগ্রাম", "রাঙ্গামাটি": "চট্টগ্রাম", "বান্দরবান": "চট্টগ্রাম", "খাগড়াছড়ি": "চট্টগ্রাম", "খাগড়াছড়ি": "চট্টগ্রাম", "ফেনী": "চট্টগ্রাম", "লক্ষ্মীপুর": "চট্টগ্রাম", "লক্ষ্মীপুর ": "চট্টগ্রাম", "কুমিল্লা": "চট্টগ্রাম", "চাঁদপুর": "চট্টগ্রাম", "ব্রাহ্মণবাড়িয়া": "চট্টগ্রাম", "ব্রাহ্মণবাড়িয়া": "চট্টগ্রাম", "নোয়াখালী": "চট্টগ্রাম",
+  // Rajshahi
+  "রাজশাহী": "রাজশাহী", "নাটোর": "রাজশাহী", "নওগাঁ": "রাজশাহী", "চাঁপাইনবাবগঞ্জ": "রাজশাহী", "পাবনা": "রাজশাহী", "সিরাজগঞ্জ": "রাজশাহী", "বগুড়া": "রাজশাহী", "বগুড়া": "রাজশাহী", "জয়পুরহাট": "রাজশাহী",
+  // Khulna
+  "খুলনা": "খুলনা", "বাগেরহাট": "খুলনা", "সাতক্ষীরা": "খুলনা", "যশোর": "খুলনা", "মাগুরা": "খুলনা", "নড়াইল": "খুলনা", "কুষ্টিয়া": "খুলনা", "চুয়াডাঙ্গা": "খুলনা", "মেহেরপুর": "খুলনা", "ঝিনাইদহ": "খুলনা",
+  // Barisal
+  "বরিশাল": "বরিশাল", "পটুয়াখালী": "বরিশাল", "ভোলা": "বরিশাল", "পিরোজপুর": "বরিশাল", "বরগুনা": "বরিশাল", "ঝালকাঠি": "বরিশাল",
+  // Sylhet
+  "সিলেট": "সিলেট", "মৌলভীবাজার": "সিলেট", "হবিগঞ্জ": "সিলেট", "সুনামগঞ্জ": "সিলেট",
+  // Rangpur
+  "রংপুর": "রংপুর", "দিনাজপুর": "রংপুর", "কুড়িগ্রাম": "রংপুর", "কুড়িগ্রাম": "রংপুর", "গাইবান্ধা": "রংপুর", "নীলফামারী": "রংপুর", "পঞ্চগড়": "রংপুর", "পঞ্চগড়": "রংপুর", "ঠাকুরগাঁও": "রংপুর", "লালমনিরহাট": "রংপুর",
+  // Mymensingh
+  "ময়মনসিংহ": "ময়মনসিংহ", "ময়মনসিংহ": "ময়মনসিংহ", "জামালপুর": "ময়মনসিংহ", "নেত্রকোণা": "ময়মনসিংহ", "শেরপুর": "ময়মনসিংহ"
+};
+
 const DIVISION_COLORS = [
   "#10b981", // emerald-500
   "#059669", // emerald-600
@@ -36,56 +55,92 @@ const DIVISION_COLORS = [
 ];
 
 const SRDRechart = () => {
-  const [rows, setRows] = useState([]);
+  const [ictdRows, setIctdRows] = useState([]);
+  const [sofRows, setSofRows] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
 
   useEffect(() => {
-    fetch("/srd-data300.json")
-      .then((res) => res.json())
-      .then((json) => setRows(Array.isArray(json) ? json : []))
-      .catch(() => setRows([]));
+    // Fetch both ICTD and SOF data
+    Promise.all([
+      fetch("/srd-data.json").then((res) => res.json()),
+      fetch("/srd-data300.json").then((res) => res.json()),
+    ])
+      .then(([ictdData, sofData]) => {
+        setIctdRows(Array.isArray(ictdData) ? ictdData : []);
+        setSofRows(Array.isArray(sofData) ? sofData : []);
+      })
+      .catch((err) => {
+        console.error("Error loading lab data:", err);
+      });
   }, []);
 
   const divisionData = useMemo(() => {
-    const countMap = new Map();
+    const ictdMap = new Map();
+    const sofMap = new Map();
 
-    rows.forEach((r) => {
-      const division = (r?.division || "").trim();
-      if (!division) return;
-      countMap.set(division, (countMap.get(division) || 0) + 1);
+    // Process ICTD Labs
+    ictdRows.forEach((r) => {
+      const district = (r?.district || "").trim();
+      const division = DISTRICT_TO_DIVISION[district] || "অন্যান্য";
+      ictdMap.set(division, (ictdMap.get(division) || 0) + 1);
     });
 
-    return DIVISIONS_8.map((name) => ({
-      division: name,
-      total: countMap.get(name.replace(" বিভাগ", "")) || countMap.get(name) || 0,
-    }));
-  }, [rows]);
+    // Process SOF Labs (Note: In SOF data, 'division' field often contains district names)
+    sofRows.forEach((r) => {
+      const district = (r?.division || "").trim();
+      const division = DISTRICT_TO_DIVISION[district] || "অন্যান্য";
+      sofMap.set(division, (sofMap.get(division) || 0) + 1);
+    });
 
-  const totalLabs = useMemo(() => {
-    return divisionData.reduce((sum, d) => sum + d.total, 0);
-  }, [divisionData]);
+    return DIVISIONS_8.map((name) => {
+      const divShortName = name.replace(" বিভাগ", "");
+      const ictdCount = ictdMap.get(divShortName) || 0;
+      const sofCount = sofMap.get(divShortName) || 0;
+      return {
+        division: name,
+        ictd: ictdCount,
+        sof: sofCount,
+        total: ictdCount + sofCount,
+      };
+    });
+  }, [ictdRows, sofRows]);
+
+  const totalIctdLabs = useMemo(() => ictdRows.length || 4832, [ictdRows]);
+  const totalSofLabs = useMemo(() => sofRows.length || 300, [sofRows]);
+  const totalLabs = totalIctdLabs + totalSofLabs;
 
   const maxLabs = useMemo(() => {
     return Math.max(...divisionData.map((d) => d.total), 0);
   }, [divisionData]);
 
-  const avgLabs = useMemo(() => {
-    return totalLabs > 0 ? Math.round(totalLabs / divisionData.length) : 0;
-  }, [totalLabs, divisionData]);
-
   // Custom tooltip
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
+      const data = payload[0].payload;
       return (
-        <div className="bg-white/95 backdrop-blur-xl border-2 border-emerald-200 rounded-2xl shadow-2xl p-4">
-          <p className="text-sm font-bold text-gray-800 mb-1">
-            {payload[0].payload.division}
+        <div className="bg-white/95 backdrop-blur-xl border-2 border-emerald-200 rounded-2xl shadow-2xl p-4 min-w-[200px]">
+          <p className="text-sm font-bold text-gray-800 mb-2 border-b border-gray-100 pb-1">
+            {data.division}
           </p>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500"></div>
-            <p className="text-lg font-extrabold text-emerald-600">
-              {payload[0].value} টি ল্যাব
-            </p>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                <span className="text-xs font-semibold text-gray-600">ICTD ল্যাব:</span>
+              </div>
+              <span className="text-sm font-bold text-emerald-600">{data.ictd} টি</span>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                <span className="text-xs font-semibold text-gray-600">SOF ল্যাব:</span>
+              </div>
+              <span className="text-sm font-bold text-blue-600">{data.sof} টি</span>
+            </div>
+            <div className="flex items-center justify-between gap-4 pt-1 border-t border-gray-100">
+              <span className="text-xs font-bold text-gray-800">সর্বমোট:</span>
+              <span className="text-sm font-extrabold text-gray-900">{data.total} টি</span>
+            </div>
           </div>
         </div>
       );
@@ -106,7 +161,7 @@ const SRDRechart = () => {
             বিভাগভিত্তিক ল্যাব বিশ্লেষণ
           </h2>
           <p className="text-gray-600 text-lg">
-            বাংলাদেশের ৮টি বিভাগে স্থাপিত ল্যাবের পরিসংখ্যান
+            বাংলাদেশের ৮টি বিভাগে স্থাপিত ল্যাবের পরিসংখ্যান (ICTDL ও SOF)
           </p>
           <div className="h-1 w-24 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 mx-auto rounded-full mt-4"></div>
         </motion.div>
@@ -118,54 +173,54 @@ const SRDRechart = () => {
           transition={{ delay: 0.1 }}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
-          {/* Total Labs */}
+          {/* ICTDL Labs */}
           <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-emerald-100 text-sm font-semibold uppercase tracking-wider">
-                  মোট ল্যাব
+                  ICTDL ল্যাব
                 </p>
                 <svg className="w-8 h-8 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <p className="text-5xl font-extrabold text-white mb-1">{totalLabs}</p>
+              <p className="text-5xl font-extrabold text-white mb-1">{totalIctdLabs}</p>
               <p className="text-emerald-100 text-sm">সকল বিভাগে</p>
             </div>
           </div>
 
-          {/* Average Labs */}
+          {/* SOF Labs */}
           <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-blue-100 text-sm font-semibold uppercase tracking-wider">
-                  গড় ল্যাব
+                  SOF ল্যাব
                 </p>
                 <svg className="w-8 h-8 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
-              <p className="text-5xl font-extrabold text-white mb-1">{avgLabs}</p>
-              <p className="text-blue-100 text-sm">প্রতি বিভাগে</p>
+              <p className="text-5xl font-extrabold text-white mb-1">{totalSofLabs}</p>
+              <p className="text-blue-100 text-sm">সকল বিভাগে</p>
             </div>
           </div>
 
-          {/* Max Labs */}
+          {/* Total Labs */}
           <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-bl-full transform group-hover:scale-150 transition-transform duration-500"></div>
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-2">
                 <p className="text-cyan-100 text-sm font-semibold uppercase tracking-wider">
-                  সর্বোচ্চ ল্যাব
+                  সর্বমোট ল্যাব
                 </p>
                 <svg className="w-8 h-8 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
-              <p className="text-5xl font-extrabold text-white mb-1">{maxLabs}</p>
-              <p className="text-cyan-100 text-sm">একক বিভাগে</p>
+              <p className="text-5xl font-extrabold text-white mb-1">{totalLabs}</p>
+              <p className="text-cyan-100 text-sm">সকল বিভাগে</p>
             </div>
           </div>
         </motion.div>
@@ -185,7 +240,7 @@ const SRDRechart = () => {
                   বিভাগভিত্তিক ল্যাব সংখ্যা
                 </h3>
                 <p className="text-sm text-gray-600">
-                  প্রতিটি বিভাগে স্থাপিত ল্যাবের বিস্তারিত তথ্য
+                  প্রতিটি বিভাগে স্থাপিত ICTDL ও SOF ল্যাবের বিস্তারিত তথ্য
                 </p>
               </div>
 
@@ -335,3 +390,4 @@ const SRDRechart = () => {
 };
 
 export default SRDRechart;
+
