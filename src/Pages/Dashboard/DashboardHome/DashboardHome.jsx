@@ -63,7 +63,8 @@ const DashboardHome = () => {
         className="text-center space-y-3 mb-8 sm:mb-12 px-4"
       >
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-950">
-          ল্যাবের জন্য উপযুক্ত <span className="text-emerald-600">শিক্ষা প্রতিষ্ঠানের মানদণ্ড</span>
+          ল্যাবের জন্য উপযুক্ত{" "}
+          <span className="text-emerald-600">শিক্ষা প্রতিষ্ঠানের মানদণ্ড</span>
         </h1>
 
         <div className="h-1 w-20 sm:w-24 bg-gradient-to-r from-emerald-600 via-emerald-500 to-blue-500 mx-auto rounded-full mt-4"></div>
@@ -86,7 +87,9 @@ const DashboardHome = () => {
               {/* Timeline Badge */}
               <div className="absolute left-0 md:left-8 transform md:-translate-x-1/2 z-10">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg border-2 sm:border-4 border-emerald-50">
-                  <span className="text-white font-bold text-lg sm:text-xl">{item.id}</span>
+                  <span className="text-white font-bold text-lg sm:text-xl">
+                    {item.id}
+                  </span>
                 </div>
               </div>
 
@@ -101,7 +104,7 @@ const DashboardHome = () => {
 
                   {/* Step number indicator */}
                   <div className="absolute top-2 right-2 sm:top-4 sm:right-4 text-4xl sm:text-6xl font-bold text-emerald-100 group-hover:text-emerald-200 transition-colors">
-                    {String(item.id).padStart(2, '0')}
+                    {String(item.id).padStart(2, "0")}
                   </div>
 
                   {/* Content */}
@@ -109,7 +112,9 @@ const DashboardHome = () => {
                     <div className="flex items-start gap-3 sm:gap-4">
                       {/* Icon/Badge for mobile */}
                       <div className="md:hidden w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-md flex-shrink-0">
-                        <span className="text-white font-bold text-sm sm:text-base">{item.id}</span>
+                        <span className="text-white font-bold text-sm sm:text-base">
+                          {item.id}
+                        </span>
                       </div>
 
                       {/* Description */}
@@ -145,21 +150,35 @@ const DashboardHome = () => {
         >
           <div className="absolute left-0 md:left-8 transform md:-translate-x-1/2 z-10">
             <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center shadow-lg border-2 sm:border-4 border-emerald-50">
-              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              <svg
+                className="w-6 h-6 sm:w-8 sm:h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={3}
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             </div>
           </div>
 
           <div className="ml-16 sm:ml-24 md:ml-32">
             <div className="bg-gradient-to-r from-emerald-600 to-blue-600 backdrop-blur-xl rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 text-white text-center border border-emerald-500/30">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">সকল মানদণ্ড পূরণ করুন</h3>
-              <p className="text-sm sm:text-base text-emerald-100">উপরের সকল শর্ত পূরণ করলে আপনার প্রতিষ্ঠান ল্যাব স্থাপনের জন্য উপযুক্ত বিবেচিত হবে</p>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2">
+                সকল মানদণ্ড পূরণ করুন
+              </h3>
+              <p className="text-sm sm:text-base text-emerald-100">
+                উপরের সকল শর্ত পূরণ করলে আপনার প্রতিষ্ঠান ল্যাব স্থাপনের জন্য
+                উপযুক্ত বিবেচিত হবে
+              </p>
             </div>
           </div>
         </motion.div>
       </div>
-
     </div>
   );
 };
