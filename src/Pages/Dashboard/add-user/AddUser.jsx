@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import { FaUserPlus } from "react-icons/fa";
+import { FaUserPlus } from "react-icons/fa"
+import { GrPowerReset } from "react-icons/gr";
 import { motion } from "framer-motion";
 
 const AddUser = () => {
@@ -117,9 +118,9 @@ const AddUser = () => {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="flex justify-center gap-3 mb-3">
+          <div className="flex justify-center items-center gap-3 mb-3">
             <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center">
-              <FaUserPlus className="text-emerald-700" />
+              <FaUserPlus className="text-emerald-700 text-2xl" />
             </div>
             <h1 className="text-3xl font-bold text-emerald-900">
               Add User
@@ -297,14 +298,22 @@ const AddUser = () => {
 
           </div>
 
-          <div className="mt-10 text-right">
-            <button
-              type="submit"
-              className="px-10 py-3 bg-emerald-600 text-white rounded-xl font-semibold"
-            >
-              Add User
-            </button>
-          </div>
+               <div className="mt-10 flex justify-end gap-4">
+                      <button
+                        type="reset"
+                        
+                        className="px-10 py-3 bg-gray-600 hover:bg-gray-700 cursor-pointer text-white rounded-xl font-semibold"
+                      >
+                        <GrPowerReset  className="text-2xl"/>
+                      </button>
+          
+                      <button
+                        type="submit"
+                        className="px-10 py-3 bg-emerald-600 hover:bg-emerald-700 cursor-pointer text-white rounded-xl font-semibold"
+                      >
+                        Add User
+                      </button>
+                    </div>
         </form>
       </div>
     </motion.section>
