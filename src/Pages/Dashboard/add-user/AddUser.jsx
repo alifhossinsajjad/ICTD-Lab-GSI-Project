@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { FaUserPlus } from "react-icons/fa"
+import { FaUserPlus } from "react-icons/fa";
 import { GrPowerReset } from "react-icons/gr";
 import { motion } from "framer-motion";
 
 const AddUser = () => {
   const [form, setForm] = useState({
     name: "",
+    designation: "",
     email: "",
     role: "",
     phone: "",
@@ -61,6 +62,22 @@ const AddUser = () => {
     upazilas.find(u => u.id === id)?.name || "";
 
   /* ======================
+     Reset
+  ======================= */
+  const handleReset = () => {
+    setForm({
+      name: "",
+      designation: "",
+      email: "",
+      role: "",
+      phone: "",
+      division: "",
+      district: "",
+      upazila: "",
+    });
+  };
+
+  /* ======================
      Submit
   ======================= */
   const handleSubmit = (e) => {
@@ -81,11 +98,11 @@ const AddUser = () => {
       return;
     }
 
-    /* ===== Backend Payload ===== */
     const payload = {
       name: form.name,
+      designation: form.designation,
       email: form.email,
-      phone: form.phone,
+      phone: "+880" + form.phone,
       role: form.role,
       division: getDivisionName(form.division),
       district: getDistrictName(form.district),
@@ -94,6 +111,7 @@ const AddUser = () => {
 
     console.log("✅ Backend Payload:", payload);
     alert("User created successfully");
+    handleReset();
   };
 
   const baseInput =
@@ -127,7 +145,7 @@ const AddUser = () => {
             </h1>
           </div>
           <p className="text-emerald-700">
-            User creation with role and location
+            User creation with role, designation and location
           </p>
         </div>
 
@@ -154,12 +172,16 @@ const AddUser = () => {
               />
             </div>
 
+            {/* Designation */}
+            
+
             {/* Email */}
             <div>
               <label className="text-xs font-semibold text-emerald-700">
                 Email
               </label>
               <input
+                type="email"
                 className={baseInput}
                 placeholder="Enter email address"
                 required
@@ -185,41 +207,48 @@ const AddUser = () => {
               >
                 <option value="">Select role</option>
                 {roles.map(r => (
-                  <option key={r}>{r}</option>
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
                 ))}
               </select>
             </div>
+            <div>
+              <label className="text-xs font-semibold text-emerald-700">
+                Designation
+              </label>
+              <input
+                className={baseInput}
+                placeholder="Enter designation"
+                required
+                value={form.designation}
+                onChange={(e) =>
+                  setForm({ ...form, designation: e.target.value })
+                }
+              />
+            </div>
 
             {/* Phone */}
-           {/* Phone */}
-<div>
-  <label className="text-xs font-semibold text-emerald-700">
-    Phone Number
-  </label>
-
-  <div
-    className="group mt-1 flex items-center gap-3 rounded-xl px-4 py-3
-               border border-emerald-300 bg-white
-               focus-within:border-emerald-500
-               focus-within:ring-2 focus-within:ring-emerald-400"
-  >
-    <span className="font-semibold text-emerald-800">+880</span>
-
-    <input
-      className="flex-1 outline-none text-sm"
-      placeholder="1XXXXXXXXX"
-      value={form.phone}
-      onChange={(e) =>
-        setForm({
-          ...form,
-          phone: e.target.value.replace(/\D/g, "").slice(0, 10),
-        })
-      }
-      required
-    />
-  </div>
-</div>
-
+            <div>
+              <label className="text-xs font-semibold text-emerald-700">
+                Phone Number
+              </label>
+              <div className="group mt-1 flex items-center gap-3 rounded-xl px-4 py-3 border border-emerald-300 bg-white focus-within:border-emerald-500 focus-within:ring-2 focus-within:ring-emerald-400">
+                <span className="font-semibold text-emerald-800">+880</span>
+                <input
+                  className="flex-1 outline-none text-sm"
+                  placeholder="1XXXXXXXXX"
+                  value={form.phone}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      phone: e.target.value.replace(/\D/g, "").slice(0, 10),
+                    })
+                  }
+                  required
+                />
+              </div>
+            </div>
 
             {/* Division */}
             <div>
@@ -275,7 +304,7 @@ const AddUser = () => {
             </div>
 
             {/* Upazila */}
-            <div className="md:col-span-2">
+            <div className="md:col-span-1">
               <label className="text-xs font-semibold text-emerald-700">
                 Upazila
               </label>
@@ -298,22 +327,23 @@ const AddUser = () => {
 
           </div>
 
-               <div className="mt-10 flex justify-end gap-4">
-                      <button
-                        type="reset"
-                        
-                        className="px-10 py-3 bg-gray-600 hover:bg-gray-700 cursor-pointer text-white rounded-xl font-semibold"
-                      >
-                        <GrPowerReset  className="text-2xl"/>
-                      </button>
-          
-                      <button
-                        type="submit"
-                        className="px-10 py-3 bg-emerald-600 hover:bg-emerald-700 cursor-pointer text-white rounded-xl font-semibold"
-                      >
-                        Add User
-                      </button>
-                    </div>
+          {/* Actions */}
+          <div className="mt-10 flex justify-end gap-4">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="px-10 py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-xl font-semibold"
+            >
+              <GrPowerReset className="text-2xl" />
+            </button>
+
+            <button
+              type="submit"
+              className="px-10 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold"
+            >
+              Add User
+            </button>
+          </div>
         </form>
       </div>
     </motion.section>
