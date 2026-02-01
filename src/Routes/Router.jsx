@@ -23,6 +23,7 @@ import SOFLabs from "../Pages/SOFLabs/SOFLabs";
 import AddUser from "../Pages/Dashboard/add-user/AddUser";
 import ICTDLabs from "../Pages/Dashboard/LabsUnderControls/ICTDLabs/ICTDLabs";
 import AddLab from "../Pages/Dashboard/add_lab/AddLab";
+import ManageUser from "../Pages/Dashboard/manege_user/ManageUser";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "add-lab",
         Component: AddLab,
+      },
+      {
+        path: "manage-user",
+        Component: ManageUser,
       }
     ],
   },

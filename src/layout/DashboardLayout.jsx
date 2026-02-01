@@ -85,7 +85,7 @@ const DashboardLayout = () => {
           name: t("Add User"),
         },
         {
-          path: "/dashboard/dashboard_ictd_labs",
+          path: "/dashboard/manage-user",
           name: t("Manage Users"),
         },
       ],
