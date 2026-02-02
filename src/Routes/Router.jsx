@@ -20,8 +20,9 @@ import FilesComplaints from "../Pages/Dashboard/LabsUnderControls/LabsControl/Fi
 import TraningUpdate from "../Pages/Dashboard/Traning/TraningUpdate/TraningUpdate";
 import SendReport from "../Pages/Dashboard/SendReport/SendReport";
 import SOFLabs from "../Pages/SOFLabs/SOFLabs";
-import AddUser from "../Pages/Dashboard/add-user/AddUser";
+import AddUser from "../Pages/Dashboard/user_control/add-user/AddUser";
 import ICTDLabs from "../Pages/Dashboard/LabsUnderControls/ICTDLabs/ICTDLabs";
+import ManageUser from "../Pages/Dashboard/user_control/manege_user/ManageUser";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,10 +49,6 @@ const router = createBrowserRouter([
       {
         path: "soflabs",
         Component: SOFLabs,
-      },
-      {
-        path: "add-user",
-        Component: AddUser,
       },
     ],
   },
@@ -112,6 +109,15 @@ const router = createBrowserRouter([
         path: "ictdLabs",
         Component: ICTDLabs,
       },
+      {
+        path: "add-user",
+        Component: AddUser,
+      },
+      
+      {
+        path: "manage-user",
+        Component: ManageUser,
+      }
     ],
   },
 ]);
