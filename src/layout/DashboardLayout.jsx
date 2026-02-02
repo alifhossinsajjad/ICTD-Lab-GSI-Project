@@ -73,6 +73,23 @@ const DashboardLayout = () => {
       name: t("dashboard_complaints"),
       icon: <HiOutlineExclamationCircle className="w-5 h-5" />,
     },
+    {
+      id: "userManagement", // unique identifier for dropdown
+      path: null, // No direct path, only dropdown
+      name: t("User Control"),
+      icon: <HiOutlineDesktopComputer className="w-5 h-5" />,
+      hasDropdown: true,
+      subItems: [
+        {
+          path: "/dashboard/add-user",
+          name: t("Add User"),
+        },
+        {
+          path: "/dashboard/manage-user",
+          name: t("Manage Users"),
+        },
+      ],
+    },
   ];
 
   const handleLogout = () => {
